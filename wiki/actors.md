@@ -26,7 +26,9 @@
 
 > `L'utilisateur possède un compte sur l'application et est actuellement connecté`
 
-- Il peut personnaliser ses informations personnelles et de gérer les évènements auxquels il participe.
+- Il peut personnaliser ses informations personnelles.
+- Il peut gérer les évènements auquels il participe
+- Il peut gérer ses amis
 - Il peut créer un évènement.
 
 ### Le participant
