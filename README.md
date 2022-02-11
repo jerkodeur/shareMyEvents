@@ -8,7 +8,7 @@ However, after careful research, I found there were many such applications out t
 Being myself a user of this kind of applications, I realised that there was not really offer for private events in which we just wanted to propose to his friends, his family, to participate in a meal, an evening, or more and to be able to centralize the needs within the same application.  
 A lot of features came to me but I decided to focus on those that seemed essential to me to start.
 
-As part of my masterpiece, given the limited time I have, I decided to focus on creating events, being able to share them with other people, creating an account and the management of its events for registered members of the site.
+As part of my masterpiece, given the limited time I have, I decided to focus on creating events, being able to share them with other people, the creating of an account and the management of its events for registered members of the site.
 
 Here are the main features my app
 - Create an event
