@@ -1,0 +1,31 @@
+@import "/src/assets/scss/variables.scss";
+
+.title {
+  font-family: $dancing, cursive;
+}
+
+.title-desk {
+  font-size: 2.5em;
+}
+
+.title-tablet {
+  font-size: 2em;
+}
+
+.title-primary {
+  color: $primary;
+  text-shadow: 1px 1px 2px $blood;
+}
+
+.title-primary:last-of-type {
+  position: relative;
+  left: -3px;
+}
+
+.title-secondary {
+  color: $secondary;
+  position: relative;
+  text-shadow: 1px 1px 2px $blood;
+  left: -2px;
+  top: -5px;
+}

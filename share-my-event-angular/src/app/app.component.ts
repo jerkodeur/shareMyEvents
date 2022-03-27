@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'share-my-event-angular';
+export class AppComponent{
+  logo = '../assets/img/logo_long.svg';
 }
