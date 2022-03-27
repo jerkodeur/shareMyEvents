@@ -1,1 +1,38 @@
-<app-navbar-title></app-navbar-title>
+<nav class="navbar navbar-expand-sm navbar-light">
+  <div class="container-fluid">
+    <div>
+      <a routerLink="/home">
+        <app-navbar-logo class=".navbar-brand"></app-navbar-logo>
+      </a>
+      <a routerLink="/home">
+        <app-navbar-title></app-navbar-title>
+      </a>
+    </div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="navbar-nav me-auto mb-2 mb-lg-0">
+      </div>
+      <ul>
+        <li class="nav-item">
+          <a routerLink="/signup">
+            <div class="flex-icon">
+              <svg class="signup-img"></svg>
+              Inscription
+            </div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/login">
+            <div class="flex-icon">
+              <svg class="login-img"></svg>
+              Connection
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
