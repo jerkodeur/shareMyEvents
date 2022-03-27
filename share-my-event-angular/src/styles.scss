@@ -1,1 +1,34 @@
-/* You can add global styles to this file, and also import other style files */
+@import url(https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+
+@import "/node_modules/bootstrap/scss/bootstrap.scss";
+
+@import "/src/assets/scss/variables.scss";
+@import "/src/assets/scss/styles.scss";
+
+// font colors
+.text-primary {
+  color: $primary !important;
+}
+.text-secondary {
+  color: $secondary !important;
+}
+.text-light {
+  color: $light !important;
+}
+.text-blood {
+  color: $blood;
+}
+
+// Background colors
+.bg-primary {
+  background-color: $primary !important;
+}
+.bg-secondary {
+  background-color: $secondary !important;
+}
+.bg-light {
+  background-color: $light !important;
+}
+.bg-blood {
+  background-color: $blood;
+}
