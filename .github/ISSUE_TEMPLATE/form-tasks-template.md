@@ -9,7 +9,7 @@ assignees: jerkodeur
 
 Related to #1 
 
-# Task
+# Tasks
 
 ### Angular
 - [ ] Import form module
