@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
-import { LoginComponent } from './pages/login/login.component';
+import { LogInComponent } from './pages/log-in/log-in.component';
+import { NgModule } from '@angular/core';
 import { Page404Component } from './pages/page404/page404.component';
-import { SignupComponent } from './pages/signup/signup.component';
+import { RouterModule, Routes } from '@angular/router';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
 const routes: Routes = [
   {
@@ -13,10 +13,10 @@ const routes: Routes = [
     path: "home", component: HomeComponent
   },
   {
-    path: "login", component: LoginComponent
+    path: "login", component: LogInComponent
   },
   {
-    path: "signup", component: SignupComponent
+    path: "signup", component: SignUpComponent
   },
   {
     path: "**", component: Page404Component

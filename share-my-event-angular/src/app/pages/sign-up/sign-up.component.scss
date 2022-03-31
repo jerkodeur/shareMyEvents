@@ -1,0 +1,57 @@
+@import "/src/assets/scss/variables.scss";
+
+fieldset {
+  padding: 0.5em 1em 1em;
+  border-color: $primary !important;
+
+  legend {
+    float: none;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: $primary;
+  }
+  .required {
+    text-align: right;
+    width: 100%;
+    font-size: 0.75em;
+    margin-bottom: 1em;
+    color: $blood;
+  }
+
+  .form-label {
+    font-size: 0.75em;
+    font-weight: bold;
+    margin-bottom: 0.15em !important;
+    padding-left: 0.15em;
+    color: $primary;
+  }
+
+  button {
+    width: 60%;
+    margin: auto;
+    font-weight: 700;
+    background-color: $secondary;
+    color: $primary;
+    &:hover {
+      background-color: $primary;
+      color: $secondary;
+      transition: all 0.5s;
+    }
+  }
+
+  .error-feedback {
+    padding: 0.1em 0 0 0.5em;
+    color: $blood;
+    font-size: 0.75em;
+  }
+
+  input {
+    border-color: $primary;
+    color: $primary !important;
+    font-size: 0.8em !important;
+    &::placeholder {
+      color: lighten($color: $primary, $amount: 50%);
+    }
+  }
+}
