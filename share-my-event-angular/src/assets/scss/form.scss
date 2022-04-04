@@ -1,0 +1,87 @@
+fieldset {
+  width: 100%;
+  padding: 0 1em 1em;
+  border: 1pt $primary solid;
+  border-radius: 4px;
+  margin: 0 auto 0.5em;
+  background-color: #fff;
+
+  legend {
+    float: none;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: $primary;
+  }
+  .required {
+    text-align: right;
+    width: 100%;
+    font-size: 0.75em;
+    color: $blood;
+  }
+
+  .form-label {
+    font-size: 0.75em;
+    font-weight: bold;
+    margin-bottom: 0.15em !important;
+    padding-left: 0.15em;
+    color: $primary;
+  }
+  .form-group {
+    padding-bottom: 5px;
+    .form-text {
+      color: $primary;
+      margin-top: 0.1em;
+      font-size: 0.75em;
+      padding-left: 0.25em;
+    }
+  }
+
+  .form-btn-layout {
+    margin: 1em 0 0.5em;
+    .btn {
+      width: 60%;
+      margin: auto;
+      font-weight: 700;
+      background-color: $secondary;
+      color: $primary;
+      padding: 0.25em 0 !important;
+      &:hover {
+        background-color: $primary;
+        color: $secondary;
+        transition: all 0.5s;
+      }
+    }
+  }
+
+  .error-feedback {
+    padding: 0.1em 0 0 0.5em;
+    color: $blood;
+    font-size: 0.75em;
+  }
+
+  input {
+    border-color: $primary;
+    color: $primary !important;
+    font-size: 0.8em !important;
+    &::placeholder {
+      color: lighten($color: $primary, $amount: 50%);
+    }
+  }
+}
+
+.form-info {
+  padding-left: 0.25em;
+  margin-top: 1em;
+  font-size: 0.85em;
+  a {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #000;
+    &:hover {
+      text-decoration: underline;
+      color: $secondary;
+    }
+  }
+}

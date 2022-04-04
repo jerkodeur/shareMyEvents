@@ -5,3 +5,54 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+.container-fluid {
+  min-width: 270px;
+}
+main {
+  margin: auto;
+}
+
+aside {
+  &.form-info {
+    margin: auto;
+    margin-bottom: 1em;
+    width: 100%;
+    text-align: right;
+  }
+}
+
+/* iPads (portrait) ----------- */
+@media only screen and (min-width: 576px) {
+  main {
+    width: 90%;
+  }
+}
+
+/* iPads (portrait) ----------- */
+@media only screen and (min-width: 768px) {
+  fieldset {
+    .form-group {
+      margin: auto;
+      width: 80%;
+    }
+    .btn {
+      width: 50% !important;
+    }
+  }
+}
+
+// Desktop
+@media screen and (min-width: 1024px) {
+  fieldset,
+  aside.form-info {
+    width: 75% !important;
+  }
+}
+
+@media screen and (min-width: 1268px) {
+  fieldset,
+  aside.form-info {
+    width: 60% !important;
+  }
+}

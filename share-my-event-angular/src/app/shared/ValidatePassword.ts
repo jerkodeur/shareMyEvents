@@ -1,15 +1,15 @@
 import { AbstractControl } from '@angular/forms';
 
 export class ValidatePassword {
-  static MatchPassword(abstractControl: AbstractControl) {
+  static matchPassword(abstractControl: AbstractControl) {
     let password = abstractControl.get('password')?.value;
     let confirmPassword = abstractControl.get('confirm_password')?.value;
      if (password != confirmPassword) {
          abstractControl.get('confirm_password')?.setErrors({
-           MatchPassword: true
+           matchPassword: true
          })
        return {
-           MatchPassword: true
+           matchPassword: true
          }
     } else {
       return null

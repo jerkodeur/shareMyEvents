@@ -23,7 +23,7 @@ export class SignUpComponent implements OnInit {
     password: ['', [Validators.required, Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/), Validators.minLength(8)]],
     confirm_password: ['', [Validators.required]]
     }, {
-    validator: ValidatePassword.MatchPassword
+    validator: ValidatePassword.matchPassword
    })
 
   get formValues(){
