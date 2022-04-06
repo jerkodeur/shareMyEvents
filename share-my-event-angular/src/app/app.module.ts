@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -27,8 +28,9 @@ import { FlashMessageComponent } from './components/flash-message/flash-message.
   imports: [
     AppRoutingModule,
     BrowserModule,
+    FontAwesomeModule,
+    HttpClientModule,
     ReactiveFormsModule,
-    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

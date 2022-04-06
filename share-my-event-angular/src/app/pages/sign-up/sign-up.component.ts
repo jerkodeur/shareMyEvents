@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-
-import { FlashService } from 'src/app/services/flash.service';
+import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 
 import { ValidatePassword } from 'src/app/shared/ValidatePassword';
+import { FlashService } from 'src/app/services/flash.service';
+
+import { User } from "src/app/core/models/User.model";
 
 @Component({
   selector: 'app-sign-up',
@@ -12,6 +14,10 @@ import { ValidatePassword } from 'src/app/shared/ValidatePassword';
 })
 export class SignUpComponent{
 
+  faEyeSlash = faEyeSlash;
+  faEye = faEye;
+  pwdShow : boolean =  false;
+  cfPwdShow : boolean =  false;
   submitted = false;
 
   constructor(private formBuilder: FormBuilder, private flashService: FlashService) {
@@ -33,9 +39,18 @@ export class SignUpComponent{
   onSubmit = (): void => {
     this.submitted = true;
     if (this.signUpForm.invalid && this.signUpForm.updateOn) {
-      this.flashService.flash$.next({errors:true, message: "Des erreurs ont été détectées, merci de les corriger."});
+      return this.flashService.flash$.next({errors:true, message: "Des erreurs ont été détectées, merci de les corriger."});
     }
-    console.log(this.signUpForm.value);
+    const { username, email, password } = this.signUpForm.value;
+    const newUser = new User(username, email, password);
+    console.log(newUser);
   }
 
+  togglePwdType = (): void => {
+    this.pwdShow = !this.pwdShow;
+  }
+
+  toggleCfPwdType = (): void => {
+    this.cfPwdShow = !this.cfPwdShow;
+  }
 }
