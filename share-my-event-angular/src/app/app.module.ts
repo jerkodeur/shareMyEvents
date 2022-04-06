@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +11,7 @@ import { NavbarLogoComponent } from './components/navbar/navbar-logo/navbar-logo
 import { NavbarTitleComponent } from './components/navbar/navbar-title/navbar-title.component';
 import { Page404Component } from './pages/page404/page404.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { FlashMessageComponent } from './components/flash-message/flash-message.component';
 
 @NgModule({
   declarations: [
@@ -20,11 +22,13 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
     NavbarTitleComponent,
     Page404Component,
     SignUpComponent,
+    FlashMessageComponent,
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

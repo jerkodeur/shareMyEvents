@@ -1,0 +1,19 @@
+[class^="flash-message-"] {
+  padding: 0.5em;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.flash-message-error {
+  &::before {
+    content: "* ";
+  }
+  color: red;
+  box-shadow: 1px 1px 1px 1px red;
+}
+
+.flash-message-success {
+  color: green;
+  box-shadow: 1px 1px 1px 1px green;
+}

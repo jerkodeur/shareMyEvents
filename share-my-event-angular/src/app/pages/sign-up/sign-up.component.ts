@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+
+import { FlashService } from 'src/app/services/flash.service';
+
 import { ValidatePassword } from 'src/app/shared/ValidatePassword';
 
 @Component({
@@ -7,14 +10,11 @@ import { ValidatePassword } from 'src/app/shared/ValidatePassword';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent{
 
   submitted = false;
 
-  constructor(private formBuilder : FormBuilder) { }
-
-  ngOnInit(): void {
-
+  constructor(private formBuilder: FormBuilder, private flashService: FlashService) {
   }
 
    signUpForm = this.formBuilder.group({
@@ -23,7 +23,7 @@ export class SignUpComponent implements OnInit {
     password: ['', [Validators.required, Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/), Validators.minLength(8)]],
     confirm_password: ['', [Validators.required]]
     }, {
-    validator: ValidatePassword.matchPassword
+     validator: ValidatePassword.matchPassword
    })
 
   get formValues(){
@@ -32,10 +32,10 @@ export class SignUpComponent implements OnInit {
 
   onSubmit = (): void => {
     this.submitted = true;
+    if (this.signUpForm.invalid && this.signUpForm.updateOn) {
+      this.flashService.flash$.next({errors:true, message: "Des erreurs ont été détectées, merci de les corriger."});
+    }
     console.log(this.signUpForm.value);
-    console.log(this.signUpForm.errors);
-    console.log(this.signUpForm);
-    console.log(this.signUpForm.valid);
   }
 
 }
