@@ -30,11 +30,27 @@ fieldset {
   }
   .form-group {
     padding-bottom: 5px;
+
     .form-text {
       color: $primary;
       margin-top: 0.1em;
       font-size: 0.75em;
       padding-left: 0.25em;
+    }
+
+    .form-icon {
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      fa-icon {
+        position: absolute;
+        color: $primary;
+        right: 0.5em;
+        &:hover {
+          cursor: pointer;
+        }
+      }
     }
   }
 
@@ -72,8 +88,8 @@ fieldset {
 }
 
 .form-info {
-  padding-left: 0.25em;
-  margin-top: 1em;
+  text-align: right;
+  margin-top: 1.5em;
   font-size: 0.85em;
   a {
     font-weight: bold;
@@ -83,5 +99,8 @@ fieldset {
       text-decoration: underline;
       color: $secondary;
     }
+  }
+  &.text-right {
+    margin-top: 0;
   }
 }

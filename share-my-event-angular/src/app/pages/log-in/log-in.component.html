@@ -1,1 +1,52 @@
-<p>log-in works!</p>
+<main class="mt-4">
+  <app-flash-message></app-flash-message>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+    <fieldset>
+      <legend class="w-auto px-2">Formulaire de connexion</legend>
+      <div class="required">* Champs obligatoires</div>
+      <div class="form-group">
+        <label for="email" class="form-label">E-mail <span class="text-blood">*</span></label>
+        <input type="email" name="email" id="email" placeholder="Entrez votre adresse e-mail" class="form-control"
+               aria-required formControlName="email" autocomplete="email">
+        <div class="error-feedback"
+             *ngIf="submitted && loginForm.controls['email'].errors && loginForm.controls['email'].errors['required']">
+          * Vous devez renseigner une adresse e-email.
+        </div>
+        <div class="error-feedback"
+             *ngIf="submitted && loginForm.controls['email'].errors && loginForm.controls['email'].errors['pattern']">
+          * Le format de l'adresse e-mail est invalide.
+        </div>
+        <div class="error-feedback"
+             *ngIf="noMatch">
+          * Identifiants inconnus.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password" class="form-label" aria-required>Mot de passe <span class="text-blood">*</span></label>
+        <div class="form-icon">
+          <input [type]="pwdShow ? 'texte' : 'password'" name="password" id="password"
+                 placeholder="Entrez votre mot de passe"
+                 class="form-control" aria-required formControlName="password">
+          <fa-icon [icon]="pwdShow ? faEyeSlash : faEye" size="xs" (click)="togglePwdType()"></fa-icon>
+        </div>
+        <div class="error-feedback"
+             *ngIf="submitted && loginForm.controls['password'].errors && loginForm.controls['password'].errors['required']">
+          * Vous devez renseigner un mot de passe.
+        </div>
+        <div class="error-feedback"
+             *ngIf="noMatch">
+          * Identifiants inconnus.
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-info text-right">
+          <a href="#">Mot de passe oublié ?</a>
+        </div>
+      </div>
+      <div class="row form-btn-layout">
+        <button type="submit" class="btn btn-secondary">Se connecter</button>
+      </div>
+    </fieldset>
+  </form>
+  <aside class="form-info">Vous n'avez pas encore de compte ? <a routerLink="/signup">Inscription</a></aside>
+</main>

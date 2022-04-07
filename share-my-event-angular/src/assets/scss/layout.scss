@@ -8,18 +8,10 @@
 
 .container-fluid {
   min-width: 270px;
+  margin-bottom: 1em;
 }
 main {
   margin: auto;
-}
-
-aside {
-  &.form-info {
-    margin: auto;
-    margin-bottom: 1em;
-    width: 100%;
-    text-align: right;
-  }
 }
 
 /* iPads (portrait) ----------- */

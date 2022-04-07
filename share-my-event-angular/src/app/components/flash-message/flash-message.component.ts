@@ -21,6 +21,6 @@ export class FlashMessageComponent {
   hideMessage = (flashService: FlashService): void => {
     setTimeout(() => {
       flashService.flash$.next({errors:false, message: ""})
-    }, 3500);
+    }, 10000);
   }
 }

@@ -38,7 +38,7 @@ export class SignUpComponent{
 
   onSubmit = (): void => {
     this.submitted = true;
-    if (this.signUpForm.invalid && this.signUpForm.updateOn) {
+    if (this.signUpForm.invalid) {
       return this.flashService.flash$.next({errors:true, message: "Des erreurs ont été détectées, merci de les corriger."});
     }
     const { username, email, password } = this.signUpForm.value;
