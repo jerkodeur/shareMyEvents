@@ -4,6 +4,9 @@ fa-icon {
   position: absolute;
   color: $primary;
   right: 0.5em;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .form-icon {

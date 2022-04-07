@@ -26,7 +26,15 @@ ul {
   > li {
     list-style-type: none;
     color: $secondary;
-    padding: 0.1em 1em;
+    padding: 0.2em 1em;
+    &.nav-item:hover {
+      cursor: pointer;
+      background-color: $primary;
+      transition: all 650ms;
+      .flex-icon {
+        color: lighten($color: $secondary, $amount: 20%);
+      }
+    }
   }
 }
 
@@ -66,12 +74,7 @@ button {
   font-size: 0.75em;
   flex-direction: row;
   justify-content: space-between;
-
-  &:hover {
-    cursor: pointer;
-    background-color: $primary;
-    color: $light;
-  }
+  padding: 0.5em;
 
   svg {
     margin-right: 0.5em;
@@ -104,7 +107,28 @@ button {
     padding-bottom: 0 !important;
     box-shadow: none;
     > li {
-      color: $blood;
+      padding: 0;
+      &.active-nav-item {
+        .flex-icon {
+          cursor: auto;
+          color: $blood;
+          font-weight: bold;
+          svg {
+            &.login-img {
+              background-image: url("../../img/login-hover.svg");
+            }
+
+            &.signup-img {
+              background-image: url("../../img/sign-up-hover.svg");
+            }
+          }
+
+          &:hover {
+            text-decoration: none;
+            color: $blood !important;
+          }
+        }
+      }
     }
   }
 
@@ -128,10 +152,13 @@ button {
     &:hover {
       background-color: $light;
       color: $secondary !important;
+      text-decoration: underline;
       svg.login-img {
+        transition: all 500ms;
         background-image: url("../../img/login-hover.svg");
       }
       svg.signup-img {
+        transition: all 500ms;
         background-image: url("../../img/sign-up-hover.svg");
       }
     }
