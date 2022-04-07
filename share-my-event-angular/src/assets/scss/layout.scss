@@ -23,7 +23,7 @@ main {
 
 /* iPads (portrait) ----------- */
 @media only screen and (min-width: 768px) {
-  fieldset {
+  main {
     .form-group {
       margin: auto;
       width: 80%;
@@ -36,15 +36,13 @@ main {
 
 // Desktop
 @media screen and (min-width: 1024px) {
-  fieldset,
-  aside.form-info {
+  main {
     width: 75% !important;
   }
 }
 
 @media screen and (min-width: 1268px) {
-  fieldset,
-  aside.form-info {
+  main {
     width: 60% !important;
   }
 }

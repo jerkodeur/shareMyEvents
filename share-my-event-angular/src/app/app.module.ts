@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,9 @@ import { NavbarTitleComponent } from './components/navbar/navbar-title/navbar-ti
 import { Page404Component } from './pages/page404/page404.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { FlashMessageComponent } from './components/flash-message/flash-message.component';
+import { ResetPasswordInitComponent } from './pages/reset-password/reset-password-init/reset-password-init.component';
+import { ResetPasswordInstructionsComponent } from './pages/reset-password/reset-password-instructions/reset-password-instructions.component';
+import { ResetPasswordPageComponent } from './pages/reset-password/reset-password-page/reset-password-page.component';
 
 @NgModule({
   declarations: [
@@ -24,11 +27,15 @@ import { FlashMessageComponent } from './components/flash-message/flash-message.
     Page404Component,
     SignUpComponent,
     FlashMessageComponent,
+    ResetPasswordInitComponent,
+    ResetPasswordInstructionsComponent,
+    ResetPasswordPageComponent,
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     FontAwesomeModule,
+    FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
   ],

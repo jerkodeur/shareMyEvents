@@ -2,7 +2,9 @@
   <app-flash-message></app-flash-message>
   <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" novalidate>
     <fieldset>
-      <legend class="w-auto px-2">Formulaire d'inscription</legend>
+      <legend class="w-auto px-2">
+        <h1>Formulaire d'inscription</h1>
+      </legend>
       <div class="required">* Champs obligatoires</div>
       <div class="form-group">
         <label for="username" class="form-label">Nom d'utilisateur <span class="text-blood">*</span></label>
@@ -65,7 +67,7 @@
              signUpForm.controls['confirm_password'].errors['matchPassword'] == true">
           * Les deux mots de passe ne sont pas identiques.
         </div>
-        <div class="form-info">
+        <div class="aside-text-info">
           En validant votre inscription, vous accepter les <a href="#">conditions générales d’utilisation (CGU)</a>
         </div>
       </div>
@@ -74,5 +76,5 @@
       </div>
     </fieldset>
   </form>
-  <aside class="form-info">Vous avez déjà un compte ? <a routerLink="/login">Connexion</a></aside>
+  <aside class="aside-text-info">Vous avez déjà un compte ? <a routerLink="/login">Connexion</a></aside>
 </main>

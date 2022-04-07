@@ -10,4 +10,43 @@ body {
   background-color: $light;
 }
 
+.pwd-reset-intructions {
+  h1 {
+    color: $primary;
+    margin-top: 1em;
+    font-size: 1.2em;
+  }
+
+  p {
+    &:first-of-type {
+      margin-top: 1.5em;
+    }
+
+    span {
+      font-weight: bold;
+      color: $blood;
+      margin-left: 0.5em;
+    }
+  }
+}
+
+aside {
+  &.form-info {
+    margin-top: 0 !important;
+  }
+}
+
+.aside-link {
+  font-size: 0.85em;
+  a {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #000;
+    &:hover {
+      text-decoration: underline;
+      color: $secondary;
+    }
+  }
+}
+
 @import "./navbar/navbar.scss";

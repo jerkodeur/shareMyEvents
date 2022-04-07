@@ -2,7 +2,9 @@
   <app-flash-message></app-flash-message>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
     <fieldset>
-      <legend class="w-auto px-2">Formulaire de connexion</legend>
+      <legend class="w-auto px-2">
+        <h1>Formulaire de connexion</h1>
+      </legend>
       <div class="required">* Champs obligatoires</div>
       <div class="form-group">
         <label for="email" class="form-label">E-mail <span class="text-blood">*</span></label>
@@ -39,8 +41,8 @@
         </div>
       </div>
       <div class="form-group">
-        <div class="form-info text-right">
-          <a href="#">Mot de passe oublié ?</a>
+        <div class="aside-text-info text-right">
+          <a routerLink="/password-reset/init">Mot de passe oublié ?</a>
         </div>
       </div>
       <div class="row form-btn-layout">
@@ -48,5 +50,5 @@
       </div>
     </fieldset>
   </form>
-  <aside class="form-info">Vous n'avez pas encore de compte ? <a routerLink="/signup">Inscription</a></aside>
+  <aside class="aside-text-info">Vous n'avez pas encore de compte ? <a routerLink="/signup">Inscription</a></aside>
 </main>

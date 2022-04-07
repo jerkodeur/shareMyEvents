@@ -8,11 +8,13 @@ fieldset {
 
   legend {
     float: none;
-    font-size: 0.8em;
-    font-weight: bold;
-    text-transform: uppercase;
-    white-space: nowrap;
-    color: $primary;
+
+    h1 {
+      font-size: 0.7em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      color: $primary;
+    }
   }
   .required {
     text-align: right;
@@ -54,6 +56,11 @@ fieldset {
     }
   }
 
+  .form-text {
+    color: $primary;
+    margin: 1em 0;
+  }
+
   .form-btn-layout {
     margin: 1em 0 0.5em;
     .btn {
@@ -87,9 +94,9 @@ fieldset {
   }
 }
 
-.form-info {
+.aside-text-info {
   text-align: right;
-  margin-top: 1.5em;
+  margin-top: 1.25em;
   font-size: 0.85em;
   a {
     font-weight: bold;
