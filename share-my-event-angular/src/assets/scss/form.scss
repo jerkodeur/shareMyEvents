@@ -59,6 +59,10 @@ fieldset {
   .form-text {
     color: $primary;
     margin: 1em 0;
+
+    &#pwdHelp {
+      margin-bottom: 0;
+    }
   }
 
   .form-btn-layout {

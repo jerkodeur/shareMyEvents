@@ -1,3 +1,5 @@
+@import "/src/assets/scss/variables.scss";
+@import "./mixins.scss";
 @import "./layout.scss";
 @import "./form.scss";
 
@@ -12,9 +14,8 @@ body {
 
 .pwd-reset-intructions {
   h1 {
-    color: $primary;
+    @include text-maker($size: 1.2em, $weight: bold);
     margin-top: 1em;
-    font-size: 1.2em;
   }
 
   p {

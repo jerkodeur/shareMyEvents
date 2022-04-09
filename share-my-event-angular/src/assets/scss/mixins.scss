@@ -1,0 +1,5 @@
+@mixin text-maker($color: $primary, $size: 1em, $weight: inherit) {
+  color: $color;
+  font-weight: $weight;
+  font-size: $size;
+}

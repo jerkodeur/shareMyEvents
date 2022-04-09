@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-reset-password-instructions',
   templateUrl: './reset-password-instructions.component.html',
-  styleUrls: ['./reset-password-instructions.component.scss']
+  styleUrls: ['./reset-password-instructions.component.scss'],
 })
 export class ResetPasswordInstructionsComponent implements OnInit {
-
   private _email!: any;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     if (sessionStorage.getItem('email')) {
@@ -23,5 +22,4 @@ export class ResetPasswordInstructionsComponent implements OnInit {
   public get email(): any {
     return this._email;
   }
-
 }
