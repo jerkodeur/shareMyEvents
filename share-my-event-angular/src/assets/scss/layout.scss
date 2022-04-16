@@ -10,39 +10,65 @@
   min-width: 270px;
   margin-bottom: 1em;
 }
-main {
+
+form {
+  margin: auto;
+  .btn {
+    width: 40% !important;
+  }
+  .form-group {
+    margin: auto;
+    margin-bottom: 0.5em;
+  }
+}
+
+.pwd-reset-intructions {
+  width: 90%;
   margin: auto;
 }
 
-/* iPads (portrait) ----------- */
+// Media queries
+@media only screen and (min-width: 500px) {
+  form {
+    .form-group,
+    aside.aside-text-info {
+      width: 80% !important;
+      input {
+        width: 100% !important;
+      }
+    }
+  }
+}
+
 @media only screen and (min-width: 576px) {
-  main {
-    width: 90%;
+  form {
+    width: 90% !important;
+  }
+  aside.aside-text-info {
+    width: 95%;
   }
 }
 
-/* iPads (portrait) ----------- */
 @media only screen and (min-width: 768px) {
-  main {
-    .form-group {
-      margin: auto;
-      width: 80%;
-    }
-    .btn {
-      width: 50% !important;
-    }
-  }
-}
-
-// Desktop
-@media screen and (min-width: 1024px) {
-  main {
+  form {
     width: 75% !important;
   }
+  aside.aside-text-info {
+    width: 85%;
+  }
+  .pwd-reset-intructions {
+    width: 75%;
+  }
 }
 
-@media screen and (min-width: 1268px) {
-  main {
-    width: 60% !important;
+@media only screen and (min-width: 900px) {
+  form {
+    width: 50% !important;
+  }
+  aside.aside-text-info {
+    width: 75%;
+  }
+  .pwd-reset-intructions {
+    width: 50%;
   }
 }

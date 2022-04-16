@@ -1,8 +1,12 @@
 [class^="flash-message-"] {
+  margin: auto;
+  font-weight: bold;
+  margin-bottom: 1em;
   padding: 0.5em;
   border-radius: 4px;
   text-align: center;
   cursor: pointer;
+  width: 100%;
 }
 
 .flash-message-error {
@@ -16,4 +20,21 @@
 .flash-message-success {
   color: green;
   box-shadow: 1px 1px 1px 1px green;
+}
+@media only screen and (min-width: 576px) {
+  [class^="flash-message-"] {
+    width: 90% !important;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  [class^="flash-message-"] {
+    width: 75% !important;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  [class^="flash-message-"] {
+    width: 50% !important;
+  }
 }

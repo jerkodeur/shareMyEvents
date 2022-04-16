@@ -1,5 +1,4 @@
 fieldset {
-  width: 100%;
   padding: 0 1em 1em;
   border: 1pt $primary solid;
   border-radius: 4px;
@@ -8,6 +7,7 @@ fieldset {
 
   legend {
     float: none;
+    margin-bottom: 0;
 
     h1 {
       font-size: 0.7em;
@@ -18,7 +18,6 @@ fieldset {
   }
   .required {
     text-align: right;
-    width: 100%;
     font-size: 0.75em;
     color: $blood;
   }
@@ -28,10 +27,11 @@ fieldset {
     font-weight: bold;
     margin-bottom: 0.15em !important;
     padding-left: 0.15em;
-    color: $primary;
+    color: $blood;
   }
   .form-group {
     padding-bottom: 5px;
+    margin-bottom: 0;
 
     .form-text {
       color: $primary;
@@ -54,6 +54,11 @@ fieldset {
         }
       }
     }
+    .aside-text-info {
+      text-align: left;
+      margin-top: 1em;
+      color: $blood;
+    }
   }
 
   .form-text {
@@ -68,7 +73,6 @@ fieldset {
   .form-btn-layout {
     margin: 1em 0 0.5em;
     .btn {
-      width: 60%;
       margin: auto;
       font-weight: 700;
       background-color: $secondary;
@@ -84,7 +88,7 @@ fieldset {
 
   .error-feedback {
     padding: 0.1em 0 0 0.5em;
-    color: $blood;
+    color: red;
     font-size: 0.75em;
   }
 
@@ -100,7 +104,8 @@ fieldset {
 
 .aside-text-info {
   text-align: right;
-  margin-top: 1.25em;
+  color: $primary;
+  margin-top: 0;
   font-size: 0.85em;
   a {
     font-weight: bold;
@@ -114,4 +119,8 @@ fieldset {
   &.text-right {
     margin-top: 0;
   }
+}
+
+div.aside-text-info.text-right {
+  text-align: right;
 }
