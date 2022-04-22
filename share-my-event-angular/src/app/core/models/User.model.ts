@@ -1,13 +1,13 @@
-import { UserInterface } from "../interfaces/User.interface";
-
-export class User implements UserInterface{
-  id !: number;
-  username: string;
+export class User {
+  id!: number;
+  firstname: string;
+  lastname: string;
   email: string;
   password: string;
 
-  constructor(username: string, email: string, password: string) {
-    this.username = username;
+  constructor(firstname: string, lastname: string, email: string, password: string) {
+    this.firstname = firstname;
+    this.lastname = lastname;
     this.email = email;
     this.password = password;
   }

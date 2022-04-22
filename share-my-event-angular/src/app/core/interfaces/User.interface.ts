@@ -1,6 +1,7 @@
-export interface UserInterface  {
+export interface UserInterface {
   id: number;
-  username: string;
+  firstname: string;
+  lastname: string;
   email: string;
   password: string;
 }
