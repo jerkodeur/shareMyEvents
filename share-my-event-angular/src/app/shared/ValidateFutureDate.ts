@@ -1,14 +1,12 @@
 import { AbstractControl } from '@angular/forms';
+import { DateHandler } from '../handlers/date-handler';
 
 export class ValidateDate {
   static isFuture(abstractControl: AbstractControl) {
-    let splitDate = abstractControl.get('date')?.value.toString().split('-');
-    let splitTime = abstractControl.get('time')?.value.toString().split(':');
+    let date = abstractControl.get('date')?.value;
+    let time = abstractControl.get('time')?.value;
 
-    const [year, month, day] = splitDate;
-    const [hours, minutes] = splitTime;
-
-    const fromDate = new Date(year, month - 1, day, hours, minutes, 0);
+    const fromDate = DateHandler.createDatebyDateAndTime(date, time);
 
     if (fromDate < new Date(Date.now())) {
       return {

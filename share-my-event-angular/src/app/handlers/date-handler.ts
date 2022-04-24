@@ -1,22 +1,17 @@
-import { Injectable } from '@angular/core';
-
-@Injectable({
-  providedIn: 'root',
-})
-export class DateHandlerService {
+export class DateHandler {
   constructor() {}
 
-  addHoursToDate(date: Date, hours: number): Date {
+  static addHoursToDate(date: Date, hours: number): Date {
     return new Date(new Date(date).setHours(date.getHours() + hours));
   }
 
-  validateExpirationDate(refDate: Date, hours: number): boolean {
+  static validateExpirationDate(refDate: Date, hours: number): boolean {
     const dateNow = new Date(Date.now());
     const compareDate = this.addHoursToDate(refDate, hours);
     return compareDate > dateNow;
   }
 
-  createDatebyDateAndTime(date: any, time: any) {
+  static createDatebyDateAndTime(date: any, time: any) {
     let splitDate = date.split('-');
     let splitTime = time.split(':');
 

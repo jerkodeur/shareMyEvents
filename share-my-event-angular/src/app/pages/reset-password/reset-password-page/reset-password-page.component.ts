@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 
-import { DateHandlerService } from 'src/app/services/date-handler.service';
+import { DateHandler } from 'src/app/handlers/date-handler';
 import { FlashService } from 'src/app/services/flash.service';
 import { ValidatePassword } from 'src/app/shared/ValidatePassword';
 
@@ -23,7 +23,6 @@ export class ResetPasswordPageComponent {
   testCode = '12345';
 
   constructor(
-    private dateHandler: DateHandlerService,
     private formBuilder: FormBuilder,
     private flashService: FlashService,
     private router: Router
@@ -58,7 +57,7 @@ export class ResetPasswordPageComponent {
     this.noMatch = false;
     this.submitted = true;
     const { code, password, confirm_password } = this.pwdForm.value;
-    if (!this.dateHandler.validateExpirationDate(currentDate, 0)) {
+    if (!DateHandler.validateExpirationDate(currentDate, 0)) {
       this.router.navigate([
         'password-reset/init',
         { exception: 'codeExpired' },

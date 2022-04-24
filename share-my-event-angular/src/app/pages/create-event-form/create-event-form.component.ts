@@ -3,8 +3,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { FlashService } from 'src/app/services/flash.service';
 import { FullDate } from 'src/app/core/models/Date.model';
 import { ValidateDate } from 'src/app/shared/ValidateFutureDate';
-import { DateHandlerService } from 'src/app/services/date-handler.service';
 import { Event } from 'src/app/core/models/Event.model';
+import { DateHandler } from 'src/app/handlers/date-handler';
 
 @Component({
   selector: 'app-create-event-form',
@@ -16,7 +16,6 @@ export class CreateEventFormComponent implements OnInit {
   currentDate = FullDate.getCurrentDate();
 
   constructor(
-    private dateService: DateHandlerService,
     private formBuilder: FormBuilder,
     private flashService: FlashService
   ) {}
@@ -64,7 +63,7 @@ export class CreateEventFormComponent implements OnInit {
     const { address, zipCode, locality, additionnal } =
       this.eventForm.value.addressForm;
 
-    const eventDate = this.dateService.createDatebyDateAndTime(date, time);
+    const eventDate = DateHandler.createDatebyDateAndTime(date, time);
     const newEvent = new Event(
       title,
       description,
