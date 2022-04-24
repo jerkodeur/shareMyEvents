@@ -7,17 +7,30 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
+import { FlashMessageComponent } from './components/flash-message/flash-message.component';
 import { LogInComponent } from './pages/log-in/log-in.component';
+import { Page404Component } from './pages/page404/page404.component';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
+
+// Event components
+import { CreateEventFormComponent } from './pages/create-event-form/create-event-form.component';
+import { EventLayoutComponent } from './pages/event-layout/event-layout.component';
+import { EventDateComponent } from './components/event/event-date/event-date.component';
+import { EventMainInfoComponent } from './components/event/event-main-info/event-main-info.component';
+import { EventLocalizationComponent } from './components/event/event-localization/event-localization.component';
+import { EventGuestListComponent } from './components/event/event-guest-list/event-guest-list.component';
+import { EventFooterMenuComponent } from './components/event/event-footer-menu/event-footer-menu.component';
+import { EventCancelComponent } from './components/event/event-cancel/event-cancel.component';
+
+// Navbar components
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NavbarLogoComponent } from './components/navbar/navbar-logo/navbar-logo.component';
 import { NavbarTitleComponent } from './components/navbar/navbar-title/navbar-title.component';
-import { Page404Component } from './pages/page404/page404.component';
-import { SignUpComponent } from './pages/sign-up/sign-up.component';
-import { FlashMessageComponent } from './components/flash-message/flash-message.component';
+
+// Reset password components
 import { ResetPasswordInitComponent } from './pages/reset-password/reset-password-init/reset-password-init.component';
 import { ResetPasswordInstructionsComponent } from './pages/reset-password/reset-password-instructions/reset-password-instructions.component';
 import { ResetPasswordPageComponent } from './pages/reset-password/reset-password-page/reset-password-page.component';
-import { CreateEventFormComponent } from './pages/create-event-form/create-event-form.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +46,13 @@ import { CreateEventFormComponent } from './pages/create-event-form/create-event
     ResetPasswordInstructionsComponent,
     ResetPasswordPageComponent,
     SignUpComponent,
+    EventLayoutComponent,
+    EventDateComponent,
+    EventMainInfoComponent,
+    EventLocalizationComponent,
+    EventGuestListComponent,
+    EventFooterMenuComponent,
+    EventCancelComponent,
   ],
   imports: [
     AppRoutingModule,
