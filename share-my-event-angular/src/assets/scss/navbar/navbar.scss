@@ -16,56 +16,73 @@ a:visited {
     color: secondary;
   }
 }
-
-ul {
-  background-color: lighten($primary, $amount: 3.5%);
-  box-shadow: 1px 1px 2px $blood;
-  padding: 1em 0 !important ;
-  margin-top: 2.5em;
-  border-radius: 4px;
-  > li {
-    list-style-type: none;
-    color: $secondary;
-    padding: 0.2em 1em;
-    &.nav-item:hover {
-      cursor: pointer;
-      background-color: $primary;
-      transition: all 650ms;
-      .flex-icon {
-        color: lighten($color: $secondary, $amount: 20%);
+.top-nav {
+  ul {
+    background-color: lighten($primary, $amount: 3.5%);
+    box-shadow: 1px 1px 2px $dark;
+    padding: 0 !important ;
+    margin-top: 2.75em;
+    margin-right: 0.25em;
+    border-radius: 4px;
+    > li {
+      list-style-type: none;
+      color: $secondary;
+      font-size: 1.5em;
+      padding: 0 1em;
+      &.nav-item:hover {
+        cursor: pointer;
+        background-color: $primary;
+        transition: all 650ms;
+        .flex-icon {
+          color: lighten($color: $secondary, $amount: 20%);
+        }
       }
     }
   }
-}
+  &.navbar {
+    box-shadow: 0 2px 2px $primary;
+    background-color: $light;
+    padding: 0;
 
-button {
-  z-index: 1;
-}
-
-.navbar {
-  box-shadow: 0 2px 2px $primary;
-
-  .navbar-toggler {
-    box-shadow: none;
-    background-color: $secondary;
-    padding: 0.3em;
-    border-radius: 2.5em;
-    color: $primary;
-    border-color: none;
-    &:focus {
-      box-shadow: 2px 2px 2px $primary, -2px -2px 2px $primary;
+    .container-fluid {
+      margin-bottom: 0 !important;
     }
+
+    .navbar-toggler {
+      box-shadow: none;
+      background-color: $secondary;
+      padding: 0.3em;
+      border-radius: 2.5em;
+      color: $primary;
+      border-color: none;
+      &:focus {
+        box-shadow: 2px 2px 2px $primary, -2px -2px 2px $primary;
+      }
+      &:hover {
+        box-shadow: 2px 2px 2px $blood, -2px -2px 2px $blood;
+      }
+    }
+
+    .navbar-collapse {
+      position: absolute;
+      right: 0.75em;
+      top: 0.75em;
+      padding: 0 0.5em;
+      z-index: 0;
+    }
+  }
+  .login-img {
+    background-image: url("../../img/login-hover.svg");
     &:hover {
-      box-shadow: 2px 2px 2px $blood, -2px -2px 2px $blood;
+      background-image: url("../../img/login-hover.svg");
     }
   }
 
-  .navbar-collapse {
-    position: absolute;
-    right: 0.75em;
-    top: 0.75em;
-    padding: 0 0.5em;
-    z-index: 0;
+  .signup-img {
+    background-image: url("../../img/sign-up-hover.svg");
+    &:hover {
+      background-image: url("../../img/sign-up-hover.svg");
+    }
   }
 }
 
@@ -82,84 +99,76 @@ button {
     height: 15px;
   }
 }
-.login-img {
-  background-image: url("../../img/login-hover.svg");
-  &:hover {
-    background-image: url("../../img/login-hover.svg");
-  }
-}
-
-.signup-img {
-  background-image: url("../../img/sign-up-hover.svg");
-  &:hover {
-    background-image: url("../../img/sign-up-hover.svg");
-  }
+button {
+  z-index: 1;
 }
 
 @media screen and (min-width: 576px) {
-  .navbar-collapse {
-    padding: 0 !important;
-  }
-  ul {
-    background-color: $light;
-    display: flex;
-    margin-top: -0.75em;
-    padding-bottom: 0 !important;
-    box-shadow: none;
-    > li {
-      padding: 0;
-      &.active-nav-item {
-        .flex-icon {
-          cursor: auto;
-          color: $blood;
-          font-weight: bold;
-          svg {
-            &.login-img {
-              background-image: url("../../img/login-hover.svg");
+  .top-nav {
+    .navbar-collapse {
+      padding: 0 !important;
+    }
+    ul {
+      background-color: $light;
+      display: flex;
+      margin-top: -0.75em;
+      padding-bottom: 0 !important;
+      box-shadow: none;
+      > li {
+        padding: 0;
+        font-size: 1em;
+        &.active-nav-item {
+          .flex-icon {
+            cursor: auto;
+            color: $blood;
+            font-weight: bold;
+            svg {
+              &.login-img {
+                background-image: url("../../img/login-hover.svg");
+              }
+
+              &.signup-img {
+                background-image: url("../../img/sign-up-hover.svg");
+              }
             }
 
-            &.signup-img {
-              background-image: url("../../img/sign-up-hover.svg");
+            &:hover {
+              text-decoration: none;
+              color: $blood !important;
             }
-          }
-
-          &:hover {
-            text-decoration: none;
-            color: $blood !important;
           }
         }
       }
     }
-  }
+    .flex-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: $primary;
 
-  .flex-icon {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: $primary;
+      svg {
+        width: 30px;
+        height: 30px;
+        &.login-img {
+          background-image: url("../../img/login.svg");
+        }
 
-    svg {
-      width: 30px;
-      height: 30px;
-      &.login-img {
-        background-image: url("../../img/login.svg");
+        &.signup-img {
+          background-image: url("../../img/sign-up.svg");
+        }
       }
-
-      &.signup-img {
-        background-image: url("../../img/sign-up.svg");
-      }
-    }
-    &:hover {
-      background-color: $light;
-      color: $secondary !important;
-      text-decoration: underline;
-      svg.login-img {
-        transition: all 500ms;
-        background-image: url("../../img/login-hover.svg");
-      }
-      svg.signup-img {
-        transition: all 500ms;
-        background-image: url("../../img/sign-up-hover.svg");
+      &:hover {
+        background-color: $light;
+        color: $secondary !important;
+        text-decoration: underline;
+        svg.login-img {
+          transition: all 500ms;
+          background-image: url("../../img/login-hover.svg");
+        }
+        svg.signup-img {
+          transition: all 500ms;
+          background-image: url("../../img/sign-up-hover.svg");
+        }
       }
     }
   }

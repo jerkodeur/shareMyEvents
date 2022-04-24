@@ -1,13 +1,19 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
 import { HomeComponent } from './pages/home/home.component';
 import { LogInComponent } from './pages/log-in/log-in.component';
-import { NgModule } from '@angular/core';
 import { Page404Component } from './pages/page404/page404.component';
-import { RouterModule, Routes } from '@angular/router';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
+
+// Events
+import { CreateEventFormComponent } from './pages/create-event-form/create-event-form.component';
+import { EventLayoutComponent } from './pages/event-layout/event-layout.component';
+
+// Reset Password
 import { ResetPasswordInitComponent } from './pages/reset-password/reset-password-init/reset-password-init.component';
 import { ResetPasswordInstructionsComponent } from './pages/reset-password/reset-password-instructions/reset-password-instructions.component';
 import { ResetPasswordPageComponent } from './pages/reset-password/reset-password-page/reset-password-page.component';
-import { CreateEventFormComponent } from './pages/create-event-form/create-event-form.component';
 
 const routes: Routes = [
   {
@@ -15,8 +21,8 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'new-event',
-    component: CreateEventFormComponent,
+    path: 'event/:id',
+    component: EventLayoutComponent,
   },
   {
     path: 'home',
@@ -27,8 +33,12 @@ const routes: Routes = [
     component: LogInComponent,
   },
   {
-    path: 'signup',
-    component: SignUpComponent,
+    path: 'new-event',
+    component: CreateEventFormComponent,
+  },
+  {
+    path: 'password-reset',
+    component: ResetPasswordPageComponent,
   },
   {
     path: 'password-reset/init',
@@ -39,8 +49,8 @@ const routes: Routes = [
     component: ResetPasswordInstructionsComponent,
   },
   {
-    path: 'password-reset',
-    component: ResetPasswordPageComponent,
+    path: 'signup',
+    component: SignUpComponent,
   },
   {
     path: '**',

@@ -65,9 +65,13 @@ export class CreateEventFormComponent implements OnInit {
 
     const eventDate = DateHandler.createDatebyDateAndTime(date, time);
     const newEvent = new Event(
+      Math.floor(Math.random() * 10000),
       title,
       description,
       eventDate,
+      Math.floor(Math.random() * 10000000000000).toString(),
+      'Jérôme Potié',
+      'jerome.potie@gmail.com',
       address,
       zipCode,
       locality,

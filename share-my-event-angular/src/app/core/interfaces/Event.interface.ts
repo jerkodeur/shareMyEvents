@@ -3,8 +3,11 @@ export interface EventInterface {
   title: string;
   description: string;
   date: string;
-  address: string | null;
-  ZIPcode: number | null;
-  locality: string | null;
-  additionnal: string | null;
+  eventId?: string;
+  organizer?: string;
+  organizerMail?: string;
+  address?: string;
+  ZIPcode?: number;
+  locality?: string;
+  additionnal?: string;
 }

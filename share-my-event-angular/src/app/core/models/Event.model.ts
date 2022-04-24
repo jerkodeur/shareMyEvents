@@ -1,26 +1,38 @@
 export class Event {
+  id!: number;
   title: string;
   description: string;
   date: Date;
-  address!: string | null;
-  ZIPCode!: number | null;
-  locality!: string | null;
-  additional!: string | null;
+  eventId!: string;
+  organizer!: string;
+  organizerMail!: string;
+  address!: string;
+  zipCode!: number;
+  locality!: string;
+  additional!: string;
 
   constructor(
+    id: number,
     title: string,
     description: string,
     date: Date,
-    address: string | null,
-    ZIPcode: number | null,
-    locality: string | null,
-    additional: string | null
+    event_id: string,
+    organizer: string,
+    organizerMail: string,
+    address: string,
+    zipCode: number,
+    locality: string,
+    additional: string
   ) {
+    this.id = id;
     this.title = title;
     this.description = description;
     this.date = date;
+    this.eventId = event_id;
+    this.organizer = organizer;
+    this.organizerMail = organizerMail;
     this.address = address;
-    this.ZIPCode = ZIPcode;
+    this.zipCode = zipCode;
     this.locality = locality;
     this.additional = additional;
   }

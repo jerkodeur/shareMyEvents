@@ -32,3 +32,9 @@
 .bg-blood {
   background-color: $blood;
 }
+
+// Bootstrap override
+.btn,
+.btn:active {
+  box-shadow: none !important;
+}

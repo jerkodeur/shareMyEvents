@@ -53,6 +53,11 @@ form {
   aside.aside-text-info {
     width: 95%;
   }
+  .top-nav {
+    ul {
+      padding: 0 !important;
+    }
+  }
 }
 
 @media only screen and (min-width: 768px) {

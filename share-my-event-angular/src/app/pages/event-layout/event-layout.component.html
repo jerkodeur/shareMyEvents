@@ -1,1 +1,93 @@
-<p>event-layout works!</p>
+<app-event-mobile-menu></app-event-mobile-menu>
+<div style="overflow-y: visible; position: absolute">
+  <app-event-id [eventId]="event.eventId"></app-event-id>
+  <app-event-cancel id="description" [eventId]="event.id"></app-event-cancel>
+  <app-event-date [date]="event.date"></app-event-date>
+  <app-event-main-info
+    [title]="event.title"
+    [description]="event.description"
+  ></app-event-main-info>
+  <app-event-localization
+    id="address"
+    [address]="event.address"
+    [zipCode]="event.zipCode"
+    [locality]="event.locality"
+    [additional]="event.additional"
+  ></app-event-localization>
+  <app-event-guest-list
+    id="guestList"
+    [eventId]="event.id"
+  ></app-event-guest-list>
+  <!-- <div id="description">
+    <h2 style="margin: 0">Section 1</h2>
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo deleniti ea
+    velit beatae cumque laborum inventore qui earum officia nulla voluptate
+    cupiditate quam, vero reprehenderit. Facilis voluptates officia debitis at
+    hic expedita, repudiandae porro vero molestias laborum exercitationem
+    laboriosam, nemo aliquid sunt voluptate ea tenetur sapiente nam omnis?
+    Explicabo ratione nostrum, possimus saepe deleniti molestias odio? Alias,
+    quis similique molestias incidunt dignissimos facilis voluptatibus sequi at
+    totam mollitia architecto inventore odio facere dolores sit aliquid nemo
+    sunt soluta corporis hic reprehenderit quasi ut minus. Exercitationem cum
+    corrupti alias voluptatibus. Nihil voluptates sit dolore cumque quidem cum
+    perspiciatis voluptatum nisi placeat quisquam earum ducimus commodi minus
+    assumenda unde, odio distinctio quo error pariatur vitae architecto esse
+    quos. Pariatur, exercitationem soluta, illum corrupti earum delectus eaque
+    odio aperiam natus doloribus ab. Eveniet facilis sequi pariatur eius
+    explicabo iure assumenda animi quod quidem vitae porro aperiam non, dolore
+    accusantium fugiat soluta suscipit odio tempore odit voluptatem, voluptas
+    iste id quia? Nisi, nostrum accusamus quia maiores expedita asperiores vel
+    numquam aspernatur possimus ratione reprehenderit, adipisci itaque
+    voluptatibus perferendis non ad impedit quidem explicabo alias! Iusto quia
+    vel unde dicta ut, delectus voluptate eaque omnis hic voluptas dolorem.
+    Veritatis dolor, vel corporis hic beatae doloribus.
+  </div> -->
+  <!-- <div id="address">
+    <h1>Section 2</h1>
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo deleniti ea
+    velit beatae cumque laborum inventore qui earum officia nulla voluptate
+    cupiditate quam, vero reprehenderit. Facilis voluptates officia debitis at
+    hic expedita, repudiandae porro vero molestias laborum exercitationem
+    laboriosam, nemo aliquid sunt voluptate ea tenetur sapiente nam omnis?
+    Explicabo ratione nostrum, possimus saepe deleniti molestias odio? Alias,
+    quis similique molestias incidunt dignissimos facilis voluptatibus sequi at
+    totam mollitia architecto inventore odio facere dolores sit aliquid nemo
+    sunt soluta corporis hic reprehenderit quasi ut minus. Exercitationem cum
+    corrupti alias voluptatibus. Nihil voluptates sit dolore cumque quidem cum
+    perspiciatis voluptatum nisi placeat quisquam earum ducimus commodi minus
+    assumenda unde, odio distinctio quo error pariatur vitae architecto esse
+    quos. Pariatur, exercitationem soluta, illum corrupti earum delectus eaque
+    odio aperiam natus doloribus ab. Eveniet facilis sequi pariatur eius
+    explicabo iure assumenda animi quod quidem vitae porro aperiam non, dolore
+    accusantium fugiat soluta suscipit odio tempore odit voluptatem, voluptas
+    iste id quia? Nisi, nostrum accusamus quia maiores expedita asperiores vel
+    numquam aspernatur possimus ratione reprehenderit, adipisci itaque
+    voluptatibus perferendis non ad impedit quidem explicabo alias! Iusto quia
+    vel unde dicta ut, delectus voluptate eaque omnis hic voluptas dolorem.
+    Veritatis dolor, vel corporis hic beatae doloribus.
+  </div>
+  <div id="guestList">
+    <h1>Section 3</h1>
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo deleniti ea
+    velit beatae cumque laborum inventore qui earum officia nulla voluptate
+    cupiditate quam, vero reprehenderit. Facilis voluptates officia debitis at
+    hic expedita, repudiandae porro vero molestias laborum exercitationem
+    laboriosam, nemo aliquid sunt voluptate ea tenetur sapiente nam omnis?
+    Explicabo ratione nostrum, possimus saepe deleniti molestias odio? Alias,
+    quis similique molestias incidunt dignissimos facilis voluptatibus sequi at
+    totam mollitia architecto inventore odio facere dolores sit aliquid nemo
+    sunt soluta corporis hic reprehenderit quasi ut minus. Exercitationem cum
+    corrupti alias voluptatibus. Nihil voluptates sit dolore cumque quidem cum
+    perspiciatis voluptatum nisi placeat quisquam earum ducimus commodi minus
+    assumenda unde, odio distinctio quo error pariatur vitae architecto esse
+    quos. Pariatur, exercitationem soluta, illum corrupti earum delectus eaque
+    odio aperiam natus doloribus ab. Eveniet facilis sequi pariatur eius
+    explicabo iure assumenda animi quod quidem vitae porro aperiam non, dolore
+    accusantium fugiat soluta suscipit odio tempore odit voluptatem, voluptas
+    iste id quia? Nisi, nostrum accusamus quia maiores expedita asperiores vel
+    numquam aspernatur possimus ratione reprehenderit, adipisci itaque
+    voluptatibus perferendis non ad impedit quidem explicabo alias! Iusto quia
+    vel unde dicta ut, delectus voluptate eaque omnis hic voluptas dolorem.
+    Veritatis dolor, vel corporis hic beatae doloribus.
+  </div> -->
+</div>

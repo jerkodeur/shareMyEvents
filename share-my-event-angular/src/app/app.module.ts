@@ -14,13 +14,15 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
 // Event components
 import { CreateEventFormComponent } from './pages/create-event-form/create-event-form.component';
-import { EventLayoutComponent } from './pages/event-layout/event-layout.component';
-import { EventDateComponent } from './components/event/event-date/event-date.component';
-import { EventMainInfoComponent } from './components/event/event-main-info/event-main-info.component';
-import { EventLocalizationComponent } from './components/event/event-localization/event-localization.component';
-import { EventGuestListComponent } from './components/event/event-guest-list/event-guest-list.component';
-import { EventFooterMenuComponent } from './components/event/event-footer-menu/event-footer-menu.component';
 import { EventCancelComponent } from './components/event/event-cancel/event-cancel.component';
+import { EventDateComponent } from './components/event/event-date/event-date.component';
+import { EventGuestListComponent } from './components/event/event-guest-list/event-guest-list.component';
+import { EventIdComponent } from './components/event/event-id/event-id.component';
+import { EventLayoutComponent } from './pages/event-layout/event-layout.component';
+import { EventLocalizationComponent } from './components/event/event-localization/event-localization.component';
+import { EventMainInfoComponent } from './components/event/event-main-info/event-main-info.component';
+import { EventMobileMenuComponent } from './components/event/event-mobile-menu/event-mobile-menu.component';
+import { StatusModifierComponent } from './components/event/event-mobile-menu/status-modifier/status-modifier.component';
 
 // Navbar components
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -28,14 +30,22 @@ import { NavbarLogoComponent } from './components/navbar/navbar-logo/navbar-logo
 import { NavbarTitleComponent } from './components/navbar/navbar-title/navbar-title.component';
 
 // Reset password components
+import { ResetPasswordPageComponent } from './pages/reset-password/reset-password-page/reset-password-page.component';
 import { ResetPasswordInitComponent } from './pages/reset-password/reset-password-init/reset-password-init.component';
 import { ResetPasswordInstructionsComponent } from './pages/reset-password/reset-password-instructions/reset-password-instructions.component';
-import { ResetPasswordPageComponent } from './pages/reset-password/reset-password-page/reset-password-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateEventFormComponent,
+    EventCancelComponent,
+    EventDateComponent,
+    EventGuestListComponent,
+    EventIdComponent,
+    EventLayoutComponent,
+    EventLocalizationComponent,
+    EventMainInfoComponent,
+    EventMobileMenuComponent,
     FlashMessageComponent,
     LogInComponent,
     NavbarComponent,
@@ -46,13 +56,7 @@ import { ResetPasswordPageComponent } from './pages/reset-password/reset-passwor
     ResetPasswordInstructionsComponent,
     ResetPasswordPageComponent,
     SignUpComponent,
-    EventLayoutComponent,
-    EventDateComponent,
-    EventMainInfoComponent,
-    EventLocalizationComponent,
-    EventGuestListComponent,
-    EventFooterMenuComponent,
-    EventCancelComponent,
+    StatusModifierComponent,
   ],
   imports: [
     AppRoutingModule,
