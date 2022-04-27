@@ -1,12 +1,17 @@
-<app-event-mobile-menu></app-event-mobile-menu>
-<div style="overflow-y: visible; position: absolute">
-  <app-event-id [eventId]="event.eventId"></app-event-id>
-  <app-event-cancel id="description" [eventId]="event.id"></app-event-cancel>
-  <app-event-date [date]="event.date"></app-event-date>
-  <app-event-main-info
+<div class="event-layout">
+  <app-event-mobile-menu></app-event-mobile-menu>
+  <app-event-title [title]="event.title"></app-event-title>
+  <app-event-id [eventId]="event.eventId" [id]="event.id"></app-event-id>
+  <app-event-aside-info
+    [organizer]="event.organizer"
+    [organizerMail]="event.organizerMail"
     [title]="event.title"
+    [eventDate]="event.date"
+  ></app-event-aside-info>
+  <app-event-description
     [description]="event.description"
-  ></app-event-main-info>
+    id="description"
+  ></app-event-description>
   <app-event-localization
     id="address"
     [address]="event.address"

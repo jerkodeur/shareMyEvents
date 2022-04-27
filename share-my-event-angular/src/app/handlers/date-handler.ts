@@ -20,4 +20,21 @@ export class DateHandler {
 
     return new Date(year, month - 1, day, hours, minutes);
   }
+
+  static splitDateObject(dateObj: Date): Array<string> {
+    const date = dateObj.toLocaleDateString('fr-FR', {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
+
+    const time = dateObj.toLocaleTimeString('fr-FR', {
+      hour: 'numeric',
+      minute: 'numeric',
+      second: '2-digit',
+    });
+
+    return [date, time];
+  }
 }

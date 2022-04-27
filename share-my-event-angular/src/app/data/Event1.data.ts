@@ -8,7 +8,7 @@ export const event1: Event = {
   date: new Date('2022-06-15T13:00:00.000Z'),
   eventId: '0242ac120002',
   organizer: 'Jérôme Potié',
-  organizerMail: 'jerome.potie@gmaim.com',
+  organizerMail: 'jerome.potie@gmail.com',
   address: '30 rue de la résistance',
   zipCode: 93130,
   locality: 'Montreuil',

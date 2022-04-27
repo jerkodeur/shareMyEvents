@@ -1,0 +1,16 @@
+<section class="event-aside-info">
+  <fieldset class="sub-fieldset">
+    <legend>Informations générales</legend>
+    <aside class="event-date">
+      <span class="fw-bold">{{ date | titlecase }}</span> à
+      <span class="fw-bold">{{ time }}</span>
+    </aside>
+    <p class="event-organizer">
+      Organisé par:
+      <a href="mailto:{{ organizerMail }}?subject={{ title }}" class="blood">{{
+        organizer
+      }}</a>
+    </p>
+    <button type="button" class="tight-white-button">Modifier la date</button>
+  </fieldset>
+</section>

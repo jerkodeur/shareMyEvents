@@ -14,14 +14,14 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
 // Event components
 import { CreateEventFormComponent } from './pages/create-event-form/create-event-form.component';
-import { EventCancelComponent } from './components/event/event-cancel/event-cancel.component';
-import { EventDateComponent } from './components/event/event-date/event-date.component';
+import { EventAsideInfoComponent } from './components/event/event-aside-info/event-aside-info.component';
+import { EventDescriptionComponent } from './components/event/event-description/event-description.component';
 import { EventGuestListComponent } from './components/event/event-guest-list/event-guest-list.component';
 import { EventIdComponent } from './components/event/event-id/event-id.component';
 import { EventLayoutComponent } from './pages/event-layout/event-layout.component';
 import { EventLocalizationComponent } from './components/event/event-localization/event-localization.component';
-import { EventMainInfoComponent } from './components/event/event-main-info/event-main-info.component';
 import { EventMobileMenuComponent } from './components/event/event-mobile-menu/event-mobile-menu.component';
+import { EventTitleComponent } from './components/event/event-title/event-title.component';
 import { StatusModifierComponent } from './components/event/event-mobile-menu/status-modifier/status-modifier.component';
 
 // Navbar components
@@ -38,14 +38,14 @@ import { ResetPasswordInstructionsComponent } from './pages/reset-password/reset
   declarations: [
     AppComponent,
     CreateEventFormComponent,
-    EventCancelComponent,
-    EventDateComponent,
+    EventAsideInfoComponent,
+    EventDescriptionComponent,
     EventGuestListComponent,
     EventIdComponent,
     EventLayoutComponent,
     EventLocalizationComponent,
-    EventMainInfoComponent,
     EventMobileMenuComponent,
+    EventTitleComponent,
     FlashMessageComponent,
     LogInComponent,
     NavbarComponent,

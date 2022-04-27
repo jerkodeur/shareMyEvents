@@ -7,9 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class EventIdComponent implements OnInit {
   @Input() eventId!: string;
+  @Input() id!: number;
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.eventId);
-  }
+  ngOnInit(): void {}
 }

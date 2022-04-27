@@ -1,3 +1,12 @@
 .dancing-font {
   font-family: $dancing, cursive;
 }
+
+a.blood {
+  color: $primary;
+  text-decoration: underline;
+  &:hover {
+    color: $blood;
+    text-decoration: underline;
+  }
+}

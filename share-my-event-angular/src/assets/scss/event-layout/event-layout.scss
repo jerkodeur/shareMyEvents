@@ -1,1 +1,61 @@
+.event-layout {
+  color: $primary;
+  margin: auto;
+
+  .event-id {
+    @include flex-center;
+  }
+
+  .event-title {
+    h1 {
+      font-size: 1.35em;
+      text-align: center;
+      text-shadow: 1px 1px 1px #000;
+    }
+  }
+
+  .sub-fieldset {
+    text-align: left;
+    width: 100%;
+    @include flex-maker($justifyContent: start);
+    background-color: lighten($secondary, $amount: 30%);
+    padding: 0 0.5em 0.5em;
+    legend {
+      @include text-maker($size: 1em, $weight: bold);
+      width: auto;
+      padding: 0.5em;
+    }
+    p {
+      margin: 0;
+    }
+  }
+
+  .event-localization {
+    .address-info {
+      @include flex-maker($justifyContent: flex-start, $direction: row);
+      flex-wrap: wrap;
+      margin-bottom: 0;
+      .address {
+        margin-right: 0.5em;
+      }
+    }
+    .additional-address {
+      @include flex-maker($justifyContent: flex-start);
+      margin-bottom: 0.25em;
+      text-align: center;
+    }
+    .aside-info {
+      @include text-maker($primary, 0.85em, bold);
+      margin: 0.5em 0;
+      border-bottom: 1px solid #000;
+    }
+  }
+
+  .tight-white-button {
+    @include tight-white-button;
+    margin-left: auto;
+    margin-right: 0.5em;
+  }
+}
+
 @import "./menu.scss";

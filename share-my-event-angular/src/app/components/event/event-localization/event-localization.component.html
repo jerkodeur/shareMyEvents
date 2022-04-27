@@ -1,1 +1,12 @@
-<p>event-localization works!</p>
+<section class="event-localization">
+  <fieldset class="sub-fieldset">
+    <legend>Addresse</legend>
+    <p class="address-info">
+      <span class="address">{{ address }}</span>
+      <span class="locZip">{{ zipCode }} {{ locality }}</span>
+    </p>
+    <span class="aside-info">Complément d'addresse:</span>
+    <p class="additional-address">{{ additional }}</p>
+    <button type="button" class="tight-white-button">Modifier l'adresse</button>
+  </fieldset>
+</section>
