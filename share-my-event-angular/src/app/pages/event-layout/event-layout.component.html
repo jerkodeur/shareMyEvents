@@ -1,5 +1,7 @@
+<div id="top-nav"></div>
 <div class="event-layout">
   <app-event-mobile-menu></app-event-mobile-menu>
+  <!-- <div class="mt-5"></div> -->
   <app-event-title [title]="event.title"></app-event-title>
   <app-event-id [eventId]="event.eventId" [id]="event.id"></app-event-id>
   <app-event-aside-info
@@ -8,10 +10,15 @@
     [title]="event.title"
     [eventDate]="event.date"
   ></app-event-aside-info>
+  <div id="description"></div>
   <app-event-description
     [description]="event.description"
-    id="description"
   ></app-event-description>
+  <app-event-guest-list
+    id="guestList"
+    [eventId]="event.id"
+    [title]="event.title"
+  ></app-event-guest-list>
   <app-event-localization
     id="address"
     [address]="event.address"
@@ -19,10 +26,6 @@
     [locality]="event.locality"
     [additional]="event.additional"
   ></app-event-localization>
-  <app-event-guest-list
-    id="guestList"
-    [eventId]="event.id"
-  ></app-event-guest-list>
   <!-- <div id="description">
     <h2 style="margin: 0">Section 1</h2>
     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo deleniti ea
@@ -96,3 +99,4 @@
     Veritatis dolor, vel corporis hic beatae doloribus.
   </div> -->
 </div>
+<div style="height: 50px"></div>

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-event-description',
@@ -7,9 +8,13 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class EventDescriptionComponent implements OnInit {
   @Input() description!: string;
-  constructor() {}
+  safeDescription!: SafeHtml;
+
+  constructor(private domSanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
-    // this.description = new DomSanitizerI().sanitize(this.description);
+    this.safeDescription = this.domSanitizer.bypassSecurityTrustHtml(
+      this.description
+    );
   }
 }

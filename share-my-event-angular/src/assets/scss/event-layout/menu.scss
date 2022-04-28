@@ -2,6 +2,9 @@
   background-color: lighten($primary, $amount: 3.5%);
   box-shadow: 0 -2px 2px $dark;
   padding: 0 !important;
+  &.navbar {
+    flex-wrap: nowrap;
+  }
   .nav-link {
     padding: 0.25em;
     .flex-icon {

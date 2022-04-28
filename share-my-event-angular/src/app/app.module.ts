@@ -34,8 +34,13 @@ import { ResetPasswordPageComponent } from './pages/reset-password/reset-passwor
 import { ResetPasswordInitComponent } from './pages/reset-password/reset-password-init/reset-password-init.component';
 import { ResetPasswordInstructionsComponent } from './pages/reset-password/reset-password-instructions/reset-password-instructions.component';
 
+// Guest components
+import { AddGuestFormComponent } from './components/event/event-guest-list/add-guest-form/add-guest-form.component';
+import { GuestStatusComponent } from './components/event/event-guest-list/guest-status/guest-status.component';
+
 @NgModule({
   declarations: [
+    AddGuestFormComponent,
     AppComponent,
     CreateEventFormComponent,
     EventAsideInfoComponent,
@@ -47,6 +52,7 @@ import { ResetPasswordInstructionsComponent } from './pages/reset-password/reset
     EventMobileMenuComponent,
     EventTitleComponent,
     FlashMessageComponent,
+    GuestStatusComponent,
     LogInComponent,
     NavbarComponent,
     NavbarLogoComponent,

@@ -26,13 +26,22 @@
 }
 
 @mixin tight-white-button {
-  @include button-color-maker(#fff, $primary, #fff, $blood);
+  @include tight-button-maker(#fff, $primary, #fff, $blood);
+}
+@mixin tight-secondary-button {
+  @include tight-button-maker($secondary, $primary, $secondary, $primary);
+}
+
+@mixin tight-button-maker($bgColor, $color, $hoverBgColor, $hoverColor) {
+  @include button-color-maker($bgColor, $color, $hoverBgColor, $hoverColor);
   @include space-maker(0 0.5em, 0.5em 0 0.25em);
+
+  font-size: 0.8em;
   border-radius: 4px;
   border: none;
-  box-shadow: 1px 1px 1px 1px $primary;
+  box-shadow: 1px 1px 1px 1px $color;
   &:hover {
-    box-shadow: 1px 1px 5px 2px $primary;
+    box-shadow: 1px 1px 5px 2px $hoverColor;
   }
 }
 

@@ -1,0 +1,71 @@
+<form
+  #addGuestForm="ngForm"
+  (ngSubmit)="addGuestForm.valid && onSubmit(addGuestForm)"
+>
+  <fieldset class="guest-form-layout">
+    <legend>Nouvel invité</legend>
+    <div class="form-group">
+      <label for="name" class="form-label"
+        >Nom <span class="text-blood">*</span></label
+      >
+      <input
+        type="text"
+        name="name"
+        id="name"
+        placeholder="Nom de l'invité"
+        class="form-control"
+        aria-required
+        #name="ngModel"
+        [(ngModel)]="guest.name"
+        required
+        minlength="2"
+      />
+      <div
+        class="error-feedback"
+        *ngIf="addGuestForm.submitted && name.errors?.['required']"
+      >
+        * Champs requis.
+      </div>
+      <div
+        class="error-feedback"
+        *ngIf="addGuestForm.submitted && name.touched && name.errors?.['minlength']"
+      >
+        * 2 caractères minimum requis.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email" class="form-label"
+        >E-mail <span class="text-blood">*</span></label
+      >
+      <input
+        type="email"
+        name="email"
+        id="email"
+        placeholder="E-mail de l'invité"
+        class="form-control"
+        aria-required
+        #email="ngModel"
+        [(ngModel)]="guest.email"
+        pattern="[\w-\.]+@([\w-]+\.)+[\w-]{2,4}"
+        required
+      />
+      <div
+        class="error-feedback"
+        *ngIf="addGuestForm.submitted && email.errors?.['required']"
+      >
+        * Champs requis.
+      </div>
+      <div
+        class="error-feedback"
+        *ngIf="addGuestForm.submitted && email.errors?.['pattern']"
+      >
+        * Format invalide.
+      </div>
+    </div>
+    <div class="wrap-btn">
+      <button class="tight-secondary-button" type="submit">
+        Ajouter un invité
+      </button>
+    </div>
+  </fieldset>
+</form>

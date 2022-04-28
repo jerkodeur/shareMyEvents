@@ -13,7 +13,7 @@ export class EventMobileMenuComponent {
   scrollTo(section: any) {
     document
       .querySelector('#' + section)
-      ?.scrollIntoView({ block: 'start', behavior: 'smooth', inline: 'start' });
+      ?.scrollIntoView({ behavior: 'smooth' });
     this.currentSection = section;
   }
 }

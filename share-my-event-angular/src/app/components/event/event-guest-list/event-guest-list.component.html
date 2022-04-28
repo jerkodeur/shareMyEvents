@@ -1,1 +1,46 @@
-<p>event-guest-list works!</p>
+<section class="event-guestlist">
+  <fieldset class="sub-fieldset">
+    <legend>Liste des invités</legend>
+    <div class="toggle-text">
+      <div
+        class="circle-layout"
+        [ngClass]="{ selected: isDisplayForm }"
+        title="Ajouter un invité"
+      >
+        <svg
+          (click)="toggleForm()"
+          role="button"
+          aria-roledescription="Ajouter un invité"
+        ></svg>
+      </div>
+      <span *ngIf="!isDisplayForm && guestList.length == 0" class="text-muted">
+        Aucun invité
+      </span>
+      <span *ngIf="!isDisplayForm && guestList.length > 0">
+        {{ guestList.length }} invité<span *ngIf="guestList.length > 1">s</span>
+      </span>
+      <span *ngIf="isDisplayForm" class="required"> * required </span>
+    </div>
+    <app-add-guest-form
+      [ngClass]="{ 'show-form': isDisplayForm, 'hide-form': !isDisplayForm }"
+    ></app-add-guest-form>
+    <article class="guest-list" *ngIf="guestList.length > 0">
+      <p *ngFor="let guest of guestList">
+        <app-guest-status [status]="guest.availabilty"></app-guest-status>
+        <a
+          href="mailto:{{ guest.email }}?subject={{ title }}"
+          title="Envoyé un mail à {{ guest.email }}"
+          target="_blank"
+          >{{ guest.name }}</a
+        >
+        <button
+          type="button"
+          (click)="removeGuest(guest)"
+          title="retirer {{ guest.name }}"
+        >
+          X
+        </button>
+      </p>
+    </article>
+  </fieldset>
+</section>
