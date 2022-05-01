@@ -7,8 +7,11 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
   styleUrls: ['./event-description.component.scss'],
 })
 export class EventDescriptionComponent implements OnInit {
+  @Input() eventId!: number;
   @Input() description!: string;
+
   safeDescription!: SafeHtml;
+  edited = false;
 
   constructor(private domSanitizer: DomSanitizer) {}
 
@@ -16,5 +19,9 @@ export class EventDescriptionComponent implements OnInit {
     this.safeDescription = this.domSanitizer.bypassSecurityTrustHtml(
       this.description
     );
+  }
+
+  toggleEdition() {
+    this.edited = !this.edited;
   }
 }

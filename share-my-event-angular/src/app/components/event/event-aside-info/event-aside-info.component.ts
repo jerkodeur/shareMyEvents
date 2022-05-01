@@ -7,12 +7,15 @@ import { DateHandler } from 'src/app/handlers/date-handler';
   styleUrls: ['./event-aside-info.component.scss'],
 })
 export class EventAsideInfoComponent implements OnInit {
+  @Input() eventId!: number;
   @Input() organizer!: string;
   @Input() organizerMail!: string;
   @Input() title!: string;
   @Input() eventDate!: Date;
+
   date!: string;
   time!: string;
+  edited = false;
 
   constructor() {}
 
@@ -20,5 +23,9 @@ export class EventAsideInfoComponent implements OnInit {
     const splitDate = DateHandler.splitDateObject(this.eventDate);
     this.date = splitDate[0];
     this.time = splitDate[1];
+  }
+
+  toggleEdition() {
+    this.edited = !this.edited;
   }
 }

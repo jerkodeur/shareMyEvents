@@ -1,10 +1,10 @@
-<div id="top-nav"></div>
+<div></div>
 <div class="event-layout">
   <app-event-mobile-menu></app-event-mobile-menu>
-  <!-- <div class="mt-5"></div> -->
-  <app-event-title [title]="event.title"></app-event-title>
+  <app-event-title [title]="event.title" [eventId]="event.id"></app-event-title>
   <app-event-id [eventId]="event.eventId" [id]="event.id"></app-event-id>
   <app-event-aside-info
+    [eventId]="event.id"
     [organizer]="event.organizer"
     [organizerMail]="event.organizerMail"
     [title]="event.title"
@@ -12,6 +12,7 @@
   ></app-event-aside-info>
   <div id="description"></div>
   <app-event-description
+    [eventId]="event.id"
     [description]="event.description"
   ></app-event-description>
   <app-event-guest-list
@@ -21,6 +22,7 @@
   ></app-event-guest-list>
   <app-event-localization
     id="address"
+    [eventId]="event.id"
     [address]="event.address"
     [zipCode]="event.zipCode"
     [locality]="event.locality"

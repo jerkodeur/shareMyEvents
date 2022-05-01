@@ -114,27 +114,8 @@ fieldset {
     color: $primary !important;
     font-size: 0.8em !important;
     &::placeholder {
-      color: lighten($color: $primary, $amount: 50%);
+      color: lighten($color: $primary, $amount: 50%) !important;
     }
-  }
-}
-
-.aside-text-info {
-  text-align: right;
-  color: $primary;
-  margin-top: 0;
-  font-size: 0.85em;
-  a {
-    font-weight: bold;
-    text-decoration: underline;
-    color: #000;
-    &:hover {
-      text-decoration: underline;
-      color: $secondary;
-    }
-  }
-  &.text-right {
-    margin-top: 0;
   }
 }
 

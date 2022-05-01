@@ -1,0 +1,24 @@
+.event-localization {
+  .address-info {
+    @include flex-maker($direction: row);
+    flex-wrap: wrap;
+    margin-bottom: 0;
+    .address {
+      margin-right: 0.5em;
+    }
+  }
+  .additional-address {
+    @include flex-maker($justifyContent: flex-start);
+    margin-bottom: 0.25em;
+    text-align: center;
+  }
+  .aside-info {
+    @include text-maker($blood, 0.85em, bold);
+    margin: 0.5em 0;
+    border-bottom: 1px solid #000;
+  }
+
+  .event-localization-form-layout {
+    @extend .event-edit-form;
+  }
+}

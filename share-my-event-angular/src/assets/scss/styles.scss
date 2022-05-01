@@ -10,7 +10,7 @@ html {
 }
 
 #top-nav {
-  padding-top: 4em;
+  padding-top: 0.01em;
 }
 
 .pwd-reset-intructions {
@@ -53,3 +53,4 @@ aside {
 
 @import "./navbar/navbar.scss";
 @import "./event-layout/event-layout.scss";
+@import "./home/home.scss";

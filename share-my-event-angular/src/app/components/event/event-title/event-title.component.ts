@@ -7,8 +7,17 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class EventTitleComponent implements OnInit {
   @Input() title!: string;
+  @Input() eventId!: number;
+
+  edited = false;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.title);
+  }
+
+  toggleEdition() {
+    this.edited = !this.edited;
+  }
 }

@@ -5,6 +5,8 @@ import { FullDate } from 'src/app/core/models/Date.model';
 import { ValidateDate } from 'src/app/shared/ValidateFutureDate';
 import { Event } from 'src/app/core/models/Event.model';
 import { DateHandler } from 'src/app/handlers/date-handler';
+import { NotificationService } from 'src/app/services/notification.service';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'app-create-event-form',
@@ -17,7 +19,8 @@ export class CreateEventFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private flashService: FlashService
+    private notify: NotificationService,
+    private eventService: EventService
   ) {}
 
   ngOnInit(): void {}
@@ -41,7 +44,7 @@ export class CreateEventFormComponent implements OnInit {
         address: null,
         zipCode: [null, Validators.pattern(/^[0-9]{5}$/)],
         locality: null,
-        additionnal: null,
+        additional: null,
       }),
     },
     { validator: ValidateDate.isFuture }
@@ -54,29 +57,26 @@ export class CreateEventFormComponent implements OnInit {
   onSubmit = (): void => {
     this.submitted = true;
     if (this.eventForm.invalid) {
-      return this.flashService.flash$.next({
-        errors: true,
-        message: 'Des erreurs ont été détectées, merci de les corriger.',
-      });
+      return this.notify.showError(
+        'Des erreurs ont été détectées, merci de les corriger.'
+      );
     }
     const { title, description, date, time } = this.eventForm.value;
-    const { address, zipCode, locality, additionnal } =
+    const { address, zipCode, locality, additional } =
       this.eventForm.value.addressForm;
 
     const eventDate = DateHandler.createDatebyDateAndTime(date, time);
     const newEvent = new Event(
-      Math.floor(Math.random() * 10000),
       title,
       description,
       eventDate,
-      Math.floor(Math.random() * 10000000000000).toString(),
       'Jérôme Potié',
       'jerome.potie@gmail.com',
       address,
       zipCode,
       locality,
-      additionnal
+      additional
     );
-    console.log(newEvent);
+    this.eventService.createEvent$(newEvent);
   };
 }

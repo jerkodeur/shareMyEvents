@@ -10,3 +10,27 @@ a.blood {
     text-decoration: underline;
   }
 }
+
+.form-text-error {
+  color: red !important;
+  font-weight: 500;
+}
+
+.aside-text-info {
+  text-align: right;
+  color: $primary;
+  margin-top: 0;
+  font-size: 0.85em;
+  cursor: pointer;
+  a {
+    font-weight: 500;
+    color: $primary;
+    text-decoration: underline;
+    &:hover {
+      color: $secondary;
+    }
+  }
+  &.text-right {
+    margin-top: 0;
+  }
+}

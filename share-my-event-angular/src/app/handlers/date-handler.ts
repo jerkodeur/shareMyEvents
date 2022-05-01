@@ -34,7 +34,9 @@ export class DateHandler {
       minute: 'numeric',
       second: '2-digit',
     });
-
-    return [date, time];
+    const shortTime = dateObj.toLocaleTimeString().slice(0, 5);
+    const shortDate = dateObj.toLocaleDateString().split('/');
+    const shortDateFormatted = `${shortDate[2]}-${shortDate[1]}-${shortDate[0]}`;
+    return [date, time, shortDateFormatted, shortTime];
   }
 }

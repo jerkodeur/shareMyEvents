@@ -1,5 +1,4 @@
-<main class="mt-4">
-  <app-flash-message></app-flash-message>
+<app-flash-message></app-flash-message>
   <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" class="event-form">
     <fieldset>
       <legend class="w-auto px-2">
@@ -29,13 +28,14 @@
           * Vous devez indiquer un titre.
         </div>
         <div
-          class="error-feedback"
-          *ngIf="
-            submitted &&
-            eventForm.controls['title'].errors?.['maxlength']
-          "
+          id="titleHelp"
+          class="form-text"
+          [ngClass]="{
+            'form-text-error': eventForm.value['title'].length > 50
+          }"
         >
-          Le titre doit comporter au maximum 50 caractères.
+          50 caractères maximum [{{ eventForm.value?.['title']?.length }}
+          / 50]
         </div>
       </div>
       <div class="form-group">
@@ -229,7 +229,7 @@
               id="additionnal"
               placeholder="Complément d'adresse (codes, étages, accès, batiment, etc...)"
               class="form-control"
-              formControlName="additionnal"
+              formControlName="additional"
             ></textarea>
           </div>
         </div>
@@ -239,4 +239,3 @@
       </div>
     </fieldset>
   </form>
-</main>

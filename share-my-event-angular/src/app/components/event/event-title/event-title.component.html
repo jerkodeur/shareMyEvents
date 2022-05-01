@@ -1,12 +1,21 @@
 <section class="event-title">
-  <!-- <legend>Informations organisateur</legend> -->
-  <!-- Identifiant de l'event: -->
-  <h1>{{ title }}</h1>
-  <!-- <hr /> -->
+  <div *ngIf="!edited">
+    <h1>{{ title }}</h1>
+  </div>
+  <app-event-title-form
+    [eventTitle]="title"
+    [eventId]="eventId"
+    (hideForm)="toggleEdition()"
+    *ngIf="edited"
+  ></app-event-title-form>
   <div class="button-layout">
-    <button type="button" class="tight-white-button">Modifier le titre</button>
+    <button
+      type="button"
+      class="tight-white-button"
+      (click)="toggleEdition()"
+      *ngIf="!edited"
+    >
+      Modifier le titre
+    </button>
   </div>
 </section>
-<!-- <div class="event-title">
-  <h1>{{ title }}</h1>
-</div> -->

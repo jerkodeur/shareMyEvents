@@ -26,26 +26,52 @@
 }
 
 @mixin tight-white-button {
-  @include tight-button-maker(#fff, $primary, #fff, $blood);
+  @include tight-button-maker(
+    $bgColor: #fff,
+    $color: $primary,
+    $boxShadowColor: $primary,
+    $boxShadowHoverColor: $blood
+  );
 }
 @mixin tight-secondary-button {
-  @include tight-button-maker($secondary, $primary, $secondary, $primary);
+  @include tight-button-maker(
+    $bgColor: $secondary,
+    $color: #fff,
+    $boxShadowColor: $blood,
+    $boxShadowHoverColor: $primary
+  );
+}
+@mixin tight-blood-button {
+  @include tight-button-maker(
+    $bgColor: $blood,
+    $color: $light,
+    $boxShadowColor: $primary,
+    $boxShadowHoverColor: $blood
+  );
 }
 
-@mixin tight-button-maker($bgColor, $color, $hoverBgColor, $hoverColor) {
-  @include button-color-maker($bgColor, $color, $hoverBgColor, $hoverColor);
+@mixin tight-button-maker(
+  $bgColor,
+  $hoverBgColor: $bgColor,
+  $color,
+  $hoverColor: $color,
+  $boxShadowColor,
+  $boxShadowHoverColor: $boxShadowColor
+) {
+  @include button-color-maker($bgColor, $hoverBgColor, $color, $hoverColor);
   @include space-maker(0 0.5em, 0.5em 0 0.25em);
 
+  font-weight: 500;
   font-size: 0.8em;
   border-radius: 4px;
   border: none;
-  box-shadow: 1px 1px 1px 1px $color;
+  box-shadow: 1px 1px 1px 1px $boxShadowColor;
   &:hover {
-    box-shadow: 1px 1px 5px 2px $hoverColor;
+    box-shadow: 1px 1px 5px 2px $boxShadowHoverColor;
   }
 }
 
-@mixin button-color-maker($bgColor, $color, $hoverBgColor, $hoverColor) {
+@mixin button-color-maker($bgColor, $hoverBgColor, $color, $hoverColor) {
   @include layout-color-maker($bgColor, $color);
   &:hover {
     @include layout-color-maker($hoverBgColor, $hoverColor);

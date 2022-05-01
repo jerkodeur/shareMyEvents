@@ -6,6 +6,9 @@ import { ValidatePassword } from 'src/app/shared/ValidatePassword';
 import { FlashService } from 'src/app/services/flash.service';
 
 import { User } from 'src/app/core/models/User.model';
+import { NotificationService } from 'src/app/services/notification.service';
+import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -21,7 +24,9 @@ export class SignUpComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private flashService: FlashService
+    private notify: NotificationService,
+    private userService: UserService,
+    private router: Router
   ) {}
 
   signUpForm = this.formBuilder.group(
@@ -59,14 +64,15 @@ export class SignUpComponent {
   onSubmit = (): void => {
     this.submitted = true;
     if (this.signUpForm.invalid) {
-      return this.flashService.flash$.next({
-        errors: true,
-        message: 'Des erreurs ont été détectées, merci de les corriger.',
-      });
+      return this.notify.showError(
+        'Des erreurs ont été détectées, merci de les corriger.'
+      );
     }
     const { firstname, lastname, email, password } = this.signUpForm.value;
     const newUser = new User(firstname, lastname, email, password);
-    console.log(newUser);
+    this.userService
+      .signup$(newUser)
+      .subscribe(() => this.router.navigate(['/login']));
   };
 
   togglePwdType = (): void => {

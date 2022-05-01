@@ -13,7 +13,8 @@ export class EventLayoutComponent implements OnInit {
   constructor(private eventService: EventService) {}
 
   ngOnInit(): void {
-    this.event = this.eventService.getEvent();
-    console.log(this.eventService.getEvent());
+    this.eventService.getEvent$(1).subscribe((data) => {
+      this.event = data;
+    });
   }
 }

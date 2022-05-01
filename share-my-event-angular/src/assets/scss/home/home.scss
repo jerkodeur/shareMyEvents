@@ -1,0 +1,58 @@
+.home-layout {
+  fieldset {
+    padding-bottom: 0.25em;
+    legend {
+      margin: auto;
+      h1 {
+        font-weight: bold;
+        font-size: 0.75em;
+        color: $blood !important;
+      }
+    }
+    .event-join-instructions {
+      font-size: 0.8em;
+      text-align: justify;
+      margin-bottom: 0.5em;
+    }
+    .form-btn-layout {
+      width: 100%;
+      white-space: nowrap;
+      margin: 0.5em;
+      .btn {
+        width: auto !important;
+        padding: 0 0.5em !important;
+        font-size: 0.9em !important;
+        font-weight: 500;
+      }
+    }
+    hr {
+      box-shadow: 0 2px 5px $primary;
+      color: $primary;
+      margin: 0 0 0.5em;
+    }
+  }
+  .event-create-layout {
+    margin-top: 1em;
+    .inline-links {
+      @extend .aside-text-info;
+      a {
+        color: $primary;
+        font-weight: 500;
+      }
+    }
+    .event-create-button-layout {
+      margin-bottom: 1.5em;
+      button {
+        @include button-color-maker($secondary, $primary, $primary, $secondary);
+        width: 100%;
+        border-radius: 4px;
+        padding: 0.5em 0;
+        font-weight: bold;
+        border-color: $blood;
+        &:hover {
+          border-color: $primary;
+        }
+      }
+    }
+  }
+}

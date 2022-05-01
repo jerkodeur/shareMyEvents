@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
+import { catchError, of, pipe } from 'rxjs';
 
 import { FlashService } from 'src/app/services/flash.service';
+import { NotificationService } from 'src/app/services/notification.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-log-in',
@@ -14,14 +18,14 @@ export class LogInComponent {
   faEyeSlash = faEyeSlash;
   faEye = faEye;
   pwdShow: boolean = false;
-  submitted = false;
   noMatch = false;
-  testPassword = '12345';
-  testEmail = 'jerome.potie@gmail.com';
+  submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private flashService: FlashService
+    private notify: NotificationService,
+    private router: Router,
+    private userService: UserService
   ) {}
 
   loginForm = this.formBuilder.group({
@@ -40,26 +44,19 @@ export class LogInComponent {
   }
 
   onSubmit = (): void => {
-    this.noMatch = false;
     this.submitted = true;
     const { email, password } = this.loginForm.value;
     if (this.loginForm.invalid) {
-      return this.flashService.flash$.next({
-        errors: true,
-        message: 'Des erreurs ont été détectées, merci de les corriger.',
-      });
-    } else if (
-      this.loginForm.value.email !== this.testEmail ||
-      this.loginForm.value.password !== this.testPassword
-    ) {
-      this.noMatch = true;
-      this.loginForm.reset();
-      this.submitted = false;
-      return this.flashService.flash$.next({
-        errors: true,
-        message: 'Les identifiants renseignés ne sont pas valides.',
-      });
+      return this.notify.showError(
+        'Des erreurs ont été détectées, merci de les corriger.'
+      );
     }
+    this.userService.login$(email, password).subscribe((res: any) => {
+      if (!res.error) {
+        this.notify.showSuccess(`Bon retour parmi nous ${res.user.lastname}`);
+        this.router.navigate(['/home']);
+      }
+    });
   };
 
   togglePwdType = (): void => {

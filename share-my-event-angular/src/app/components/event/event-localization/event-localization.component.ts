@@ -5,13 +5,18 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './event-localization.component.html',
   styleUrls: ['./event-localization.component.scss'],
 })
-export class EventLocalizationComponent implements OnInit {
+export class EventLocalizationComponent {
+  @Input() eventId!: number;
   @Input() address!: string;
   @Input() zipCode!: number;
   @Input() locality!: string;
   @Input() additional!: string;
 
+  edited = false;
+
   constructor() {}
 
-  ngOnInit(): void {}
+  toggleEdition() {
+    this.edited = !this.edited;
+  }
 }

@@ -38,3 +38,7 @@
 .btn:active {
   box-shadow: none !important;
 }
+.form-control:focus {
+  border-color: $secondary;
+  box-shadow: 1px 1px 1px $secondary;
+}

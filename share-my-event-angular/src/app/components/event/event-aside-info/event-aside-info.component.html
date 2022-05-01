@@ -1,5 +1,12 @@
 <section class="event-aside-info">
-  <fieldset class="sub-fieldset">
+  <app-event-aside-info-form
+    [eventId]="eventId"
+    [eventDate]="eventDate"
+    (hideForm)="toggleEdition()"
+    *ngIf="edited"
+  >
+  </app-event-aside-info-form>
+  <fieldset class="sub-fieldset" *ngIf="!edited">
     <legend>Infos générales</legend>
     <aside class="event-date">
       <span class="fw-bold">{{ date | titlecase }}</span> à
@@ -11,6 +18,8 @@
         organizer
       }}</a>
     </p>
-    <button type="button" class="tight-white-button">Modifier la date</button>
+    <button type="button" class="tight-white-button" (click)="toggleEdition()">
+      Modifier la date
+    </button>
   </fieldset>
 </section>
