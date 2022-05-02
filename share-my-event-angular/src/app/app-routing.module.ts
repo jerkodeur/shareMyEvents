@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './pages/home/home.component';
 import { LogInComponent } from './pages/log-in/log-in.component';
+import { LogOutComponent } from './pages/log-out/log-out.component';
 import { Page404Component } from './pages/page404/page404.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
@@ -15,6 +16,12 @@ import { ResetPasswordInitComponent } from './pages/reset-password/reset-passwor
 import { ResetPasswordInstructionsComponent } from './pages/reset-password/reset-password-instructions/reset-password-instructions.component';
 import { ResetPasswordPageComponent } from './pages/reset-password/reset-password-page/reset-password-page.component';
 
+// Guards
+import { AuthenticatedGuard } from './core/guards/authenticated.guard';
+import { UnauthenticatedGuard } from './core/guards/unauthenticated.guard';
+import { GuestGuard } from './core/guards/guest.guard';
+import { OrganizerGuard } from './core/guards/organizer.guard';
+
 const routes: Routes = [
   {
     path: '',
@@ -23,6 +30,7 @@ const routes: Routes = [
   {
     path: 'events/:id',
     component: EventLayoutComponent,
+    canActivate: [GuestGuard || OrganizerGuard],
   },
   {
     path: 'home',
@@ -31,26 +39,37 @@ const routes: Routes = [
   {
     path: 'login',
     component: LogInComponent,
+    canActivate: [UnauthenticatedGuard],
+  },
+  {
+    path: 'logout',
+    component: LogOutComponent,
+    canActivate: [AuthenticatedGuard],
   },
   {
     path: 'new-event',
     component: CreateEventFormComponent,
+    canActivate: [AuthenticatedGuard],
   },
   {
     path: 'password-reset',
     component: ResetPasswordPageComponent,
+    canActivate: [UnauthenticatedGuard],
   },
   {
     path: 'password-reset/init',
     component: ResetPasswordInitComponent,
+    canActivate: [UnauthenticatedGuard],
   },
   {
     path: 'password-reset/instructions',
     component: ResetPasswordInstructionsComponent,
+    canActivate: [UnauthenticatedGuard],
   },
   {
     path: 'signup',
     component: SignUpComponent,
+    canActivate: [UnauthenticatedGuard],
   },
   {
     path: '**',

@@ -10,8 +10,8 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { FlashMessageComponent } from './components/flash-message/flash-message.component';
-import { HomeComponent } from './pages/home/home.component';
 import { LogInComponent } from './pages/log-in/log-in.component';
+import { LogOutComponent } from './pages/log-out/log-out.component';
 import { Page404Component } from './pages/page404/page404.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
@@ -44,6 +44,9 @@ import { AddGuestFormComponent } from './components/event/event-guest-list/add-g
 import { GuestStatusComponent } from './components/event/event-guest-list/guest-status/guest-status.component';
 import { EventTitleFormComponent } from './components/event/event-title/event-title-form/event-title-form.component';
 import { EventDescriptionFormComponent } from './components/event/event-description/event-description-form/event-description-form.component';
+
+// Home
+import { HomeComponent } from './pages/home/home.component';
 import { HomeEventCreateComponent } from './pages/home/home-event-create/home-event-create.component';
 import { HomeEventJoinFormComponent } from './pages/home/home-event-join-form/home-event-join-form.component';
 
@@ -80,6 +83,7 @@ import { HomeEventJoinFormComponent } from './pages/home/home-event-join-form/ho
     EventDescriptionFormComponent,
     HomeEventCreateComponent,
     HomeEventJoinFormComponent,
+    LogOutComponent,
   ],
   imports: [
     AppRoutingModule,

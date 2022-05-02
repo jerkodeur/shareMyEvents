@@ -1,19 +1,20 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, map, tap, catchError, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { User } from '../core/models/User.model';
+
 import { NotificationService } from './notification.service';
+import { User } from '../core/models/User.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private user!: User;
-
   constructor(
     private httpService: HttpClient,
-    private notify: NotificationService
+    private notify: NotificationService,
+    private router: Router
   ) {}
 
   signup$(user: User): Observable<any> {
@@ -45,6 +46,13 @@ export class UserService {
           return of(this.handleError(err));
         })
       );
+  }
+
+  logout() {
+    sessionStorage.clear();
+    this.notify.showSuccess('Déconnexion effectuée avec succès');
+
+    this.router.navigate(['/home']);
   }
 
   private handleError(err: HttpErrorResponse) {
