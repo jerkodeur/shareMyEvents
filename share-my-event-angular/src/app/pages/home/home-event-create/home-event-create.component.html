@@ -1,10 +1,10 @@
 <div class="event-create-layout">
   <div class="event-create-button-layout">
-    <button *ngIf="connected" (click)="createNewEvent()">
+    <button *ngIf="authenticated" (click)="createNewEvent()">
       Organiser un event
     </button>
   </div>
-  <fieldset *ngIf="!connected">
+  <fieldset *ngIf="!authenticated">
     <legend class="w-auto px-2">
       <h1>Organiser un event</h1>
     </legend>

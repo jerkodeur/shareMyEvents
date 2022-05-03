@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,13 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  connected = false;
+  authenticated = false;
 
-  constructor() {}
+  constructor(private auth: AuthenticationService) {}
 
   ngOnInit(): void {
-    if (sessionStorage.getItem('token')) {
-      this.connected = true;
-    }
+    this.auth.authenticated.subscribe((bool) => (this.authenticated = bool));
+    this.auth.setIfAuthenticated();
   }
 }

@@ -1,10 +1,11 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, tap, catchError, of } from 'rxjs';
 import { Router } from '@angular/router';
-import { Observable, map, tap, catchError, of } from 'rxjs';
-import { environment } from 'src/environments/environment';
 
+import { AuthenticationService } from './authentication.service';
 import { NotificationService } from './notification.service';
+import { environment } from 'src/environments/environment';
 import { User } from '../core/models/User.model';
 
 @Injectable({
@@ -12,6 +13,7 @@ import { User } from '../core/models/User.model';
 })
 export class UserService {
   constructor(
+    private authentication: AuthenticationService,
     private httpService: HttpClient,
     private notify: NotificationService,
     private router: Router
@@ -37,11 +39,12 @@ export class UserService {
       .post(`${environment.apiTestBaseUrl}/login`, { email, password })
       .pipe(
         tap((res: any) => {
-          sessionStorage.setItem('token', res.accessToken);
+          sessionStorage.setItem('access_token', res.accessToken);
           sessionStorage.setItem('firstname', res.user.firstname);
           sessionStorage.setItem('lastname', res.user.lastname);
           sessionStorage.setItem('email', res.user.email);
         }),
+        tap(() => this.authentication.authenticated.next(true)),
         catchError((err) => {
           return of(this.handleError(err));
         })
@@ -50,6 +53,7 @@ export class UserService {
 
   logout() {
     sessionStorage.clear();
+    this.authentication.authenticated.next(false);
     this.notify.showSuccess('Déconnexion effectuée avec succès');
 
     this.router.navigate(['/home']);

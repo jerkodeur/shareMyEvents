@@ -1,4 +1,12 @@
 .home-layout {
+  margin: auto;
+  .presentation {
+    text-align: justify;
+  }
+  fieldset,
+  form {
+    width: 100% !important;
+  }
   fieldset {
     padding-bottom: 0.25em;
     legend {

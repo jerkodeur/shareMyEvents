@@ -55,7 +55,8 @@ form {
 }
 
 @media only screen and (min-width: 576px) {
-  form {
+  form,
+  .home-layout {
     width: 90% !important;
   }
   aside.aside-text-info {
@@ -69,6 +70,9 @@ form {
 }
 
 @media only screen and (min-width: 768px) {
+  .home-layout {
+    width: 75% !important;
+  }
   .pwd-reset-intructions,
   form:not(.event-form) {
     width: 75% !important;
@@ -87,7 +91,8 @@ form {
 
 @media only screen and (min-width: 1024px) {
   form:not(.event-form),
-  .pwd-reset-intructions {
+  .pwd-reset-intructions,
+  .home-layout {
     width: 65% !important;
   }
   aside.aside-text-info {
@@ -102,7 +107,8 @@ form {
 
 @media only screen and (min-width: 1200px) {
   form:not(.event-form),
-  .pwd-reset-intructions {
+  .pwd-reset-intructions,
+  .home-layout {
     width: 50% !important;
   }
   .event-form {
@@ -115,7 +121,8 @@ form {
 @media only screen and (min-width: 1400px) {
   .event-form {
     .sub-fieldset,
-    .form-group {
+    .form-group,
+    .home-layout {
       width: 90% !important;
     }
     .row {

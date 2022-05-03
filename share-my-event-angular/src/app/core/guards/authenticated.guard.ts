@@ -1,26 +1,42 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
+  Router,
   RouterStateSnapshot,
-  UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthenticatedGuard implements CanActivate {
-  constructor(private userService: UserService) {}
+export class AuthenticatedGuard implements CanActivate, OnInit {
+  token!: any;
+
+  constructor(
+    private auth: AuthenticationService,
+    private jwtService: JwtHelperService,
+    private router: Router,
+    private userService: UserService
+  ) {}
+
+  ngOnInit(): void {
+    this.token = sessionStorage.getItem('access_token');
+  }
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
+  ): boolean {
+    const invalidToken = this.jwtService.isTokenExpired(this.token);
+    if (invalidToken) {
+      this.auth.authenticated.next(false);
+      if (this.token) this.userService.logout();
+      else this.router.navigate(['/home']);
+      return false;
+    }
     return true;
   }
 }

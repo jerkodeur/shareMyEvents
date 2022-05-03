@@ -146,6 +146,10 @@ button {
               &.signup-img {
                 background-image: url("../../img/sign-up-hover.svg");
               }
+
+              &.logout-img {
+                background-image: url("../../img/logout-hover.svg");
+              }
             }
 
             &:hover {
@@ -172,6 +176,10 @@ button {
         &.signup-img {
           background-image: url("../../img/sign-up.svg");
         }
+
+        &.logout-img {
+          background-image: url("../../img/logout.svg");
+        }
       }
       &:hover {
         background-color: $light;
@@ -184,6 +192,10 @@ button {
         svg.signup-img {
           transition: all 500ms;
           background-image: url("../../img/sign-up-hover.svg");
+        }
+        svg.logout-img {
+          transition: all 500ms;
+          background-image: url("../../img/logout-hover.svg");
         }
       }
     }

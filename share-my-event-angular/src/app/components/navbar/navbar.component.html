@@ -33,7 +33,7 @@
         <li
           class="nav-item"
           routerLinkActive="active-nav-item"
-          *ngIf="!connected"
+          *ngIf="!authenticated"
           data-bs-toggle="collapse"
           data-bs-target=".navbar-collapse.show"
         >
@@ -47,7 +47,7 @@
         <li
           class="nav-item"
           routerLinkActive="active-nav-item"
-          *ngIf="!connected"
+          *ngIf="!authenticated"
           data-bs-toggle="collapse"
           data-bs-target=".navbar-collapse.show"
         >
@@ -61,7 +61,7 @@
         <li
           class="nav-item"
           routerLinkActive="active-nav-item"
-          *ngIf="connected"
+          *ngIf="authenticated"
           data-bs-toggle="collapse"
           data-bs-target=".navbar-collapse.show"
         >

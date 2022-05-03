@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
@@ -49,8 +50,11 @@ import { EventDescriptionFormComponent } from './components/event/event-descript
 import { HomeComponent } from './pages/home/home.component';
 import { HomeEventCreateComponent } from './pages/home/home-event-create/home-event-create.component';
 import { HomeEventJoinFormComponent } from './pages/home/home-event-join-form/home-event-join-form.component';
+import { environment } from 'src/environments/environment';
 
-// Toaster
+export function tokenGetter() {
+  return sessionStorage.getItem('access_token');
+}
 @NgModule({
   declarations: [
     AddGuestFormComponent,
@@ -59,6 +63,7 @@ import { HomeEventJoinFormComponent } from './pages/home/home-event-join-form/ho
     EventAsideInfoComponent,
     EventAsideInfoFormComponent,
     EventDescriptionComponent,
+    EventDescriptionFormComponent,
     EventGuestListComponent,
     EventIdComponent,
     EventLayoutComponent,
@@ -70,7 +75,10 @@ import { HomeEventJoinFormComponent } from './pages/home/home-event-join-form/ho
     FlashMessageComponent,
     GuestStatusComponent,
     HomeComponent,
+    HomeEventCreateComponent,
+    HomeEventJoinFormComponent,
     LogInComponent,
+    LogOutComponent,
     NavbarComponent,
     NavbarLogoComponent,
     NavbarTitleComponent,
@@ -80,10 +88,6 @@ import { HomeEventJoinFormComponent } from './pages/home/home-event-join-form/ho
     ResetPasswordPageComponent,
     SignUpComponent,
     StatusModifierComponent,
-    EventDescriptionFormComponent,
-    HomeEventCreateComponent,
-    HomeEventJoinFormComponent,
-    LogOutComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -93,6 +97,12 @@ import { HomeEventJoinFormComponent } from './pages/home/home-event-join-form/ho
     FontAwesomeModule,
     FormsModule,
     HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: [environment.apiBaseUrl, environment.apiTestBaseUrl],
+      },
+    }),
     ReactiveFormsModule,
     ToastrModule.forRoot(),
   ],
