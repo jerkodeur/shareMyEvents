@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Event } from 'src/app/core/models/Event.model';
 import { EventService } from 'src/app/services/event.service';
 
@@ -10,10 +11,15 @@ import { EventService } from 'src/app/services/event.service';
 export class EventLayoutComponent implements OnInit {
   event!: Event;
 
-  constructor(private eventService: EventService) {}
+  constructor(
+    private activeRoute: ActivatedRoute,
+    private eventService: EventService
+  ) {}
 
   ngOnInit(): void {
-    this.eventService.getEvent$(1).subscribe((data) => {
+    const eventId = this.activeRoute.snapshot.params['id'];
+
+    this.eventService.getEvent$(eventId).subscribe((data) => {
       this.event = data;
     });
   }

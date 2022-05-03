@@ -6,6 +6,7 @@ export class Event {
   eventId: string;
   organizer: string;
   organizerMail: string;
+  organizerId: number;
   address: string;
   zipCode: number;
   locality: string;
@@ -17,6 +18,7 @@ export class Event {
     date: Date,
     organizer: string,
     organizerMail: string,
+    organizerId: number,
     address: string,
     zipCode: number,
     locality: string,
@@ -28,6 +30,7 @@ export class Event {
     this.date = date;
     this.eventId = this.generateCustomEventId();
     this.organizer = organizer;
+    this.organizerId = organizerId;
     this.organizerMail = organizerMail;
     this.address = address;
     this.zipCode = zipCode;

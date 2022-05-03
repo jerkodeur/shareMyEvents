@@ -40,9 +40,6 @@ export class UserService {
       .pipe(
         tap((res: any) => {
           sessionStorage.setItem('access_token', res.accessToken);
-          sessionStorage.setItem('firstname', res.user.firstname);
-          sessionStorage.setItem('lastname', res.user.lastname);
-          sessionStorage.setItem('email', res.user.email);
         }),
         tap(() => this.authentication.authenticated.next(true)),
         catchError((err) => {
@@ -55,7 +52,6 @@ export class UserService {
     sessionStorage.clear();
     this.authentication.authenticated.next(false);
     this.notify.showSuccess('Déconnexion effectuée avec succès');
-
     this.router.navigate(['/home']);
   }
 

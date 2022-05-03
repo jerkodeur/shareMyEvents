@@ -7,6 +7,9 @@ import { Event } from 'src/app/core/models/Event.model';
 import { DateHandler } from 'src/app/handlers/date-handler';
 import { NotificationService } from 'src/app/services/notification.service';
 import { EventService } from 'src/app/services/event.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { User } from 'src/app/core/models/User.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-event-form',
@@ -18,9 +21,11 @@ export class CreateEventFormComponent implements OnInit {
   currentDate = FullDate.getCurrentDate();
 
   constructor(
+    private authService: AuthenticationService,
+    private eventService: EventService,
     private formBuilder: FormBuilder,
     private notify: NotificationService,
-    private eventService: EventService
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -64,19 +69,25 @@ export class CreateEventFormComponent implements OnInit {
     const { title, description, date, time } = this.eventForm.value;
     const { address, zipCode, locality, additional } =
       this.eventForm.value.addressForm;
-
     const eventDate = DateHandler.createDatebyDateAndTime(date, time);
-    const newEvent = new Event(
-      title,
-      description,
-      eventDate,
-      'Jérôme Potié',
-      'jerome.potie@gmail.com',
-      address,
-      zipCode,
-      locality,
-      additional
-    );
-    this.eventService.createEvent$(newEvent);
+
+    this.authService.getAuthUser().subscribe((organizer: User) => {
+      const newEvent = new Event(
+        title,
+        description,
+        eventDate,
+        `${organizer.firstname} ${organizer.lastname}`,
+        organizer.email,
+        organizer.id,
+        address,
+        zipCode,
+        locality,
+        additional
+      );
+
+      this.eventService
+        .createEvent$(newEvent)
+        .subscribe((event) => this.router.navigate([`/events/${event.id}`]));
+    });
   };
 }

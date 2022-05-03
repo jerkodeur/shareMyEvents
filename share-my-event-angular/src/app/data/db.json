@@ -8,17 +8,46 @@
       "eventId": "sqf56qfnp",
       "organizer": "Jérôme Potié",
       "organizerMail": "jerome.potie@gmail.com",
+      "organizerId": 7827171154534,
       "address": "30 rue de la résistance",
       "zipCode": 93104,
       "locality": "Montreuil",
       "additional": "App151 au 5ème étage.\nMalheureusement, il n'y a pas d'ascenseur... \n\nLe code au RDC est le 1257\n"
+    },
+    {
+      "id": 7469368655162,
+      "title": "grdgrd",
+      "description": "<p>grgdrgd</p>",
+      "date": "2022-05-11T23:02:00.000Z",
+      "eventId": "00q00qq0",
+      "organizer": "Potié Jérôme",
+      "organizerId": 7827171154534,
+      "organizerMail": "jerome.potie@gmail.com",
+      "address": null,
+      "zipCode": null,
+      "locality": null,
+      "additional": null
+    },
+    {
+      "id": 6425898815826,
+      "title": "srgegegge",
+      "description": "<p>gseggsegseg</p>",
+      "date": "2022-05-19T00:05:00.000Z",
+      "eventId": "66u66uu6",
+      "organizer": "Potié Jérôme",
+      "organizerId": 7827171154534,
+      "organizerMail": "jerome.potie@gmail.com",
+      "address": null,
+      "zipCode": null,
+      "locality": null,
+      "additional": null
     }
   ],
   "users": [
     {
+      "id": 7827171154534,
       "email": "jerome.potie@gmail.com",
       "password": "$2a$10$y8OFMzNIkIa2KgmVJfMhXe7ZAYkM8Eez/meKgAln2kUnNWB0JZFFq",
-      "id": 7827171154534,
       "firstname": "Potié",
       "lastname": "Jérôme"
     }

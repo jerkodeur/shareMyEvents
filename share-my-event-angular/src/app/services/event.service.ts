@@ -31,6 +31,7 @@ export class EventService {
             data.description,
             formattedDate,
             data.organizer,
+            data.organizerMail,
             data.organizerId,
             data.address,
             data.zipCode,
