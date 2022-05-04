@@ -2,7 +2,7 @@
   "name": "share-my-event-angular",
   "version": "0.0.0",
   "scripts": {
-    "api": "json-server-auth --watch src/app/data/db.json --routes routes.json",
+    "api": "json-server-auth --watch src/app/data/db.json",
     "build": "ng build",
     "ng": "ng",
     "start": "ng serve",

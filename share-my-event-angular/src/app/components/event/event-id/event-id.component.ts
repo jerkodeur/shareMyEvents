@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { EventService } from 'src/app/services/event.service';
 
 @Component({
@@ -6,15 +7,21 @@ import { EventService } from 'src/app/services/event.service';
   templateUrl: './event-id.component.html',
   styleUrls: ['./event-id.component.scss'],
 })
-export class EventIdComponent {
+export class EventIdComponent implements OnInit {
   @Input() eventId!: string;
-  @Input() id!: number;
+  @Input() event_id!: number;
 
-  constructor(private eventService: EventService) {}
+  constructor(private eventService: EventService, private router: Router) {}
+
+  ngOnInit(): void {
+    console.log(this.event_id);
+  }
 
   cancelEvent() {
     if (window.confirm('Êtes-vous sur de vouloir supprimer cet event ?')) {
-      this.eventService.deleteEvent$(this.id);
+      this.eventService
+        .deleteEvent$(this.event_id)
+        .subscribe(() => this.router.navigate(['/home']));
     }
   }
 }

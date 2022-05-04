@@ -121,7 +121,7 @@ export class EventService {
       );
   }
 
-  deleteEvent$(eventId: number): Observable<any> {
+  deleteEvent$(eventId: number): any {
     return this.httpService
       .delete(`${environment.apiTestBaseUrl}/events/${eventId}`)
       .pipe(

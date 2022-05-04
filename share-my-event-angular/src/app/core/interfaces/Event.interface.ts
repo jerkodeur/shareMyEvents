@@ -6,6 +6,7 @@ export interface EventInterface {
   eventId: string;
   organizer: string;
   organizerMail: string;
+  organizerId: number;
   address: string;
   zipCode: number;
   locality: string;

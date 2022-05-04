@@ -41,6 +41,20 @@
       "zipCode": null,
       "locality": null,
       "additional": null
+    },
+    {
+      "id": 9656739295236,
+      "title": "sesges",
+      "description": "<p>egsgsegsegesgges es esefs</p>",
+      "date": "2022-05-20T03:21:00.000Z",
+      "eventId": "74p24ms4",
+      "organizer": "Potié Jérôme",
+      "organizerId": 7827171154534,
+      "organizerMail": "jerome.potie@gmail.com",
+      "address": null,
+      "zipCode": null,
+      "locality": null,
+      "additional": null
     }
   ],
   "users": [
@@ -50,6 +64,14 @@
       "password": "$2a$10$y8OFMzNIkIa2KgmVJfMhXe7ZAYkM8Eez/meKgAln2kUnNWB0JZFFq",
       "firstname": "Potié",
       "lastname": "Jérôme"
+    }
+  ],
+  "guests": [
+    {
+      "id": 1,
+      "name": "Jérôme",
+      "email": "jerome.potie@gmail.com",
+      "eventId": "1"
     }
   ]
 }

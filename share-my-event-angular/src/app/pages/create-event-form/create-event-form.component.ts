@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { FlashService } from 'src/app/services/flash.service';
 import { FullDate } from 'src/app/core/models/Date.model';
 import { ValidateDate } from 'src/app/shared/ValidateFutureDate';
 import { Event } from 'src/app/core/models/Event.model';
-import { DateHandler } from 'src/app/handlers/date-handler';
-import { NotificationService } from 'src/app/services/notification.service';
-import { EventService } from 'src/app/services/event.service';
-import { AuthenticationService } from 'src/app/services/authentication.service';
 import { User } from 'src/app/core/models/User.model';
 import { Router } from '@angular/router';
+
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { EventService } from 'src/app/services/event.service';
+import { NotificationService } from 'src/app/services/notification.service';
+import { DateHandler } from 'src/app/handlers/date-handler';
 
 @Component({
   selector: 'app-create-event-form',

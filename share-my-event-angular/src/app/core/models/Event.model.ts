@@ -38,23 +38,22 @@ export class Event {
     this.additional = additional;
   }
 
-  generateCustomId(): number {
+  private generateCustomId(): number {
     return Math.floor(Math.random() * 10000000000000);
   }
 
-  generateCustomEventId(): string {
+  private generateCustomEventId(): string {
     const alphabet = ['abcdefghijklmnopqrstuvwxyz'];
-    const randomNumber = Math.floor(Math.random() * 9);
-    const randomLetterPos = Math.floor(Math.random() * 25);
+
     let tempCode = '';
-    tempCode += randomNumber;
-    tempCode += randomNumber;
-    tempCode += alphabet[0][randomLetterPos];
-    tempCode += randomNumber;
-    tempCode += randomNumber;
-    tempCode += alphabet[0][randomLetterPos];
-    tempCode += alphabet[0][randomLetterPos];
-    tempCode += randomNumber;
+    tempCode += Math.floor(Math.random() * 9);
+    tempCode += Math.floor(Math.random() * 9);
+    tempCode += alphabet[0][Math.floor(Math.random() * 25)];
+    tempCode += Math.floor(Math.random() * 9);
+    tempCode += Math.floor(Math.random() * 9);
+    tempCode += alphabet[0][Math.floor(Math.random() * 25)];
+    tempCode += alphabet[0][Math.floor(Math.random() * 25)];
+    tempCode += Math.floor(Math.random() * 9);
     return tempCode;
   }
 }
