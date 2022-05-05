@@ -2,13 +2,10 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
-import { catchError, of, pipe } from 'rxjs';
-
-import { FlashService } from 'src/app/services/flash.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { UserService } from 'src/app/services/user.service';
 
+import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-log-in',
   templateUrl: './log-in.component.html',

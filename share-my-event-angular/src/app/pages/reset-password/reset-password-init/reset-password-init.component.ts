@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { FlashService } from 'src/app/services/flash.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-reset-password-init',
@@ -13,20 +13,18 @@ export class ResetPasswordInitComponent implements OnInit {
   noMatch = false;
 
   constructor(
-    private flashService: FlashService,
-    private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private notify: NotificationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(
       (param) =>
         param['exception'] == 'codeExpired' &&
-        this.flashService.flash$.next({
-          errors: true,
-          message:
-            'La validité du code a expiré, merci de renseigner votre e-mail pour relancer la procédure.',
-        })
+        this.notify.showError(
+          'La validité du code a expiré, merci de renseigner votre e-mail pour relancer la procédure'
+        )
     );
     sessionStorage.clear();
   }
@@ -34,10 +32,9 @@ export class ResetPasswordInitComponent implements OnInit {
   onSubmit(form: any) {
     if (form.value.email !== this.testEmail) {
       this.noMatch = true;
-      return this.flashService.flash$.next({
-        errors: true,
-        message: "L'adresse e-mail est inconnue de nos services.",
-      });
+      return this.notify.showError(
+        "L'adresse e-mail est inconnue de nos services"
+      );
     }
     sessionStorage.setItem('email', form.value.email);
     this.router.navigate(['password-reset/instructions']);

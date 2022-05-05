@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 
 import { DateHandler } from 'src/app/handlers/date-handler';
-import { FlashService } from 'src/app/services/flash.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { ValidatePassword } from 'src/app/shared/ValidatePassword';
 
 @Component({
@@ -24,7 +24,7 @@ export class ResetPasswordPageComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private flashService: FlashService,
+    private notify: NotificationService,
     private router: Router
   ) {}
 
@@ -56,25 +56,21 @@ export class ResetPasswordPageComponent {
     const currentDate = new Date(Date.now());
     this.noMatch = false;
     this.submitted = true;
-    const { code, password, confirm_password } = this.pwdForm.value;
+    const { code, ...rest } = this.pwdForm.value;
     if (!DateHandler.validateExpirationDate(currentDate, 0)) {
       this.router.navigate([
         'password-reset/init',
         { exception: 'codeExpired' },
       ]);
     } else if (this.pwdForm.invalid) {
-      return this.flashService.flash$.next({
-        errors: true,
-        message: 'Des erreurs ont été détectées, merci de les corriger.',
-      });
+      return this.notify.showError(
+        'Des erreurs ont été détectées, merci de les corriger.'
+      );
     } else if (code !== this.testCode) {
       this.noMatch = true;
       this.pwdForm.reset();
       this.submitted = false;
-      return this.flashService.flash$.next({
-        errors: true,
-        message: 'Le code renseigné est invalide.',
-      });
+      return this.notify.showError('Le code renseigné est invalide');
     }
   };
 

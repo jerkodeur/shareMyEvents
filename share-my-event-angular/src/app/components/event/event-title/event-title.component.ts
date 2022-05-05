@@ -1,21 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-event-title',
   templateUrl: './event-title.component.html',
   styleUrls: ['./event-title.component.scss'],
 })
-export class EventTitleComponent implements OnInit {
+export class EventTitleComponent {
   @Input() title!: string;
   @Input() eventId!: number;
 
   edited = false;
 
   constructor() {}
-
-  ngOnInit(): void {
-    console.log(this.title);
-  }
 
   toggleEdition() {
     this.edited = !this.edited;

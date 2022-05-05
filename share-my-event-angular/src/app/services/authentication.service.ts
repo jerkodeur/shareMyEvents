@@ -1,11 +1,12 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of, Subject } from 'rxjs';
-
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { NotificationService } from './notification.service';
+import { catchError, Observable, Subject } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
+
+import { ErrorHandlerService } from './error-handler.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +16,7 @@ export class AuthenticationService {
   authenticated = new Subject<boolean>();
 
   constructor(
+    private errorHandler: ErrorHandlerService,
     private jwtService: JwtHelperService,
     private httpService: HttpClient,
     private notify: NotificationService
@@ -31,15 +33,9 @@ export class AuthenticationService {
     return this.httpService
       .get(`${environment.apiTestBaseUrl}/users/${decodeToken.sub}`)
       .pipe(
-        catchError((err) => {
-          return of(this.handleError(err, 'Erreur serveur'));
-        })
+        catchError(async (err) =>
+          this.errorHandler.notifyHttpError(err).subscribe()
+        )
       );
-  }
-
-  private handleError(err: HttpErrorResponse, message: string) {
-    this.notify.showError(message);
-    console.log(err);
-    throw new Error(message);
   }
 }

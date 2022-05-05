@@ -1,11 +1,14 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap, catchError, of } from 'rxjs';
 import { Router } from '@angular/router';
 
-import { AuthenticationService } from './authentication.service';
-import { NotificationService } from './notification.service';
 import { environment } from 'src/environments/environment';
+
+import { AuthenticationService } from './authentication.service';
+import { ErrorHandlerService } from './error-handler.service';
+import { NotificationService } from './notification.service';
+
 import { User } from '../core/models/User.model';
 
 @Injectable({
@@ -14,6 +17,7 @@ import { User } from '../core/models/User.model';
 export class UserService {
   constructor(
     private authentication: AuthenticationService,
+    private errorHandler: ErrorHandlerService,
     private httpService: HttpClient,
     private notify: NotificationService,
     private router: Router
@@ -21,15 +25,15 @@ export class UserService {
 
   signup$(user: User): Observable<any> {
     return this.httpService
-      .post(`${environment.apiTestBaseUrl}/register`, { ...user })
+      .post(`${environment.apiBaseUrl}/users/sign-up`, { ...user })
       .pipe(
-        catchError((err) => {
-          return of(this.handleError(err));
-        }),
         tap(() =>
           this.notify.showSuccess(
             `Bienvenue ${user.firstname}, ton compte a été crée avec succès`
           )
+        ),
+        catchError(async (err) =>
+          this.errorHandler.notifyHttpError(err).subscribe()
         )
       );
   }
@@ -42,9 +46,9 @@ export class UserService {
           sessionStorage.setItem('access_token', res.accessToken);
         }),
         tap(() => this.authentication.authenticated.next(true)),
-        catchError((err) => {
-          return of(this.handleError(err));
-        })
+        catchError(async (err) =>
+          this.errorHandler.notifyHttpError(err).subscribe()
+        )
       );
   }
 
@@ -53,13 +57,5 @@ export class UserService {
     this.authentication.authenticated.next(false);
     this.notify.showSuccess('Déconnexion effectuée avec succès');
     this.router.navigate(['/home']);
-  }
-
-  private handleError(err: HttpErrorResponse) {
-    this.notify.showError('Identifiants incorrects');
-    return {
-      error: err.statusText,
-      status: err.status,
-    };
   }
 }

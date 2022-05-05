@@ -1,4 +1,4 @@
-.event-guestlist {
+.event-participantlist {
   .sub-fieldset {
     align-items: inherit;
     .toggle-text {
@@ -27,7 +27,7 @@
         height: 25px;
       }
     }
-    .guest-list {
+    .participant-list {
       @include flex-maker($direction: row);
       flex-wrap: wrap;
       margin-top: 1em;
@@ -48,7 +48,7 @@
       }
     }
   }
-  .guest-form-layout {
+  .participant-form-layout {
     width: 85%;
     transition: all 2s;
     position: relative;
@@ -80,7 +80,7 @@
   .hide-form {
     display: none;
   }
-  .guest-status-layout {
+  .participant-status-layout {
     margin-left: 0.5em;
     .circle-layout {
       border-radius: 50%;

@@ -7,15 +7,11 @@ import { EventService } from 'src/app/services/event.service';
   templateUrl: './event-id.component.html',
   styleUrls: ['./event-id.component.scss'],
 })
-export class EventIdComponent implements OnInit {
+export class EventIdComponent {
   @Input() eventId!: string;
   @Input() event_id!: number;
 
   constructor(private eventService: EventService, private router: Router) {}
-
-  ngOnInit(): void {
-    console.log(this.event_id);
-  }
 
   cancelEvent() {
     if (window.confirm('Êtes-vous sur de vouloir supprimer cet event ?')) {

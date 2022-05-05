@@ -9,8 +9,9 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 
+import { environment } from 'src/environments/environment';
+
 import { AppComponent } from './app.component';
-import { FlashMessageComponent } from './components/flash-message/flash-message.component';
 import { LogInComponent } from './pages/log-in/log-in.component';
 import { LogOutComponent } from './pages/log-out/log-out.component';
 import { Page404Component } from './pages/page404/page404.component';
@@ -21,13 +22,14 @@ import { CreateEventFormComponent } from './pages/create-event-form/create-event
 import { EventAsideInfoComponent } from './components/event/event-aside-info/event-aside-info.component';
 import { EventAsideInfoFormComponent } from './components/event/event-aside-info/event-aside-info-form/event-aside-info-form.component';
 import { EventDescriptionComponent } from './components/event/event-description/event-description.component';
-import { EventGuestListComponent } from './components/event/event-guest-list/event-guest-list.component';
+import { EventDescriptionFormComponent } from './components/event/event-description/event-description-form/event-description-form.component';
 import { EventIdComponent } from './components/event/event-id/event-id.component';
 import { EventLayoutComponent } from './pages/event-layout/event-layout.component';
 import { EventLocalizationFormComponent } from './components/event/event-localization/event-localization-form/event-localization-form.component';
 import { EventLocalizationComponent } from './components/event/event-localization/event-localization.component';
 import { EventMobileMenuComponent } from './components/event/event-mobile-menu/event-mobile-menu.component';
 import { EventTitleComponent } from './components/event/event-title/event-title.component';
+import { EventTitleFormComponent } from './components/event/event-title/event-title-form/event-title-form.component';
 import { StatusModifierComponent } from './components/event/event-mobile-menu/status-modifier/status-modifier.component';
 
 // Navbar components
@@ -40,40 +42,36 @@ import { ResetPasswordPageComponent } from './pages/reset-password/reset-passwor
 import { ResetPasswordInitComponent } from './pages/reset-password/reset-password-init/reset-password-init.component';
 import { ResetPasswordInstructionsComponent } from './pages/reset-password/reset-password-instructions/reset-password-instructions.component';
 
-// Guest components
-import { AddGuestFormComponent } from './components/event/event-guest-list/add-guest-form/add-guest-form.component';
-import { GuestStatusComponent } from './components/event/event-guest-list/guest-status/guest-status.component';
-import { EventTitleFormComponent } from './components/event/event-title/event-title-form/event-title-form.component';
-import { EventDescriptionFormComponent } from './components/event/event-description/event-description-form/event-description-form.component';
+// Participant components
+import { AddParticipantFormComponent } from './components/event/event-participant-list/add-participant-form/add-participant-form.component';
+import { EventParticipantListComponent } from './components/event/event-participant-list/event-participant-list.component';
+import { ParticipantStatusComponent } from './components/event/event-participant-list/participant-status/participant-status.component';
 
 // Home
 import { HomeComponent } from './pages/home/home.component';
 import { HomeEventCreateComponent } from './pages/home/home-event-create/home-event-create.component';
 import { HomeEventJoinFormComponent } from './pages/home/home-event-join-form/home-event-join-form.component';
-import { environment } from 'src/environments/environment';
 
 export function tokenGetter() {
   return sessionStorage.getItem('access_token');
 }
 @NgModule({
   declarations: [
-    AddGuestFormComponent,
+    AddParticipantFormComponent,
     AppComponent,
     CreateEventFormComponent,
     EventAsideInfoComponent,
     EventAsideInfoFormComponent,
     EventDescriptionComponent,
     EventDescriptionFormComponent,
-    EventGuestListComponent,
     EventIdComponent,
     EventLayoutComponent,
     EventLocalizationComponent,
     EventLocalizationFormComponent,
-    EventTitleFormComponent,
     EventMobileMenuComponent,
+    EventParticipantListComponent,
+    EventTitleFormComponent,
     EventTitleComponent,
-    FlashMessageComponent,
-    GuestStatusComponent,
     HomeComponent,
     HomeEventCreateComponent,
     HomeEventJoinFormComponent,
@@ -83,6 +81,7 @@ export function tokenGetter() {
     NavbarLogoComponent,
     NavbarTitleComponent,
     Page404Component,
+    ParticipantStatusComponent,
     ResetPasswordInitComponent,
     ResetPasswordInstructionsComponent,
     ResetPasswordPageComponent,

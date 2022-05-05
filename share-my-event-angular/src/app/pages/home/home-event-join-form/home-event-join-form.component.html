@@ -60,19 +60,19 @@
         <div class="form-icon">
           <input
             type="text"
-            name="guestId"
-            id="guestId"
+            name="participantId"
+            id="participantId"
             placeholder="Entrez votre identifiant de participant"
             class="form-control"
             aria-required
-            formControlName="guestId"
+            formControlName="participantId"
           />
         </div>
         <div
           class="error-feedback"
           *ngIf="
           submitted &&
-          joinEventForm.controls['guestId']?.errors?.['required']
+          joinEventForm.controls['participantId']?.errors?.['required']
         "
         >
           * Champs requis.
@@ -83,7 +83,7 @@
           *ngIf="
             submitted &&
             joinEventForm.dirty &&
-            joinEventForm.getError('unknownGuestId')
+            joinEventForm.getError('unknownParticipantId')
           "
         >
           * Id de participant invalide.

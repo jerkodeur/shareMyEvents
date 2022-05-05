@@ -24,9 +24,14 @@ export class HomeEventJoinFormComponent implements OnInit {
     this.joinEventForm = this.fb.group(
       {
         username: ['', [Validators.required, Validators.minLength(2)]],
-        guestId: ['', Validators.required],
+        participantId: ['', Validators.required],
       },
-      { validator: [this.userExistValidator, this.unknownGuestIdValidator] }
+      {
+        validator: [
+          this.userExistValidator,
+          this.unknownParticipantIdValidator,
+        ],
+      }
     );
   }
 
@@ -38,11 +43,11 @@ export class HomeEventJoinFormComponent implements OnInit {
     }
   }
 
-  unknownGuestIdValidator(form: FormGroup) {
-    if (form.get('guestId')?.value === '12345') {
+  unknownParticipantIdValidator(form: FormGroup) {
+    if (form.get('participantId')?.value === '12345') {
       return null;
     } else {
-      return { unknownGuestId: true };
+      return { unknownParticipantId: true };
     }
   }
 

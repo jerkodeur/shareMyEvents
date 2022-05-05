@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiTestBaseUrl: 'http://localhost:3000',
-  apiBaseUrl: 'localhost:8080/',
+  apiBaseUrl: 'http://localhost:8080',
   localeDb: '../data/db.json',
 };
 

@@ -1,8 +1,8 @@
 <form
-  #addGuestForm="ngForm"
-  (ngSubmit)="addGuestForm.valid && onSubmit(addGuestForm)"
+  #addParticipantForm="ngForm"
+  (ngSubmit)="addParticipantForm.valid && onSubmit(addParticipantForm)"
 >
-  <fieldset class="guest-form-layout">
+  <fieldset class="participant-form-layout">
     <legend>Nouvel invité</legend>
     <div class="form-group">
       <label for="name" class="form-label"
@@ -16,19 +16,19 @@
         class="form-control"
         aria-required
         #name="ngModel"
-        [(ngModel)]="guest.name"
+        [(ngModel)]="participant.name"
         required
         minlength="2"
       />
       <div
         class="error-feedback"
-        *ngIf="addGuestForm.submitted && name.errors?.['required']"
+        *ngIf="addParticipantForm.submitted && name.errors?.['required']"
       >
         * Champs requis.
       </div>
       <div
         class="error-feedback"
-        *ngIf="addGuestForm.submitted && name.touched && name.errors?.['minlength']"
+        *ngIf="addParticipantForm.submitted && name.touched && name.errors?.['minlength']"
       >
         * 2 caractères minimum requis.
       </div>
@@ -45,19 +45,19 @@
         class="form-control"
         aria-required
         #email="ngModel"
-        [(ngModel)]="guest.email"
+        [(ngModel)]="participant.email"
         pattern="[\w-\.]+@([\w-]+\.)+[\w-]{2,4}"
         required
       />
       <div
         class="error-feedback"
-        *ngIf="addGuestForm.submitted && email.errors?.['required']"
+        *ngIf="addParticipantForm.submitted && email.errors?.['required']"
       >
         * Champs requis.
       </div>
       <div
         class="error-feedback"
-        *ngIf="addGuestForm.submitted && email.errors?.['pattern']"
+        *ngIf="addParticipantForm.submitted && email.errors?.['pattern']"
       >
         * Format invalide.
       </div>

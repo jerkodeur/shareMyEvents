@@ -1,38 +1,32 @@
 <div></div>
-<div class="event-layout">
+<div class="event-layout" *ngIf="event">
   <app-event-mobile-menu></app-event-mobile-menu>
-  <app-event-title
-    [title]="event && event.title"
-    [eventId]="event && event.id"
-  ></app-event-title>
-  <app-event-id
-    [eventId]="event && event.eventId"
-    [event_id]="event && event.id"
-  ></app-event-id>
+  <app-event-title [title]="event.title" [eventId]="event.id"></app-event-title>
+  <app-event-id [eventId]="event.eventId" [event_id]="event.id"></app-event-id>
   <app-event-aside-info
-    [eventId]="event && event.id"
-    [organizer]="event && event.organizer"
-    [organizerMail]="event && event.organizerMail"
-    [title]="event && event.title"
-    [eventDate]="event && event.date"
+    [eventId]="event.id"
+    [organizer]="event.organizer"
+    [organizerMail]="event.organizerMail"
+    [title]="event.title"
+    [eventDate]="event.date"
   ></app-event-aside-info>
   <div id="description"></div>
   <app-event-description
-    [eventId]="event && event.id"
-    [description]="event && event.description"
+    [eventId]="event.id"
+    [description]="event.description"
   ></app-event-description>
-  <app-event-guest-list
-    id="guestList"
-    [eventId]="event && event.id"
-    [title]="event && event.title"
-  ></app-event-guest-list>
+  <app-event-participant-list
+    id="participantList"
+    [eventId]="event.id"
+    [title]="event.title"
+  ></app-event-participant-list>
   <app-event-localization
     id="address"
-    [eventId]="event && event.id"
-    [address]="event && event.address"
-    [zipCode]="event && event.zipCode"
-    [locality]="event && event.locality"
-    [additional]="event && event.additional"
+    [eventId]="event.id"
+    [address]="event.address"
+    [zipCode]="event.zipCode"
+    [locality]="event.locality"
+    [additional]="event.additional"
   ></app-event-localization>
 </div>
 <div style="height: 50px"></div>

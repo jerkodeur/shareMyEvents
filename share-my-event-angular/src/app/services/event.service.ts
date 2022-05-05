@@ -1,45 +1,47 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of, tap } from 'rxjs';
+import { Injectable, Input } from '@angular/core';
+import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { Event } from '../core/models/Event.model';
+
+import { ErrorHandlerService } from './error-handler.service';
 import { LocalizationInterface } from '../core/interfaces/Localization.interface';
 import { NotificationService } from './notification.service';
 
-import '../data/db.json';
+import { Event } from '../core/models/Event.model';
+import { EventInterface } from '../core/interfaces/Event.interface';
 
+import '../data/db.json';
 @Injectable({
   providedIn: 'root',
 })
 export class EventService {
-  private event!: Event;
+  _event = new BehaviorSubject<any>(null);
+
+  @Input()
+  public set event(value: EventInterface) {
+    this._event.next(value);
+  }
+
+  public get event(): EventInterface {
+    return this._event.getValue();
+  }
 
   constructor(
+    private errorHandler: ErrorHandlerService,
     private httpService: HttpClient,
     private notify: NotificationService
   ) {}
 
-  getEvent$(eventId: number): Observable<Event> {
+  getEvent$(eventId: number): Observable<EventInterface | any> {
     return this.httpService
-      .get<Event>(`${environment.apiTestBaseUrl}/events/${eventId}`)
+      .get<EventInterface>(`${environment.apiTestBaseUrl}/events/${eventId}`)
       .pipe(
-        map((data: any) => {
-          const formattedDate: Date = new Date(data.date);
-          return (data = new Event(
-            data.title,
-            data.description,
-            formattedDate,
-            data.organizer,
-            data.organizerMail,
-            data.organizerId,
-            data.address,
-            data.zipCode,
-            data.locality,
-            data.additional
-          ));
-        }),
-        tap((data: Event) => (this.event = data))
+        tap((data: any) => (data.date = new Date(data.date))),
+        tap((data: EventInterface) => this._event.next(data)),
+        catchError(async (err) =>
+          this.errorHandler.notifyHttpError(err).subscribe()
+        )
       );
   }
 
@@ -47,13 +49,13 @@ export class EventService {
     return this.httpService
       .post(`${environment.apiTestBaseUrl}/events`, { ...event })
       .pipe(
-        catchError((err) => {
-          return of(this.handleError(err));
-        }),
         tap(() =>
           this.notify.showSuccess(
             "L'event a été crée avec succès, n'oubliez pas d'y ajouter des invités !"
           )
+        ),
+        catchError(async (err) =>
+          this.errorHandler.notifyHttpError(err).subscribe()
         )
       );
   }
@@ -64,11 +66,12 @@ export class EventService {
         title,
       })
       .pipe(
-        catchError((err) => {
-          return of(this.handleError(err));
-        }),
-        tap(() => (this.event.title = title)),
-        tap(() => this.notify.showSuccess('Le titre a été modifié avec succès'))
+        tap(() =>
+          this.notify.showSuccess('Le titre a été modifié avec succès')
+        ),
+        catchError(async (err) =>
+          this.errorHandler.notifyHttpError(err).subscribe()
+        )
       );
   }
 
@@ -78,12 +81,11 @@ export class EventService {
         description,
       })
       .pipe(
-        catchError((err) => {
-          return of(this.handleError(err));
-        }),
-        tap(() => (this.event.description = description)),
         tap(() =>
           this.notify.showSuccess('La description a été modifié avec succès')
+        ),
+        catchError(async (err) =>
+          this.errorHandler.notifyHttpError(err).subscribe()
         )
       );
   }
@@ -94,11 +96,10 @@ export class EventService {
         date,
       })
       .pipe(
-        catchError((err) => {
-          return of(this.handleError(err));
-        }),
-        tap(() => (this.event.date = date)),
-        tap(() => this.notify.showSuccess('La date a été modifié avec succès'))
+        tap(() => this.notify.showSuccess('La date a été modifié avec succès')),
+        catchError(async (err) =>
+          this.errorHandler.notifyHttpError(err).subscribe()
+        )
       );
   }
 
@@ -106,17 +107,16 @@ export class EventService {
     localization: LocalizationInterface,
     eventId: number
   ): Observable<any> {
-    console.log(this.event);
     return this.httpService
-      .patch(`${environment.apiTestBaseUrl}/events/${eventId}`, {
+      .patch(`${environment.apiTestBaseUrl}/event/${eventId}`, {
         ...localization,
       })
       .pipe(
-        catchError((err) => {
-          return of(this.handleError(err));
-        }),
         tap(() =>
           this.notify.showSuccess("L'addresse a été modifiée avec succès")
+        ),
+        catchError(async (err) =>
+          this.errorHandler.notifyHttpError(err).subscribe()
         )
       );
   }
@@ -125,15 +125,13 @@ export class EventService {
     return this.httpService
       .delete(`${environment.apiTestBaseUrl}/events/${eventId}`)
       .pipe(
-        catchError((err) => {
-          return of(this.handleError(err));
-        }),
-        tap(() => this.notify.showSuccess("L'event a été supprimé avec succès"))
+        tap(() =>
+          this.notify.showSuccess("L'event a été supprimé avec succès")
+        ),
+        tap(() => this._event.next(null)),
+        catchError(async (err) =>
+          this.errorHandler.notifyHttpError(err).subscribe()
+        )
       );
-  }
-
-  private handleError(err: HttpErrorResponse) {
-    this.notify.showError('Erreur serveur', "La requête n'a pas pu aboutir");
-    console.error('Erreur requête http', err.status, err);
   }
 }
