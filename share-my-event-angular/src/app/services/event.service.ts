@@ -1,6 +1,6 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable, Input } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { catchError, Observable, tap } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 
@@ -16,17 +16,6 @@ import '../data/db.json';
   providedIn: 'root',
 })
 export class EventService {
-  _event = new BehaviorSubject<any>(null);
-
-  @Input()
-  public set event(value: EventInterface) {
-    this._event.next(value);
-  }
-
-  public get event(): EventInterface {
-    return this._event.getValue();
-  }
-
   constructor(
     private errorHandler: ErrorHandlerService,
     private httpService: HttpClient,
@@ -38,7 +27,6 @@ export class EventService {
       .get<EventInterface>(`${environment.apiTestBaseUrl}/events/${eventId}`)
       .pipe(
         tap((data: any) => (data.date = new Date(data.date))),
-        tap((data: EventInterface) => this._event.next(data)),
         catchError(async (err) =>
           this.errorHandler.notifyHttpError(err).subscribe()
         )
@@ -128,7 +116,6 @@ export class EventService {
         tap(() =>
           this.notify.showSuccess("L'event a été supprimé avec succès")
         ),
-        tap(() => this._event.next(null)),
         catchError(async (err) =>
           this.errorHandler.notifyHttpError(err).subscribe()
         )

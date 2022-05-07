@@ -14,12 +14,14 @@
         ></svg>
       </div>
       <span
-        *ngIf="!isDisplayForm && participantList.length == 0"
+        *ngIf="!isDisplayForm && participantList && participantList.length == 0"
         class="text-muted"
       >
         Aucun invité
       </span>
-      <span *ngIf="!isDisplayForm && participantList.length > 0">
+      <span
+        *ngIf="!isDisplayForm && participantList && participantList.length > 0"
+      >
         {{ participantList.length }} invité<span
           *ngIf="participantList.length > 1"
           >s</span
@@ -31,7 +33,10 @@
       [eventId]="eventId"
       [ngClass]="{ 'show-form': isDisplayForm, 'hide-form': !isDisplayForm }"
     ></app-add-participant-form>
-    <article class="participant-list" *ngIf="participantList.length > 0">
+    <article
+      class="participant-list"
+      *ngIf="participantList && participantList.length > 0"
+    >
       <p *ngFor="let participant of participantList">
         <app-participant-status
           [status]="participant.availabilty"

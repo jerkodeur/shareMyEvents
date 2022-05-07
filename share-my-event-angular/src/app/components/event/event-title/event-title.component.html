@@ -1,21 +1,23 @@
 <section class="event-title">
-  <div *ngIf="!edited">
-    <h1>{{ title }}</h1>
-  </div>
   <app-event-title-form
     [eventTitle]="title"
     [eventId]="eventId"
     (hideForm)="toggleEdition()"
     *ngIf="edited"
   ></app-event-title-form>
-  <div class="button-layout">
-    <button
-      type="button"
-      class="tight-white-button"
-      (click)="toggleEdition()"
-      *ngIf="!edited"
-    >
-      Modifier le titre
-    </button>
-  </div>
+  <fieldset class="sub-fieldset" *ngIf="!edited">
+    <legend>Titre</legend>
+    <div>
+      <h1>{{ title }}</h1>
+    </div>
+    <div class="button-layout">
+      <button
+        type="button"
+        class="tight-white-button"
+        (click)="toggleEdition()"
+      >
+        Modifier le titre
+      </button>
+    </div>
+  </fieldset>
 </section>

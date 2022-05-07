@@ -17,10 +17,9 @@ export class EventParticipantListComponent implements OnInit {
   constructor(private participantService: ParticipantService) {}
 
   ngOnInit(): void {
-    this.participantService.getEventParticipants$(this.eventId);
-    this.participantService._participantList.subscribe(
-      (participants) => (this.participantList = participants)
-    );
+    this.participantService
+      .getEventParticipants$(this.eventId)
+      .subscribe((participants) => (this.participantList = participants));
   }
 
   toggleForm() {

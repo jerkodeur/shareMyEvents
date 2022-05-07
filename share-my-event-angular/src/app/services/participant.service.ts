@@ -8,20 +8,13 @@ import { ErrorHandlerService } from './error-handler.service';
 import { NotificationService } from './notification.service';
 
 import { Participant } from '../core/models/Participant.model';
+import { ParticipantGuard } from '../core/guards/participant.guard';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ParticipantService {
-  _participantList = new BehaviorSubject<Participant[]>([]);
-
-  @Input()
-  public get participantList() {
-    return this._participantList;
-  }
-  public set participantList(value) {
-    this._participantList = value;
-  }
+  participantList = new BehaviorSubject<Participant[]>([]);
 
   constructor(
     private httpService: HttpClient,
@@ -29,17 +22,16 @@ export class ParticipantService {
     private notify: NotificationService
   ) {}
 
-  getEventParticipants$(eventId: number): void {
-    this.httpService
-      .get<any>(`${environment.apiTestBaseUrl}/participants?eventId=${eventId}`)
+  getEventParticipants$(eventId: number): Observable<any> {
+    return this.httpService
+      .get<Participant[]>(
+        `${environment.apiTestBaseUrl}/participants?eventId=${eventId}`
+      )
       .pipe(
         catchError(async (err) =>
           this.handleError.notifyHttpError(err).subscribe()
         )
-      )
-      .subscribe((participants) => {
-        this._participantList.next(participants);
-      });
+      );
   }
 
   addParticipantToEvent$(participant: Participant): Observable<any> {

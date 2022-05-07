@@ -20,8 +20,7 @@ export class EventLayoutComponent implements OnInit {
 
   ngOnInit(): void {
     const eventId = +this.activeRoute.snapshot.params['id'];
-    this.eventService.getEvent$(eventId).subscribe();
-    this.eventService._event.subscribe((data: EventInterface) => {
+    this.eventService.getEvent$(eventId).subscribe((data: EventInterface) => {
       pipe(takeWhile(() => !this.event));
       this.event = data;
     });

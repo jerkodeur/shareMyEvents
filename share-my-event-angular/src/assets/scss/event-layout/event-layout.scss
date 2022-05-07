@@ -2,6 +2,14 @@
   color: $primary;
   margin: auto;
 
+  .flex-main-layout {
+    display: flex;
+    flex-direction: column;
+    form {
+      width: 100% !important;
+    }
+  }
+
   .button-layout {
     text-align: right;
   }
@@ -16,7 +24,7 @@
   .event-title {
     h1 {
       color: $blood;
-      font-size: 1.25em;
+      font-size: 1.35em;
       text-align: center;
     }
     hr {
@@ -24,7 +32,7 @@
     }
     .button-layout {
       margin-top: -0.3em;
-      margin-right: 0.6em;
+      margin-left: auto;
     }
     .event-title-form-layout {
       @extend .event-edit-form;
@@ -49,13 +57,23 @@
 
   .event-description {
     .sub-fieldset {
-      background-color: #fff;
       img {
         display: none !important;
       }
     }
     .event-description-form-layout {
       @extend .event-edit-form;
+      .form-group {
+        width: 100% !important;
+        margin-top: 0.45em;
+      }
+    }
+  }
+
+  .event-description,
+  .event-title {
+    .sub-fieldset {
+      background-color: #fff;
     }
   }
 
@@ -94,6 +112,7 @@
     color: $blood;
   }
   .wrap-btn {
+    margin-top: 0.25em;
     text-align: right;
     button {
       margin: 0 0 0 0.5em;
@@ -107,6 +126,45 @@
   }
   .form-text {
     margin-bottom: 0;
+  }
+}
+
+@media only screen and (min-width: 650px) {
+  .flex-main-layout {
+    margin: auto;
+    width: 90%;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .flex-main-layout {
+    width: 80%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .event-layout {
+    .flex-main-layout {
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .flex-center-layout {
+        width: 56%;
+      }
+
+      .flex-left-layout,
+      .flex-right-layout {
+        width: 20%;
+      }
+
+      .event-title,
+      .event-localization {
+        .sub-fieldset {
+          background-color: #fff;
+        }
+      }
+    }
   }
 }
 
