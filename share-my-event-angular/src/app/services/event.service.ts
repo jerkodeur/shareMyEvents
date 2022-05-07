@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, tap } from 'rxjs';
+import { catchError, map, Observable, tap } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 
+import { AuthenticationService } from './authentication.service';
 import { ErrorHandlerService } from './error-handler.service';
 import { LocalizationInterface } from '../core/interfaces/Localization.interface';
 import { NotificationService } from './notification.service';
@@ -17,6 +18,7 @@ import '../data/db.json';
 })
 export class EventService {
   constructor(
+    private authService: AuthenticationService,
     private errorHandler: ErrorHandlerService,
     private httpService: HttpClient,
     private notify: NotificationService
@@ -27,6 +29,25 @@ export class EventService {
       .get<EventInterface>(`${environment.apiTestBaseUrl}/events/${eventId}`)
       .pipe(
         tap((data: any) => (data.date = new Date(data.date))),
+        catchError(async (err) =>
+          this.errorHandler.notifyHttpError(err).subscribe()
+        )
+      );
+  }
+
+  getNextOrganizerEvent(): Observable<any> {
+    return this.httpService
+      .get<any>(
+        `${
+          environment.apiTestBaseUrl
+        }/events?organizerId=${this.authService.getAuthUserId()}`
+      )
+      .pipe(
+        map((data) => {
+          data = data[0];
+          data.date = new Date(data.date);
+          return data;
+        }),
         catchError(async (err) =>
           this.errorHandler.notifyHttpError(err).subscribe()
         )

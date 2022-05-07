@@ -5,4 +5,8 @@
   </p>
   <app-home-event-create></app-home-event-create>
   <app-home-event-join-form></app-home-event-join-form>
+  <app-organizer-next-events
+    *ngIf="authenticated"
+    [nextEvent$]="nextEvent"
+  ></app-organizer-next-events>
 </div>

@@ -49,8 +49,9 @@ import { ParticipantStatusComponent } from './components/event/event-participant
 
 // Home
 import { HomeComponent } from './pages/home/home.component';
-import { HomeEventCreateComponent } from './pages/home/home-event-create/home-event-create.component';
-import { HomeEventJoinFormComponent } from './pages/home/home-event-join-form/home-event-join-form.component';
+import { HomeEventCreateComponent } from './components/home/home-event-create/home-event-create.component';
+import { HomeEventJoinFormComponent } from './components/home/home-event-join-form/home-event-join-form.component';
+import { OrganizerNextEventsComponent } from './components/home/organizer-next-events/organizer-next-events.component';
 
 export function tokenGetter() {
   return sessionStorage.getItem('access_token');
@@ -87,6 +88,7 @@ export function tokenGetter() {
     ResetPasswordPageComponent,
     SignUpComponent,
     StatusModifierComponent,
+    OrganizerNextEventsComponent,
   ],
   imports: [
     AppRoutingModule,

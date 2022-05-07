@@ -21,8 +21,8 @@
 }
 
 @mixin space-maker($padding: 0, $margin: 0) {
-  padding: $padding;
-  margin: $margin;
+  padding: $padding !important;
+  margin: $margin !important;
 }
 
 @mixin tight-white-button {
@@ -50,6 +50,22 @@
   );
 }
 
+@mixin main-secondary-button {
+  @include main-button-maker($bgColor: $secondary, $color: $primary);
+}
+
+@mixin main-button-maker($bgColor, $hoverBgColor: $bgColor, $color, $hoverColor: $color) {
+  @include button-color-maker($bgColor, $color);
+  @include space-maker(0 0.5em, 0);
+  font-weight: 500;
+  font-size: 1.15em !important;
+  border-radius: 4px;
+  border: 1pt solid $primary;
+  &:hover {
+    transition: 500ms all;
+  }
+}
+
 @mixin tight-button-maker(
   $bgColor,
   $hoverBgColor: $bgColor,
@@ -58,7 +74,7 @@
   $boxShadowColor,
   $boxShadowHoverColor: $boxShadowColor
 ) {
-  @include button-color-maker($bgColor, $hoverBgColor, $color, $hoverColor);
+  @include button-color-maker($bgColor, $color, $hoverBgColor, $hoverColor);
   @include space-maker(0 0.5em, 0.5em 0 0.25em);
 
   font-weight: 500;
@@ -71,9 +87,28 @@
   }
 }
 
-@mixin button-color-maker($bgColor, $hoverBgColor, $color, $hoverColor) {
+@mixin button-color-maker($bgColor, $color, $hoverBgColor: $color, $hoverColor: $bgColor) {
   @include layout-color-maker($bgColor, $color);
   &:hover {
     @include layout-color-maker($hoverBgColor, $hoverColor);
+  }
+}
+
+@mixin primary-secondary-link($size: 1em) {
+  @include link-maker($primary, $secondary);
+}
+
+@mixin blood-secondary-link($size: 1em) {
+  @include link-maker($blood, $secondary);
+}
+
+@mixin link-maker($color, $hoverColor: $color, $decoration: underline, $size: 1.15em, $weight: 500) {
+  color: $color;
+  text-decoration: $decoration;
+  font-size: $size;
+  font-weight: $weight;
+  &:hover {
+    color: $hoverColor;
+    transition: 250ms all;
   }
 }
