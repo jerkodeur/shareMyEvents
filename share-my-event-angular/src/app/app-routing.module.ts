@@ -28,9 +28,14 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'events/:id',
     component: EventLayoutComponent,
-    canActivate: [ParticipantGuard || OrganizerGuard],
+    path: 'events/:id',
+    canActivate: [AuthenticatedGuard, OrganizerGuard],
+  },
+  {
+    path: 'events/:id/participant/:participant',
+    component: EventLayoutComponent,
+    canActivate: [ParticipantGuard],
   },
   {
     path: 'home',
@@ -76,7 +81,6 @@ const routes: Routes = [
     component: Page404Component,
   },
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],

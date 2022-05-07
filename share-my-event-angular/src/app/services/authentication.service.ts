@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 
 import { ErrorHandlerService } from './error-handler.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { NotificationService } from './notification.service';
+import { User } from '../core/models/User.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +18,7 @@ export class AuthenticationService {
   constructor(
     private errorHandler: ErrorHandlerService,
     private jwtService: JwtHelperService,
-    private httpService: HttpClient,
-    private notify: NotificationService
+    private httpService: HttpClient
   ) {}
 
   setIfAuthenticated() {
@@ -29,13 +28,17 @@ export class AuthenticationService {
 
   getAuthUser(): Observable<any> {
     this.setIfAuthenticated();
-    const decodeToken = this.jwtService.decodeToken(this.token);
     return this.httpService
-      .get(`${environment.apiTestBaseUrl}/users/${decodeToken.sub}`)
+      .get<User>(`${environment.apiTestBaseUrl}/users/${this.getAuthUserId}`)
       .pipe(
         catchError(async (err) =>
           this.errorHandler.notifyHttpError(err).subscribe()
         )
       );
+  }
+
+  getAuthUserId(): number {
+    this.setIfAuthenticated();
+    return this.jwtService.decodeToken(this.token).sub;
   }
 }

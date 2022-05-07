@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, Input } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, Observable, pipe, tap } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
@@ -8,7 +8,6 @@ import { ErrorHandlerService } from './error-handler.service';
 import { NotificationService } from './notification.service';
 
 import { Participant } from '../core/models/Participant.model';
-import { ParticipantGuard } from '../core/guards/participant.guard';
 
 @Injectable({
   providedIn: 'root',
