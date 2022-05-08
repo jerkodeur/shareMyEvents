@@ -17,7 +17,12 @@
     <span class="aside-info">Complément d'addresse:</span>
     <p class="additional-address">{{ additional }}</p>
 
-    <button type="button" class="tight-white-button" (click)="toggleEdition()">
+    <button
+      type="button"
+      class="tight-white-button"
+      (click)="toggleEdition()"
+      *ngIf="isOrganizer"
+    >
       Modifier l'adresse
     </button>
   </fieldset>

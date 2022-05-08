@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { EventService } from 'src/app/services/event.service';
 
 @Component({
@@ -7,11 +8,20 @@ import { EventService } from 'src/app/services/event.service';
   templateUrl: './event-id.component.html',
   styleUrls: ['./event-id.component.scss'],
 })
-export class EventIdComponent {
+export class EventIdComponent implements OnInit {
   @Input() eventId!: string;
   @Input() event_id!: number;
+  isOrganizer!: boolean;
 
-  constructor(private eventService: EventService, private router: Router) {}
+  constructor(
+    private authService: AuthenticationService,
+    private eventService: EventService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.authService.isOrganizer.subscribe((bool) => (this.isOrganizer = bool));
+  }
 
   cancelEvent() {
     if (window.confirm('Êtes-vous sur de vouloir supprimer cet event ?')) {

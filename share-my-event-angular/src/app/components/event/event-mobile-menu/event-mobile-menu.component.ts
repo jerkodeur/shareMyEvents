@@ -1,14 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-event-mobile-menu',
   templateUrl: './event-mobile-menu.component.html',
   styleUrls: ['./event-mobile-menu.component.scss'],
 })
-export class EventMobileMenuComponent {
+export class EventMobileMenuComponent implements OnInit {
   currentSection!: string;
+  isOrganizer!: boolean;
 
-  constructor() {}
+  constructor(private authService: AuthenticationService) {}
+
+  ngOnInit(): void {
+    this.authService.isOrganizer.subscribe((bool) => (this.isOrganizer = bool));
+    console.log(this.isOrganizer);
+  }
 
   scrollTo(section: any) {
     document

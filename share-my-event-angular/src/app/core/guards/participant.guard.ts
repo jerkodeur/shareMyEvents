@@ -8,6 +8,7 @@ import {
 import { map, Observable, timeout } from 'rxjs';
 import { ParticipantService } from 'src/app/services/participant.service';
 import { Participant } from '../models/Participant.model';
+
 @Injectable({
   providedIn: 'root',
 })

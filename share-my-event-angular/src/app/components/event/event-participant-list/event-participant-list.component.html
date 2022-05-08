@@ -1,11 +1,12 @@
 <section class="event-participantlist">
   <fieldset class="sub-fieldset">
     <legend>Liste des invités</legend>
-    <div class="toggle-text">
+    <div class="toggle-text" [ngClass]="{ 'mx-auto': !isOrganizer }">
       <div
         class="circle-layout"
         [ngClass]="{ selected: isDisplayForm }"
         title="Ajouter un invité"
+        *ngIf="isOrganizer"
       >
         <svg
           (click)="toggleForm()"
@@ -15,7 +16,6 @@
       </div>
       <span
         *ngIf="!isDisplayForm && participantList && participantList.length == 0"
-        class="text-muted"
       >
         Aucun invité
       </span>

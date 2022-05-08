@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DateHandler } from 'src/app/handlers/date-handler';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-event-aside-info',
@@ -17,12 +18,15 @@ export class EventAsideInfoComponent implements OnInit {
   time!: string;
   edited = false;
 
-  constructor() {}
+  isOrganizer!: boolean;
+
+  constructor(private authService: AuthenticationService) {}
 
   ngOnInit(): void {
     const splitDate = DateHandler.splitDateObject(this.eventDate);
     this.date = splitDate[0];
     this.time = splitDate[1];
+    this.authService.isOrganizer.subscribe((bool) => (this.isOrganizer = bool));
   }
 
   toggleEdition() {

@@ -76,6 +76,9 @@
   .dropdown-toggle {
     background-color: lighten($primary, $amount: 3.5%);
     border-radius: 8px;
+    &:hover {
+      background-color: $primary;
+    }
     &::after {
       content: none;
     }
@@ -99,7 +102,7 @@
         background-color: rgb(63, 136, 84);
       }
       &.sts_uncertain {
-        background-color: $light;
+        background-color: $secondary;
         background-image: url("../../img/user-profile-uncertain.svg");
       }
       &.sts_unavailable {
@@ -129,6 +132,51 @@
           width: 15px;
           height: 15px;
         }
+      }
+    }
+  }
+}
+
+@media only screen and(min-width: 768px) {
+  .event-menu {
+    width: 100px;
+    z-index: 2000;
+    bottom: 25px;
+    left: 10px;
+    padding: 0 !important;
+    box-shadow: none;
+    background-color: transparent;
+
+    .nav-link:not(:first-child),
+    .flex-icon {
+      display: none;
+    }
+    .dropdown-toggle {
+      border-radius: 100%;
+      svg#user-status {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 60px;
+        height: 60px;
+        box-shadow: 2px 2px 6px $primary, -2px -2px 6px $primary;
+
+        &:hover {
+          box-shadow: 3px 3px 6px $secondary, -3px -3px 6px $secondary;
+        }
+      }
+    }
+    .dropdown-menu.show {
+      margin-bottom: 0.5em !important;
+      left: 1.5em !important;
+    }
+
+    .nav-link:first-child {
+      padding: 0 !important;
+      border-radius: 100%;
+      &:hover {
+        border-radius: 100%;
+        padding: 0;
+        background-color: transparent;
       }
     }
   }

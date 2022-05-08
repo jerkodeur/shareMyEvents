@@ -20,5 +20,32 @@
 
   .event-localization-form-layout {
     @extend .event-edit-form;
+    input {
+      margin-top: 0 !important;
+    }
+  }
+  @media only screen and (min-width: 400px) {
+    .zip-loc-layout {
+      display: flex;
+      justify-content: space-between;
+      .zipcode {
+        &.form-group {
+          width: 30% !important;
+          margin-right: 1em;
+        }
+      }
+      .locality {
+        &.form-group {
+          width: 70% !important;
+        }
+      }
+    }
+  }
+  @media only screen and (min-width: 1024px) {
+    .event-localization-form-layout {
+      .form-group {
+        width: 100% !important;
+      }
+    }
   }
 }

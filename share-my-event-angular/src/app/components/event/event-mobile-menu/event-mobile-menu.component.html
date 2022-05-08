@@ -1,5 +1,5 @@
 <div class="event-menu navbar nav-pills nav-justified fixed-bottom">
-  <app-status-modifier></app-status-modifier>
+  <app-status-modifier *ngIf="!isOrganizer"></app-status-modifier>
   <div class="nav-link" (click)="scrollTo('description')">
     <div class="flex-icon">
       <svg class="event-info"></svg>

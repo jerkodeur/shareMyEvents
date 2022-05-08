@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Participant } from 'src/app/core/models/Participant.model';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ParticipantService } from 'src/app/services/participant.service';
 
 @Component({
@@ -13,10 +14,16 @@ export class EventParticipantListComponent implements OnInit {
 
   participantList!: Participant[];
   isDisplayForm = false;
+  isOrganizer!: boolean;
 
-  constructor(private participantService: ParticipantService) {}
+  constructor(
+    private authService: AuthenticationService,
+    private participantService: ParticipantService
+  ) {}
 
   ngOnInit(): void {
+    this.authService.isOrganizer.subscribe((bool) => (this.isOrganizer = bool));
+
     this.participantService
       .getEventParticipants$(this.eventId)
       .subscribe((participants) => (this.participantList = participants));

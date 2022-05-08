@@ -18,7 +18,12 @@
         organizer
       }}</a>
     </p>
-    <button type="button" class="tight-white-button" (click)="toggleEdition()">
+    <button
+      type="button"
+      class="tight-white-button"
+      (click)="toggleEdition()"
+      *ngIf="isOrganizer"
+    >
       Modifier la date
     </button>
   </fieldset>

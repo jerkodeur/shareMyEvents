@@ -30,7 +30,9 @@
     .participant-list {
       @include flex-maker($direction: row);
       flex-wrap: wrap;
-      margin-top: 1em;
+      border-top: 1px solid $primary;
+      padding-top: 0.25em;
+      margin-top: 0.5em;
       p {
         @include flex-maker($direction: row, $justifyContent: flex-start);
       }
@@ -99,6 +101,16 @@
       }
       &.unavailable {
         background-color: $blood;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .sub-fieldset {
+      .participant-list {
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-left: 0.5em;
       }
     }
   }

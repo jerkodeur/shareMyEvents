@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, Subject } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 
@@ -14,6 +14,7 @@ import { User } from '../core/models/User.model';
 export class AuthenticationService {
   private token!: any;
   authenticated = new Subject<boolean>();
+  isOrganizer = new BehaviorSubject<boolean>(false);
 
   constructor(
     private errorHandler: ErrorHandlerService,

@@ -29,6 +29,15 @@ export class OrganizerGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | any {
+    const authorized = this.isAuthorized(route);
+    if (!authorized) {
+      this.router.navigate(['home']);
+    }
+
+    return authorized;
+  }
+
+  isAuthorized(route: ActivatedRouteSnapshot) {
     this.authUserId = +this.authService.getAuthUserId();
     return this.eventService.getEvent$(route.params['id']).pipe(
       timeout(10000),
@@ -39,16 +48,4 @@ export class OrganizerGuard implements CanActivate {
       })
     );
   }
-
-  // isAuthorized(route) {
-  //   this.authUserId = +this.authService.getAuthUserId();
-  //   return this.eventService.getEvent$(route.params['id']).pipe(
-  //     timeout(10000),
-  //     map((event: EventInterface) => {
-  //       const isAuthorized = event.organizerId == this.authUserId;
-  //       if (!isAuthorized) this.router.navigate(['home']);
-  //       return isAuthorized;
-  //     })
-  //   );
-  // }
 }

@@ -3,7 +3,12 @@
     <legend>Infos event</legend>
     Identifiant de l'event:
     <span class="fw-bold">{{ eventId }}</span>
-    <button type="button" class="tight-white-button" (click)="cancelEvent()">
+    <button
+      type="button"
+      class="tight-white-button"
+      (click)="cancelEvent()"
+      *ngIf="isOrganizer"
+    >
       Annuler l'event
     </button>
   </fieldset>
