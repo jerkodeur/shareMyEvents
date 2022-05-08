@@ -1,3 +1,4 @@
 /.metadata/
 secret-*.properties
 *.project
+application-dev.properties
