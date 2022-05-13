@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS actors;
 
 CREATE TABLE "actors" (
   id SERIAL PRIMARY KEY,
-  uuid CHAR(36) UNIQUE,
+  auth_id CHAR(36) UNIQUE,
   email VARCHAR(255) UNIQUE NOT NULL,
   firstname VARCHAR(100),
   lastname VARCHAR(100),

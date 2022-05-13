@@ -15,6 +15,8 @@ psql -h localhost -p 5432 -U postgres <<MULTILIGNE
 \i ddl/events-schema.sql
 \i ddl/availabilities-schema.sql
 \i ddl/participations-schema.sql
+\i dml/actors-data.dml.sql
+\i dml/availabilities-data.dml.sql
 \q
 MULTILIGNE
 

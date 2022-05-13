@@ -15,25 +15,27 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    
-    @Value("${sharemyevent.security.jwt.secret}")
-    private String secret;
-    
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-	http.csrf().disable().logout().disable()
-	.sessionManagement()
-	.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-	.authorizeRequests().antMatchers("/users/**").permitAll()
-	.and().authorizeRequests().anyRequest().authenticated().and()
-	.oauth2ResourceServer().jwt();	
-    }
-    
-    @Bean
-    public JwtDecoder jwtDecoder() {
-	SecretKey secretKey = new SecretKeySpec(secret.getBytes(),
-		"HMACSHA256");
-	return NimbusJwtDecoder.withSecretKey(secretKey)
-		.macAlgorithm(MacAlgorithm.HS256).build();
-    }
+
+	@Value("${sharemyevent.security.jwt.secret}")
+	private String secret;
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf().disable().logout().disable().sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+				.authorizeRequests().antMatchers("/users/**").permitAll().and()
+				// TODO Affiner les permissions pour les events
+				.authorizeRequests().antMatchers("/events/**").permitAll().and()
+				.authorizeRequests().antMatchers("/organizer/**")
+				.authenticated().and().authorizeRequests().anyRequest()
+				.authenticated().and().oauth2ResourceServer().jwt();
+	}
+
+	@Bean
+	public JwtDecoder jwtDecoder() {
+		SecretKey secretKey = new SecretKeySpec(secret.getBytes(),
+				"HMACSHA256");
+		return NimbusJwtDecoder.withSecretKey(secretKey)
+				.macAlgorithm(MacAlgorithm.HS256).build();
+	}
 }
