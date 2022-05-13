@@ -2,7 +2,7 @@ export interface EventInterface {
   id: number;
   title: string;
   description: string;
-  date: Date;
+  eventDate: Date;
   eventId: string;
   organizer: string;
   organizerMail: string;

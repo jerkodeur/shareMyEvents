@@ -40,12 +40,16 @@ export class UserService {
 
   login$(email: string, password: string) {
     return this.httpService
-      .post(`${environment.apiTestBaseUrl}/login`, { email, password })
+      .post(`${environment.apiBaseUrl}/users/login`, { email, password })
       .pipe(
         tap((res: any) => {
-          sessionStorage.setItem('access_token', res.accessToken);
+          if (res.token) {
+            sessionStorage.setItem('access_token', res.token.token);
+            this.authentication.authenticated.next(true);
+          } else {
+            throw new Error('Erreur lors de la récupération du token');
+          }
         }),
-        tap(() => this.authentication.authenticated.next(true)),
         catchError(async (err) =>
           this.errorHandler.notifyHttpError(err).subscribe()
         )

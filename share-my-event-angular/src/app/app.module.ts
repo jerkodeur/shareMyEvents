@@ -101,7 +101,11 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: [environment.apiBaseUrl, environment.apiTestBaseUrl],
+        allowedDomains: ['localhost:7070'],
+        disallowedRoutes: [
+          'http://localhost:7070/sharemyevent/users/login',
+          'http://localhost:7070/sharemyevent/users/signup',
+        ],
       },
     }),
     ReactiveFormsModule,

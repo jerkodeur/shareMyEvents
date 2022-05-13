@@ -4,7 +4,6 @@ import { catchError, map, Observable, tap } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 
-import { AuthenticationService } from './authentication.service';
 import { ErrorHandlerService } from './error-handler.service';
 import { LocalizationInterface } from '../core/interfaces/Localization.interface';
 import { NotificationService } from './notification.service';
@@ -18,7 +17,6 @@ import '../data/db.json';
 })
 export class EventService {
   constructor(
-    private authService: AuthenticationService,
     private errorHandler: ErrorHandlerService,
     private httpService: HttpClient,
     private notify: NotificationService
@@ -35,28 +33,9 @@ export class EventService {
       );
   }
 
-  getNextOrganizerEvent(): Observable<any> {
-    return this.httpService
-      .get<any>(
-        `${
-          environment.apiTestBaseUrl
-        }/events?organizerId=${this.authService.getAuthUserId()}`
-      )
-      .pipe(
-        map((data) => {
-          data = data[0];
-          data.date = new Date(data.date);
-          return data;
-        }),
-        catchError(async (err) =>
-          this.errorHandler.notifyHttpError(err).subscribe()
-        )
-      );
-  }
-
   createEvent$(event: Event): Observable<any> {
     return this.httpService
-      .post(`${environment.apiTestBaseUrl}/events`, { ...event })
+      .post(`${environment.apiBaseUrl}/events/new`, { ...event })
       .pipe(
         tap(() =>
           this.notify.showSuccess(

@@ -164,15 +164,15 @@
       <legend class="w-auto px-2">Adresse de rendez-vous</legend>
       <div class="row">
         <div class="form-group col">
-          <label for="address" class="form-label">Adresse</label>
+          <label for="street" class="form-label">Adresse</label>
           <input
             type="text"
-            name="address"
-            id="address"
+            name="street"
+            id="street"
             placeholder="Entrez un adresse (numéro, nom de rue)"
             class="form-control"
-            formControlName="address"
-            autocomplete="street-address"
+            formControlName="street"
+            autocomplete="street-street"
           />
         </div>
       </div>
@@ -188,7 +188,7 @@
               formControlName="zipCode"
               max="99999"
               min="0"
-              type="number"
+              type="string"
               autocomplete="postal-code"
             />
             <div

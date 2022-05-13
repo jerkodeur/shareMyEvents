@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { EventInterface } from 'src/app/core/interfaces/Event.interface';
+
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { OrganizerService } from 'src/app/services/organizer.service';
+
 import { DateHandler } from 'src/app/handlers/date-handler';
-import { EventService } from 'src/app/services/event.service';
+import { EventInterface } from 'src/app/core/interfaces/Event.interface';
 
 @Component({
   selector: 'app-organizer-next-events',
@@ -14,15 +16,23 @@ export class OrganizerNextEventsComponent implements OnInit {
   @Input() nextEvent$!: Observable<EventInterface>;
   event!: EventInterface;
   formattedDate!: string;
-  constructor(private eventService: EventService) {}
+
+  constructor(
+    private authService: AuthenticationService,
+    private organizerService: OrganizerService
+  ) {}
 
   ngOnInit(): void {
-    this.eventService
-      .getNextOrganizerEvent()
-      .subscribe((event: EventInterface) => {
-        this.event = event;
-        const splitDate = DateHandler.splitDateObject(event.date);
-        this.formattedDate = `${splitDate[0]} ${splitDate[1]}`;
-      });
+    if (this.authService.authenticated) {
+      this.organizerService
+        .getNextOrganizerEvent()
+        .subscribe((event: EventInterface) => {
+          this.event = event;
+          if (event) {
+            const splitDate = DateHandler.splitDateObject(event.eventDate);
+            this.formattedDate = `${splitDate[0]} ${splitDate[1]}`;
+          }
+        });
+    }
   }
 }

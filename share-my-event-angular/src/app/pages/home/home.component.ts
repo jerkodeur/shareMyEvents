@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { EventInterface } from 'src/app/core/interfaces/Event.interface';
+
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { EventService } from 'src/app/services/event.service';
+import { OrganizerService } from 'src/app/services/organizer.service';
+
+import { EventInterface } from 'src/app/core/interfaces/Event.interface';
 
 @Component({
   selector: 'app-home',
@@ -14,8 +16,8 @@ export class HomeComponent implements OnInit {
   authenticated = false;
 
   constructor(
-    private eventService: EventService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private organizerService: OrganizerService
   ) {}
 
   ngOnInit(): void {
@@ -26,6 +28,6 @@ export class HomeComponent implements OnInit {
     this.authService.setIfAuthenticated();
 
     if (this.authenticated)
-      this.nextEvent = this.eventService.getNextOrganizerEvent();
+      this.nextEvent = this.organizerService.getNextOrganizerEvent();
   }
 }

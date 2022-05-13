@@ -50,7 +50,7 @@ export class LogInComponent {
     }
     this.userService.login$(email, password).subscribe((res: any) => {
       if (!res.error) {
-        this.notify.showSuccess(`Bon retour parmi nous ${res.user.lastname}`);
+        this.notify.showSuccess(`Bon retour parmi nous ${res.actor.lastname}`);
         this.router.navigate(['/home']);
       }
     });

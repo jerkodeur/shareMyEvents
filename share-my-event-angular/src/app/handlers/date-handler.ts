@@ -16,7 +16,7 @@ export class DateHandler {
     const [year, month, day] = splitDate;
     const [hours, minutes] = splitTime;
 
-    return new Date(year, month - 1, day, hours, minutes);
+    return new Date(Date.UTC(year, month - 1, day, hours, minutes));
   }
 
   static splitDateObject(dateObj: Date): Array<string> {

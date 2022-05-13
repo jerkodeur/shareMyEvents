@@ -13,7 +13,7 @@ export class ErrorHandlerService {
     err: HttpErrorResponse,
     message: string = 'Erreur lors de la requête HTTP'
   ) {
-    console.log(err);
+    console.error(err);
     this.notify.showError(message);
     return throwError(() => new Error(message));
   }

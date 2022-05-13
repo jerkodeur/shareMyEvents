@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 
-import { ValidatePassword } from 'src/app/shared/ValidatePassword';
+import { ValidatePassword } from 'src/app/core/validations/ValidatePassword';
 
 import { NotificationService } from 'src/app/services/notification.service';
 import { UserService } from 'src/app/services/user.service';

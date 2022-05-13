@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 
-import { DateHandler } from 'src/app/handlers/date-handler';
 import { NotificationService } from 'src/app/services/notification.service';
-import { ValidatePassword } from 'src/app/shared/ValidatePassword';
+
+import { ValidatePassword } from 'src/app/core/validations/ValidatePassword';
+
+import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
+import { DateHandler } from 'src/app/handlers/date-handler';
 
 @Component({
   selector: 'app-reset-password-page',

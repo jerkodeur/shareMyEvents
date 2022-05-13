@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { FullDate } from 'src/app/core/models/Date.model';
-import { ValidateDate } from 'src/app/shared/ValidateFutureDate';
+import { Router } from '@angular/router';
+
+import { ValidateDate } from 'src/app/core/validations/ValidateFutureDate';
+
 import { Event } from 'src/app/core/models/Event.model';
 import { User } from 'src/app/core/models/User.model';
-import { Router } from '@angular/router';
 
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { EventService } from 'src/app/services/event.service';
 import { NotificationService } from 'src/app/services/notification.service';
+
 import { DateHandler } from 'src/app/handlers/date-handler';
 
 @Component({
@@ -18,7 +20,7 @@ import { DateHandler } from 'src/app/handlers/date-handler';
 })
 export class CreateEventFormComponent implements OnInit {
   submitted = false;
-  currentDate = FullDate.getCurrentDate();
+  currentDate = '16-12-1977';
 
   constructor(
     private authService: AuthenticationService,
@@ -46,7 +48,7 @@ export class CreateEventFormComponent implements OnInit {
         ],
       ],
       addressForm: this.formBuilder.group({
-        address: null,
+        street: null,
         zipCode: [null, Validators.pattern(/^[0-9]{5}$/)],
         locality: null,
         additional: null,
@@ -67,27 +69,23 @@ export class CreateEventFormComponent implements OnInit {
       );
     }
     const { title, description, date, time } = this.eventForm.value;
-    const { address, zipCode, locality, additional } =
+    const { street, zipCode, locality, additional } =
       this.eventForm.value.addressForm;
     const eventDate = DateHandler.createDatebyDateAndTime(date, time);
 
-    this.authService.getAuthUser().subscribe((organizer: User) => {
-      const newEvent = new Event(
-        title,
-        description,
-        eventDate,
-        `${organizer.firstname} ${organizer.lastname}`,
-        organizer.email,
-        organizer.id,
-        address,
-        zipCode,
-        locality,
-        additional
-      );
+    const newEvent = new Event(
+      title,
+      description,
+      eventDate,
+      this.authService.getAuthUserId(),
+      street,
+      zipCode,
+      locality,
+      additional
+    );
 
-      this.eventService
-        .createEvent$(newEvent)
-        .subscribe((event) => this.router.navigate([`/events/${event.id}`]));
+    this.eventService.createEvent$(newEvent).subscribe((event) => {
+      // next: () => this.router.navigate([`/events/${event.id}`]);
     });
   };
 }
