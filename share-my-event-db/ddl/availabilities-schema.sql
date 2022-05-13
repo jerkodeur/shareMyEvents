@@ -8,5 +8,5 @@ DROP TABLE IF EXISTS availabilities;
 
 CREATE TABLE "availabilities" (
   id SERIAL PRIMARY KEY,
-  name CHAR(11) UNIQUE NOT NULL
+  name CHAR(12) UNIQUE NOT NULL
 );

@@ -11,7 +11,7 @@ CREATE TABLE "events" (
   	code CHAR(8) UNIQUE NOT NULL,
   	title CHAR(50) NOT NULL,
   	description TEXT NOT NULL,
-  	event_date DATE NOT NULL,
+  	event_date TIMESTAMP NOT NULL,
   	organizer_id INTEGER NOT NULL,
   	address_id INTEGER,
 	CONSTRAINT fk_event_organizer FOREIGN KEY (organizer_id) REFERENCES actors(id) ON DELETE CASCADE,

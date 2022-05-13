@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS addresses;
 CREATE TABLE "addresses" (
   id SERIAL PRIMARY KEY,
   street VARCHAR(255),
-  zip_code SMALLINT,
+  zip_code CHAR(5),
   locality VARCHAR(75),
   additional TEXT,
   UNIQUE(street, zip_code, locality)
