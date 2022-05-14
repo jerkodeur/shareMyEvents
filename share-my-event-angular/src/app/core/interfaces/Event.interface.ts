@@ -2,12 +2,13 @@ export interface EventInterface {
   id: number;
   title: string;
   description: string;
+  code: string;
   eventDate: Date;
-  eventId: string;
-  organizer: string;
-  organizerMail: string;
-  organizerId: number;
-  address: string;
+  organizerAuthId: string;
+  organizerEmail: string;
+  organizerFirstname: string;
+  organizerLastname: string;
+  street: string;
   zipCode: number;
   locality: string;
   additional: string;

@@ -2,14 +2,11 @@
   <fieldset class="sub-fieldset">
     <legend>Infos event</legend>
     Identifiant de l'event:
-    <span class="fw-bold">{{ eventId }}</span>
-    <button
-      type="button"
-      class="tight-white-button"
-      (click)="cancelEvent()"
-      *ngIf="isOrganizer"
-    >
-      Annuler l'event
-    </button>
+    <span class="fw-bold">{{ eventCode }}</span>
+    <div class="button-layout" *ngIf="isOrganizer">
+      <button type="button" class="tight-white-button" (click)="cancelEvent()">
+        Annuler l'event
+      </button>
+    </div>
   </fieldset>
 </section>

@@ -15,6 +15,7 @@ export class AuthenticationService {
   private token!: any;
   authenticated = new Subject<boolean>();
   isOrganizer = new BehaviorSubject<boolean>(false);
+  isParticipant = new BehaviorSubject<boolean>(false);
 
   constructor(
     private errorHandler: ErrorHandlerService,
@@ -38,8 +39,17 @@ export class AuthenticationService {
       );
   }
 
-  getAuthUserId(): number {
+  getAuthUserId(): string {
     this.setIfAuthenticated();
     return this.jwtService.decodeToken(this.token).sub;
+  }
+
+  checkIfOrganizer(eventOrganizerId: string): void {
+    console.log(this.getAuthUserId() == eventOrganizerId);
+    this.isOrganizer.next(this.getAuthUserId() == eventOrganizerId);
+  }
+
+  checkIfParticipant(eventId: number, participantId: number): void {
+    this.isParticipant.next(eventId == participantId);
   }
 }

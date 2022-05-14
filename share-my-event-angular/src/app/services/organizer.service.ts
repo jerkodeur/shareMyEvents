@@ -17,7 +17,7 @@ export class OrganizerService {
 
   getNextOrganizerEvent(): Observable<any> {
     return this.httpService
-      .get<any>(`${environment.apiBaseUrl}/organizer/next-event`)
+      .get<any>(`${environment.apiUrl}/organizer/next-event`)
       .pipe(
         map((data) => {
           data.eventDate = data && new Date(data.eventDate);

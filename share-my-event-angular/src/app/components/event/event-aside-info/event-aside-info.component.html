@@ -14,17 +14,18 @@
     </aside>
     <p class="event-organizer">
       Organisé par:
-      <a href="mailto:{{ organizerMail }}?subject={{ title }}" class="blood">{{
-        organizer
-      }}</a>
+      <a href="mailto:{{ organizerMail }}?subject={{ title }}" class="blood">
+        {{ organizerLastname }} {{ " " }} {{ organizerFirstname }}
+      </a>
     </p>
-    <button
-      type="button"
-      class="tight-white-button"
-      (click)="toggleEdition()"
-      *ngIf="isOrganizer"
-    >
-      Modifier la date
-    </button>
+    <div class="button-layout" *ngIf="isOrganizer">
+      <button
+        type="button"
+        class="tight-white-button"
+        (click)="toggleEdition()"
+      >
+        Modifier la date
+      </button>
+    </div>
   </fieldset>
 </section>

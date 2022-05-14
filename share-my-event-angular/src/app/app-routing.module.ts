@@ -18,9 +18,8 @@ import { ResetPasswordPageComponent } from './pages/reset-password/reset-passwor
 
 // Guards
 import { AuthenticatedGuard } from './core/guards/authenticated.guard';
+import { EventAccessGuard } from './core/guards/event-access.guard';
 import { UnauthenticatedGuard } from './core/guards/unauthenticated.guard';
-import { OrganizerGuard } from './core/guards/organizer.guard';
-import { ParticipantGuard } from './core/guards/participant.guard';
 
 const routes: Routes = [
   {
@@ -28,18 +27,13 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    component: EventLayoutComponent,
-    path: 'events/:id',
-    canActivate: [AuthenticatedGuard, OrganizerGuard],
-  },
-  {
-    path: 'events/:id/participant/:participant',
-    component: EventLayoutComponent,
-    canActivate: [ParticipantGuard],
-  },
-  {
     path: 'home',
     component: HomeComponent,
+  },
+  {
+    component: EventLayoutComponent,
+    path: 'events/:id',
+    canActivate: [EventAccessGuard],
   },
   {
     path: 'login',

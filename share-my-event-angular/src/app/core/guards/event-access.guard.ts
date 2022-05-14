@@ -1,27 +1,25 @@
 import { Injectable } from '@angular/core';
 import {
+  ActivatedRoute,
   ActivatedRouteSnapshot,
   CanActivate,
   Router,
   RouterStateSnapshot,
+  UrlTree,
 } from '@angular/router';
-import { map, Observable, timeout } from 'rxjs';
-
+import { map, Observable, tap, timeout } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { EventService } from 'src/app/services/event.service';
-
 import { EventInterface } from '../interfaces/Event.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class OrganizerGuard implements CanActivate {
-  eventOrganizerId!: number;
-  authUserId!: string;
-
+export class EventAccessGuard implements CanActivate {
   constructor(
     private authService: AuthenticationService,
     private eventService: EventService,
+    private route: ActivatedRoute,
     private router: Router
   ) {}
 
@@ -29,22 +27,13 @@ export class OrganizerGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | any {
-    const authorized = this.isAuthorized(route);
-    if (!authorized) {
-      this.router.navigate(['home']);
-    }
-
-    return authorized;
-  }
-
-  isAuthorized(route: ActivatedRouteSnapshot) {
-    this.authUserId = this.authService.getAuthUserId();
-
     return this.eventService.getEvent$(route.params['id']).pipe(
-      timeout(10000),
       map((event: EventInterface) => {
-        const isAuthorized = this.authUserId == event.organizerAuthId;
-        if (!isAuthorized) this.router.navigate(['home']);
+        const isAuthorized =
+          this.authService.getAuthUserId() == event.organizerAuthId;
+        if (!isAuthorized) {
+          this.router.navigate(['']);
+        }
         return isAuthorized;
       })
     );

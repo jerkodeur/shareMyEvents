@@ -147,7 +147,7 @@
     box-shadow: none;
     background-color: transparent;
 
-    .nav-link:not(:first-child),
+    .nav-link:not(&.user-status),
     .flex-icon {
       display: none;
     }

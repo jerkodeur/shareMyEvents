@@ -25,7 +25,7 @@ export class UserService {
 
   signup$(user: User): Observable<any> {
     return this.httpService
-      .post(`${environment.apiBaseUrl}/users/sign-up`, { ...user })
+      .post(`${environment.apiUrl}/users/sign-up`, { ...user })
       .pipe(
         tap(() =>
           this.notify.showSuccess(
@@ -40,7 +40,7 @@ export class UserService {
 
   login$(email: string, password: string) {
     return this.httpService
-      .post(`${environment.apiBaseUrl}/users/login`, { email, password })
+      .post(`${environment.apiUrl}/users/login`, { email, password })
       .pipe(
         tap((res: any) => {
           if (res.token) {

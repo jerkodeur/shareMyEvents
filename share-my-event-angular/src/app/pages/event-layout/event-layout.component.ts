@@ -22,13 +22,10 @@ export class EventLayoutComponent implements OnInit {
 
   ngOnInit(): void {
     const eventId = +this.route.snapshot.params['id'];
-    this.eventService.getEvent$(eventId).subscribe((data: EventInterface) => {
+    this.eventService.getEvent$(eventId).subscribe((event: EventInterface) => {
       pipe(takeWhile(() => !this.event));
-      this.event = data;
-      const isParticipant = this.route.snapshot.routeConfig?.path
-        ?.split('/')
-        .includes('participant');
-      isParticipant && this.authService.isOrganizer.next(!isParticipant);
+      this.authService.checkIfOrganizer(event.organizerAuthId);
+      this.event = event;
     });
   }
 }

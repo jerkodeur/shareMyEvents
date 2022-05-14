@@ -9,8 +9,8 @@ import { EventService } from 'src/app/services/event.service';
   styleUrls: ['./event-id.component.scss'],
 })
 export class EventIdComponent implements OnInit {
-  @Input() eventId!: string;
-  @Input() event_id!: number;
+  @Input() eventCode!: string;
+  @Input() eventId!: number;
   isOrganizer!: boolean;
 
   constructor(
@@ -26,7 +26,7 @@ export class EventIdComponent implements OnInit {
   cancelEvent() {
     if (window.confirm('Êtes-vous sur de vouloir supprimer cet event ?')) {
       this.eventService
-        .deleteEvent$(this.event_id)
+        .deleteEvent$(this.eventId)
         .subscribe(() => this.router.navigate(['/home']));
     }
   }

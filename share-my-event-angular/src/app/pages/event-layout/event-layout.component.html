@@ -4,13 +4,14 @@
   <div class="flex-main-layout">
     <div class="flex-left-layout">
       <app-event-id
-        [eventId]="event.eventId"
-        [event_id]="event.id"
+        [eventId]="event.id"
+        [eventCode]="event.code"
       ></app-event-id>
       <app-event-aside-info
         [eventId]="event.id"
-        [organizer]="event.organizer"
-        [organizerMail]="event.organizerMail"
+        [organizerFirstname]="event.organizerFirstname"
+        [organizerLastname]="event.organizerLastname"
+        [organizerMail]="event.organizerEmail"
         [title]="event.title"
         [eventDate]="event.eventDate"
       ></app-event-aside-info>
@@ -28,7 +29,7 @@
       <app-event-localization
         id="address"
         [eventId]="event.id"
-        [address]="event.address"
+        [address]="event.street"
         [zipCode]="event.zipCode"
         [locality]="event.locality"
         [additional]="event.additional"

@@ -9,8 +9,9 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class EventAsideInfoComponent implements OnInit {
   @Input() eventId!: number;
-  @Input() organizer!: string;
   @Input() organizerMail!: string;
+  @Input() organizerFirstname!: string;
+  @Input() organizerLastname!: string;
   @Input() title!: string;
   @Input() eventDate!: Date;
 

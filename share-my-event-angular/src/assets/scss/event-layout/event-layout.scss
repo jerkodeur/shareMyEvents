@@ -10,9 +10,6 @@
     }
   }
 
-  .button-layout {
-    text-align: right;
-  }
   #description {
     position: absolute;
     margin-top: -4em;
@@ -32,7 +29,6 @@
     }
     .button-layout {
       margin-top: -0.3em;
-      margin-left: auto;
     }
     .event-title-form-layout {
       @extend .event-edit-form;
@@ -97,12 +93,13 @@
     }
   }
 
-  .tight-white-button {
-    @include tight-white-button;
+  .button-layout {
     margin-left: auto;
-    margin-right: 0.5em;
   }
 
+  .tight-white-button {
+    @include tight-white-button;
+  }
   .tight-secondary-button {
     @include tight-secondary-button;
   }
@@ -121,6 +118,9 @@
     .flex-main-layout {
       margin: auto;
       width: 90%;
+    }
+    .button-layout {
+      margin: auto;
     }
   }
 
@@ -156,6 +156,10 @@
       .flex-left-layout,
       .flex-right-layout {
         width: 20%;
+        .button-layout {
+          width: 100%;
+          text-align: right;
+        }
       }
 
       .event-title,

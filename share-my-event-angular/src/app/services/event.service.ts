@@ -24,9 +24,12 @@ export class EventService {
 
   getEvent$(eventId: number): Observable<EventInterface | any> {
     return this.httpService
-      .get<EventInterface>(`${environment.apiTestBaseUrl}/events/${eventId}`)
+      .get<EventInterface>(`${environment.apiUrl}/events/${eventId}`)
       .pipe(
-        tap((data: any) => (data.date = new Date(data.date))),
+        map((data: any) => {
+          data.eventDate = new Date(data.eventDate);
+          return data;
+        }),
         catchError(async (err) =>
           this.errorHandler.notifyHttpError(err).subscribe()
         )
@@ -35,7 +38,7 @@ export class EventService {
 
   createEvent$(event: Event): Observable<any> {
     return this.httpService
-      .post(`${environment.apiBaseUrl}/events/new`, { ...event })
+      .post(`${environment.apiUrl}/events/new`, { ...event })
       .pipe(
         tap(() =>
           this.notify.showSuccess(

@@ -2,7 +2,7 @@ export class Event {
   title: string;
   description: string;
   eventDate: Date;
-  organizerId: number;
+  organizerId: string;
   street: string;
   zipCode: number;
   locality: string;
@@ -12,7 +12,7 @@ export class Event {
     title: string,
     description: string,
     eventDate: Date,
-    organizerId: number,
+    organizerId: string,
     street: string,
     zipCode: number,
     locality: string,

@@ -9,13 +9,14 @@
   <fieldset class="sub-fieldset" *ngIf="!edited">
     <legend>Description</legend>
     <div [innerHtml]="safeDescription"></div>
-    <button
-      type="button"
-      class="tight-white-button"
-      (click)="toggleEdition()"
-      *ngIf="isOrganizer"
-    >
-      Modifier la description
-    </button>
+    <div class="button-layout" *ngIf="isOrganizer">
+      <button
+        type="button"
+        class="tight-white-button"
+        (click)="toggleEdition()"
+      >
+        Modifier la description
+      </button>
+    </div>
   </fieldset>
 </section>

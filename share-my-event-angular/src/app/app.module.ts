@@ -101,10 +101,10 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ['localhost:7070'],
+        allowedDomains: [`${environment.apiBaseUrl}`],
         disallowedRoutes: [
-          'http://localhost:7070/sharemyevent/users/login',
-          'http://localhost:7070/sharemyevent/users/signup',
+          `${environment.apiUrl}/users/login`,
+          `${environment.apiUrl}/users/signup`,
         ],
       },
     }),
