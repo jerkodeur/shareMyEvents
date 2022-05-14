@@ -3,12 +3,14 @@ package co.simplon.p25.sharemyeventapi.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.MapKeyJoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -30,28 +32,36 @@ public class Actor extends AbstractEntity {
 	@Column(name = "nickname")
 	private String nickname;
 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "organizer", orphanRemoval = true)
+	private List<Event> organizerEvents = new ArrayList<>();
+
 	@ManyToMany
 	@JoinTable(name = "participations", joinColumns = @JoinColumn(name = "actor_id"), inverseJoinColumns = @JoinColumn(name = "event_id"))
 	@MapKeyJoinColumn(name = "availability_id")
-	private List<Event> events = new ArrayList<>();
+	private List<Event> participantEvents = new ArrayList<>();
 
 	public Actor() {
 	}
 
-	public Actor(String gandalfId, String email, String firstname,
+	public Actor(String authId, String email, String firstname,
 			String lastname) {
-		authId = gandalfId;
+		this.authId = authId;
 		this.email = email;
 		this.firstname = firstname;
 		this.lastname = lastname;
 	}
 
-	public String getGandalfId() {
+	public void addOrganizerEvent(Event organizerEvent) {
+		organizerEvents.add(organizerEvent);
+		organizerEvent.setOrganizer(this);
+	}
+
+	public String getAuthId() {
 		return authId;
 	}
 
-	public void setGandalfId(String gandalfId) {
-		authId = gandalfId;
+	public void setAuthId(String authId) {
+		this.authId = authId;
 	}
 
 	public String getEmail() {
@@ -88,9 +98,9 @@ public class Actor extends AbstractEntity {
 
 	@Override
 	public String toString() {
-		return "Actor [gandalfId=" + authId + ", email=" + email
-				+ ", firstname=" + firstname + ", lastname=" + lastname
-				+ ", nickname=" + nickname + "]";
+		return "Actor [authId=" + authId + ", email=" + email + ", firstname="
+				+ firstname + ", lastname=" + lastname + ", nickname="
+				+ nickname + "]";
 	}
 
 }

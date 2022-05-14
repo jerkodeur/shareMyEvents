@@ -44,7 +44,8 @@ public final class UserServiceImpl implements UserService {
 	@Autowired
 	JwtDecoder decoder;
 
-	public UserServiceImpl() {
+	private UserServiceImpl() {
+		// Ensures non-instantiability
 	}
 
 	@Override

@@ -15,6 +15,10 @@ public class OrganizerServiceImpl implements OrganizerService {
 	@Autowired
 	AuthService authService;
 
+	private OrganizerServiceImpl() {
+		// Ensures non-instantiability
+	}
+
 	@Override
 	public NextEventHomeDto nextEvent() {
 		NextEventHomeDto nextEvent = eventRepo

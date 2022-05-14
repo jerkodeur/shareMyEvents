@@ -13,8 +13,8 @@ public class ActorServiceImpl implements ActorService {
 	@Autowired
 	ActorRepository actorRepo;
 
-	public ActorServiceImpl() {
-		// TODO Auto-generated constructor stub
+	private ActorServiceImpl() {
+		// Ensures non-instantiability
 	}
 
 	@Override

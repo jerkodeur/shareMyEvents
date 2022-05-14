@@ -97,7 +97,8 @@ public class Event extends AbstractEntity {
 	public String toString() {
 		return "Event [code=" + code + ", title=" + title + ", description="
 				+ description + ", eventDate=" + eventDate + ", organizer="
-				+ organizer + ", address=" + address + "]";
+				+ organizer + ", address=" + address + ", participants="
+				+ participants + "]";
 	}
 
 }

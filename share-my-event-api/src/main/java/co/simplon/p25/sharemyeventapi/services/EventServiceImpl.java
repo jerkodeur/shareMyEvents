@@ -5,6 +5,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import co.simplon.p25.sharemyeventapi.dtos.EventPageDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventCreateDto;
 import co.simplon.p25.sharemyeventapi.entities.Actor;
 import co.simplon.p25.sharemyeventapi.entities.Address;
@@ -27,6 +28,10 @@ public class EventServiceImpl implements EventService {
 
 	@Autowired
 	AddressRepo addressRepo;
+
+	private EventServiceImpl() {
+		// Ensures non-instantiability
+	}
 
 	@Override
 	@Transactional
@@ -57,6 +62,31 @@ public class EventServiceImpl implements EventService {
 		eventRepo.save(event);
 		// System.out.println(event);
 
+	}
+
+	@Override
+	public EventPageDto getEvent(Long eventId) {
+		Event event = eventRepo.findOneById(eventId);
+
+		EventPageDto eventPage = new EventPageDto();
+		eventPage.setId(event.getId());
+		eventPage.setCode(event.getCode());
+		eventPage.setTitle(event.getTitle());
+		eventPage.setDescription(event.getDescription());
+		eventPage.setEventDate(event.getEventDate());
+		if (event.getAddress() != null) {
+			eventPage.setStreet(event.getAddress().getStreet());
+			eventPage.setZipCode(event.getAddress().getZipCode());
+			eventPage.setLocality(event.getAddress().getLocality());
+			eventPage.setAdditional(event.getAddress().getAdditional());
+		}
+		eventPage.setOrganizerAuthId(event.getOrganizer().getAuthId());
+		eventPage.setOrganizerFirstname(event.getOrganizer().getFirstname());
+		eventPage.setOrganizerLastname(event.getOrganizer().getLastname());
+		eventPage.setOrganizerEmail(event.getOrganizer().getEmail());
+
+		System.out.println(eventPage);
+		return eventPage;
 	}
 
 }

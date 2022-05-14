@@ -13,7 +13,8 @@ public class AuthServiceImpl implements AuthService {
 	@Autowired
 	ActorRepository actorRepository;
 
-	public AuthServiceImpl() {
+	private AuthServiceImpl() {
+		// Ensures non-instantiability
 	}
 
 	@Override
