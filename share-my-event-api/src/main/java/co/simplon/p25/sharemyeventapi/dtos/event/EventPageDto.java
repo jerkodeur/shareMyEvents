@@ -1,6 +1,8 @@
-package co.simplon.p25.sharemyeventapi.dtos;
+package co.simplon.p25.sharemyeventapi.dtos.event;
 
 import java.time.LocalDateTime;
+
+import co.simplon.p25.sharemyeventapi.entities.Address;
 
 public class EventPageDto {
 	private Long id;
@@ -12,10 +14,7 @@ public class EventPageDto {
 	private String organizerFirstname;
 	private String organizerLastname;
 	private String organizerEmail;
-	private String street;
-	private String zipCode;
-	private String locality;
-	private String additional;
+	private Address address;
 
 	public EventPageDto() {
 
@@ -93,36 +92,12 @@ public class EventPageDto {
 		this.organizerEmail = organizerEmail;
 	}
 
-	public String getStreet() {
-		return street;
+	public Address getAddress() {
+		return address;
 	}
 
-	public void setStreet(String street) {
-		this.street = street;
-	}
-
-	public String getZipCode() {
-		return zipCode;
-	}
-
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
-	}
-
-	public String getLocality() {
-		return locality;
-	}
-
-	public void setLocality(String locality) {
-		this.locality = locality;
-	}
-
-	public String getAdditional() {
-		return additional;
-	}
-
-	public void setAdditional(String additional) {
-		this.additional = additional;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	@Override
@@ -132,9 +107,8 @@ public class EventPageDto {
 				+ ", organizerAuthId=" + organizerAuthId
 				+ ", organizerFirstname=" + organizerFirstname
 				+ ", organizerLastname=" + organizerLastname
-				+ ", organizerEmail=" + organizerEmail + ", street=" + street
-				+ ", zipCode=" + zipCode + ", locality=" + locality
-				+ ", additional=" + additional + "]";
+				+ ", organizerEmail=" + organizerEmail + ", address=" + address
+				+ "]";
 	}
 
 }

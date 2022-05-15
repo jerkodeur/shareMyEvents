@@ -1,3 +1,5 @@
+import { LocalizationInterface } from './Localization.interface';
+
 export interface EventInterface {
   id: number;
   title: string;
@@ -8,8 +10,5 @@ export interface EventInterface {
   organizerEmail: string;
   organizerFirstname: string;
   organizerLastname: string;
-  street: string;
-  zipCode: string;
-  locality: string;
-  additional: string;
+  address: LocalizationInterface;
 }

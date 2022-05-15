@@ -5,17 +5,17 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import co.simplon.p25.sharemyeventapi.dtos.EventPageDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventAdressDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventCreateDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventDateDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventDescriptionDto;
+import co.simplon.p25.sharemyeventapi.dtos.event.EventPageDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventTitleDto;
 import co.simplon.p25.sharemyeventapi.entities.Actor;
 import co.simplon.p25.sharemyeventapi.entities.Address;
 import co.simplon.p25.sharemyeventapi.entities.Event;
 import co.simplon.p25.sharemyeventapi.helpers.RandomCode;
-import co.simplon.p25.sharemyeventapi.repositories.AddressRepo;
+import co.simplon.p25.sharemyeventapi.repositories.AddressRepository;
 import co.simplon.p25.sharemyeventapi.repositories.EventRepository;
 
 @Service
@@ -31,7 +31,7 @@ public class EventServiceImpl implements EventService {
 	EventRepository eventRepo;
 
 	@Autowired
-	AddressRepo addressRepo;
+	AddressRepository addressRepo;
 
 	private EventServiceImpl() {
 		// Ensures non-instantiability
@@ -50,21 +50,20 @@ public class EventServiceImpl implements EventService {
 		event.setCode(code);
 		event.setOrganizer(actor);
 
-		if (inputs.getStreet() != null || inputs.getZipCode() != null
-				|| inputs.getLocality() != null
-				|| inputs.getAdditional() != null) {
+		if (inputs.getAddress().getStreet() != null
+				|| inputs.getAddress().getZipCode() != null
+				|| inputs.getAddress().getLocality() != null
+				|| inputs.getAddress().getAdditional() != null) {
 			Address address = new Address();
-			address.setStreet(inputs.getStreet());
-			address.setZipCode(inputs.getZipCode());
-			address.setLocality(inputs.getLocality());
-			address.setAdditional(inputs.getAdditional());
-			addressRepo.save(address);
+			address.setStreet(inputs.getAddress().getStreet());
+			address.setZipCode(inputs.getAddress().getZipCode());
+			address.setLocality(inputs.getAddress().getLocality());
+			address.setAdditional(inputs.getAddress().getAdditional());
+
 			event.setAddress(address);
-			// System.out.println(address);
 		}
 
 		eventRepo.save(event);
-		// System.out.println(event);
 
 	}
 
@@ -78,18 +77,18 @@ public class EventServiceImpl implements EventService {
 		eventPage.setTitle(event.getTitle());
 		eventPage.setDescription(event.getDescription());
 		eventPage.setEventDate(event.getEventDate());
-		if (event.getAddress() != null) {
-			eventPage.setStreet(event.getAddress().getStreet());
-			eventPage.setZipCode(event.getAddress().getZipCode());
-			eventPage.setLocality(event.getAddress().getLocality());
-			eventPage.setAdditional(event.getAddress().getAdditional());
+		if (event.getAddress() != null
+				&& (event.getAddress().getStreet() != null
+						|| event.getAddress().getZipCode() != null
+						|| event.getAddress().getLocality() != null
+						|| event.getAddress().getAdditional() != null)) {
+			eventPage.setAddress(event.getAddress());
 		}
 		eventPage.setOrganizerAuthId(event.getOrganizer().getAuthId());
 		eventPage.setOrganizerFirstname(event.getOrganizer().getFirstname());
 		eventPage.setOrganizerLastname(event.getOrganizer().getLastname());
 		eventPage.setOrganizerEmail(event.getOrganizer().getEmail());
 
-		System.out.println(eventPage);
 		return eventPage;
 	}
 
@@ -121,8 +120,31 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public EventAdressDto updateAddress(Long EventId, EventAdressDto inputs) {
-		// TODO Auto-generated method stub
-		return null;
+		Address address;
+		Event event = eventRepo.findOneById(EventId);
+
+		if (event.getAddress() != null)
+			address = event.getAddress();
+		else
+			address = new Address();
+
+		if (inputs.getStreet() != null || inputs.getZipCode() != null
+				|| inputs.getLocality() != null
+				|| inputs.getAdditional() != null) {
+			address.setStreet(inputs.getStreet());
+			address.setZipCode(inputs.getZipCode());
+			address.setLocality(inputs.getLocality());
+			address.setAdditional(inputs.getAdditional());
+
+			addressRepo.save(address);
+			event.setAddress(address);
+		} else {
+			addressRepo.delete(address);
+			event.setAddress(null);
+		}
+
+		eventRepo.save(event);
+		return inputs;
 	}
 
 }

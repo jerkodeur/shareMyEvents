@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { ValidateDate } from 'src/app/core/validations/ValidateFutureDate';
 
 import { Event } from 'src/app/core/models/Event.model';
-import { User } from 'src/app/core/models/User.model';
 
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { EventService } from 'src/app/services/event.service';
@@ -69,23 +68,26 @@ export class CreateEventFormComponent implements OnInit {
       );
     }
     const { title, description, date, time } = this.eventForm.value;
-    const { street, zipCode, locality, additional } =
-      this.eventForm.value.addressForm;
     const eventDate = DateHandler.createDatebyDateAndTime(date, time);
+
+    let { street, zipCode, locality, additional } =
+      this.eventForm.value.addressForm.value;
+
+    if (street == '') street = null;
+    if (zipCode == '') zipCode = null;
+    if (locality == '') locality = null;
+    if (additional == '') additional = null;
 
     const newEvent = new Event(
       title,
       description,
       eventDate,
       this.authService.getAuthUserId(),
-      street,
-      zipCode,
-      locality,
-      additional
+      { street, zipCode, locality, additional }
     );
 
     this.eventService.createEvent$(newEvent).subscribe((event) => {
-      // next: () => this.router.navigate([`/events/${event.id}`]);
+      next: () => this.router.navigate([`/events/${event.id}`]);
     });
   };
 }

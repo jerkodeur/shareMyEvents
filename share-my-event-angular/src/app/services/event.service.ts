@@ -1,13 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  BehaviorSubject,
-  catchError,
-  map,
-  Observable,
-  Subject,
-  tap,
-} from 'rxjs';
+import { catchError, map, Observable, Subject, tap } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 
@@ -26,12 +19,7 @@ export class EventService {
   title = new Subject<string>();
   description = new Subject<string>();
   eventDate = new Subject<Date>();
-  address = new Subject<{
-    street: string;
-    zipCode: string;
-    locality: string;
-    additional: string;
-  }>();
+  address = new Subject<LocalizationInterface>();
 
   constructor(
     private errorHandler: ErrorHandlerService,
@@ -121,13 +109,12 @@ export class EventService {
     eventId: number
   ): Observable<any> {
     return this.httpService
-      .patch(`${environment.apiUrl}/event/update/${eventId}/address`, {
+      .patch(`${environment.apiUrl}/events/update/${eventId}/address`, {
         ...localization,
       })
       .pipe(
-        tap((res: any) => {
-          const { street, zipCode, locality, additional } = res;
-          this.address.next({ street, zipCode, locality, additional });
+        tap((address: any) => {
+          this.address.next(address);
           this.notify.showSuccess("L'addresse a été modifiée avec succès");
         }),
         catchError(async (err) =>

@@ -28,7 +28,7 @@ public class Event extends AbstractEntity {
 	@JoinColumn(name = "organizer_id")
 	private Actor organizer;
 
-	@ManyToOne
+	@ManyToOne(optional = true)
 	@JoinColumn(name = "address_id")
 	private Address address;
 

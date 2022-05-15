@@ -1,8 +1,16 @@
 package co.simplon.p25.sharemyeventapi.dtos.event;
 
+import javax.validation.constraints.Pattern;
+
 public final class EventAdressDto {
 
+	// TODO Créer une validation si la rue est renseignée, mais pas la ville
+	// @FullStreet
 	private String street;
+
+	@Pattern(regexp = "^(\\s*|\\d{5})$", message = "zip-code_format")
+	// TODO Créer une validation si le code postal est renseigné, mais pas la
+	// ville
 	private String zipCode;
 	private String locality;
 	private String additional;

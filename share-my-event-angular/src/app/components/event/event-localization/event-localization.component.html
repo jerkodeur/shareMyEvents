@@ -1,21 +1,18 @@
 <section class="event-localization">
   <app-event-localization-form
     [eventId]="eventId"
-    [eventAddress]="address"
-    [eventZipCode]="zipCode"
-    [eventLocality]="locality"
-    [eventAdditional]="additional"
+    [address]="address"
     (hideForm)="toggleEdition()"
     *ngIf="edited"
   ></app-event-localization-form>
   <fieldset class="sub-fieldset" *ngIf="!edited">
-    <legend>Addresse</legend>
+    <legend>Adresse</legend>
     <p class="address-info">
-      <span class="address">{{ address }}</span>
-      <span class="locZip">{{ zipCode }} {{ locality }}</span>
+      <span class="address">{{ address.street }}</span>
+      <span class="locZip">{{ address.zipCode }} {{ address.locality }}</span>
     </p>
     <span class="aside-info">Complément d'addresse:</span>
-    <p class="additional-address">{{ additional }}</p>
+    <p class="additional-address">{{ address.additional }}</p>
 
     <div class="button-layout" *ngIf="isOrganizer">
       <button

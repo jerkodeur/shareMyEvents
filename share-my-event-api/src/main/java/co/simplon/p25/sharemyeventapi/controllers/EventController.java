@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.simplon.p25.sharemyeventapi.dtos.EventPageDto;
+import co.simplon.p25.sharemyeventapi.dtos.event.EventAdressDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventCreateDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventDateDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventDescriptionDto;
+import co.simplon.p25.sharemyeventapi.dtos.event.EventPageDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventTitleDto;
 import co.simplon.p25.sharemyeventapi.services.EventService;
 
@@ -59,5 +60,12 @@ public class EventController {
 	public EventDateDto updateDate(@PathVariable(value = "id") Long eventId,
 			@Valid @RequestBody EventDateDto input) {
 		return eventService.updateDate(eventId, input);
+	}
+
+	@PatchMapping("/update/{id}/address")
+	public EventAdressDto updateAddress(
+			@PathVariable(value = "id") Long eventId,
+			@Valid @RequestBody EventAdressDto input) {
+		return eventService.updateAddress(eventId, input);
 	}
 }

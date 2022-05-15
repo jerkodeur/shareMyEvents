@@ -2,11 +2,11 @@ package co.simplon.p25.sharemyeventapi.dtos.event;
 
 import java.time.LocalDateTime;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,18 +25,8 @@ public class EventCreateDto {
 	@Future
 	private LocalDateTime eventDate;
 
-	// TODO Créer une validation si la rue est renseignée, mais pas la ville
-	// @FullStreet
-	private String street;
-
-	@Pattern(regexp = "^(\\s*|\\d{5})$", message = "zip-code_format")
-	// TODO Créer une validation si le code postal est renseigné, mais pas la
-	// ville
-	private String zipCode;
-
-	private String locality;
-
-	private String additional;
+	@Valid
+	private EventAdressDto address;
 
 	private String organizerId;
 
@@ -67,36 +57,12 @@ public class EventCreateDto {
 		eventDate = date;
 	}
 
-	public String getStreet() {
-		return street;
+	public EventAdressDto getAddress() {
+		return address;
 	}
 
-	public void setStreet(String street) {
-		this.street = street;
-	}
-
-	public String getZipCode() {
-		return zipCode;
-	}
-
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
-	}
-
-	public String getLocality() {
-		return locality;
-	}
-
-	public void setLocality(String locality) {
-		this.locality = locality;
-	}
-
-	public String getAdditional() {
-		return additional;
-	}
-
-	public void setAdditional(String additional) {
-		this.additional = additional;
+	public void setAddress(EventAdressDto address) {
+		this.address = address;
 	}
 
 	public String getOrganizerId() {
@@ -110,9 +76,8 @@ public class EventCreateDto {
 	@Override
 	public String toString() {
 		return "EventCreateDto [title=" + title + ", description=" + description
-				+ ", eventDate=" + eventDate + ", street=" + street + ", zipCode="
-				+ zipCode + ", locality=" + locality + ", additional="
-				+ additional + ", organizerId=" + organizerId + "]";
+				+ ", eventDate=" + eventDate + ", address=" + address
+				+ ", organizerId=" + organizerId + "]";
 	}
 
 }

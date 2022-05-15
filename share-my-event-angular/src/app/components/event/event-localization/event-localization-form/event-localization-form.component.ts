@@ -1,7 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+
 import { EventService } from 'src/app/services/event.service';
 import { NotificationService } from 'src/app/services/notification.service';
+
+import { LocalizationInterface } from 'src/app/core/interfaces/Localization.interface';
 
 @Component({
   selector: 'app-event-localization-form',
@@ -11,13 +14,11 @@ import { NotificationService } from 'src/app/services/notification.service';
 export class EventLocalizationFormComponent implements OnInit {
   @Output() hideForm = new EventEmitter();
   @Input() eventId!: number;
-  @Input() eventAddress!: string;
-  @Input() eventZipCode!: string;
-  @Input() eventLocality!: string;
-  @Input() eventAdditional!: string;
+  @Input() address!: LocalizationInterface;
 
   localizationForm!: FormGroup;
   submitted = false;
+  hasChange = false;
 
   constructor(
     private eventService: EventService,
@@ -27,24 +28,26 @@ export class EventLocalizationFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.localizationForm = this.fb.group({
-      address: this.eventAddress,
-      zipCode: [this.eventZipCode, Validators.pattern(/^[0-9]{5}$/)],
-      locality: this.eventLocality,
-      additional: this.eventAdditional,
+      street: this.address.street,
+      zipCode: this.address.zipCode,
+      locality: this.address.locality,
+      additional: this.address.additional,
     });
+
+    this.onCreateGroupFormValueChange();
   }
   cancelForm(): void {
     this.localizationForm.reset();
     this.hideForm.emit();
   }
 
-  checkIfchanged(): boolean {
-    return (
-      this.localizationForm.value['address'] == this.eventAddress &&
-      this.localizationForm.value['zipCode'] == this.eventZipCode &&
-      this.localizationForm.value['locality'] == this.eventLocality &&
-      this.localizationForm.value['additional'] == this.eventAdditional
-    );
+  onCreateGroupFormValueChange() {
+    const initialValue = this.localizationForm.value;
+    this.localizationForm.valueChanges.subscribe((value) => {
+      this.hasChange = Object.keys(initialValue).some(
+        (key) => this.localizationForm.value[key] != initialValue[key]
+      );
+    });
   }
 
   onSubmitForm(): void {
@@ -54,9 +57,19 @@ export class EventLocalizationFormComponent implements OnInit {
         'Des erreurs ont été détectées, merci de les corriger'
       );
     }
-    if (!this.checkIfchanged()) {
+    let { street, zipCode, locality, additional } = this.localizationForm.value;
+
+    if (street == '') street = null;
+    if (zipCode == '') zipCode = null;
+    if (locality == '') locality = null;
+    if (additional == '') additional = null;
+
+    if (this.hasChange) {
       this.eventService
-        .updateLocalization$({ ...this.localizationForm.value }, this.eventId)
+        .updateLocalization$(
+          { street, zipCode, locality, additional },
+          this.eventId
+        )
         .subscribe();
     }
     this.cancelForm();

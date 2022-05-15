@@ -26,18 +26,11 @@ export class EventLayoutComponent implements OnInit {
   ngOnInit(): void {
     const eventId = +this.route.snapshot.params['id'];
     this.eventService.getEvent$(eventId).subscribe((event: EventInterface) => {
-      const { title, description, eventDate } = event;
+      const { title, description, eventDate, address } = event;
       this.subscribeTitle(title);
       this.subscribeDescription(description);
       this.subscribeDate(eventDate);
-
-      const { street, zipCode, locality, additional } = event;
-      this.subscribeAddress({
-        street,
-        zipCode,
-        locality,
-        additional,
-      });
+      this.subscribeAddress(address);
 
       pipe(takeWhile(() => !this.event));
       this.authService.checkIfOrganizer(event.organizerAuthId);
