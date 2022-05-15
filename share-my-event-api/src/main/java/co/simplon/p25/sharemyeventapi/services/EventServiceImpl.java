@@ -147,4 +147,9 @@ public class EventServiceImpl implements EventService {
 		return inputs;
 	}
 
+	@Override
+	public void remove(Long eventId) {
+		eventRepo.deleteById(eventId);
+	}
+
 }

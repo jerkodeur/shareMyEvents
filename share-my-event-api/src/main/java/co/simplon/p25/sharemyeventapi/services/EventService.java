@@ -16,4 +16,5 @@ public interface EventService {
 			EventDescriptionDto input);
 	EventDateDto updateDate(Long EventId, EventDateDto input);
 	EventAdressDto updateAddress(Long EventId, EventAdressDto inputs);
+	void remove(Long eventId);
 }
