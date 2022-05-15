@@ -1,6 +1,6 @@
 export interface LocalizationInterface {
-  address: string;
-  zipCode: number;
+  street: string;
+  zipCode: string;
   locality: string;
   additional: string;
 }

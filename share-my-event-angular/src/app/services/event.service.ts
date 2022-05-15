@@ -1,14 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  map,
+  Observable,
+  Subject,
+  tap,
+} from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 
-import { ErrorHandlerService } from './error-handler.service';
 import { LocalizationInterface } from '../core/interfaces/Localization.interface';
 import { NotificationService } from './notification.service';
 
 import { Event } from '../core/models/Event.model';
+import { ErrorHandlerService } from './error-handler.service';
 import { EventInterface } from '../core/interfaces/Event.interface';
 
 import '../data/db.json';
@@ -16,6 +23,16 @@ import '../data/db.json';
   providedIn: 'root',
 })
 export class EventService {
+  title = new Subject<string>();
+  description = new Subject<string>();
+  eventDate = new Subject<Date>();
+  address = new Subject<{
+    street: string;
+    zipCode: string;
+    locality: string;
+    additional: string;
+  }>();
+
   constructor(
     private errorHandler: ErrorHandlerService,
     private httpService: HttpClient,
@@ -51,15 +68,16 @@ export class EventService {
       );
   }
 
-  updateTitle$(title: string, eventId: number): Observable<any> {
+  updateTitle$(newTitle: string, eventId: number): Observable<any> {
     return this.httpService
-      .patch(`${environment.apiTestBaseUrl}/events/${eventId}`, {
-        title,
+      .patch(`${environment.apiUrl}/events/update/${eventId}/title`, {
+        title: newTitle,
       })
       .pipe(
-        tap(() =>
-          this.notify.showSuccess('Le titre a été modifié avec succès')
-        ),
+        tap((res: any) => {
+          this.title.next(res.title);
+          this.notify.showSuccess('Le titre a été modifié avec succès');
+        }),
         catchError(async (err) =>
           this.errorHandler.notifyHttpError(err).subscribe()
         )
@@ -68,26 +86,30 @@ export class EventService {
 
   updateDescription$(description: string, eventId: number): Observable<any> {
     return this.httpService
-      .patch(`${environment.apiTestBaseUrl}/events/${eventId}`, {
+      .patch(`${environment.apiUrl}/events/update/${eventId}/description`, {
         description,
       })
       .pipe(
-        tap(() =>
-          this.notify.showSuccess('La description a été modifié avec succès')
-        ),
+        tap((res: any) => {
+          this.description.next(res.description);
+          this.notify.showSuccess('La description a été modifié avec succès');
+        }),
         catchError(async (err) =>
           this.errorHandler.notifyHttpError(err).subscribe()
         )
       );
   }
 
-  updateDate$(date: Date, eventId: number): Observable<any> {
+  updateDate$(eventDate: Date, eventId: number): Observable<any> {
     return this.httpService
-      .patch(`${environment.apiTestBaseUrl}/events/${eventId}`, {
-        date,
+      .patch(`${environment.apiUrl}/events/update/${eventId}/date`, {
+        eventDate,
       })
       .pipe(
-        tap(() => this.notify.showSuccess('La date a été modifié avec succès')),
+        tap((res: any) => {
+          this.eventDate.next(new Date(res.eventDate));
+          this.notify.showSuccess('La date a été modifié avec succès');
+        }),
         catchError(async (err) =>
           this.errorHandler.notifyHttpError(err).subscribe()
         )
@@ -99,13 +121,15 @@ export class EventService {
     eventId: number
   ): Observable<any> {
     return this.httpService
-      .patch(`${environment.apiTestBaseUrl}/event/${eventId}`, {
+      .patch(`${environment.apiUrl}/event/update/${eventId}/address`, {
         ...localization,
       })
       .pipe(
-        tap(() =>
-          this.notify.showSuccess("L'addresse a été modifiée avec succès")
-        ),
+        tap((res: any) => {
+          const { street, zipCode, locality, additional } = res;
+          this.address.next({ street, zipCode, locality, additional });
+          this.notify.showSuccess("L'addresse a été modifiée avec succès");
+        }),
         catchError(async (err) =>
           this.errorHandler.notifyHttpError(err).subscribe()
         )
@@ -114,7 +138,7 @@ export class EventService {
 
   deleteEvent$(eventId: number): any {
     return this.httpService
-      .delete(`${environment.apiTestBaseUrl}/events/${eventId}`)
+      .delete(`${environment.apiUrl}/events/${eventId}`)
       .pipe(
         tap(() =>
           this.notify.showSuccess("L'event a été supprimé avec succès")

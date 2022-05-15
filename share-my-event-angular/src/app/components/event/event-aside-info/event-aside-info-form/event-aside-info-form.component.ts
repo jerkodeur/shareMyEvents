@@ -52,14 +52,15 @@ export class EventAsideInfoFormComponent implements OnInit {
     return this.convertDate().getTime() == this.eventDate.getTime();
   }
 
-  convertDate(): Date {
-    return DateHandler.createDatebyDateAndTime(
-      this.asideInfoForm.value['date'],
-      this.asideInfoForm.value['time']
-    );
+  convertDate(
+    date: string = this.asideInfoForm.value['date'],
+    time: string = this.asideInfoForm.value['time']
+  ): Date {
+    return DateHandler.createDatebyDateAndTime(date, time);
   }
   onSubmitForm(): void {
     this.submitted = true;
+    const { date, time } = this.asideInfoForm.value;
     if (this.asideInfoForm.invalid) {
       return this.notify.showError(
         'Des erreurs ont été détectées, merci de les corriger'
@@ -72,7 +73,7 @@ export class EventAsideInfoFormComponent implements OnInit {
     }
     if (!this.checkIfchanged()) {
       this.eventService
-        .updateDate$(this.convertDate(), this.eventId)
+        .updateDate$(this.convertDate(date, time), this.eventId)
         .subscribe();
     }
     this.cancelForm();

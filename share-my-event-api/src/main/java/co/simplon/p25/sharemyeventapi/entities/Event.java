@@ -1,16 +1,11 @@
 package co.simplon.p25.sharemyeventapi.entities;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -37,10 +32,11 @@ public class Event extends AbstractEntity {
 	@JoinColumn(name = "address_id")
 	private Address address;
 
-	@ManyToMany
-	@JoinTable(name = "participations", joinColumns = @JoinColumn(name = "event_id"), inverseJoinColumns = @JoinColumn(name = "actor_id"))
-	@MapKeyJoinColumn(name = "availability_id")
-	private List<Actor> participants = new ArrayList<>();
+	// @ManyToMany
+	// @JoinTable(name = "participations", joinColumns = @JoinColumn(name =
+	// "event_id"), inverseJoinColumns = @JoinColumn(name = "actor_id"))
+	// @MapKeyJoinColumn(name = "availability_id")
+	// private List<Actor> participants = new ArrayList<>();
 
 	public Event() {
 	}
@@ -97,8 +93,7 @@ public class Event extends AbstractEntity {
 	public String toString() {
 		return "Event [code=" + code + ", title=" + title + ", description="
 				+ description + ", eventDate=" + eventDate + ", organizer="
-				+ organizer + ", address=" + address + ", participants="
-				+ participants + "]";
+				+ organizer + ", address=" + address + "]";
 	}
 
 }

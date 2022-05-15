@@ -9,7 +9,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 export class EventLocalizationComponent implements OnInit {
   @Input() eventId!: number;
   @Input() address!: string;
-  @Input() zipCode!: number;
+  @Input() zipCode!: string;
   @Input() locality!: string;
   @Input() additional!: string;
 

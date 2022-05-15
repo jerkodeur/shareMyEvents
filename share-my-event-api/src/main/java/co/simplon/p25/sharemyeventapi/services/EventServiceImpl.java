@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.simplon.p25.sharemyeventapi.dtos.EventPageDto;
+import co.simplon.p25.sharemyeventapi.dtos.event.EventAdressDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventCreateDto;
+import co.simplon.p25.sharemyeventapi.dtos.event.EventDateDto;
+import co.simplon.p25.sharemyeventapi.dtos.event.EventDescriptionDto;
+import co.simplon.p25.sharemyeventapi.dtos.event.EventTitleDto;
 import co.simplon.p25.sharemyeventapi.entities.Actor;
 import co.simplon.p25.sharemyeventapi.entities.Address;
 import co.simplon.p25.sharemyeventapi.entities.Event;
@@ -87,6 +91,38 @@ public class EventServiceImpl implements EventService {
 
 		System.out.println(eventPage);
 		return eventPage;
+	}
+
+	@Override
+	@Transactional
+	public EventTitleDto updateTitle(Long EventId, EventTitleDto input) {
+		Event event = eventRepo.findOneById(EventId);
+		event.setTitle(input.getTitle());
+		eventRepo.save(event);
+		return input;
+	}
+
+	@Override
+	public EventDescriptionDto updateDescription(Long EventId,
+			EventDescriptionDto input) {
+		Event event = eventRepo.findOneById(EventId);
+		event.setDescription(input.getDescription());
+		eventRepo.save(event);
+		return input;
+	}
+
+	@Override
+	public EventDateDto updateDate(Long EventId, EventDateDto input) {
+		Event event = eventRepo.findOneById(EventId);
+		event.setEventDate(input.getEventDate());
+		eventRepo.save(event);
+		return input;
+	}
+
+	@Override
+	public EventAdressDto updateAddress(Long EventId, EventAdressDto inputs) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

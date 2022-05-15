@@ -9,7 +9,7 @@ export interface EventInterface {
   organizerFirstname: string;
   organizerLastname: string;
   street: string;
-  zipCode: number;
+  zipCode: string;
   locality: string;
   additional: string;
 }

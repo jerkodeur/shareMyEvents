@@ -25,7 +25,10 @@ export class EventTitleFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.eventTitleForm = this.fb.group({
-      title: [this.eventTitle, [Validators.required, Validators.maxLength(50)]],
+      title: [
+        this.eventTitle.trim(),
+        [Validators.required, Validators.maxLength(50)],
+      ],
     });
   }
 
@@ -36,7 +39,6 @@ export class EventTitleFormComponent implements OnInit {
 
   onSubmitForm(): void {
     this.submitted = true;
-    console.log(this.eventTitleForm);
     if (this.eventTitleForm.invalid) {
       return this.notify.showError(
         'Des erreurs ont été détectées, merci de les corriger'

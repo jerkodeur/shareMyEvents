@@ -12,7 +12,7 @@ export class EventLocalizationFormComponent implements OnInit {
   @Output() hideForm = new EventEmitter();
   @Input() eventId!: number;
   @Input() eventAddress!: string;
-  @Input() eventZipCode!: number;
+  @Input() eventZipCode!: string;
   @Input() eventLocality!: string;
   @Input() eventAdditional!: string;
 
