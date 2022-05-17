@@ -25,16 +25,21 @@ export class UserService {
 
   signup$(user: User): Observable<any> {
     return this.httpService
-      .post(`${environment.apiUrl}/users/sign-up`, { ...user })
+      .post(`${environment.apiUrl}/users/sign-up`, {
+        ...user,
+      })
       .pipe(
-        tap(() =>
-          this.notify.showSuccess(
-            `Bienvenue ${user.firstname}, ton compte a été crée avec succès`
-          )
-        ),
-        catchError(async (err) =>
-          this.errorHandler.notifyHttpError(err).subscribe()
-        )
+        tap({
+          next: () => {
+            this.notify.showSuccess(
+              `Bienvenue ${user.firstname}, ton compte a été crée avec succès`
+            );
+            this.router.navigate(['/login']);
+          },
+          error: async (err) => {
+            this.errorHandler.notifyHttpError(err).subscribe();
+          },
+        })
       );
   }
 

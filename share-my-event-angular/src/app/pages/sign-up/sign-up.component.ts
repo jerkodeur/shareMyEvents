@@ -70,9 +70,7 @@ export class SignUpComponent {
     }
     const { firstname, lastname, email, password } = this.signUpForm.value;
     const newUser = new User(firstname, lastname, email, password);
-    this.userService
-      .signup$(newUser)
-      .subscribe(() => this.router.navigate(['/login']));
+    this.userService.signup$(newUser).subscribe();
   };
 
   togglePwdType = (): void => {

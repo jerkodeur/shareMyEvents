@@ -1,4 +1,9 @@
-<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" novalidate>
+<form
+  [formGroup]="signUpForm"
+  class="main-form-layout"
+  (ngSubmit)="onSubmit()"
+  novalidate
+>
   <fieldset>
     <legend class="w-auto px-2">
       <h1>Formulaire d'inscription</h1>
@@ -16,14 +21,13 @@
         class="form-control"
         aria-required
         formControlName="firstname"
-        autocomplete="name"
+        autocomplete="family-name"
       />
       <div
         class="error-feedback"
         *ngIf="
           submitted &&
-          signUpForm.controls['firstname'].errors &&
-          signUpForm.controls['firstname'].errors['required']
+          signUpForm.controls['firstname'].errors?.['required']
         "
       >
         * Vous devez entrer un nom.
@@ -32,8 +36,7 @@
         class="error-feedback"
         *ngIf="
           submitted &&
-          signUpForm.controls['firstname'].errors &&
-          signUpForm.controls['firstname'].errors['minlength']
+          signUpForm.controls['firstname'].errors?.['minlength']
         "
       >
         Le nom doit comporter au moins 2 caractères.
@@ -51,14 +54,13 @@
         class="form-control"
         aria-required
         formControlName="lastname"
-        autocomplete="lastname"
+        autocomplete="given-name"
       />
       <div
         class="error-feedback"
         *ngIf="
           submitted &&
-          signUpForm.controls['lastname'].errors &&
-          signUpForm.controls['lastname'].errors['required']
+          signUpForm.controls['lastname'].errors?.['required']
         "
       >
         * Vous devez entrer un prénom.
@@ -67,8 +69,7 @@
         class="error-feedback"
         *ngIf="
           submitted &&
-          signUpForm.controls['lastname'].errors &&
-          signUpForm.controls['lastname'].errors['minlength']
+          signUpForm.controls['lastname'].errors?.['minlength']
         "
       >
         Le prénom doit comporter au moins 2 caractères.
@@ -92,8 +93,7 @@
         class="error-feedback"
         *ngIf="
           submitted &&
-          signUpForm.controls['email'].errors &&
-          signUpForm.controls['email'].errors['required']
+          signUpForm.controls['email'].errors?.['required']
         "
       >
         * Vous devez renseigner une adresse e-email.
@@ -101,9 +101,7 @@
       <div
         class="error-feedback"
         *ngIf="
-          submitted &&
-          signUpForm.controls['email'].errors &&
-          signUpForm.controls['email'].errors['pattern']
+          submitted && (signUpForm.controls['email'].errors?.['pattern'])
         "
       >
         * Le format de l'adresse e-mail est invalide.
@@ -138,8 +136,7 @@
         class="error-feedback"
         *ngIf="
           submitted &&
-          signUpForm.controls['password'].errors &&
-          signUpForm.controls['password'].errors['required']
+          signUpForm.controls['password'].errors?.['required']
         "
       >
         * Vous devez renseigner un mot de passe.
@@ -148,8 +145,7 @@
         class="error-feedback"
         *ngIf="
           submitted &&
-          signUpForm.controls['password'].errors &&
-          signUpForm.controls['password'].errors['pattern']
+          signUpForm.controls['password'].errors?.['pattern']
         "
       >
         * Le format du mot de passe n'est pas correct.
@@ -180,8 +176,7 @@
         *ngIf="
           submitted &&
           !signUpForm.controls['password'].errors &&
-          signUpForm.controls['confirm_password'].errors &&
-          signUpForm.controls['confirm_password'].errors['matchPassword'] ==
+          signUpForm.controls['confirm_password'].errors?.['matchPassword'] ==
             true
         "
       >

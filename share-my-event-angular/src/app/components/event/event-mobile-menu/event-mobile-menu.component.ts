@@ -14,7 +14,6 @@ export class EventMobileMenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.isOrganizer.subscribe((bool) => (this.isOrganizer = bool));
-    console.log(this.isOrganizer);
   }
 
   scrollTo(section: any) {
