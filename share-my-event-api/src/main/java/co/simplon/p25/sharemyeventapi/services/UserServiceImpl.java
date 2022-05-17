@@ -5,9 +5,6 @@ import java.util.UUID;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.stereotype.Service;
@@ -26,20 +23,11 @@ import co.simplon.p25.sharemyeventapi.security.Jwt;
 @Service
 public final class UserServiceImpl implements UserService {
 
-	@Value("gandalf.api.access.url")
-	private String gandalfUrl;
-
-	@Value("${gandalf.client-name}")
-	private String clientName;
-
-	@Value("${gandalf.api-key}")
-	private String apiKey;
-
 	@Autowired
 	ActorRepository actorRepo;
 
 	@Autowired
-	RestTemplate restTemplate;
+	private RestTemplate restTemplate;
 
 	@Autowired
 	JwtDecoder decoder;
@@ -54,12 +42,8 @@ public final class UserServiceImpl implements UserService {
 		UserSignUpDto userSignUpDto = new UserSignUpDto(actor.getEmail(),
 				actor.getPassword());
 
-		HttpEntity<UserSignUpDto> entity = new HttpEntity<UserSignUpDto>(
-				userSignUpDto, gandalfClientHeaders());
-
 		ResponseEntity<UserGandalfId> response = restTemplate.postForEntity(
-				"http://localhost:9090/users/create", entity,
-				UserGandalfId.class);
+				"/users/create", userSignUpDto, UserGandalfId.class);
 
 		actor.setGandalfId(response.getBody().getGandalfId());
 
@@ -72,11 +56,8 @@ public final class UserServiceImpl implements UserService {
 	@Override
 	public ActorJwt login(UserLogInDto userLogInInputs) {
 
-		HttpEntity<UserLogInDto> entity = new HttpEntity<UserLogInDto>(
-				userLogInInputs, gandalfClientHeaders());
-
-		ResponseEntity<ActorJwt> response = restTemplate.postForEntity(
-				"http://localhost:9090/users/login", entity, ActorJwt.class);
+		ResponseEntity<ActorJwt> response = restTemplate
+				.postForEntity("/users/login", userLogInInputs, ActorJwt.class);
 
 		Jwt gandalfToken = response.getBody().getToken();
 		UUID userUuid = UUID.fromString(
@@ -87,15 +68,6 @@ public final class UserServiceImpl implements UserService {
 		actorJwt.setToken(gandalfToken);
 		actorJwt.setActor(actorIdentity);
 		return actorJwt;
-	}
-
-	private HttpHeaders gandalfClientHeaders() {
-		HttpHeaders headers = new HttpHeaders();
-
-		headers.set("client-name", clientName);
-		headers.set("client-api-key", apiKey);
-
-		return headers;
 	}
 
 }

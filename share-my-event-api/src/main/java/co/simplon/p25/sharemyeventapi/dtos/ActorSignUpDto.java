@@ -6,20 +6,20 @@ import javax.validation.constraints.Size;
 
 public class ActorSignUpDto {
 
-	@NotBlank(message = "email_required")
 	@Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "email_format")
+	@NotBlank(message = "email_required")
 	private String email;
 
 	@NotBlank(message = "password_required")
 	@Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", message = "password_format")
 	private String password;
 
-	@NotBlank(message = "firstname_required")
 	@Size(min = 2, message = "firstname_length")
+	@NotBlank(message = "firstname_required")
 	private String firstname;
 
-	@NotBlank(message = "lastname_required")
 	@Size(min = 2, message = "lastname_length")
+	@NotBlank(message = "lastname_required")
 	private String lastname;
 
 	private String gandalf_id;
