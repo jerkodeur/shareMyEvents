@@ -50,7 +50,7 @@ export class UserService {
         tap({
           next: (res: any) => {
             if (res.token) {
-              sessionStorage.setItem('access_token', res.token.token);
+              localStorage.setItem('access_token', res.token.token);
               this.authentication.authenticated.next(true);
               this.notify.showSuccess(
                 `Bon retour parmi nous ${res.actor.lastname}`
@@ -68,7 +68,7 @@ export class UserService {
   }
 
   logout() {
-    sessionStorage.clear();
+    localStorage.clear();
     this.authentication.authenticated.next(false);
     this.notify.showSuccess('Déconnexion effectuée avec succès');
     this.router.navigate(['/home']);

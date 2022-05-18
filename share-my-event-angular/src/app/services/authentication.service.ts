@@ -24,7 +24,7 @@ export class AuthenticationService {
   ) {}
 
   setIfAuthenticated() {
-    this.token = sessionStorage.getItem('access_token');
+    this.token = localStorage.getItem('access_token');
     this.authenticated.next(!this.jwtService.isTokenExpired(this.token));
   }
 

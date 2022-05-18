@@ -23,7 +23,7 @@ export class AuthenticatedGuard implements CanActivate, OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.token = sessionStorage.getItem('access_token');
+    this.token = localStorage.getItem('access_token');
   }
 
   canActivate(

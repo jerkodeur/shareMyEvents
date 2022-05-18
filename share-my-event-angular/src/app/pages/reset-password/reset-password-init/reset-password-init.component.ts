@@ -26,7 +26,7 @@ export class ResetPasswordInitComponent implements OnInit {
           'La validité du code a expiré, merci de renseigner votre e-mail pour relancer la procédure'
         )
     );
-    sessionStorage.clear();
+    localStorage.clear();
   }
 
   onSubmit(form: any) {
@@ -36,7 +36,7 @@ export class ResetPasswordInitComponent implements OnInit {
         "L'adresse e-mail est inconnue de nos services"
       );
     }
-    sessionStorage.setItem('email', form.value.email);
+    localStorage.setItem('email', form.value.email);
     this.router.navigate(['password-reset/instructions']);
   }
 }

@@ -54,7 +54,7 @@ import { HomeEventJoinFormComponent } from './components/home/home-event-join-fo
 import { OrganizerNextEventsComponent } from './components/home/organizer-next-events/organizer-next-events.component';
 
 export function tokenGetter() {
-  return sessionStorage.getItem('access_token');
+  return localStorage.getItem('access_token');
 }
 @NgModule({
   declarations: [

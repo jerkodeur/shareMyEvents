@@ -12,8 +12,8 @@ export class ResetPasswordInstructionsComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    if (sessionStorage.getItem('email')) {
-      this._email = sessionStorage.getItem('email');
+    if (localStorage.getItem('email')) {
+      this._email = localStorage.getItem('email');
     } else {
       this.router.navigate(['']);
     }

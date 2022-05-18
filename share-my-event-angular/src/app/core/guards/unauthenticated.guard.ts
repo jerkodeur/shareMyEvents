@@ -15,7 +15,7 @@ export class UnauthenticatedGuard implements CanActivate {
   constructor(private jwtService: JwtHelperService, private router: Router) {}
 
   ngOnInit(): void {
-    this.token = sessionStorage.getItem('access_token');
+    this.token = localStorage.getItem('access_token');
   }
 
   canActivate(
