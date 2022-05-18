@@ -1,0 +1,117 @@
+.event-participantlist {
+  .sub-fieldset {
+    align-items: inherit;
+    .toggle-text {
+      display: flex;
+      justify-content: space-between;
+      .circle-layout {
+        @include flex-center;
+        background-color: $secondary;
+        cursor: pointer;
+        box-shadow: 1px 1px 2px $blood;
+        border-radius: 50%;
+        padding: 0.5em;
+        z-index: 1;
+        &:hover,
+        &.selected {
+          box-shadow: 1px 1px 5px $dark;
+          svg {
+            background-image: url("../../img/male-add-hover.svg");
+          }
+        }
+      }
+      svg {
+        background-image: url("../../img/male-add.svg");
+        background-repeat: no-repeat;
+        width: 25px;
+        height: 25px;
+      }
+    }
+    .participant-list {
+      @include flex-maker($direction: row);
+      flex-wrap: wrap;
+      border-top: 1px solid $primary;
+      padding-top: 0.25em;
+      margin-top: 0.5em;
+      p {
+        @include flex-maker($direction: row, $justifyContent: flex-start);
+      }
+      button {
+        background-color: $secondary;
+        box-shadow: 1px 1px 2px $blood;
+        margin-left: 0.5em;
+        margin-right: 1em;
+        font-size: 0.6em;
+        padding: 0 0.5em;
+        border: none;
+        &:hover {
+          box-shadow: 2px 2px 10px $primary;
+        }
+      }
+    }
+  }
+  .participant-form-layout {
+    width: 85%;
+    transition: all 2s;
+    position: relative;
+    border-color: $blood;
+    top: -1em;
+    left: 0.35em;
+    z-index: 0;
+    margin-bottom: 0;
+    legend {
+      padding: 0 1em;
+      text-align: left;
+      font-weight: 500;
+      color: $blood;
+      font-size: 0.9em;
+    }
+    input {
+      padding: 0.25em;
+    }
+    label {
+      color: $primary;
+    }
+    .wrap-btn {
+      text-align: center;
+    }
+  }
+  .show-form {
+    display: block;
+  }
+  .hide-form {
+    display: none;
+  }
+  .participant-status-layout {
+    margin-left: 0.5em;
+    .circle-layout {
+      border-radius: 50%;
+      width: 15px;
+      height: 15px;
+      margin-right: 0.5em;
+      box-shadow: 2px 2px 2px $primary, -1px -1px 2px $primary;
+      &.unknown {
+        background-color: $light;
+      }
+      &.available {
+        background-color: rgb(63, 136, 84);
+      }
+      &.uncertain {
+        background-color: rgb(227, 169, 51);
+      }
+      &.unavailable {
+        background-color: $blood;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .sub-fieldset {
+      .participant-list {
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-left: 0.5em;
+      }
+    }
+  }
+}

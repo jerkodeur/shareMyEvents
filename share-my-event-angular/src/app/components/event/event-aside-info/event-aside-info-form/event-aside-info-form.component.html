@@ -1,0 +1,90 @@
+<form [formGroup]="asideInfoForm" (ngSubmit)="onSubmitForm()">
+  <fieldset class="event-aside-info-form-layout">
+    <legend>Modification de la date</legend>
+    <div class="date-time">
+      <div class="form-group date">
+        <label for="date" class="form-label"
+          >Date de l'event<span class="text-blood">*</span></label
+        >
+        <input
+          type="date"
+          name="date"
+          id="date"
+          class="form-control"
+          formControlName="date"
+          [min]="currentDate"
+          aria-required
+        />
+        <div
+          class="error-feedback"
+          *ngIf="
+                    submitted &&
+                    asideInfoForm.controls['date'].errors?.['required']
+                  "
+        >
+          * Vous devez indiquer une date pour l'event.
+        </div>
+        <div
+          class="error-feedback"
+          *ngIf="
+                    submitted &&
+                    asideInfoForm.controls['date'].errors?.['pattern']
+                  "
+        >
+          La date indiquée ne respecte pas le format requis.
+        </div>
+      </div>
+      <div class="form-group time">
+        <label for="time" class="form-label"
+          >Heure de début<span class="text-blood">*</span></label
+        >
+        <input
+          type="time"
+          name="time"
+          id="time"
+          class="form-control"
+          aria-required
+          formControlName="time"
+        />
+        <div
+          class="error-feedback"
+          *ngIf="
+                    submitted &&
+                    asideInfoForm.controls['time'].errors?.['required']
+                  "
+        >
+          * Vous devez indiquer une heure de début pour l'event.
+        </div>
+        <div
+          class="error-feedback"
+          *ngIf="
+                    submitted &&
+                    asideInfoForm.controls['time'].errors &&
+                    asideInfoForm.controls['time'].errors?.['pattern']
+                  "
+        >
+          L'heure indiquée ne respecte pas le format requis.
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div
+        class="error-feedback ps-"
+        *ngIf="
+                    submitted &&
+                    asideInfoForm.errors?.['invalidDate']
+                  "
+      >
+        * La date de l'event ne peut être inférieur à la date actuelle
+      </div>
+    </div>
+    <div class="wrap-btn">
+      <button class="tight-white-button" type="button" (click)="cancelForm()">
+        Annuler
+      </button>
+      <button class="tight-blood-button" type="submit">
+        Modifier le titre
+      </button>
+    </div>
+  </fieldset>
+</form>

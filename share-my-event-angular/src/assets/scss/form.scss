@@ -1,0 +1,124 @@
+fieldset {
+  padding: 0 1em 1em;
+  border: 1pt $primary solid;
+  border-radius: 4px;
+  margin: 0 auto 0.5em;
+  background-color: #fff;
+
+  .sub-fieldset {
+    margin-top: 0.5em;
+    padding-top: 0.5em;
+    width: 100%;
+    border-color: #777;
+    legend {
+      font-size: 1em;
+      font-weight: 600;
+      color: $primary !important;
+    }
+    form-group > input {
+      width: 90% !important;
+    }
+  }
+
+  legend {
+    float: none;
+    margin-bottom: 0;
+    width: auto;
+    padding: 0 0.25em;
+
+    h1 {
+      font-size: 0.7em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      color: $primary;
+    }
+  }
+  .required {
+    text-align: right;
+    font-size: 0.75em;
+    color: $blood;
+  }
+
+  .form-label {
+    font-size: 0.75em;
+    font-weight: bold;
+    margin-bottom: 0.15em !important;
+    padding-left: 0.15em;
+    color: $blood;
+  }
+  .form-group {
+    padding-bottom: 5px;
+    margin-bottom: 0;
+
+    .form-text {
+      color: $primary;
+      margin-top: 0.1em;
+      font-size: 0.75em;
+      padding-left: 0.25em;
+    }
+
+    .form-icon {
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      fa-icon {
+        position: absolute;
+        color: $primary;
+        right: 0.5em;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+    .aside-text-info {
+      text-align: left;
+      margin-top: 1em;
+      color: $blood;
+    }
+  }
+
+  .form-text {
+    color: $primary;
+    margin: 1em 0;
+
+    &#pwdHelp {
+      margin-bottom: 0;
+    }
+  }
+
+  .form-btn-layout {
+    margin: 1em 0 0.5em;
+    .btn {
+      margin: auto;
+      font-weight: 700;
+      background-color: $secondary;
+      color: $primary;
+      padding: 0.25em 0 !important;
+      &:hover {
+        background-color: $primary;
+        color: $secondary;
+        transition: all 0.5s;
+      }
+    }
+  }
+
+  .error-feedback {
+    padding: 0.1em 0 0 0.5em;
+    color: red;
+    font-size: 0.75em;
+  }
+
+  input,
+  textarea {
+    color: $primary !important;
+    font-size: 0.8em !important;
+    &::placeholder {
+      color: lighten($color: $primary, $amount: 50%) !important;
+    }
+  }
+}
+
+div.aside-text-info.text-right {
+  text-align: right;
+}

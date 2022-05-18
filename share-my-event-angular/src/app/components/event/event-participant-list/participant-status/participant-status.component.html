@@ -1,0 +1,12 @@
+<div class="participant-status-layout">
+  <div
+    class="circle-layout"
+    [ngClass]="{
+      unknown: status == 'unknown',
+      uncertain: status == 'uncertain',
+      available: status == 'available',
+      unavailable: status == 'unavailable'
+    }"
+    [title]="status"
+  ></div>
+</div>

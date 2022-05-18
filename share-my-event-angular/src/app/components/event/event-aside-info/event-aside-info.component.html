@@ -1,0 +1,31 @@
+<section class="event-aside-info">
+  <app-event-aside-info-form
+    [eventId]="eventId"
+    [eventDate]="eventDate"
+    (hideForm)="toggleEdition()"
+    *ngIf="edited"
+  >
+  </app-event-aside-info-form>
+  <fieldset class="sub-fieldset" *ngIf="!edited">
+    <legend>Infos générales</legend>
+    <aside class="event-date">
+      <span class="fw-bold">{{ date | titlecase }}</span> à
+      <span class="fw-bold">{{ time }}</span>
+    </aside>
+    <p class="event-organizer">
+      Organisé par:
+      <a href="mailto:{{ organizerMail }}?subject={{ title }}" class="blood">
+        {{ organizerLastname }} {{ " " }} {{ organizerFirstname }}
+      </a>
+    </p>
+    <div class="button-layout" *ngIf="isOrganizer">
+      <button
+        type="button"
+        class="tight-white-button"
+        (click)="toggleEdition()"
+      >
+        Modifier la date
+      </button>
+    </div>
+  </fieldset>
+</section>

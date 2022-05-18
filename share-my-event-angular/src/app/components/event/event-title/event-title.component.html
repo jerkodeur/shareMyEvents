@@ -1,0 +1,23 @@
+<section class="event-title">
+  <app-event-title-form
+    [eventTitle]="title"
+    [eventId]="eventId"
+    (hideForm)="toggleEdition()"
+    *ngIf="edited"
+  ></app-event-title-form>
+  <fieldset class="sub-fieldset" *ngIf="!edited">
+    <legend>Titre</legend>
+    <div>
+      <h1>{{ title }}</h1>
+    </div>
+    <div class="button-layout" *ngIf="isOrganizer">
+      <button
+        type="button"
+        class="tight-white-button"
+        (click)="toggleEdition()"
+      >
+        Modifier le titre
+      </button>
+    </div>
+  </fieldset>
+</section>

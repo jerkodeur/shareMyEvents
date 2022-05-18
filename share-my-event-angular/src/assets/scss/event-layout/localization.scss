@@ -1,0 +1,51 @@
+.event-localization {
+  .address-info {
+    @include flex-maker($direction: row);
+    flex-wrap: wrap;
+    margin-bottom: 0;
+    .address {
+      margin-right: 0.5em;
+    }
+  }
+  .additional-address {
+    @include flex-maker($justifyContent: flex-start);
+    margin-bottom: 0.25em;
+    text-align: center;
+  }
+  .aside-info {
+    @include text-maker($blood, 0.85em, bold);
+    margin: 0.5em 0;
+    border-bottom: 1px solid #000;
+  }
+
+  .event-localization-form-layout {
+    @extend .event-edit-form;
+    input {
+      margin-top: 0 !important;
+    }
+  }
+  @media only screen and (min-width: 400px) {
+    .zip-loc-layout {
+      display: flex;
+      justify-content: space-between;
+      .zipcode {
+        &.form-group {
+          width: 30% !important;
+          margin-right: 1em;
+        }
+      }
+      .locality {
+        &.form-group {
+          width: 70% !important;
+        }
+      }
+    }
+  }
+  @media only screen and (min-width: 1024px) {
+    .event-localization-form-layout {
+      .form-group {
+        width: 100% !important;
+      }
+    }
+  }
+}

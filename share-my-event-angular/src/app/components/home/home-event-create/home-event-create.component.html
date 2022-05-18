@@ -1,0 +1,20 @@
+<div class="event-create-layout">
+  <div class="event-create-button-layout">
+    <button *ngIf="authenticated" (click)="createNewEvent()">
+      Organiser un event
+    </button>
+  </div>
+  <fieldset *ngIf="!authenticated">
+    <legend class="w-auto px-2">
+      <h1>Organiser un event</h1>
+    </legend>
+    <p class="event-join-instructions">
+      Afin de pouvoir organiser un event, vous devez être connecté.
+    </p>
+    <hr />
+    <div class="inline-links">
+      <a routerLink="/signup">S'inscrire</a> -
+      <a routerLink="/login">Se connecter</a>
+    </div>
+  </fieldset>
+</div>

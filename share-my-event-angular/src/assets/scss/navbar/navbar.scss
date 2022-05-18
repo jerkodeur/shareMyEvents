@@ -16,48 +16,73 @@ a:visited {
     color: secondary;
   }
 }
-
-ul {
-  background-color: lighten($primary, $amount: 3.5%);
-  box-shadow: 1px 1px 2px $blood;
-  padding: 1em 0 !important ;
-  margin-top: 2.5em;
-  border-radius: 4px;
-  > li {
-    list-style-type: none;
-    color: $secondary;
-    padding: 0.1em 1em;
-  }
-}
-
-button {
-  z-index: 1;
-}
-
-.navbar {
-  box-shadow: 0 2px 2px $primary;
-
-  .navbar-toggler {
-    box-shadow: none;
-    background-color: $secondary;
-    padding: 0.3em;
-    border-radius: 2.5em;
-    color: $primary;
-    border-color: none;
-    &:focus {
-      box-shadow: 2px 2px 2px $primary, -2px -2px 2px $primary;
+.top-nav {
+  ul {
+    background-color: lighten($primary, $amount: 3.5%);
+    box-shadow: 1px 1px 2px $dark;
+    padding: 0 !important ;
+    margin-top: 2.75em;
+    margin-right: 0.25em;
+    border-radius: 4px;
+    > li {
+      list-style-type: none;
+      color: $secondary;
+      font-size: 1.5em;
+      padding: 0 1em;
+      &.nav-item:hover {
+        cursor: pointer;
+        background-color: $primary;
+        transition: all 650ms;
+        .flex-icon {
+          color: lighten($color: $secondary, $amount: 20%);
+        }
+      }
     }
+  }
+  &.navbar {
+    box-shadow: 0 2px 2px $primary;
+    background-color: $light;
+    padding: 0;
+
+    .container-fluid {
+      margin-bottom: 0 !important;
+    }
+
+    .navbar-toggler {
+      box-shadow: none;
+      background-color: $secondary;
+      padding: 0.3em;
+      border-radius: 2.5em;
+      color: $primary;
+      border-color: none;
+      &:focus {
+        box-shadow: 2px 2px 2px $primary, -2px -2px 2px $primary;
+      }
+      &:hover {
+        box-shadow: 2px 2px 2px $blood, -2px -2px 2px $blood;
+      }
+    }
+
+    .navbar-collapse {
+      position: absolute;
+      right: 0.75em;
+      top: 0.75em;
+      padding: 0 0.5em;
+      z-index: 0;
+    }
+  }
+  .login-img {
+    background-image: url("../../img/login-hover.svg");
     &:hover {
-      box-shadow: 2px 2px 2px $blood, -2px -2px 2px $blood;
+      background-image: url("../../img/login-hover.svg");
     }
   }
 
-  .navbar-collapse {
-    position: absolute;
-    right: 0.75em;
-    top: 0.75em;
-    padding: 0 0.5em;
-    z-index: 0;
+  .signup-img {
+    background-image: url("../../img/sign-up-hover.svg");
+    &:hover {
+      background-image: url("../../img/sign-up-hover.svg");
+    }
   }
 }
 
@@ -66,12 +91,7 @@ button {
   font-size: 0.75em;
   flex-direction: row;
   justify-content: space-between;
-
-  &:hover {
-    cursor: pointer;
-    background-color: $primary;
-    color: $light;
-  }
+  padding: 0.5em;
 
   svg {
     margin-right: 0.5em;
@@ -79,60 +99,104 @@ button {
     height: 15px;
   }
 }
-.login-img {
-  background-image: url("../../img/login-hover.svg");
-  &:hover {
-    background-image: url("../../img/login-hover.svg");
-  }
+button {
+  z-index: 1;
 }
 
-.signup-img {
-  background-image: url("../../img/sign-up-hover.svg");
-  &:hover {
-    background-image: url("../../img/sign-up-hover.svg");
-  }
+.navbar {
+  /*   z-index should be above .close-navbar-toggler */
+  z-index: 2;
+}
+.close-navbar-toggler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+.close-navbar-toggler.collapsed {
+  z-index: -1;
 }
 
 @media screen and (min-width: 576px) {
-  .navbar-collapse {
-    padding: 0 !important;
-  }
-  ul {
-    background-color: $light;
-    display: flex;
-    margin-top: -0.75em;
-    padding-bottom: 0 !important;
-    box-shadow: none;
-    > li {
-      color: $blood;
+  .top-nav {
+    .navbar-collapse {
+      padding: 0 !important;
     }
-  }
-
-  .flex-icon {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: $primary;
-
-    svg {
-      width: 30px;
-      height: 30px;
-      &.login-img {
-        background-image: url("../../img/login.svg");
-      }
-
-      &.signup-img {
-        background-image: url("../../img/sign-up.svg");
-      }
-    }
-    &:hover {
+    ul {
       background-color: $light;
-      color: $secondary !important;
-      svg.login-img {
-        background-image: url("../../img/login-hover.svg");
+      display: flex;
+      margin-top: -0.75em;
+      padding-bottom: 0 !important;
+      box-shadow: none;
+      > li {
+        padding: 0;
+        font-size: 1em;
+        &.active-nav-item {
+          .flex-icon {
+            cursor: auto;
+            color: $blood;
+            font-weight: bold;
+            svg {
+              &.login-img {
+                background-image: url("../../img/login-hover.svg");
+              }
+
+              &.signup-img {
+                background-image: url("../../img/sign-up-hover.svg");
+              }
+
+              &.logout-img {
+                background-image: url("../../img/logout-hover.svg");
+              }
+            }
+
+            &:hover {
+              text-decoration: none;
+              color: $blood !important;
+            }
+          }
+        }
       }
-      svg.signup-img {
-        background-image: url("../../img/sign-up-hover.svg");
+    }
+    .flex-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: $primary;
+
+      svg {
+        width: 30px;
+        height: 30px;
+        &.login-img {
+          background-image: url("../../img/login.svg");
+        }
+
+        &.signup-img {
+          background-image: url("../../img/sign-up.svg");
+        }
+
+        &.logout-img {
+          background-image: url("../../img/logout.svg");
+        }
+      }
+      &:hover {
+        background-color: $light;
+        color: $secondary !important;
+        text-decoration: underline;
+        svg.login-img {
+          transition: all 500ms;
+          background-image: url("../../img/login-hover.svg");
+        }
+        svg.signup-img {
+          transition: all 500ms;
+          background-image: url("../../img/sign-up-hover.svg");
+        }
+        svg.logout-img {
+          transition: all 500ms;
+          background-image: url("../../img/logout-hover.svg");
+        }
       }
     }
   }

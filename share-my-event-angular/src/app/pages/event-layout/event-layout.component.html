@@ -1,0 +1,44 @@
+<div></div>
+<div class="event-layout" *ngIf="event">
+  <app-event-mobile-menu></app-event-mobile-menu>
+  <div class="flex-main-layout">
+    <div class="flex-left-layout">
+      <app-event-id
+        [eventId]="event.id"
+        [eventCode]="event.code"
+      ></app-event-id>
+      <app-event-aside-info
+        [eventId]="event.id"
+        [organizerFirstname]="event.organizerFirstname"
+        [organizerLastname]="event.organizerLastname"
+        [organizerMail]="event.organizerEmail"
+        [title]="event.title"
+        [eventDate]="event.eventDate"
+      ></app-event-aside-info>
+    </div>
+    <div class="flex-center-layout">
+      <app-event-title
+        [title]="event.title"
+        [eventId]="event.id"
+      ></app-event-title>
+      <div id="description"></div>
+      <app-event-description
+        [eventId]="event.id"
+        [description]="event.description"
+      ></app-event-description>
+      <app-event-localization
+        id="address"
+        [eventId]="event.id"
+        [address]="event.address"
+      ></app-event-localization>
+    </div>
+    <div class="flex-right-layout">
+      <app-event-participant-list
+        id="participantList"
+        [eventId]="event.id"
+        [title]="event.title"
+      ></app-event-participant-list>
+    </div>
+  </div>
+</div>
+<div style="height: 50px"></div>
