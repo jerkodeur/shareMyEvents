@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, Subject, tap } from 'rxjs';
+import { catchError, map, Observable, pipe, Subject, take, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 import { environment } from 'src/environments/environment';
 
@@ -24,7 +25,8 @@ export class EventService {
   constructor(
     private errorHandler: ErrorHandlerService,
     private httpService: HttpClient,
-    private notify: NotificationService
+    private notify: NotificationService,
+    private router: Router
   ) {}
 
   getEvent$(eventId: number): Observable<EventInterface | any> {
@@ -43,16 +45,21 @@ export class EventService {
 
   createEvent$(event: Event): Observable<any> {
     return this.httpService
-      .post(`${environment.apiUrl}/events/new`, { ...event })
+      .post(`${environment.apiUrl}/events/new`, {
+        ...event,
+      })
       .pipe(
-        tap(() =>
-          this.notify.showSuccess(
-            "L'event a été crée avec succès, n'oubliez pas d'y ajouter des invités !"
-          )
-        ),
-        catchError(async (err) =>
-          this.errorHandler.notifyHttpError(err).subscribe()
-        )
+        tap({
+          next: (res: any) => {
+            this.notify.showSuccess(
+              "L'event a été crée avec succès, n'oubliez pas d'y ajouter des invités !"
+            );
+            this.router.navigate([`/events/${res.id}`]);
+          },
+          error: async (err) => {
+            this.errorHandler.notifyHttpError(err).pipe(take(1)).subscribe();
+          },
+        })
       );
   }
 

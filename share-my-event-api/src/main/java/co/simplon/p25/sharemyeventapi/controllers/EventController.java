@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.simplon.p25.sharemyeventapi.dtos.event.EventAdressDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventCreateDto;
+import co.simplon.p25.sharemyeventapi.dtos.event.EventCreatedId;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventDateDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventDescriptionDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventPageDto;
@@ -35,8 +36,8 @@ public class EventController {
 
 	@PostMapping("/new")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void Create(@Valid @RequestBody EventCreateDto inputs) {
-		eventService.create(inputs);
+	public EventCreatedId Create(@Valid @RequestBody EventCreateDto inputs) {
+		return eventService.create(inputs);
 	}
 
 	@GetMapping("/{id}")

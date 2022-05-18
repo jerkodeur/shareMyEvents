@@ -24,9 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable().logout().disable().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.authorizeRequests().antMatchers("/users/**").permitAll().and()
-				// TODO Affiner les permissions pour les events
-				.authorizeRequests().antMatchers("/events/**").permitAll().and()
-				.authorizeRequests().antMatchers("/organizer/**")
+				.authorizeRequests().antMatchers("/events/**").authenticated()
+				.and().authorizeRequests().antMatchers("/organizer/**")
 				.authenticated().and().authorizeRequests().anyRequest()
 				.authenticated().and().oauth2ResourceServer().jwt();
 	}
