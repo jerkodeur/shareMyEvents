@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap, catchError, of } from 'rxjs';
+import { Observable, tap, catchError, of, take } from 'rxjs';
 import { Router } from '@angular/router';
 
 import { environment } from 'src/environments/environment';
@@ -37,7 +37,7 @@ export class UserService {
             this.router.navigate(['/login']);
           },
           error: async (err) => {
-            this.errorHandler.notifyHttpError(err).subscribe();
+            this.errorHandler.notifyHttpError(err).pipe(take(1)).subscribe();
           },
         })
       );
@@ -61,7 +61,7 @@ export class UserService {
             }
           },
           error: async (err) => {
-            this.errorHandler.notifyHttpError(err).subscribe();
+            this.errorHandler.notifyHttpError(err).pipe(take(1)).subscribe();
           },
         })
       );

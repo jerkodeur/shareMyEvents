@@ -11,6 +11,5 @@ CREATE TABLE "addresses" (
   street VARCHAR(255),
   zip_code CHAR(5),
   locality VARCHAR(75),
-  additional TEXT,
-  UNIQUE(street, zip_code, locality)
+  additional TEXT
 );

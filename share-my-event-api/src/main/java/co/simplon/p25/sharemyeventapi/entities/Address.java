@@ -2,6 +2,7 @@ package co.simplon.p25.sharemyeventapi.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +20,9 @@ public class Address extends AbstractEntity {
 
 	@Column(name = "additional")
 	private String additional;
+
+	@OneToOne(mappedBy = "address")
+	private Event event;
 
 	public Address() {
 	}

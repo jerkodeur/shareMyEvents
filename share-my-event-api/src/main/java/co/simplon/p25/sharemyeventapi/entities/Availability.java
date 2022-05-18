@@ -7,22 +7,23 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "availabilities")
 public class Availability extends AbstractEntity {
-	
-	@Column(name = "name")
-	private String name;
 
-	public Availability() {}
+	@Column(name = "label")
+	private String label;
 
-	public String getName() {
-		return name;
+	public Availability() {
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
 	}
 
 	@Override
 	public String toString() {
-		return "Availability [name=" + name + "]";
+		return "Availability [label=" + label + "]";
 	}
 }

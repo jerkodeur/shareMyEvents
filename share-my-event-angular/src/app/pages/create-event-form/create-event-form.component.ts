@@ -69,9 +69,8 @@ export class CreateEventFormComponent implements OnInit {
     }
     const { title, description, date, time } = this.eventForm.value;
     const eventDate = DateHandler.createDatebyDateAndTime(date, time);
-
     let { street, zipCode, locality, additional } =
-      this.eventForm.value.addressForm.value;
+      this.eventForm.value.addressForm;
 
     if (street == '') street = null;
     if (zipCode == '') zipCode = null;

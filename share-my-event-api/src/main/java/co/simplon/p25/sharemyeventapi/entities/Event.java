@@ -2,10 +2,12 @@ package co.simplon.p25.sharemyeventapi.entities;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,8 +30,8 @@ public class Event extends AbstractEntity {
 	@JoinColumn(name = "organizer_id")
 	private Actor organizer;
 
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "address_id", nullable = true)
+	@OneToOne(optional = true, cascade = CascadeType.ALL)
+	@JoinColumn(name = "address_id", referencedColumnName = "id")
 	private Address address;
 
 	// @ManyToMany

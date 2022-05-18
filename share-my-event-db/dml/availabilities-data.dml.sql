@@ -4,5 +4,5 @@
  * \q
  */
 DELETE FROM availabilities;
-INSERT INTO availabilities (name) values('Disponible'), ('Incertain'), ('Indisponible')
+INSERT INTO availabilities (label) values('Disponible'), ('Incertain'), ('Indisponible')
 ;
