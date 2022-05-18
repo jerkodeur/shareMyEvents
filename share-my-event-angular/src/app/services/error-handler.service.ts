@@ -43,6 +43,18 @@ export class ErrorHandlerService {
         return 'Cette adresse e-mail est déjà associée à un compte';
       case 'unauthorized':
         return 'Identifiants incorrects';
+      case 'title_required':
+        return 'Le titre est obligatoire';
+      case 'title_max_length':
+        return 'Nombre maximum de caractères du titre dépassé';
+      case 'description_required':
+        return 'La description est obligatoire';
+      case 'title_max_length':
+        return 'La description est obligatoire';
+      case 'date_required':
+        return 'La date est obligatoire';
+      case 'date_earlier':
+        return "Impossible d'insérer une date déjà passée";
 
       default:
         return "Erreur serveur, merci de contacter l'administrateur";

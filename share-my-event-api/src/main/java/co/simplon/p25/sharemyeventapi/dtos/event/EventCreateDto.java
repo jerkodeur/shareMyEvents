@@ -14,7 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class EventCreateDto {
 
 	@NotBlank(message = "title_required")
-	@Length(max = 50)
+	@Length(max = 50, message = "title_max_length")
 	private String title;
 
 	@NotEmpty(message = "description_required")
@@ -22,7 +22,7 @@ public class EventCreateDto {
 
 	@NotNull(message = "date_required")
 	@DateTimeFormat
-	@Future
+	@Future(message = "date_earlier")
 	private LocalDateTime eventDate;
 
 	@Valid

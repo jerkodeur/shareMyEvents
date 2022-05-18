@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-
-import { ValidateDate } from 'src/app/core/validations/ValidateFutureDate';
-
-import { Event } from 'src/app/core/models/Event.model';
+import { Subject, takeUntil, tap } from 'rxjs';
 
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { EventService } from 'src/app/services/event.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
+import { Event } from 'src/app/core/models/Event.model';
+
+import { ValidateDate } from 'src/app/core/validations/ValidateFutureDate';
 import { DateHandler } from 'src/app/handlers/date-handler';
 
 @Component({
@@ -17,19 +16,27 @@ import { DateHandler } from 'src/app/handlers/date-handler';
   templateUrl: './create-event-form.component.html',
   styleUrls: ['./create-event-form.component.scss'],
 })
-export class CreateEventFormComponent implements OnInit {
+export class CreateEventFormComponent implements OnInit, OnDestroy {
   submitted = false;
-  currentDate = '16-12-1977';
+  currentDate!: string;
+
+  destroy$ = new Subject<void>();
 
   constructor(
     private authService: AuthenticationService,
     private eventService: EventService,
     private formBuilder: FormBuilder,
-    private notify: NotificationService,
-    private router: Router
+    private notify: NotificationService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.currentDate = DateHandler.splitDateObject(new Date())[2];
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   eventForm = this.formBuilder.group(
     {
@@ -85,8 +92,9 @@ export class CreateEventFormComponent implements OnInit {
       { street, zipCode, locality, additional }
     );
 
-    this.eventService.createEvent$(newEvent).subscribe((event) => {
-      next: () => this.router.navigate([`/events/${event.id}`]);
-    });
+    this.eventService
+      .createEvent$(newEvent)
+      .pipe(tap(takeUntil(this.destroy$)))
+      .subscribe();
   };
 }

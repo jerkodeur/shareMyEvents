@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import co.simplon.p25.sharemyeventapi.dtos.event.EventAdressDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventCreateDto;
+import co.simplon.p25.sharemyeventapi.dtos.event.EventCreatedId;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventDateDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventDescriptionDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventPageDto;
@@ -39,7 +40,7 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	@Transactional
-	public void create(EventCreateDto inputs) {
+	public EventCreatedId create(EventCreateDto inputs) {
 		String code = RandomCode.getCode(8);
 		Actor actor = actorService.actorByAuthId();
 
@@ -64,6 +65,9 @@ public class EventServiceImpl implements EventService {
 		}
 
 		eventRepo.save(event);
+
+		EventCreatedId eventId = new EventCreatedId(event.getId());
+		return eventId;
 
 	}
 
