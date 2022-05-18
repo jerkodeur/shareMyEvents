@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 
 import { NotificationService } from 'src/app/services/notification.service';
 import { UserService } from 'src/app/services/user.service';
@@ -11,29 +11,29 @@ import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './log-in.component.html',
   styleUrls: ['./log-in.component.scss'],
 })
-export class LogInComponent {
+export class LogInComponent implements OnDestroy {
   faEyeSlash = faEyeSlash;
   faEye = faEye;
   pwdShow: boolean = false;
   noMatch = false;
   submitted = false;
 
+  private readonly destroy$: Subject<void> = new Subject();
+
   constructor(
     private formBuilder: FormBuilder,
     private notify: NotificationService,
-    private router: Router,
     private userService: UserService
   ) {}
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   loginForm = this.formBuilder.group({
-    email: [
-      '',
-      [
-        Validators.required,
-        Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/),
-      ],
-    ],
-    password: ['', [Validators.required]],
+    email: ['', Validators.required],
+    password: ['', Validators.required],
   });
 
   get formValues() {
@@ -42,18 +42,15 @@ export class LogInComponent {
 
   onSubmit = (): void => {
     this.submitted = true;
-    const { email, password } = this.loginForm.value;
     if (this.loginForm.invalid) {
       return this.notify.showError(
         'Des erreurs ont été détectées, merci de les corriger.'
       );
     }
-    this.userService.login$(email, password).subscribe((res: any) => {
-      if (!res.error) {
-        this.notify.showSuccess(`Bon retour parmi nous ${res.actor.lastname}`);
-        this.router.navigate(['/home']);
-      }
-    });
+    this.userService
+      .login$({ ...this.loginForm.value })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe();
   };
 
   togglePwdType = (): void => {

@@ -43,21 +43,27 @@ export class UserService {
       );
   }
 
-  login$(email: string, password: string) {
+  login$(credentials: { email: string; password: string }) {
     return this.httpService
-      .post(`${environment.apiUrl}/users/login`, { email, password })
+      .post(`${environment.apiUrl}/users/login`, credentials)
       .pipe(
-        tap((res: any) => {
-          if (res.token) {
-            sessionStorage.setItem('access_token', res.token.token);
-            this.authentication.authenticated.next(true);
-          } else {
-            throw new Error('Erreur lors de la récupération du token');
-          }
-        }),
-        catchError(async (err) =>
-          this.errorHandler.notifyHttpError(err).subscribe()
-        )
+        tap({
+          next: (res: any) => {
+            if (res.token) {
+              sessionStorage.setItem('access_token', res.token.token);
+              this.authentication.authenticated.next(true);
+              this.notify.showSuccess(
+                `Bon retour parmi nous ${res.actor.lastname}`
+              );
+              this.router.navigate(['/home']);
+            } else {
+              throw new Error('Erreur lors de la récupération du token');
+            }
+          },
+          error: async (err) => {
+            this.errorHandler.notifyHttpError(err).subscribe();
+          },
+        })
       );
   }
 

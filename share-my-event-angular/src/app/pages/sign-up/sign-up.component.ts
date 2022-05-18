@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
+import { Subject, takeUntil } from 'rxjs';
 
 import { ValidatePassword } from 'src/app/core/validations/ValidatePassword';
 
@@ -8,26 +8,33 @@ import { NotificationService } from 'src/app/services/notification.service';
 import { UserService } from 'src/app/services/user.service';
 
 import { User } from 'src/app/core/models/User.model';
-import { Router } from '@angular/router';
+
+import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
 })
-export class SignUpComponent {
+export class SignUpComponent implements OnDestroy {
   faEyeSlash = faEyeSlash;
   faEye = faEye;
   pwdShow: boolean = false;
   cfPwdShow: boolean = false;
   submitted = false;
 
+  private readonly destroy$: Subject<void> = new Subject();
+
   constructor(
     private formBuilder: FormBuilder,
     private notify: NotificationService,
-    private userService: UserService,
-    private router: Router
+    private userService: UserService
   ) {}
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   signUpForm = this.formBuilder.group(
     {
@@ -70,7 +77,10 @@ export class SignUpComponent {
     }
     const { firstname, lastname, email, password } = this.signUpForm.value;
     const newUser = new User(firstname, lastname, email, password);
-    this.userService.signup$(newUser).subscribe();
+    this.userService
+      .signup$(newUser)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe();
   };
 
   togglePwdType = (): void => {
