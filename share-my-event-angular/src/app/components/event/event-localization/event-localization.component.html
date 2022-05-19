@@ -7,15 +7,20 @@
   ></app-event-localization-form>
   <fieldset class="sub-fieldset" *ngIf="!edited">
     <legend>Adresse</legend>
-    <p class="address-info">
-      <span class="address">{{ address && address.street }}</span>
-      <span class="locZip"
-        >{{ address && address.zipCode }}
-        {{ address && address.locality }}</span
+    <div *ngIf="address">
+      <p class="address-info">
+        <span class="address">{{ address && address.street }}</span>
+        <span class="locZip"
+          >{{ address && address.zipCode }}
+          {{ address && address.locality }}</span
+        >
+      </p>
+      <span class="aside-info" *ngIf="address.additional"
+        >Complément d'addresse:</span
       >
-    </p>
-    <span class="aside-info">Complément d'addresse:</span>
-    <p class="additional-address">{{ address && address.additional }}</p>
+      <p class="additional-address">{{ address && address.additional }}</p>
+    </div>
+    <div *ngIf="!address" class="pb-2">Aucune adresse renseignée</div>
 
     <div class="button-layout" *ngIf="isOrganizer">
       <button

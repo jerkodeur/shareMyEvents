@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { takeWhile } from 'rxjs';
 
 import { EventService } from 'src/app/services/event.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -47,6 +48,7 @@ export class EventTitleFormComponent implements OnInit {
     if (this.eventTitleForm.value['title'] != this.eventTitle) {
       this.eventService
         .updateTitle$(this.eventTitleForm.value['title'], this.eventId)
+        .pipe(takeWhile(() => !this.hideForm))
         .subscribe();
     }
     this.cancelForm();

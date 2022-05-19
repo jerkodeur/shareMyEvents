@@ -33,13 +33,15 @@ export class EventService {
     return this.httpService
       .get<EventInterface>(`${environment.apiUrl}/events/${eventId}`)
       .pipe(
-        map((data: any) => {
-          data.eventDate = new Date(data.eventDate);
-          return data;
-        }),
-        catchError(async (err) =>
-          this.errorHandler.notifyHttpError(err).subscribe()
-        )
+        tap({
+          next: (data: any) => {
+            data.eventDate = new Date(data.eventDate);
+            return data;
+          },
+          error: async (err) => {
+            this.errorHandler.notifyHttpError(err).pipe(take(1)).subscribe();
+          },
+        })
       );
   }
 
@@ -63,19 +65,21 @@ export class EventService {
       );
   }
 
-  updateTitle$(newTitle: string, eventId: number): Observable<any> {
+  updateTitle$(title: string, eventId: number): Observable<any> {
     return this.httpService
       .patch(`${environment.apiUrl}/events/update/${eventId}/title`, {
-        title: newTitle,
+        title,
       })
       .pipe(
-        tap((res: any) => {
-          this.title.next(res.title);
-          this.notify.showSuccess('Le titre a été modifié avec succès');
-        }),
-        catchError(async (err) =>
-          this.errorHandler.notifyHttpError(err).subscribe()
-        )
+        tap({
+          next: (res: any) => {
+            this.title.next(res.title);
+            this.notify.showSuccess('Le titre a été modifié avec succès');
+          },
+          error: async (err) => {
+            this.errorHandler.notifyHttpError(err).pipe(take(1)).subscribe();
+          },
+        })
       );
   }
 
@@ -85,13 +89,15 @@ export class EventService {
         description,
       })
       .pipe(
-        tap((res: any) => {
-          this.description.next(res.description);
-          this.notify.showSuccess('La description a été modifié avec succès');
-        }),
-        catchError(async (err) =>
-          this.errorHandler.notifyHttpError(err).subscribe()
-        )
+        tap({
+          next: (res: any) => {
+            this.description.next(res.description);
+            this.notify.showSuccess('La description a été modifié avec succès');
+          },
+          error: async (err) => {
+            this.errorHandler.notifyHttpError(err).pipe(take(1)).subscribe();
+          },
+        })
       );
   }
 
@@ -101,13 +107,15 @@ export class EventService {
         eventDate,
       })
       .pipe(
-        tap((res: any) => {
-          this.eventDate.next(new Date(res.eventDate));
-          this.notify.showSuccess('La date a été modifié avec succès');
-        }),
-        catchError(async (err) =>
-          this.errorHandler.notifyHttpError(err).subscribe()
-        )
+        tap({
+          next: (res: any) => {
+            this.eventDate.next(new Date(res.eventDate));
+            this.notify.showSuccess('La date a été modifié avec succès');
+          },
+          error: async (err) => {
+            this.errorHandler.notifyHttpError(err).pipe(take(1)).subscribe();
+          },
+        })
       );
   }
 
@@ -120,13 +128,15 @@ export class EventService {
         ...localization,
       })
       .pipe(
-        tap((address: any) => {
-          this.address.next(address);
-          this.notify.showSuccess("L'addresse a été modifiée avec succès");
-        }),
-        catchError(async (err) =>
-          this.errorHandler.notifyHttpError(err).subscribe()
-        )
+        tap({
+          next: (address: any) => {
+            this.address.next(address);
+            this.notify.showSuccess("L'addresse a été modifiée avec succès");
+          },
+          error: async (err) => {
+            this.errorHandler.notifyHttpError(err).pipe(take(1)).subscribe();
+          },
+        })
       );
   }
 

@@ -22,4 +22,10 @@ public class ActorServiceImpl implements ActorService {
 		return actorRepo.findByAuthId(SecurityHelper.authenticatedUserId());
 	}
 
+	@Override
+	public Long actorIdByAuthId() {
+		return actorRepo
+				.findActorIdByAuthId(SecurityHelper.authenticatedUserId());
+	}
+
 }
