@@ -45,7 +45,6 @@ export class AuthenticationService {
   }
 
   checkIfOrganizer(eventOrganizerId: string): void {
-    console.log(this.getAuthUserId() == eventOrganizerId);
     this.isOrganizer.next(this.getAuthUserId() == eventOrganizerId);
   }
 

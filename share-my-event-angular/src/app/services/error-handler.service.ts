@@ -17,7 +17,12 @@ export class ErrorHandlerService {
     console.error(err);
     let errorCode = err?.error?.code_error;
     errorCode = err.error?.fieldErrors?.email[0].code ?? errorCode;
-    errorCode = err.status == 401 ? 'unauthorized' : errorCode;
+    if (err.status == 401) {
+      errorCode =
+        err?.error?.message == 'Invalid credential'
+          ? 'bad_credential'
+          : 'unauthorized';
+    }
     errorCode = err.status == 403 ? 'forbidden' : errorCode;
 
     this.notify.showError(this.setErrorMessage(errorCode));
@@ -46,6 +51,7 @@ export class ErrorHandlerService {
       case 'lastname_required':
         return 'Le prénom est obligatoire';
       case 'email_uniq':
+        return 'Cette adresse e-mail est déjà associée à un compte';
       case 'title_required':
         return 'Le titre est obligatoire';
       case 'title_max_length':
@@ -58,9 +64,10 @@ export class ErrorHandlerService {
         return 'La date est obligatoire';
       case 'date_earlier':
         return "Impossible d'insérer une date déjà passée";
-        return 'Cette adresse e-mail est déjà associée à un compte';
-      case 'unauthorized':
+      case 'bad_credential':
         return 'Identifiants incorrects';
+      case 'unauthorized':
+        return 'Votre session a expiré';
       case 'forbidden':
         return 'Accès non autorisé';
 
