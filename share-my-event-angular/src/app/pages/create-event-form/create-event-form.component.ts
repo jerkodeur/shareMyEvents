@@ -10,6 +10,7 @@ import { Event } from 'src/app/core/models/Event.model';
 
 import { ValidateDate } from 'src/app/core/validations/ValidateFutureDate';
 import { DateHandler } from 'src/app/handlers/date-handler';
+import { FullDate } from 'src/app/core/models/Date.model';
 
 @Component({
   selector: 'app-create-event-form',
@@ -30,7 +31,7 @@ export class CreateEventFormComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.currentDate = DateHandler.splitDateObject(new Date())[2];
+    this.currentDate = FullDate.getCurrentDate();
   }
 
   ngOnDestroy(): void {
