@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.Length;
 public final class EventTitleDto {
 
 	@NotBlank(message = "title_required")
-	@Length(max = 50)
+	@Length(max = 50, message = "title_max_length")
 	private String title;
 
 	EventTitleDto() {

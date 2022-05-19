@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
+import { takeWhile } from 'rxjs';
+
 import { EventService } from 'src/app/services/event.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
@@ -36,7 +38,6 @@ export class EventDescriptionFormComponent implements OnInit {
 
   onSubmitForm(): void {
     this.submitted = true;
-    console.log(this.eventDescriptionForm);
     if (this.eventDescriptionForm.invalid) {
       return this.notify.showError(
         'Des erreurs ont été détectées, merci de les corriger'
@@ -50,6 +51,7 @@ export class EventDescriptionFormComponent implements OnInit {
           this.eventDescriptionForm.value['description'],
           this.eventId
         )
+        .pipe(takeWhile(() => !this.hideForm))
         .subscribe();
     }
     this.cancelForm();

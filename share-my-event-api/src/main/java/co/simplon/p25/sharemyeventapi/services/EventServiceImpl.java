@@ -15,6 +15,7 @@ import co.simplon.p25.sharemyeventapi.dtos.event.EventTitleDto;
 import co.simplon.p25.sharemyeventapi.entities.Actor;
 import co.simplon.p25.sharemyeventapi.entities.Address;
 import co.simplon.p25.sharemyeventapi.entities.Event;
+import co.simplon.p25.sharemyeventapi.exceptions.ForbiddenException;
 import co.simplon.p25.sharemyeventapi.helpers.RandomCode;
 import co.simplon.p25.sharemyeventapi.repositories.AddressRepository;
 import co.simplon.p25.sharemyeventapi.repositories.EventRepository;
@@ -33,6 +34,9 @@ public class EventServiceImpl implements EventService {
 
 	@Autowired
 	AddressRepository addressRepo;
+
+	@Autowired
+	OrganizerService organizerService;
 
 	private EventServiceImpl() {
 		// Ensures non-instantiability
@@ -98,34 +102,49 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	@Transactional
-	public EventTitleDto updateTitle(Long EventId, EventTitleDto input) {
-		Event event = eventRepo.findOneById(EventId);
+	public EventTitleDto updateTitle(Long eventId, EventTitleDto input)
+			throws ForbiddenException {
+		if (!isOrganizer(eventId)) {
+			throw new ForbiddenException("Forbidden access to the resource");
+		}
+		Event event = eventRepo.findOneById(eventId);
 		event.setTitle(input.getTitle());
 		eventRepo.save(event);
 		return input;
 	}
 
 	@Override
-	public EventDescriptionDto updateDescription(Long EventId,
-			EventDescriptionDto input) {
-		Event event = eventRepo.findOneById(EventId);
+	public EventDescriptionDto updateDescription(Long eventId,
+			EventDescriptionDto input) throws ForbiddenException {
+		if (!isOrganizer(eventId)) {
+			throw new ForbiddenException("Forbidden access to the resource");
+		}
+		Event event = eventRepo.findOneById(eventId);
 		event.setDescription(input.getDescription());
 		eventRepo.save(event);
 		return input;
 	}
 
 	@Override
-	public EventDateDto updateDate(Long EventId, EventDateDto input) {
-		Event event = eventRepo.findOneById(EventId);
+	public EventDateDto updateDate(Long eventId, EventDateDto input)
+			throws ForbiddenException {
+		if (!isOrganizer(eventId)) {
+			throw new ForbiddenException("Forbidden access to the resource");
+		}
+		Event event = eventRepo.findOneById(eventId);
 		event.setEventDate(input.getEventDate());
 		eventRepo.save(event);
 		return input;
 	}
 
 	@Override
-	public EventAdressDto updateAddress(Long EventId, EventAdressDto inputs) {
+	public EventAdressDto updateAddress(Long eventId, EventAdressDto inputs)
+			throws ForbiddenException {
+		if (!isOrganizer(eventId)) {
+			throw new ForbiddenException("Forbidden access to the resource");
+		}
 		Address address;
-		Event event = eventRepo.findOneById(EventId);
+		Event event = eventRepo.findOneById(eventId);
 
 		if (event.getAddress() != null)
 			address = event.getAddress();
@@ -152,8 +171,17 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public void remove(Long eventId) {
+	public void remove(Long eventId) throws ForbiddenException {
+		if (isOrganizer(eventId)) {
+			throw new ForbiddenException("Forbidden access to the resource");
+		}
 		eventRepo.deleteById(eventId);
+	}
+
+	@Override
+	public boolean isOrganizer(Long eventId) {
+		return authService.findActorIdByAuthId() == eventRepo
+				.findOrganizerByEventId(eventId).getId();
 	}
 
 }

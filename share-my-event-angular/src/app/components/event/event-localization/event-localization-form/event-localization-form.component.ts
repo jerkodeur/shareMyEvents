@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { take, takeWhile } from 'rxjs';
 
 import { EventService } from 'src/app/services/event.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -28,10 +29,10 @@ export class EventLocalizationFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.localizationForm = this.fb.group({
-      street: this.address.street,
-      zipCode: this.address.zipCode,
-      locality: this.address.locality,
-      additional: this.address.additional,
+      street: this.address && this.address.street,
+      zipCode: this.address && this.address.zipCode,
+      locality: this.address && this.address.locality,
+      additional: this.address && this.address.additional,
     });
 
     this.onCreateGroupFormValueChange();
@@ -70,6 +71,7 @@ export class EventLocalizationFormComponent implements OnInit {
           { street, zipCode, locality, additional },
           this.eventId
         )
+        .pipe(takeWhile(() => !this.hideForm))
         .subscribe();
     }
     this.cancelForm();

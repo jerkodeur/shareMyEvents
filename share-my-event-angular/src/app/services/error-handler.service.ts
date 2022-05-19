@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { NotificationService } from './notification.service';
 
@@ -7,17 +8,22 @@ import { NotificationService } from './notification.service';
   providedIn: 'root',
 })
 export class ErrorHandlerService {
-  constructor(private notify: NotificationService) {}
+  constructor(private notify: NotificationService, private router: Router) {}
 
   notifyHttpError(
     err: HttpErrorResponse,
     message: string = 'Erreur lors de la requête HTTP'
   ) {
-    let errorCode = err.error.code_error;
-    errorCode = err.error.fieldErrors?.email[0].code ?? errorCode;
+    console.error(err);
+    let errorCode = err?.error?.code_error;
+    errorCode = err.error?.fieldErrors?.email[0].code ?? errorCode;
     errorCode = err.status == 401 ? 'unauthorized' : errorCode;
+    errorCode = err.status == 403 ? 'forbidden' : errorCode;
 
     this.notify.showError(this.setErrorMessage(errorCode));
+    if (errorCode == 'unauthorized' || errorCode == 'forbidden') {
+      this.router.navigateByUrl('/home');
+    }
     return throwError(() => new Error(message));
   }
 
@@ -40,13 +46,10 @@ export class ErrorHandlerService {
       case 'lastname_required':
         return 'Le prénom est obligatoire';
       case 'email_uniq':
-        return 'Cette adresse e-mail est déjà associée à un compte';
-      case 'unauthorized':
-        return 'Identifiants incorrects';
       case 'title_required':
         return 'Le titre est obligatoire';
       case 'title_max_length':
-        return 'Nombre maximum de caractères du titre dépassé';
+        return 'Le titre doit être compris entre 0 et 50 caractères';
       case 'description_required':
         return 'La description est obligatoire';
       case 'title_max_length':
@@ -55,6 +58,11 @@ export class ErrorHandlerService {
         return 'La date est obligatoire';
       case 'date_earlier':
         return "Impossible d'insérer une date déjà passée";
+        return 'Cette adresse e-mail est déjà associée à un compte';
+      case 'unauthorized':
+        return 'Identifiants incorrects';
+      case 'forbidden':
+        return 'Accès non autorisé';
 
       default:
         return "Erreur serveur, merci de contacter l'administrateur";

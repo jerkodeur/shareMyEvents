@@ -15,7 +15,8 @@ public interface EventService {
 	EventTitleDto updateTitle(Long eventId, EventTitleDto input);
 	EventDescriptionDto updateDescription(Long EventId,
 			EventDescriptionDto input);
-	EventDateDto updateDate(Long EventId, EventDateDto input);
-	EventAdressDto updateAddress(Long EventId, EventAdressDto inputs);
+	EventDateDto updateDate(Long eventId, EventDateDto input);
+	EventAdressDto updateAddress(Long eventId, EventAdressDto inputs);
+	boolean isOrganizer(Long eventId);
 	void remove(Long eventId);
 }

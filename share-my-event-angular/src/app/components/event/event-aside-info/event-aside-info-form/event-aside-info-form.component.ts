@@ -1,8 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { takeWhile } from 'rxjs';
 
 import { EventService } from 'src/app/services/event.service';
 import { NotificationService } from 'src/app/services/notification.service';
+
 import { DateHandler } from 'src/app/handlers/date-handler';
 import { FullDate } from 'src/app/core/models/Date.model';
 
@@ -74,6 +83,7 @@ export class EventAsideInfoFormComponent implements OnInit {
     if (!this.checkIfchanged()) {
       this.eventService
         .updateDate$(this.convertDate(date, time), this.eventId)
+        .pipe(takeWhile(() => !this.hideForm))
         .subscribe();
     }
     this.cancelForm();

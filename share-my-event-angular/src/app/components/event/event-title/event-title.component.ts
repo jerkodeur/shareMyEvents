@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { EventService } from 'src/app/services/event.service';
@@ -15,14 +16,25 @@ export class EventTitleComponent implements OnInit {
   isOrganizer!: boolean;
   edited = false;
 
+  readonly destroy$: Subject<void> = new Subject<void>();
+
   constructor(
     private authService: AuthenticationService,
     private eventService: EventService
   ) {}
 
   ngOnInit(): void {
-    this.authService.isOrganizer.subscribe((bool) => (this.isOrganizer = bool));
-    this.eventService.title.subscribe((title: string) => (this.title = title));
+    this.authService.isOrganizer
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((bool) => (this.isOrganizer = bool));
+    this.eventService.title
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((title: string) => (this.title = title));
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   toggleEdition() {

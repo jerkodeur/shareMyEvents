@@ -18,7 +18,7 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
-	public int findActorIdByAuthId() {
+	public Long findActorIdByAuthId() {
 		return actorRepository
 				.findActorIdByAuthId(SecurityHelper.authenticatedUserId());
 	}

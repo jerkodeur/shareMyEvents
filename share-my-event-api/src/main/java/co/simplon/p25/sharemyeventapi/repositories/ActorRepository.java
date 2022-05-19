@@ -14,5 +14,5 @@ public interface ActorRepository extends JpaRepository<Actor, Long> {
 	Actor findByAuthId(String authId);
 
 	@Query("SELECT a.id FROM Actor a WHERE a.authId = ?1")
-	int findActorIdByAuthId(String authId);
+	Long findActorIdByAuthId(String authId);
 }

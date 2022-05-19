@@ -4,6 +4,6 @@ import co.simplon.p25.sharemyeventapi.entities.Actor;
 
 public interface AuthService {
 
-	public int findActorIdByAuthId();
+	public Long findActorIdByAuthId();
 	public Actor findActorByAuthId();
 }
