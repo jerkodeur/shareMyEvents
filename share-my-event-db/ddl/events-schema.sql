@@ -14,6 +14,12 @@ CREATE TABLE "events" (
   	event_date TIMESTAMP NOT NULL,
   	organizer_id INTEGER NOT NULL,
   	address_id INTEGER,
-	CONSTRAINT fk_event_organizer FOREIGN KEY (organizer_id) REFERENCES actors(id) ON DELETE CASCADE,
-	CONSTRAINT fk_event_address FOREIGN KEY (address_id) REFERENCES addresses(id) ON DELETE SET NULL
+	CONSTRAINT fk_event_organizer 
+		FOREIGN KEY (organizer_id) 
+		REFERENCES actors(id) 
+		ON DELETE CASCADE,
+	CONSTRAINT fk_event_address 
+		FOREIGN KEY (address_id) 
+		REFERENCES addresses(id) 
+		ON DELETE SET NULL
 );

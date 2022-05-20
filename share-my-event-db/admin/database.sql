@@ -6,4 +6,4 @@
  */
 
 DROP DATABASE IF EXISTS sharemyevent;
-CREATE DATABASE "sharemyevent" WITH OWNER "postgres" ENCODING 'UTF8';
+CREATE DATABASE "sharemyevent" ENCODING 'UTF8';

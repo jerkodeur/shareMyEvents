@@ -172,7 +172,7 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public void remove(Long eventId) throws ForbiddenException {
-		if (isOrganizer(eventId)) {
+		if (!isOrganizer(eventId)) {
 			throw new ForbiddenException("Forbidden access to the resource");
 		}
 		eventRepo.deleteById(eventId);

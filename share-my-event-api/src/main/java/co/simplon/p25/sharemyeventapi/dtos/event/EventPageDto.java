@@ -1,6 +1,7 @@
 package co.simplon.p25.sharemyeventapi.dtos.event;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import co.simplon.p25.sharemyeventapi.entities.Address;
 
@@ -10,7 +11,7 @@ public class EventPageDto {
 	private String title;
 	private String description;
 	private LocalDateTime eventDate;
-	private String organizerAuthId;
+	private UUID organizerAuthId;
 	private String organizerFirstname;
 	private String organizerLastname;
 	private String organizerEmail;
@@ -60,12 +61,12 @@ public class EventPageDto {
 		this.eventDate = eventDate;
 	}
 
-	public String getOrganizerAuthId() {
+	public UUID getOrganizerAuthId() {
 		return organizerAuthId;
 	}
 
-	public void setOrganizerAuthId(String organizerAuthId) {
-		this.organizerAuthId = organizerAuthId;
+	public void setOrganizerAuthId(UUID uuid) {
+		organizerAuthId = uuid;
 	}
 
 	public String getOrganizerFirstname() {

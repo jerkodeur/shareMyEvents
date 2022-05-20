@@ -1,5 +1,7 @@
 package co.simplon.p25.sharemyeventapi.security;
 
+import java.util.UUID;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -14,10 +16,10 @@ public final class SecurityHelper {
 	 *
 	 * @return the authenticated user id
 	 */
-	public static String authenticatedUserId() {
+	public static UUID authenticatedUserId() {
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 
-		return auth.getName();
+		return UUID.fromString(auth.getName());
 	}
 }

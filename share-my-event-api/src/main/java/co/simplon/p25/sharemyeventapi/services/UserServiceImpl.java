@@ -12,9 +12,9 @@ import org.springframework.web.client.RestTemplate;
 
 import co.simplon.p25.sharemyeventapi.dtos.ActorIdentity;
 import co.simplon.p25.sharemyeventapi.dtos.ActorSignUpDto;
-import co.simplon.p25.sharemyeventapi.dtos.UserGandalfId;
 import co.simplon.p25.sharemyeventapi.dtos.UserLogInDto;
 import co.simplon.p25.sharemyeventapi.dtos.UserSignUpDto;
+import co.simplon.p25.sharemyeventapi.dtos.UserUuid;
 import co.simplon.p25.sharemyeventapi.entities.Actor;
 import co.simplon.p25.sharemyeventapi.repositories.ActorRepository;
 import co.simplon.p25.sharemyeventapi.security.ActorJwt;
@@ -42,10 +42,9 @@ public final class UserServiceImpl implements UserService {
 		UserSignUpDto userSignUpDto = new UserSignUpDto(actor.getEmail(),
 				actor.getPassword());
 
-		ResponseEntity<UserGandalfId> response = restTemplate.postForEntity(
-				"/users/create", userSignUpDto, UserGandalfId.class);
-
-		actor.setGandalfId(response.getBody().getGandalfId());
+		ResponseEntity<UserUuid> response = restTemplate
+				.postForEntity("/users/create", userSignUpDto, UserUuid.class);
+		actor.setGandalfId(response.getBody().getUuid());
 
 		Actor newActor = new Actor(actor.getGandalfId(), actor.getEmail(),
 				actor.getFirstname(), actor.getLastname());
@@ -63,7 +62,7 @@ public final class UserServiceImpl implements UserService {
 		UUID userUuid = UUID.fromString(
 				decoder.decode(gandalfToken.getToken()).getSubject());
 		ActorIdentity actorIdentity = actorRepo
-				.findActorIdentityByAuthId(userUuid.toString());
+				.findActorIdentityByAuthId(userUuid);
 		ActorJwt actorJwt = new ActorJwt();
 		actorJwt.setToken(gandalfToken);
 		actorJwt.setActor(actorIdentity);
