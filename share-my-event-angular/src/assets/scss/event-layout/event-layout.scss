@@ -1,0 +1,226 @@
+.event-layout {
+  color: $primary;
+  margin: auto;
+
+  .flex-main-layout {
+    display: flex;
+    flex-direction: column;
+    form {
+      width: 100% !important;
+    }
+  }
+
+  #description {
+    position: absolute;
+    margin-top: -4em;
+  }
+  .event-id {
+    @include flex-center;
+  }
+
+  .event-title {
+    h1 {
+      color: $blood;
+      font-size: 1.35em;
+      text-align: center;
+    }
+    hr {
+      margin: 0;
+    }
+    .button-layout {
+      margin-top: -0.3em;
+    }
+    .event-title-form-layout {
+      @extend .event-edit-form;
+    }
+  }
+
+  .sub-fieldset {
+    text-align: left;
+    width: 100%;
+    @include flex-maker($justifyContent: flex-start);
+    background-color: lighten($secondary, $amount: 30%);
+    padding: 0 0.5em 0.5em;
+    legend {
+      @include text-maker($color: $blood, $size: 1em, $weight: 500);
+      width: auto;
+      padding: 0.5em;
+    }
+    p {
+      margin: 0;
+    }
+  }
+
+  .event-description {
+    .sub-fieldset {
+      img {
+        display: none !important;
+      }
+    }
+    .event-description-form-layout {
+      @extend .event-edit-form;
+      .form-group {
+        width: 100% !important;
+        margin-top: 0.45em;
+      }
+    }
+  }
+
+  .event-description,
+  .event-title {
+    .sub-fieldset {
+      background-color: #fff;
+    }
+  }
+
+  .event-aside-info {
+    .event-organizer {
+      margin-bottom: 0.25em;
+    }
+    .event-aside-info-form-layout {
+      @extend .event-edit-form;
+    }
+
+    .date-time {
+      display: flex;
+      width: 100%;
+      max-height: 100px;
+      .form-group {
+        width: 50%;
+        margin: unset;
+      }
+      .time {
+        margin-left: 0.5em;
+      }
+    }
+  }
+
+  .button-layout {
+    margin-left: auto;
+  }
+
+  .tight-white-button {
+    @include tight-white-button;
+  }
+  .tight-secondary-button {
+    @include tight-secondary-button;
+  }
+  .tight-blood-button {
+    @include tight-blood-button;
+  }
+
+  @media only screen and (min-width: 500px) {
+    form {
+      .form-group {
+        width: 100% !important;
+      }
+    }
+  }
+  @media only screen and (min-width: 650px) {
+    .flex-main-layout {
+      margin: auto;
+      width: 90%;
+    }
+    .button-layout {
+      margin: auto;
+    }
+
+    .event-description {
+      .sub-fieldset {
+        img {
+          display: block !important;
+        }
+      }
+    }
+  }
+
+  @media only screen and (min-width: 800px) {
+    .flex-main-layout {
+      width: 80%;
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .date-time {
+      flex-direction: column;
+      justify-content: center;
+      .time {
+        margin-left: 0 !important;
+      }
+    }
+    .event-edit-form {
+      .wrap-btn {
+        text-align: center;
+      }
+    }
+
+    .flex-main-layout {
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .flex-center-layout {
+        width: 56%;
+      }
+
+      .flex-left-layout,
+      .flex-right-layout {
+        width: 20%;
+        .button-layout {
+          width: 100%;
+          text-align: right;
+        }
+        .event-aside-info {
+          .wrap-btn {
+            margin-top: 1.25em !important;
+          }
+          legend {
+            margin-bottom: 1.5em;
+          }
+        }
+      }
+
+      .event-title,
+      .event-localization {
+        .sub-fieldset {
+          background-color: #fff;
+        }
+      }
+    }
+  }
+}
+
+// Shared
+.event-edit-form {
+  background-color: $light;
+  border-color: $blood;
+  box-shadow: 1px 1px 2px $blood;
+  border-width: 2px;
+  legend {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: $blood;
+  }
+  .wrap-btn {
+    margin-top: 0.25em;
+    text-align: right;
+    button {
+      margin: 0 0 0 0.5em !important;
+      &:first-of-type {
+        margin-left: 0 !important;
+      }
+    }
+  }
+  input {
+    color: #000;
+    margin-top: 0.5em;
+    font-weight: 500;
+  }
+  .form-text {
+    margin-bottom: 0;
+  }
+}
+
+@import "./menu.scss";
+@import "./participant-list.scss";
+@import "./localization.scss";

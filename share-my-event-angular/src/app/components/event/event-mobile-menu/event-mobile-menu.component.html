@@ -1,0 +1,24 @@
+<div class="event-menu navbar nav-pills nav-justified fixed-bottom">
+  <app-status-modifier *ngIf="!isOrganizer"></app-status-modifier>
+  <div class="nav-link" (click)="scrollTo('description')">
+    <div class="flex-icon">
+      <svg class="event-info"></svg>
+      <span class="nav-item-label">Description</span>
+    </div>
+  </div>
+  <div class="nav-link" (click)="scrollTo('address')">
+    <div class="flex-icon">
+      <svg class="event-address"></svg>
+      <span class="nav-item-label">Adresse</span>
+    </div>
+  </div>
+  <div class="nav-link" (click)="scrollTo('participantList')">
+    <div class="flex-icon">
+      <svg class="event-participants"></svg>
+      <span class="nav-item-label">Invités</span>
+    </div>
+  </div>
+  <div class="flex-icon" (click)="scrollTo('top-nav')">
+    <svg class="go-to-top"></svg>
+  </div>
+</div>

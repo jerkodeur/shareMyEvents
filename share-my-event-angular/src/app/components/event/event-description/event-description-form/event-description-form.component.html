@@ -1,0 +1,49 @@
+<form [formGroup]="eventDescriptionForm" (ngSubmit)="onSubmitForm()">
+  <fieldset class="event-description-form-layout">
+    <legend>Modification de la description</legend>
+    <div class="form-group">
+      <editor
+        aria-required
+        class="editor"
+        formControlName="description"
+        apiKey="ylhx5dl95rb4k0hpi5aae7lwmge2lfra1n0e3zc5w5hd3ua2"
+        [init]="{
+          height: 250,
+          min_height: 250,
+          plugins: [
+            'lists',
+            'link',
+            'image',
+            'preview',
+            'emoticons',
+            'fullscreen',
+            'media'
+          ],
+          toolbar:
+            'undo redo | styles | bold italic underline | backcolor forecolor | alignleft aligncenter alignright',
+          placeholder: 'Description de votre évènement...',
+          language: 'fr_FR',
+          removed_menuitems:
+            'undo redo newdocument restoredraft superscript subscript codeformat align'
+        }"
+      ></editor>
+      <div
+        class="error-feedback"
+        *ngIf="
+          submitted &&
+            eventDescriptionForm.controls['description'].errors?.['required']
+        "
+      >
+        * Champs requis.
+      </div>
+    </div>
+    <div class="wrap-btn">
+      <button class="tight-white-button" type="button" (click)="cancelForm()">
+        Annuler
+      </button>
+      <button class="tight-blood-button" type="submit">
+        Modifier la description
+      </button>
+    </div>
+  </fieldset>
+</form>

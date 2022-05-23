@@ -1,0 +1,60 @@
+<section class="event-participantlist">
+  <fieldset class="sub-fieldset">
+    <legend>Liste des invités</legend>
+    <div class="toggle-text" [ngClass]="{ 'mx-auto': !isOrganizer }">
+      <div
+        class="circle-layout"
+        [ngClass]="{ selected: isDisplayForm }"
+        title="Ajouter un invité"
+        *ngIf="isOrganizer"
+      >
+        <svg
+          (click)="toggleForm()"
+          role="button"
+          aria-roledescription="Ajouter un invité"
+        ></svg>
+      </div>
+      <span
+        *ngIf="!isDisplayForm && participantList && participantList.length == 0"
+      >
+        Aucun invité
+      </span>
+      <span
+        *ngIf="!isDisplayForm && participantList && participantList.length > 0"
+      >
+        {{ participantList.length }} invité<span
+          *ngIf="participantList.length > 1"
+          >s</span
+        >
+      </span>
+      <span *ngIf="isDisplayForm" class="required"> * required </span>
+    </div>
+    <app-add-participant-form
+      [eventId]="eventId"
+      [ngClass]="{ 'show-form': isDisplayForm, 'hide-form': !isDisplayForm }"
+    ></app-add-participant-form>
+    <article
+      class="participant-list"
+      *ngIf="participantList && participantList.length > 0"
+    >
+      <p *ngFor="let participant of participantList">
+        <app-participant-status
+          [status]="participant.availabilty"
+        ></app-participant-status>
+        <a
+          href="mailto:{{ participant.email }}?subject={{ title }}"
+          title="Envoyé un mail à {{ participant.email }}"
+          target="_blank"
+          >{{ participant.name }}</a
+        >
+        <button
+          type="button"
+          (click)="removeParticipant(participant)"
+          title="retirer {{ participant.name }}"
+        >
+          X
+        </button>
+      </p>
+    </article>
+  </fieldset>
+</section>

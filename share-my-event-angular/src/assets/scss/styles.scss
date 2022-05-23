@@ -1,12 +1,57 @@
+@import "/src/assets/scss/variables.scss";
+@import "./mixins.scss";
+@import "./shared.scss";
 @import "./layout.scss";
+@import "./form.scss";
 
 html {
   font-family: $montserrat, "sans-serif";
   font-size: 16px;
+  color: $primary;
 }
 
-body {
-  background-color: $light;
+#top-nav {
+  padding-top: 0.01em;
+}
+
+.pwd-reset-intructions {
+  h1 {
+    @include text-maker($size: 1.2em, $weight: bold);
+    margin-top: 1em;
+  }
+
+  p {
+    &:first-of-type {
+      margin-top: 1.5em;
+    }
+
+    span {
+      font-weight: bold;
+      color: $blood;
+      margin-left: 0.5em;
+    }
+  }
+}
+
+aside {
+  &.form-info {
+    margin-top: 0 !important;
+  }
+}
+
+.aside-link {
+  font-size: 0.85em;
+  a {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #000;
+    &:hover {
+      text-decoration: underline;
+      color: $secondary;
+    }
+  }
 }
 
 @import "./navbar/navbar.scss";
+@import "./event-layout/event-layout.scss";
+@import "./home/home.scss";

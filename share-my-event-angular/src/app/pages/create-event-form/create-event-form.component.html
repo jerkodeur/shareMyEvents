@@ -1,0 +1,238 @@
+<form [formGroup]="eventForm" (ngSubmit)="onSubmit()" class="event-form">
+  <fieldset>
+    <legend class="w-auto px-2">
+      <h1>Création d'un event</h1>
+    </legend>
+    <div class="required">* Champs obligatoires</div>
+    <div class="form-group">
+      <label for="title" class="form-label">
+        Titre de l'event<span class="text-blood">*</span>
+      </label>
+      <input
+        type="text"
+        name="title"
+        id="title"
+        placeholder="Entrez un titre pour l'event"
+        class="form-control"
+        aria-required
+        formControlName="title"
+      />
+      <div
+        class="error-feedback"
+        *ngIf="
+            submitted &&
+            eventForm.controls['title'].errors?.['required']
+          "
+      >
+        * Vous devez indiquer un titre.
+      </div>
+      <div
+        id="titleHelp"
+        class="form-text"
+        [ngClass]="{
+          'form-text-error': eventForm.value['title'].length > 50
+        }"
+      >
+        50 caractères maximum [{{ eventForm.value?.['title']?.length }}
+        / 50]
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="title" class="form-label"
+        >Description de l'event<span class="text-blood">*</span></label
+      >
+      <editor
+        aria-required
+        class="editor"
+        formControlName="description"
+        apiKey="ylhx5dl95rb4k0hpi5aae7lwmge2lfra1n0e3zc5w5hd3ua2"
+        [init]="{
+          height: 250,
+          min_height: 250,
+          plugins: [
+            'lists',
+            'link',
+            'image',
+            'preview',
+            'emoticons',
+            'fullscreen',
+            'media'
+          ],
+          toolbar:
+            'undo redo | styles | bold italic underline | backcolor forecolor | alignleft aligncenter alignright',
+          placeholder: 'Description de votre évènement...',
+          language: 'fr_FR',
+          removed_menuitems:
+            'undo redo newdocument restoredraft superscript subscript codeformat align'
+        }"
+      ></editor>
+      <div
+        class="error-feedback"
+        *ngIf="
+            submitted &&
+            eventForm.controls['description'].errors?.['required']
+          "
+      >
+        * Vous devez donner une description à l'event.
+      </div>
+    </div>
+    <fieldset class="sub-fieldset mb-3">
+      <legend class="w-auto px-2">Date de rendez-vous</legend>
+      <div class="row">
+        <div class="col-12 col-sm-6">
+          <div class="form-group">
+            <label for="date" class="form-label"
+              >Date de l'event<span class="text-blood">*</span></label
+            >
+            <input
+              type="date"
+              name="date"
+              id="date"
+              class="form-control"
+              formControlName="date"
+              [min]="currentDate"
+              aria-required
+            />
+            <div
+              class="error-feedback"
+              *ngIf="
+                  submitted &&
+                  eventForm.controls['date'].errors?.['required']
+                "
+            >
+              * Vous devez indiquer une date pour l'event.
+            </div>
+            <div
+              class="error-feedback"
+              *ngIf="
+                  submitted &&
+                  eventForm.controls['date'].errors?.['pattern']
+                "
+            >
+              La date indiquée ne respecte pas le format requis.
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6">
+          <div class="form-group">
+            <label for="time" class="form-label"
+              >Heure de début<span class="text-blood">*</span></label
+            >
+            <input
+              type="time"
+              name="time"
+              id="time"
+              class="form-control"
+              aria-required
+              formControlName="time"
+            />
+            <div
+              class="error-feedback"
+              *ngIf="
+                  submitted &&
+                  eventForm.controls['time'].errors?.['required']
+                "
+            >
+              * Vous devez indiquer une heure de début pour l'event.
+            </div>
+            <div
+              class="error-feedback"
+              *ngIf="
+                  submitted &&
+                  eventForm.controls['time'].errors &&
+                  eventForm.controls['time'].errors?.['pattern']
+                "
+            >
+              L'heure indiquée ne respecte pas le format requis.
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div
+            class="error-feedback ps-"
+            *ngIf="
+                    submitted &&
+                    eventForm.errors?.['invalidDate']
+                  "
+          >
+            * La date de l'event ne peut être inférieur à la date actuelle
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset formGroupName="addressForm" class="sub-fieldset mb-3">
+      <legend class="w-auto px-2">Adresse de rendez-vous</legend>
+      <div class="row">
+        <div class="form-group col">
+          <label for="street" class="form-label">Adresse</label>
+          <input
+            type="text"
+            name="street"
+            id="street"
+            placeholder="Entrez un adresse (numéro, nom de rue)"
+            class="form-control"
+            formControlName="street"
+            autocomplete="street-address"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-4">
+          <div class="form-group">
+            <label for="zipCode" class="form-label">Code postal</label>
+            <input
+              name="zipCode"
+              id="zipCode"
+              placeholder="ex: 35000"
+              class="form-control"
+              formControlName="zipCode"
+              type="text"
+              autocomplete="postal-code"
+            />
+            <div
+              class="error-feedback"
+              *ngIf="
+                submitted &&
+                eventForm.controls['addressForm']
+                  .get('zipCode')
+                  ?.hasError('pattern')
+              "
+            >
+              * Doit être composé de 5 chiffres.
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-8">
+          <div class="form-group">
+            <label for="locality" class="form-label">Ville</label>
+            <input
+              type="text"
+              name="locality"
+              id="locality"
+              placeholder="Indiquez une Ville"
+              class="form-control"
+              formControlName="locality"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col">
+          <label for="additionnal" class="form-label"
+            >Infos complémentaires</label
+          >
+          <textarea
+            name="additionnal"
+            id="additionnal"
+            placeholder="Complément d'adresse (codes, étages, accès, batiment, etc...)"
+            class="form-control"
+            formControlName="additional"
+          ></textarea>
+        </div>
+      </div>
+    </fieldset>
+    <div class="row form-btn-layout">
+      <button type="submit" class="btn btn-secondary">Créer l'event</button>
+    </div>
+  </fieldset>
+</form>

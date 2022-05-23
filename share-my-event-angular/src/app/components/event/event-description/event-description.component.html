@@ -1,0 +1,22 @@
+<section class="event-description">
+  <app-event-description-form
+    [eventId]="eventId"
+    [eventDescription]="description"
+    (hideForm)="toggleEdition()"
+    *ngIf="edited"
+  >
+  </app-event-description-form>
+  <fieldset class="sub-fieldset" *ngIf="!edited">
+    <legend>Description</legend>
+    <div [innerHtml]="safeDescription"></div>
+    <div class="button-layout" *ngIf="isOrganizer">
+      <button
+        type="button"
+        class="tight-white-button"
+        (click)="toggleEdition()"
+      >
+        Modifier la description
+      </button>
+    </div>
+  </fieldset>
+</section>

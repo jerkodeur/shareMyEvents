@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "sharemyevent.security.jwt.secret",
+  "type": "java.lang.String",
+  "description": "A description for 'sharemyevent.security.jwt.secret'"
+}]}

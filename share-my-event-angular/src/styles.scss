@@ -3,7 +3,6 @@
 
 @import "/node_modules/bootstrap/scss/bootstrap.scss";
 
-@import "/src/assets/scss/variables.scss";
 @import "/src/assets/scss/styles.scss";
 
 // font colors
@@ -32,4 +31,14 @@
 }
 .bg-blood {
   background-color: $blood;
+}
+
+// Bootstrap override
+.btn,
+.btn:active {
+  box-shadow: none !important;
+}
+.form-control:focus {
+  border-color: $secondary;
+  box-shadow: 1px 1px 1px $secondary;
 }

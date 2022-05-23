@@ -1,4 +1,13 @@
-<nav class="navbar navbar-expand-sm navbar-light">
+<a
+  class="close-navbar-toggler collapsed"
+  aria-controls="navbarSupportedContent"
+  aria-expanded="false"
+  aria-label="Toggle navigation"
+  data-bs-toggle="collapse"
+  data-bs-target=".navbar-collapse.show"
+>
+</a>
+<nav class="navbar navbar-expand-sm navbar-light fixed-top top-nav">
   <div class="container-fluid">
     <div>
       <a routerLink="/home">
@@ -8,15 +17,26 @@
         <app-navbar-title></app-navbar-title>
       </a>
     </div>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <div class="navbar-nav me-auto mb-2 mb-lg-0">
-      </div>
-      <ul>
-        <li class="nav-item">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li
+          class="nav-item"
+          routerLinkActive="active-nav-item"
+          *ngIf="!authenticated"
+          data-bs-toggle="collapse"
+          data-bs-target=".navbar-collapse.show"
+        >
           <a routerLink="/signup">
             <div class="flex-icon">
               <svg class="signup-img"></svg>
@@ -24,11 +44,31 @@
             </div>
           </a>
         </li>
-        <li class="nav-item">
+        <li
+          class="nav-item"
+          routerLinkActive="active-nav-item"
+          *ngIf="!authenticated"
+          data-bs-toggle="collapse"
+          data-bs-target=".navbar-collapse.show"
+        >
           <a routerLink="/login">
             <div class="flex-icon">
               <svg class="login-img"></svg>
-              Connection
+              Connexion
+            </div>
+          </a>
+        </li>
+        <li
+          class="nav-item"
+          routerLinkActive="active-nav-item"
+          *ngIf="authenticated"
+          data-bs-toggle="collapse"
+          data-bs-target=".navbar-collapse.show"
+        >
+          <a routerLink="/logout">
+            <div class="flex-icon">
+              <svg class="logout-img"></svg>
+              Déconnexion
             </div>
           </a>
         </li>

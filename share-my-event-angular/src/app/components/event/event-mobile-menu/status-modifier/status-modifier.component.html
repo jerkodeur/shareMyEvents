@@ -1,0 +1,53 @@
+<div class="nav-link user-status">
+  <div class="flex-icon">
+    <div class="dropup">
+      <button
+        type="button"
+        class="btn dropdown-toggle"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <svg
+          id="user-status"
+          [ngClass]="{
+            sts_unknown: status == 'unknown',
+            sts_available: status == 'available',
+            sts_uncertain: status == 'uncertain',
+            sts_unavailable: status == 'unavailable'
+          }"
+        ></svg>
+      </button>
+      <ul class="dropdown-menu">
+        <li>
+          <button
+            class="dropdown-item"
+            type="button"
+            (click)="updateStatus('available')"
+          >
+            Participe
+          </button>
+        </li>
+        <li>
+          <button
+            class="dropdown-item"
+            type="button"
+            (click)="updateStatus('uncertain')"
+          >
+            Incertain
+          </button>
+        </li>
+        <li>
+          <button
+            class="dropdown-item"
+            type="button"
+            (click)="updateStatus('unavailable')"
+          >
+            Indisponible
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,127 @@
+.home-layout {
+  margin: auto;
+  .presentation {
+    text-align: center;
+    margin-top: 5em;
+    .welcome {
+      margin-bottom: 0.25em;
+      font-weight: bold;
+      font-size: 1.25em;
+      color: $blood;
+    }
+    .description {
+      font-weight: bold;
+    }
+  }
+  fieldset,
+  form {
+    width: 100% !important;
+  }
+  fieldset {
+    margin-top: 1em;
+    padding-bottom: 0.25em;
+    legend {
+      margin: auto;
+      h1 {
+        font-weight: bold;
+        font-size: 0.65em;
+        color: $blood !important;
+      }
+    }
+    .event-join-instructions {
+      font-size: 0.8em;
+      text-align: justify;
+      margin-bottom: 0.5em;
+    }
+    .form-btn-layout {
+      justify-content: center;
+      margin: 0.75em 0 0.5em 0;
+      button {
+        @include main-secondary-button;
+        width: 100%;
+        font-size: 0.9em !important;
+      }
+    }
+    hr {
+      box-shadow: 0 2px 5px $primary;
+      color: $primary;
+      margin: 0 0 0.5em;
+    }
+  }
+  .event-create-layout {
+    margin-top: 1em;
+    .inline-links {
+      @extend .aside-text-info;
+      a {
+        color: $primary;
+        font-weight: 500;
+      }
+    }
+    .event-create-button-layout {
+      margin-bottom: 1.5em;
+      button {
+        @include button-color-maker($secondary, $primary, $primary, $secondary);
+        width: 100%;
+        border-radius: 4px;
+        padding: 0.5em 0;
+        font-weight: bold;
+        border-color: $blood;
+        &:hover {
+          border-color: $primary;
+        }
+      }
+    }
+  }
+  .organiser-events-layout {
+    margin-top: 0.5em;
+    .next-event-body {
+      font-size: 0.8em;
+      display: flex;
+      flex-direction: column;
+      .event-item-label {
+        font-weight: 600;
+      }
+    }
+    .next-event-footer {
+      display: flex;
+      flex-direction: column-reverse;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 0.5em;
+      a.my-events {
+        @include blood-secondary-link;
+      }
+      a.button {
+        width: 100%;
+        margin-top: 0.75em;
+        margin-bottom: 0.5em;
+      }
+      button {
+        @include main-secondary-button;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media screen and(min-width: 475px) {
+  .home-layout {
+    .organiser-events-layout {
+      .next-event-footer {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        a.button {
+          width: 40%;
+          margin-top: 0;
+        }
+      }
+    }
+    fieldset .form-btn-layout {
+      justify-content: end;
+      button {
+        width: 40%;
+      }
+    }
+  }
+}
