@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { take, takeWhile } from 'rxjs';
 
 import { EventService } from 'src/app/services/event.service';
@@ -30,7 +30,10 @@ export class EventLocalizationFormComponent implements OnInit {
   ngOnInit(): void {
     this.localizationForm = this.fb.group({
       street: this.address && this.address.street,
-      zipCode: this.address && this.address.zipCode,
+      zipCode: [
+        this.address && this.address.zipCode,
+        Validators.pattern(/^[0-9]{5}$/),
+      ],
       locality: this.address && this.address.locality,
       additional: this.address && this.address.additional,
     });

@@ -21,11 +21,11 @@ export class AddParticipantFormComponent {
     this.submitted = true;
     const { name, email } = form.value;
     const newParticipant = new Participant(name, email, this.eventId);
-    this.participantService
-      .addParticipantToEvent$(newParticipant)
-      .subscribe(() =>
-        this.participantService.getEventParticipants$(this.eventId)
-      );
+    // this.participantService
+    //   .addParticipantToEvent$(newParticipant)
+    //   .subscribe(() =>
+    //     this.participantService.getEventParticipants$(this.eventId)
+    //   );
     form.resetForm();
   }
 }

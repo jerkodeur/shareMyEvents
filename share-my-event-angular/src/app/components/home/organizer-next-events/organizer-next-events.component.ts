@@ -29,8 +29,8 @@ export class OrganizerNextEventsComponent implements OnInit {
         .subscribe((event: EventInterface) => {
           this.event = event;
           if (event) {
-            const splitDate = DateHandler.splitDateObject(event.eventDate);
-            this.formattedDate = `${splitDate[0]} ${splitDate[1]}`;
+            const { date, time } = DateHandler.splitDateObject(event.eventDate);
+            this.formattedDate = `${date} ${time}`;
           }
         });
     }

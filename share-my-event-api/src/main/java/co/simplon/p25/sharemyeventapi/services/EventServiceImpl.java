@@ -2,10 +2,9 @@ package co.simplon.p25.sharemyeventapi.services;
 
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import co.simplon.p25.sharemyeventapi.dtos.event.EventAdressDto;
+import co.simplon.p25.sharemyeventapi.dtos.event.EventAddressDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventCreateDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventCreatedId;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventDateDto;
@@ -23,23 +22,18 @@ import co.simplon.p25.sharemyeventapi.repositories.EventRepository;
 @Service
 public class EventServiceImpl implements EventService {
 
-	@Autowired
-	AuthService authService;
+	private final AuthService authService;
+	private final ActorService actorService;
+	private final EventRepository eventRepo;
+	private final AddressRepository addressRepo;
 
-	@Autowired
-	ActorService actorService;
-
-	@Autowired
-	EventRepository eventRepo;
-
-	@Autowired
-	AddressRepository addressRepo;
-
-	@Autowired
-	OrganizerService organizerService;
-
-	private EventServiceImpl() {
-		// Ensures non-instantiability
+	public EventServiceImpl(AuthService authService, ActorService actorService,
+			EventRepository eventRepo, AddressRepository addressRepo,
+			OrganizerService organizerService) {
+		this.authService = authService;
+		this.actorService = actorService;
+		this.eventRepo = eventRepo;
+		this.addressRepo = addressRepo;
 	}
 
 	@Override
@@ -114,6 +108,7 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
+	@Transactional
 	public EventDescriptionDto updateDescription(Long eventId,
 			EventDescriptionDto input) throws ForbiddenException {
 		if (!isOrganizer(eventId)) {
@@ -126,6 +121,7 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
+	@Transactional
 	public EventDateDto updateDate(Long eventId, EventDateDto input)
 			throws ForbiddenException {
 		if (!isOrganizer(eventId)) {
@@ -138,7 +134,8 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public EventAdressDto updateAddress(Long eventId, EventAdressDto inputs)
+	@Transactional
+	public EventAddressDto updateAddress(Long eventId, EventAddressDto inputs)
 			throws ForbiddenException {
 		if (!isOrganizer(eventId)) {
 			throw new ForbiddenException("Forbidden access to the resource");
@@ -171,6 +168,7 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
+	@Transactional
 	public void remove(Long eventId) throws ForbiddenException {
 		if (!isOrganizer(eventId)) {
 			throw new ForbiddenException("Forbidden access to the resource");

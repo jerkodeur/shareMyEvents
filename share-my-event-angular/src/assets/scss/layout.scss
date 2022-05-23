@@ -44,6 +44,7 @@ form {
   form:not(.event-form) {
     .form-group,
     aside.aside-text-info {
+      margin: auto;
       width: 80% !important;
       input {
         width: 100% !important;
@@ -82,7 +83,8 @@ form {
     width: 75% !important;
   }
   aside.aside-text-info {
-    width: 85%;
+    margin: auto;
+    width: 75%;
   }
 
   .sub-fieldset {
@@ -100,7 +102,7 @@ form {
     width: 65% !important;
   }
   aside.aside-text-info {
-    width: 75%;
+    width: 65%;
   }
   .event-form {
     fieldset {
@@ -119,6 +121,10 @@ form {
     fieldset {
       width: 70%;
     }
+  }
+
+  aside.aside-text-info {
+    width: 50%;
   }
 }
 

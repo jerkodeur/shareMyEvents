@@ -26,7 +26,7 @@ public class EventCreateDto {
 	private LocalDateTime eventDate;
 
 	@Valid
-	private EventAdressDto address;
+	private EventAddressDto address;
 
 	private String organizerId;
 
@@ -57,11 +57,11 @@ public class EventCreateDto {
 		eventDate = date;
 	}
 
-	public EventAdressDto getAddress() {
+	public EventAddressDto getAddress() {
 		return address;
 	}
 
-	public void setAddress(EventAdressDto address) {
+	public void setAddress(EventAddressDto address) {
 		this.address = address;
 	}
 

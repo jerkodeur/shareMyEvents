@@ -8,9 +8,9 @@
     }
   }
   .additional-address {
-    @include flex-maker($justifyContent: flex-start);
-    margin-bottom: 0.25em;
-    text-align: center;
+    @include flex-maker($alignItems: flex-start);
+    margin-bottom: 0.25em !important;
+    margin-top: 0.25em !important;
   }
   .aside-info {
     @include text-maker($blood, 0.85em, bold);
@@ -37,6 +37,7 @@
       .locality {
         &.form-group {
           width: 70% !important;
+          margin: 0;
         }
       }
     }

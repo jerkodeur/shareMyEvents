@@ -22,16 +22,14 @@
           placeholder="ex: 35000"
           class="form-control"
           formControlName="zipCode"
-          max="99999"
-          min="0"
-          type="number"
+          type="text"
           autocomplete="postal-code"
         />
         <div
           class="error-feedback"
           *ngIf="
             submitted &&
-              localizationForm.controls['zipCode'].errors?.['pattern']
+                    localizationForm.controls['zipCode'].errors?.['pattern']
           "
         >
           * Doit être composé de 5 chiffres.

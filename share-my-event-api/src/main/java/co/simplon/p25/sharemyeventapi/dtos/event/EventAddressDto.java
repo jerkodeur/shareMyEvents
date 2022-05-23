@@ -2,7 +2,7 @@ package co.simplon.p25.sharemyeventapi.dtos.event;
 
 import javax.validation.constraints.Pattern;
 
-public final class EventAdressDto {
+public final class EventAddressDto {
 
 	// TODO Créer une validation si la rue est renseignée, mais pas la ville
 	// @FullStreet
@@ -15,7 +15,7 @@ public final class EventAdressDto {
 	private String locality;
 	private String additional;
 
-	public EventAdressDto() {
+	public EventAddressDto() {
 		// TODO Auto-generated constructor stub
 	}
 

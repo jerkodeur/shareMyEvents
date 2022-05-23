@@ -20,7 +20,9 @@ export class OrganizerService {
       .get<any>(`${environment.apiUrl}/organizer/next-event`)
       .pipe(
         map((data) => {
-          data.eventDate = data && new Date(data.eventDate);
+          if (data) {
+            data.eventDate = new Date(data.eventDate);
+          }
           return data;
         }),
         catchError(async (err) =>

@@ -15,10 +15,15 @@ export class DateHandler {
 
     const [year, month, day] = splitDate;
     const [hours, minutes] = splitTime;
-    return new Date(Date.UTC(year, month - 1, day, hours, minutes));
+    return new Date(Date.UTC(year, month - 1, day, hours, minutes, 0));
   }
 
-  static splitDateObject(dateObj: Date): Array<string> {
+  static splitDateObject(dateObj: Date): {
+    date: string;
+    time: string;
+    shortDateFormatted: string;
+    shortTime: string;
+  } {
     const date = dateObj.toLocaleDateString('fr-FR', {
       weekday: 'long',
       month: 'long',
@@ -34,6 +39,6 @@ export class DateHandler {
     const shortTime = dateObj.toLocaleTimeString().slice(0, 5);
     const shortDate = dateObj.toLocaleDateString().split('/');
     const shortDateFormatted = `${shortDate[2]}-${shortDate[1]}-${shortDate[0]}`;
-    return [date, time, shortDateFormatted, shortTime];
+    return { date, time, shortDateFormatted, shortTime };
   }
 }
