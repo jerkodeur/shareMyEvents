@@ -15,7 +15,6 @@ public final class EventDateDto {
 	private LocalDateTime eventDate;
 
 	public EventDateDto() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public EventDateDto(LocalDateTime eventDate) {

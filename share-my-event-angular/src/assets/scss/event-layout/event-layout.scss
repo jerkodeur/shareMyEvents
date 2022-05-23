@@ -84,8 +84,10 @@
     .date-time {
       display: flex;
       width: 100%;
+      max-height: 100px;
       .form-group {
         width: 50%;
+        margin: unset;
       }
       .time {
         margin-left: 0.5em;
@@ -121,6 +123,14 @@
     }
     .button-layout {
       margin: auto;
+    }
+
+    .event-description {
+      .sub-fieldset {
+        img {
+          display: block !important;
+        }
+      }
     }
   }
 
@@ -159,6 +169,14 @@
         .button-layout {
           width: 100%;
           text-align: right;
+        }
+        .event-aside-info {
+          .wrap-btn {
+            margin-top: 1.25em !important;
+          }
+          legend {
+            margin-bottom: 1.5em;
+          }
         }
       }
 

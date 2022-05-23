@@ -1,5 +1,7 @@
 package co.simplon.p25.sharemyeventapi.dtos;
 
+import java.util.UUID;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -22,7 +24,7 @@ public class ActorSignUpDto {
 	@NotBlank(message = "lastname_required")
 	private String lastname;
 
-	private String gandalf_id;
+	private UUID gandalf_id;
 
 	public ActorSignUpDto() {
 	}
@@ -59,12 +61,12 @@ public class ActorSignUpDto {
 		this.lastname = lastname;
 	}
 
-	public String getGandalfId() {
+	public UUID getGandalfId() {
 		return gandalf_id;
 	}
 
-	public void setGandalfId(String gandalf_id) {
-		this.gandalf_id = gandalf_id;
+	public void setGandalfId(UUID uuid) {
+		gandalf_id = uuid;
 	}
 
 	@Override

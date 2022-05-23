@@ -39,7 +39,7 @@ export class EventService {
             return data;
           },
           error: async (err) => {
-            this.errorHandler.notifyHttpError(err).pipe(take(1)).subscribe();
+            this.errorHandler.notifyHttpError(err).subscribe();
           },
         })
       );
@@ -59,7 +59,7 @@ export class EventService {
             this.router.navigate([`/events/${res.id}`]);
           },
           error: async (err) => {
-            this.errorHandler.notifyHttpError(err).pipe(take(1)).subscribe();
+            this.errorHandler.notifyHttpError(err).subscribe();
           },
         })
       );
@@ -77,7 +77,7 @@ export class EventService {
             this.notify.showSuccess('Le titre a été modifié avec succès');
           },
           error: async (err) => {
-            this.errorHandler.notifyHttpError(err).pipe(take(1)).subscribe();
+            this.errorHandler.notifyHttpError(err).subscribe();
           },
         })
       );
@@ -95,7 +95,7 @@ export class EventService {
             this.notify.showSuccess('La description a été modifié avec succès');
           },
           error: async (err) => {
-            this.errorHandler.notifyHttpError(err).pipe(take(1)).subscribe();
+            this.errorHandler.notifyHttpError(err).subscribe();
           },
         })
       );
@@ -112,8 +112,8 @@ export class EventService {
             this.eventDate.next(new Date(res.eventDate));
             this.notify.showSuccess('La date a été modifié avec succès');
           },
-          error: async (err) => {
-            this.errorHandler.notifyHttpError(err).pipe(take(1)).subscribe();
+          error: (err) => {
+            this.errorHandler.notifyHttpError(err).subscribe();
           },
         })
       );
@@ -134,7 +134,7 @@ export class EventService {
             this.notify.showSuccess("L'addresse a été modifiée avec succès");
           },
           error: async (err) => {
-            this.errorHandler.notifyHttpError(err).pipe(take(1)).subscribe();
+            this.errorHandler.notifyHttpError(err).subscribe();
           },
         })
       );

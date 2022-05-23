@@ -1,12 +1,22 @@
-<div class="home-layout">
-  <p class="presentation">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem minus,
-    repellendus commodi fuga magni ad molestiae itaque libero cum iste deleniti.
-  </p>
+<article class="home-layout">
+  <div class="presentation">
+    <div class="welcome">Bienvenue sur sharemyevents!</div>
+    <div>
+      L'application qui va vous permettre de partager un évènement encore plus
+      facilement que vous ne l'auriez imaginé !!!
+    </div>
+    <div class="description">
+      {{
+        authenticated
+          ? "Laissez-vous tenter!"
+          : "Inscrivez-vous ou connectez-vous pour tester!"!
+      }}
+    </div>
+  </div>
   <app-home-event-create></app-home-event-create>
   <app-home-event-join-form></app-home-event-join-form>
   <app-organizer-next-events
     *ngIf="authenticated"
     [nextEvent$]="nextEvent"
   ></app-organizer-next-events>
-</div>
+</article>

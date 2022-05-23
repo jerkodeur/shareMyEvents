@@ -24,9 +24,9 @@ export class EventParticipantListComponent implements OnInit {
   ngOnInit(): void {
     this.authService.isOrganizer.subscribe((bool) => (this.isOrganizer = bool));
 
-    this.participantService
-      .getEventParticipants$(this.eventId)
-      .subscribe((participants) => (this.participantList = participants));
+    // this.participantService
+    //   .getEventParticipants$(this.eventId)
+    //   .subscribe((participants) => (this.participantList = participants));
   }
 
   toggleForm() {
@@ -34,14 +34,14 @@ export class EventParticipantListComponent implements OnInit {
   }
 
   removeParticipant(participant: Participant) {
-    const accept = window.confirm(
-      `Etes vous sur de vouloir supprimer ${participant.name} ?`
-    );
-    accept &&
-      this.participantService.deleteParticipantToEvent$(
-        this.eventId,
-        participant.id
-      );
-    if (accept) this.participantService.getEventParticipants$(this.eventId);
+    // const accept = window.confirm(
+    //   `Etes vous sur de vouloir supprimer ${participant.name} ?`
+    // );
+    // accept &&
+    //   this.participantService.deleteParticipantToEvent$(
+    //     this.eventId,
+    //     participant.id
+    //   );
+    // if (accept) this.participantService.getEventParticipants$(this.eventId);
   }
 }

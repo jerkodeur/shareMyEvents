@@ -51,10 +51,10 @@ export class EventAsideInfoComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  splitDate(date: Date) {
-    const splitDate = DateHandler.splitDateObject(date);
-    this.date = splitDate[0];
-    this.time = splitDate[1];
+  splitDate(input: Date) {
+    const { date, time } = DateHandler.splitDateObject(input);
+    this.date = date;
+    this.time = time;
   }
 
   toggleEdition() {
