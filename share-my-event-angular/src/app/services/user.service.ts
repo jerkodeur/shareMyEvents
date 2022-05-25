@@ -32,7 +32,7 @@ export class UserService {
         tap({
           next: () => {
             this.notify.showSuccess(
-              `Bienvenue ${user.firstname}, ton compte a été crée avec succès`
+              `Bienvenue ${user.nickname}, ton compte a été crée avec succès`
             );
             this.router.navigate(['/login']);
           },
@@ -53,9 +53,9 @@ export class UserService {
               localStorage.setItem('access_token', res.token.token);
               this.authentication.authenticated.next(true);
               this.notify.showSuccess(
-                `Bon retour parmi nous ${res.actor.lastname}`
+                `Bon retour parmi nous ${res.actor.nickname}`
               );
-              this.router.navigate(['/home']);
+              this.router.navigateByUrl('/home');
             } else {
               throw new Error('Erreur lors de la récupération du token');
             }

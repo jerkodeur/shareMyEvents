@@ -44,10 +44,10 @@ public final class UserServiceImpl implements UserService {
 
 		ResponseEntity<UserUuid> response = restTemplate
 				.postForEntity("/users/create", userSignUpDto, UserUuid.class);
-		actor.setGandalfId(response.getBody().getUuid());
+		actor.setAuthId(response.getBody().getUuid());
 
-		Actor newActor = new Actor(actor.getGandalfId(), actor.getEmail(),
-				actor.getFirstname(), actor.getLastname());
+		Actor newActor = new Actor(actor.getAuthId(), actor.getEmail(),
+				actor.getNickname());
 
 		actorRepo.save(newActor);
 	}

@@ -10,69 +10,36 @@
     </legend>
     <div class="required">* Champs obligatoires</div>
     <div class="form-group">
-      <label for="firstname" class="form-label"
-        >Nom <span class="text-blood">*</span></label
+      <label for="nickname" class="form-label"
+        >Nom d'utilisateur<span class="text-blood">*</span></label
       >
       <input
         type="text"
-        name="firstname"
-        id="firstname"
-        placeholder="Entrez votre nom de famille"
+        name="nickname"
+        id="nickname"
+        placeholder="Entrez votre nom d'utilisateur'"
         class="form-control"
         aria-required
-        formControlName="firstname"
+        formControlName="nickname"
         autocomplete="family-name"
       />
       <div
         class="error-feedback"
         *ngIf="
           submitted &&
-          signUpForm.controls['firstname'].errors?.['required']
+          signUpForm.controls['nickname'].errors?.['required']
         "
       >
-        * Vous devez entrer un nom.
+        * Vous devez entrer un nom d'utilisateur.
       </div>
       <div
         class="error-feedback"
         *ngIf="
           submitted &&
-          signUpForm.controls['firstname'].errors?.['minlength']
+          signUpForm.controls['nickname'].errors?.['minlength']
         "
       >
         Le nom doit comporter au moins 2 caractères.
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="lastname" class="form-label"
-        >Prénom <span class="text-blood">*</span></label
-      >
-      <input
-        type="text"
-        name="lastname"
-        id="lastname"
-        placeholder="Entrez votre prénom"
-        class="form-control"
-        aria-required
-        formControlName="lastname"
-        autocomplete="given-name"
-      />
-      <div
-        class="error-feedback"
-        *ngIf="
-          submitted &&
-          signUpForm.controls['lastname'].errors?.['required']
-        "
-      >
-        * Vous devez entrer un prénom.
-      </div>
-      <div
-        class="error-feedback"
-        *ngIf="
-          submitted &&
-          signUpForm.controls['lastname'].errors?.['minlength']
-        "
-      >
-        Le prénom doit comporter au moins 2 caractères.
       </div>
     </div>
     <div class="form-group">

@@ -87,8 +87,7 @@ public class EventServiceImpl implements EventService {
 			eventPage.setAddress(event.getAddress());
 		}
 		eventPage.setOrganizerAuthId(event.getOrganizer().getAuthId());
-		eventPage.setOrganizerFirstname(event.getOrganizer().getFirstname());
-		eventPage.setOrganizerLastname(event.getOrganizer().getLastname());
+		eventPage.setOrganizerFirstname(event.getOrganizer().getNickname());
 		eventPage.setOrganizerEmail(event.getOrganizer().getEmail());
 
 		return eventPage;

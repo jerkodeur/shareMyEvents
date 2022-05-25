@@ -5,5 +5,5 @@
  * \q
  */
 
-DROP DATABASE IF EXISTS sharemyevent;
-CREATE DATABASE "sharemyevent" ENCODING 'UTF8';
+DROP DATABASE IF EXISTS sharemyevents;
+CREATE DATABASE "sharemyevents" ENCODING 'UTF8';

@@ -10,8 +10,8 @@ import co.simplon.p25.sharemyeventapi.entities.Actor;
 
 public interface ActorRepository extends JpaRepository<Actor, Long> {
 
-	@Query("SELECT a.firstname as firstname, a.lastname as lastname FROM Actor a WHERE a.authId = ?1")
-	ActorIdentity findActorIdentityByAuthId(UUID gandalfId);
+	@Query("SELECT a.nickname as nickname FROM Actor a WHERE a.authId = ?1")
+	ActorIdentity findActorIdentityByAuthId(UUID authId);
 
 	Actor findByAuthId(UUID authId);
 

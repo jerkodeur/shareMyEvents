@@ -10,7 +10,5 @@ CREATE TABLE "actors" (
   id SERIAL PRIMARY KEY,
   auth_id UUID UNIQUE,
   email VARCHAR(255) UNIQUE NOT NULL,
-  firstname VARCHAR(100),
-  lastname VARCHAR(100),
-  nickname VARCHAR(25)
+  nickname VARCHAR(100)
 );

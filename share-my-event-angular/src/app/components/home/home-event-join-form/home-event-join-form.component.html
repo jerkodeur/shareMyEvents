@@ -6,64 +6,54 @@
         <h1>Participer à un event</h1>
       </legend>
       <p class="event-join-instructions">
-        Afin de participer à un event, veuillez renseigner un nom d'utilisateur
-        et renseigner l'id de participant reçu par e-mail.
+        Afin de participer à un event, veuillez renseigner l'adresse e-mail sur
+        laquelle vous avez reçu votre invitation ainsi que le code event fournit
+        dans le mail que vous avez reçu.
       </p>
       <hr />
       <div class="required">* Champs obligatoires</div>
       <div class="form-group">
         <label for="email" class="form-label"
-          >Nom d'utilisateur <span class="text-blood">*</span></label
+          >E-mail <span class="text-blood">*</span></label
         >
         <input
-          type="text"
-          name="username"
-          id="username"
-          placeholder="Choisissez un nom d'utilisateur"
+          type="email"
+          name="email"
+          id="email"
+          placeholder="mon-email@gmail.com"
           class="form-control"
           aria-required
-          formControlName="username"
-          autocomplete="username"
+          formControlName="email"
+          autocomplete="email"
         />
         <div
           class="error-feedback"
           *ngIf="
           submitted &&
-          joinEventForm.controls['username']?.errors?.['required']
+          joinEventForm.controls['email'].errors?.['required']
         "
         >
-          * Vous devez choisir un nom d'utilisateur.
+          * Vous devez renseigner une adresse e-email.
         </div>
         <div
           class="error-feedback"
           *ngIf="
-          submitted &&
-          joinEventForm.controls['username']?.errors?.['minlength']
+          submitted && (joinEventForm.controls['email'].errors?.['pattern'])
         "
         >
-          * Le nom d'utilisateur doit comporter au moins 2 caractères.
-        </div>
-        <div
-          class="error-feedback"
-          *ngIf="
-            submitted &&
-            joinEventForm.dirty &&
-            joinEventForm.getError('userExist')
-          "
-        >
-          * Ce nom d'utilisateur est déjà utilisé.
+          * Le format de l'adresse e-mail est invalide.
         </div>
       </div>
       <div class="form-group">
         <label for="password" class="form-label" aria-required
-          >Id de participant <span class="text-blood">*</span></label
+          >Code event <span class="text-blood">*</span></label
         >
         <div class="form-icon">
           <input
             type="text"
             name="participantId"
             id="participantId"
-            placeholder="Entrez votre identifiant de participant"
+            placeholder="Renseignez le code de l'event"
             class="form-control"
             aria-required
             formControlName="participantId"
@@ -77,17 +67,6 @@
         "
         >
           * Champs requis.
-        </div>
-
-        <div
-          class="error-feedback"
-          *ngIf="
-            submitted &&
-            joinEventForm.dirty &&
-            joinEventForm.getError('unknownParticipantId')
-          "
-        >
-          * Id de participant invalide.
         </div>
       </div>
       <div class="row form-btn-layout">

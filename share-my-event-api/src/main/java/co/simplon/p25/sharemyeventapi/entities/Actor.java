@@ -16,23 +16,15 @@ public class Actor extends AbstractEntity {
 	@Column(name = "email")
 	private String email;
 
-	@Column(name = "firstname")
-	private String firstname;
-
-	@Column(name = "lastname")
-	private String lastname;
-
 	@Column(name = "nickname")
 	private String nickname;
 
 	public Actor() {
 	}
 
-	public Actor(UUID uuid, String email, String firstname, String lastname) {
+	public Actor(UUID uuid, String email, String nickname) {
 		authId = uuid;
 		this.email = email;
-		this.firstname = firstname;
-		this.lastname = lastname;
 	}
 
 	public UUID getAuthId() {
@@ -51,22 +43,6 @@ public class Actor extends AbstractEntity {
 		this.email = email;
 	}
 
-	public String getFirstname() {
-		return firstname;
-	}
-
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
-
-	public String getLastname() {
-		return lastname;
-	}
-
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
-
 	public String getNickname() {
 		return nickname;
 	}
@@ -77,8 +53,7 @@ public class Actor extends AbstractEntity {
 
 	@Override
 	public String toString() {
-		return "Actor [authId=" + authId + ", email=" + email + ", firstname="
-				+ firstname + ", lastname=" + lastname + ", nickname="
+		return "Actor [authId=" + authId + ", email=" + email + ", nickname="
 				+ nickname + "]";
 	}
 

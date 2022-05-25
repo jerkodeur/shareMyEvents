@@ -7,6 +7,7 @@
 DROP TABLE IF EXISTS participations;
 
 CREATE TABLE "participations" (
+	name varchar(255) NOT NULL,
   	participant_id INTEGER NOT NULL,
   	event_id INTEGER NOT NULL,
   	availability_id INTEGER,

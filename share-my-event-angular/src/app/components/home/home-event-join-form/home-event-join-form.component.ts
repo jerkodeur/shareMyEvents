@@ -12,43 +12,20 @@ export class HomeEventJoinFormComponent implements OnInit {
   joinEventForm!: FormGroup;
 
   submitted = false;
-  connected = true;
 
-  constructor(
-    private fb: FormBuilder,
-    private notify: NotificationService,
-    private router: Router
-  ) {}
+  constructor(private fb: FormBuilder, private notify: NotificationService) {}
 
   ngOnInit(): void {
-    this.joinEventForm = this.fb.group(
-      {
-        username: ['', [Validators.required, Validators.minLength(2)]],
-        participantId: ['', Validators.required],
-      },
-      {
-        validator: [
-          this.userExistValidator,
-          this.unknownParticipantIdValidator,
+    this.joinEventForm = this.fb.group({
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/),
         ],
-      }
-    );
-  }
-
-  userExistValidator(form: FormGroup) {
-    if (form.get('username')?.value !== 'moi') {
-      return null;
-    } else {
-      return { userExist: true };
-    }
-  }
-
-  unknownParticipantIdValidator(form: FormGroup) {
-    if (form.get('participantId')?.value === '12345') {
-      return null;
-    } else {
-      return { unknownParticipantId: true };
-    }
+      ],
+      participantId: ['', Validators.required],
+    });
   }
 
   onSubmitForm() {
@@ -58,6 +35,6 @@ export class HomeEventJoinFormComponent implements OnInit {
         'Des erreurs ont été détectées, merci de les corriger'
       );
     }
-    this.router.navigate(['events/1']);
+    // this.router.navigate(['events/1']);
   }
 }
