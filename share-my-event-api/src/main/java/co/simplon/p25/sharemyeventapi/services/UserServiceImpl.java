@@ -10,11 +10,11 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import co.simplon.p25.sharemyeventapi.dtos.ActorIdentity;
+import co.simplon.p25.sharemyeventapi.dtos.ActorIdentityDto;
 import co.simplon.p25.sharemyeventapi.dtos.ActorSignUpDto;
 import co.simplon.p25.sharemyeventapi.dtos.UserLogInDto;
 import co.simplon.p25.sharemyeventapi.dtos.UserSignUpDto;
-import co.simplon.p25.sharemyeventapi.dtos.UserUuid;
+import co.simplon.p25.sharemyeventapi.dtos.UserUuidDto;
 import co.simplon.p25.sharemyeventapi.entities.Actor;
 import co.simplon.p25.sharemyeventapi.repositories.ActorRepository;
 import co.simplon.p25.sharemyeventapi.security.ActorJwt;
@@ -42,8 +42,8 @@ public final class UserServiceImpl implements UserService {
 		UserSignUpDto userSignUpDto = new UserSignUpDto(actor.getEmail(),
 				actor.getPassword());
 
-		ResponseEntity<UserUuid> response = restTemplate
-				.postForEntity("/users/create", userSignUpDto, UserUuid.class);
+		ResponseEntity<UserUuidDto> response = restTemplate
+				.postForEntity("/users/create", userSignUpDto, UserUuidDto.class);
 		actor.setAuthId(response.getBody().getUuid());
 
 		Actor newActor = new Actor(actor.getAuthId(), actor.getEmail(),
@@ -61,11 +61,11 @@ public final class UserServiceImpl implements UserService {
 		Jwt gandalfToken = response.getBody().getToken();
 		UUID userUuid = UUID.fromString(
 				decoder.decode(gandalfToken.getToken()).getSubject());
-		ActorIdentity actorIdentity = actorRepo
+		ActorIdentityDto actorIdentityDto = actorRepo
 				.findActorIdentityByAuthId(userUuid);
 		ActorJwt actorJwt = new ActorJwt();
 		actorJwt.setToken(gandalfToken);
-		actorJwt.setActor(actorIdentity);
+		actorJwt.setActor(actorIdentityDto);
 		return actorJwt;
 	}
 

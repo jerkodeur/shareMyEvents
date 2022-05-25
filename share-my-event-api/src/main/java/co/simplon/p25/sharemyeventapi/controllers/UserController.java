@@ -28,12 +28,12 @@ public class UserController {
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/sign-up")
-	public void signUp(@RequestBody @Valid ActorSignUpDto userSignUpInputs) {
-		userService.signUp(userSignUpInputs);
+	public void signUp(@RequestBody @Valid ActorSignUpDto inputs) {
+		userService.signUp(inputs);
 	}
 
 	@PostMapping("/login")
-	public ActorJwt logIn(@RequestBody @Valid UserLogInDto userLoginInputs) {
-		return userService.login(userLoginInputs);
+	public ActorJwt logIn(@RequestBody @Valid UserLogInDto inputs) {
+		return userService.login(inputs);
 	}
 }
