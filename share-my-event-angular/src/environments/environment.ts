@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   apiTestBaseUrl: 'http://localhost:3000',
   apiBaseUrl: 'localhost:7070',
-  apiUrl: 'http://localhost:7070/sharemyevent',
+  apiUrl: 'http://localhost:7070/sharemyevents',
   localeDb: '../data/db.json',
 };
 
