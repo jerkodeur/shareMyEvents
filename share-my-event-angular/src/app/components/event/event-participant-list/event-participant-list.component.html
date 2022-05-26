@@ -15,15 +15,15 @@
         ></svg>
       </div>
       <span
-        *ngIf="!isDisplayForm && participantList && participantList.length == 0"
+        *ngIf="!isDisplayForm && participations && participations.length == 0"
       >
         Aucun invité
       </span>
       <span
-        *ngIf="!isDisplayForm && participantList && participantList.length > 0"
+        *ngIf="!isDisplayForm && participations && participations.length > 0"
       >
-        {{ participantList.length }} invité<span
-          *ngIf="participantList.length > 1"
+        {{ participations.length }} invité<span
+          *ngIf="participations.length > 1"
           >s</span
         >
       </span>
@@ -35,22 +35,22 @@
     ></app-add-participant-form>
     <article
       class="participant-list"
-      *ngIf="participantList && participantList.length > 0"
+      *ngIf="participations && participations.length > 0"
     >
-      <p *ngFor="let participant of participantList">
+      <p *ngFor="let participation of participations">
         <app-participant-status
-          [status]="participant.availabilty"
+          [status]="participation.availability"
         ></app-participant-status>
         <a
-          href="mailto:{{ participant.email }}?subject={{ title }}"
-          title="Envoyé un mail à {{ participant.email }}"
+          href="mailto:{{ participation.email }}"
+          title="Envoyé un mail à {{ participation.email }}"
           target="_blank"
-          >{{ participant.name }}</a
+          >{{ participation.name }}</a
         >
         <button
           type="button"
-          (click)="removeParticipant(participant)"
-          title="retirer {{ participant.name }}"
+          (click)="removeParticipant(participation)"
+          title="Enlever {{ participation.name }} de l'event"
         >
           X
         </button>

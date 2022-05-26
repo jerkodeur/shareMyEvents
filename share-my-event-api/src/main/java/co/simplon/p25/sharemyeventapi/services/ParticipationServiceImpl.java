@@ -7,10 +7,12 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import co.simplon.p25.sharemyeventapi.dtos.ParticipantCreateDto;
+import co.simplon.p25.sharemyeventapi.dtos.ParticipationDto;
 import co.simplon.p25.sharemyeventapi.entities.Actor;
 import co.simplon.p25.sharemyeventapi.entities.Participation;
 import co.simplon.p25.sharemyeventapi.exceptions.ExistException;
 import co.simplon.p25.sharemyeventapi.repositories.ActorRepository;
+import co.simplon.p25.sharemyeventapi.repositories.EventRepository;
 import co.simplon.p25.sharemyeventapi.repositories.ParticipationRepository;
 
 @Service
@@ -18,47 +20,51 @@ public class ParticipationServiceImpl implements ParticipationService {
 
 	private final ParticipationRepository repo;
 	private final ActorRepository actorRepo;
+	private final EventRepository eventRepo;
 
 	public ParticipationServiceImpl(ParticipationRepository repo,
-			ActorRepository actorRepo) {
+			ActorRepository actorRepo, EventRepository eventRepo) {
 		this.repo = repo;
 		this.actorRepo = actorRepo;
+		this.eventRepo = eventRepo;
 	}
 
 	@Override
-	public List<Participation> getAll(Long eventId) {
-		return repo.findAllByeventId(eventId);
+	public List<ParticipationDto> getAll(Long eventId) {
+		List<ParticipationDto> participations = repo
+				.findParticipationsByeventId(eventId);
+		return participations;
 	}
 
 	@Override
 	@Transactional
-	public void add(ParticipantCreateDto inputs) {
-		Long actorId;
+	public ParticipationDto add(ParticipantCreateDto inputs) {
+		Actor actor;
 
 		if (actorRepo.existsActorByEmail(inputs.getEmail())) {
-			actorId = actorRepo.findActorIdByEmail(inputs.getEmail());
-			if (repo.existsByParticipantId(actorId)) {
+			actor = actorRepo.findByEmail(inputs.getEmail());
+			if (repo.existsByParticipantId(actor.getId())) {
 				throw new ExistException("participant_exist");
 			}
 		} else {
-			Actor actor = new Actor();
+			actor = new Actor();
 			actor.setEmail(inputs.getEmail());
 			actorRepo.save(actor);
-			actorId = actor.getId();
 		}
 
 		Participation participation = new Participation();
-		participation.setEventId(inputs.getEventId());
+		participation.setEvent(eventRepo.findOneById(inputs.getEventId()));
 		participation.setName(inputs.getName());
-		participation.setParticipantId(actorId);
+		participation.setParticipant(actor);
 		repo.save(participation);
+
+		return repo.findParticipationsByeventId(inputs.getEventId()).get(0);
 	}
 
 	@Override
 	@Transactional
-	public void remove(Long eventId, String participantEmail) {
-		Long participantId = actorRepo.findActorIdByEmail(participantEmail);
-		repo.deleteByEventAndActorId(eventId, participantId);
+	public void remove(Long id) {
+		repo.deleteById(id);
 	}
 
 }

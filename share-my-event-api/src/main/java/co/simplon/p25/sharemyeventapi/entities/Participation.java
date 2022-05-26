@@ -2,6 +2,8 @@ package co.simplon.p25.sharemyeventapi.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -11,22 +13,17 @@ public class Participation extends AbstractEntity {
 	@Column(name = "name")
 	private String name;
 
-	@Column(name = "participant_id")
-	private Long participantId;
+	@ManyToOne
+	@JoinColumn(name = "participant_id")
+	private Actor participant;
 
-	@Column(name = "event_id")
-	private Long eventId;
+	@ManyToOne
+	@JoinColumn(name = "event_id")
+	private Event event;
 
-	@Column(name = "availability_id")
-	private Long availabilityId;
-
-	public Participation(String name, Long participant_id, Long event_id,
-			Long availability_id) {
-		this.name = name;
-		participantId = participant_id;
-		eventId = event_id;
-		availabilityId = availability_id;
-	}
+	@ManyToOne
+	@JoinColumn(name = "availability_id")
+	private Availability availability;
 
 	public Participation() {
 	}
@@ -39,35 +36,35 @@ public class Participation extends AbstractEntity {
 		this.name = name;
 	}
 
-	public Long getParticipantId() {
-		return participantId;
+	public Actor getParticipant() {
+		return participant;
 	}
 
-	public void setParticipantId(Long participant_id) {
-		participantId = participant_id;
+	public void setParticipant(Actor participant) {
+		this.participant = participant;
 	}
 
-	public Long getEventId() {
-		return eventId;
+	public Event getEvent() {
+		return event;
 	}
 
-	public void setEventId(Long event_id) {
-		eventId = event_id;
+	public void setEvent(Event event) {
+		this.event = event;
 	}
 
-	public Long getAvailabilityId() {
-		return availabilityId;
+	public Availability getAvailability() {
+		return availability;
 	}
 
-	public void setAvailabilityId(Long availability_id) {
-		availabilityId = availability_id;
+	public void setAvailability(Availability availability) {
+		this.availability = availability;
 	}
 
 	@Override
 	public String toString() {
-		return "Participation [name=" + name + ", participant_id="
-				+ participantId + ", event_id=" + eventId + ", availability_id="
-				+ availabilityId + "]";
+		return "Participation [name=" + name + ", email="
+				+ participant.getEmail() + ", eventId=" + event.getId()
+				+ ", availability=" + availability.getLabel() + "]";
 	}
 
 }

@@ -22,4 +22,6 @@ public interface ActorRepository extends JpaRepository<Actor, Long> {
 	Long findActorIdByEmail(String email);
 
 	boolean existsActorByEmail(String email);
+
+	Actor findByEmail(String email);
 }
