@@ -2,11 +2,11 @@ package co.simplon.p25.sharemyeventapi.dtos;
 
 import java.util.UUID;
 
-public class UserUuid {
+public class UserUuidDto {
 
 	private UUID uuid;
 
-	public UserUuid() {
+	public UserUuidDto() {
 		// TODO Auto-generated constructor stub
 	}
 
