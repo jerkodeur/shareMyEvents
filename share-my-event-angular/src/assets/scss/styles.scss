@@ -53,6 +53,27 @@ aside {
   }
 }
 
+// Toaster
+.toastr {
+  border-radius: 8px;
+}
+
+.success-toaster {
+  padding: 0.75em;
+  background-color: $green;
+  color: $primary;
+  border-radius: 4px;
+  box-shadow: 1px 1px 3px $dark;
+}
+
+.error-toaster {
+  padding: 0.75em;
+  background-color: $blood;
+  color: $white;
+  border-radius: 4px;
+  box-shadow: 1px 1px 3px $dark;
+}
+
 @import "./navbar/navbar.scss";
 @import "./event-layout/event-layout.scss";
 @import "./home/home.scss";
