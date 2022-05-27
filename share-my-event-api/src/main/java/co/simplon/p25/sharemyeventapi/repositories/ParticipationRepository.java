@@ -26,4 +26,13 @@ public interface ParticipationRepository
 			+ "LEFT JOIN p.availability av " + "WHERE p.event.id = ?1")
 	List<ParticipationDto> findParticipationsByeventId(Long eventId);
 
+	@Query(value = "SELECT " + "p.id as id, " + "p.name as name, "
+			+ "ac.email as email, " + "av.label as availability "
+			+ "FROM participations p "
+			+ "INNER JOIN actors ac ON p.participant_id = ac.id "
+			+ "LEFT JOIN availabilities av ON p.availability_id = av.id "
+			+ "WHERE p.id = ? " + "LIMIT 1", nativeQuery = true)
+	ParticipationDto findOneParticipationById(Long id);
+
+	int countByEventId(Long getId);
 }

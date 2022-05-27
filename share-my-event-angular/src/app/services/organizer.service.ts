@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
+import { NextEvent } from '../core/interfaces/NextEvent.interface';
 
 import { ErrorHandlerService } from './error-handler.service';
 
@@ -17,9 +18,9 @@ export class OrganizerService {
 
   getNextOrganizerEvent(): Observable<any> {
     return this.httpService
-      .get<any>(`${environment.apiUrl}/organizer/next-event`)
+      .get<NextEvent>(`${environment.apiUrl}/organizer/next-event`)
       .pipe(
-        map((data) => {
+        map((data: NextEvent) => {
           if (data) {
             data.eventDate = new Date(data.eventDate);
           }

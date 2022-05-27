@@ -58,7 +58,7 @@ public class ParticipationServiceImpl implements ParticipationService {
 		participation.setParticipant(actor);
 		repo.save(participation);
 
-		return repo.findParticipationsByeventId(inputs.getEventId()).get(0);
+		return repo.findOneParticipationById(participation.getId());
 	}
 
 	@Override
