@@ -5,6 +5,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
@@ -14,6 +15,7 @@ import { environment } from 'src/environments/environment';
 import { AppComponent } from './app.component';
 import { LogInComponent } from './pages/log-in/log-in.component';
 import { LogOutComponent } from './pages/log-out/log-out.component';
+import { ModalComponent } from './components/modal/modal.component';
 import { Page404Component } from './pages/page404/page404.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
@@ -89,6 +91,7 @@ export function tokenGetter() {
     SignUpComponent,
     StatusModifierComponent,
     OrganizerNextEventsComponent,
+    ModalComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -110,6 +113,7 @@ export function tokenGetter() {
     }),
     ReactiveFormsModule,
     ToastrModule.forRoot(),
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

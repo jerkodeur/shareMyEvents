@@ -1,10 +1,13 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject, takeUntil } from 'rxjs';
 
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ParticipantService } from 'src/app/services/participant.service';
-
 import { Participation } from 'src/app/core/interfaces/Participation.interface';
+
+import { ModalComponent } from 'src/app/components/modal/modal.component';
+
 @Component({
   selector: 'app-event-participant-list',
   templateUrl: './event-participant-list.component.html',
@@ -22,6 +25,7 @@ export class EventParticipantListComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthenticationService,
+    private modalService: NgbModal,
     private participantService: ParticipantService
   ) {}
 
@@ -41,14 +45,26 @@ export class EventParticipantListComponent implements OnInit, OnDestroy {
     this.participantService.getParticipants$(this.eventId).subscribe();
   }
 
+  openModal(participation: Participation) {
+    const modalRef = this.modalService.open(ModalComponent, {
+      backdropClass: 'primary-backdrop',
+      size: 'sm',
+      centered: true,
+    });
+    modalRef.componentInstance.title = "Suppression d'un participant";
+    modalRef.componentInstance.message = `Êtes-vous sur de vouloir supprimer ${participation.name} de l'event?`;
+    modalRef.componentInstance.btnName = 'Valider';
+    modalRef.componentInstance.action = () => {
+      this.removeParticipant(participation);
+      modalRef.dismiss('success');
+    };
+  }
+
   toggleForm() {
     this.isDisplayForm = !this.isDisplayForm;
   }
 
   removeParticipant(participation: Participation) {
-    const accept = window.confirm(
-      `Etes vous sur de vouloir supprimer ${participation.name} de l'event ?`
-    );
-    accept && this.participantService.delete$(participation).subscribe();
+    this.participantService.delete$(participation).subscribe();
   }
 }

@@ -1,0 +1,59 @@
+.primary-backdrop {
+  background-color: $primary !important;
+}
+.modal-header {
+  &.bg-info {
+    background-color: $secondary !important;
+    font-size: 1.5em;
+
+    .modal-title {
+      font-size: 0.65em;
+      line-height: 1;
+    }
+    border-bottom: 1px $primary solid;
+  }
+
+  button {
+    border-radius: 25%;
+    background-color: $primary;
+    color: $light;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+    font-weight: 700;
+    padding: 0;
+    padding-bottom: 0.15em;
+    box-shadow: 1px 1px 3px $light, -1px -1px 3px $light;
+    &:hover {
+      background-color: $light;
+      color: $primary;
+      box-shadow: 1px 1px 3px $primary, -1px -1px 3px $primary;
+    }
+  }
+}
+.modal-body {
+  background-color: $light;
+  padding: 0.5em 1em !important;
+  p {
+    margin-bottom: 0 !important;
+  }
+}
+
+.modal-footer {
+  padding: 0.25em 0.75em 0.5em !important;
+  &.bg-info {
+    background-color: $light !important;
+    border-top: 1px solid $primary;
+  }
+
+  button {
+    @include tight-white-button;
+    margin-right: 0.5em !important;
+    &.action {
+      @include tight-blood-button;
+    }
+  }
+}

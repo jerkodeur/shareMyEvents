@@ -41,6 +41,9 @@
     $boxShadowHoverColor: $primary
   );
 }
+@mixin tight-primary-button {
+  @include tight-button-maker($bgColor: $primary, $color: #fff, $boxShadowColor: $primary, $boxShadowHoverColor: $dark);
+}
 @mixin tight-blood-button {
   @include tight-button-maker(
     $bgColor: $blood,
