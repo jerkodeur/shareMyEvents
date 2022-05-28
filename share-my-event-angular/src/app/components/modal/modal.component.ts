@@ -12,15 +12,7 @@ export class ModalComponent implements OnInit {
   @Input() btnName!: string;
   @Input() action!: Function;
 
-  closeResult = '';
-
   constructor(public activeModal: NgbActiveModal) {}
 
   ngOnInit(): void {}
-
-  // openModal(content: any) {
-  //   const modalRef = this.modalService.open(ModalComponent);
-
-  //   this.modalService.dismissAll();
-  // }
 }

@@ -34,9 +34,9 @@ export class EventService {
       .get<EventInterface>(`${environment.apiUrl}/events/${eventId}`)
       .pipe(
         tap({
-          next: (data: any) => {
-            data.eventDate = new Date(data.eventDate);
-            return data;
+          next: (event: any) => {
+            event.eventDate = new Date(event.eventDate);
+            return event;
           },
           error: async (err) => {
             this.errorHandler.notifyHttpError(err).subscribe();
