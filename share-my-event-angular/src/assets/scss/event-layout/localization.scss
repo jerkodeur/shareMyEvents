@@ -1,8 +1,8 @@
 .event-localization {
   .address-info {
-    @include flex-maker($direction: row);
+    @include flex-maker($direction: column);
+    margin-bottom: 1em;
     flex-wrap: wrap;
-    margin-bottom: 0;
     .address {
       margin-right: 0.5em;
     }
