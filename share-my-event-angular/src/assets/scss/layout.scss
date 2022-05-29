@@ -17,6 +17,7 @@ body {
 
 main {
   margin-top: 4em;
+  margin-bottom: 2.5em !important;
 
   .main-form-layout {
     margin-top: 5em;
@@ -37,6 +38,12 @@ form {
 .pwd-reset-intructions {
   width: 90%;
   margin: auto;
+}
+
+aside {
+  &.form-info {
+    margin-top: 0 !important;
+  }
 }
 
 // Media queries

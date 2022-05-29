@@ -13,6 +13,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 
 import { AppComponent } from './app.component';
+import { CguComponent } from './components/cgu/cgu.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { LogInComponent } from './pages/log-in/log-in.component';
 import { LogOutComponent } from './pages/log-out/log-out.component';
 import { ModalComponent } from './components/modal/modal.component';
@@ -92,6 +94,8 @@ export function tokenGetter() {
     StatusModifierComponent,
     OrganizerNextEventsComponent,
     ModalComponent,
+    FooterComponent,
+    CguComponent,
   ],
   imports: [
     AppRoutingModule,
