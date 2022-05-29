@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import co.simplon.p25.sharemyeventapi.exceptions.ExistException;
 import co.simplon.p25.sharemyeventapi.exceptions.ForbiddenException;
 import co.simplon.p25.sharemyeventapi.exceptions.RestTemplateException;
 
@@ -45,10 +46,20 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
 	}
 
 	@ExceptionHandler(ForbiddenException.class)
-	protected ResponseEntity<Object> handleForbiddenExceptionException(
+	protected ResponseEntity<Object> handleForbiddenException(
 			ForbiddenException ex, WebRequest request) {
 		return super.handleExceptionInternal(ex, ex.getMessage(),
 				new HttpHeaders(), HttpStatus.FORBIDDEN, request);
+	}
+
+	@ExceptionHandler(ExistException.class)
+	protected ResponseEntity<Object> handleExistException(ExistException ex,
+			WebRequest request) {
+		Map<String, Object> body = new LinkedHashMap<>();
+		body.put("code_error", ex.getMessage());
+
+		return super.handleExceptionInternal(ex, body, new HttpHeaders(),
+				HttpStatus.BAD_REQUEST, request);
 	}
 
 }

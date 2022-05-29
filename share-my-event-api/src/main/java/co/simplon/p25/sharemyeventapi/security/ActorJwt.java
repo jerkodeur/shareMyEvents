@@ -1,12 +1,12 @@
 package co.simplon.p25.sharemyeventapi.security;
 
-import co.simplon.p25.sharemyeventapi.dtos.ActorIdentity;
+import co.simplon.p25.sharemyeventapi.dtos.ActorIdentityDto;
 
 public final class ActorJwt {
 
 	private Jwt token;
 
-	private ActorIdentity actor;
+	private ActorIdentityDto actor;
 
 	public ActorJwt() {
 	}
@@ -19,11 +19,11 @@ public final class ActorJwt {
 		this.token = token;
 	}
 
-	public ActorIdentity getActor() {
+	public ActorIdentityDto getActor() {
 		return actor;
 	}
 
-	public void setActor(ActorIdentity actor) {
+	public void setActor(ActorIdentityDto actor) {
 		this.actor = actor;
 	}
 

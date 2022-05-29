@@ -3,6 +3,7 @@ package co.simplon.p25.sharemyeventapi.services;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.HtmlUtils;
 
 import co.simplon.p25.sharemyeventapi.dtos.event.EventAddressDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventCreateDto;
@@ -39,12 +40,12 @@ public class EventServiceImpl implements EventService {
 	@Override
 	@Transactional
 	public EventCreatedId create(EventCreateDto inputs) {
+		// TODO Verify if the code doesn't exist yet
 		String code = RandomCode.getCode(8);
 		Actor actor = actorService.actorByAuthId();
-
 		Event event = new Event();
 		event.setTitle(inputs.getTitle());
-		event.setDescription(inputs.getDescription());
+		event.setDescription(HtmlUtils.htmlEscape(inputs.getDescription()));
 		event.setEventDate(inputs.getEventDate());
 		event.setCode(code);
 		event.setOrganizer(actor);
@@ -77,7 +78,8 @@ public class EventServiceImpl implements EventService {
 		eventPage.setId(event.getId());
 		eventPage.setCode(event.getCode());
 		eventPage.setTitle(event.getTitle());
-		eventPage.setDescription(event.getDescription());
+		eventPage
+				.setDescription(HtmlUtils.htmlUnescape(event.getDescription()));
 		eventPage.setEventDate(event.getEventDate());
 		if (event.getAddress() != null
 				&& (event.getAddress().getStreet() != null
@@ -87,8 +89,7 @@ public class EventServiceImpl implements EventService {
 			eventPage.setAddress(event.getAddress());
 		}
 		eventPage.setOrganizerAuthId(event.getOrganizer().getAuthId());
-		eventPage.setOrganizerFirstname(event.getOrganizer().getFirstname());
-		eventPage.setOrganizerLastname(event.getOrganizer().getLastname());
+		eventPage.setOrganizerFirstname(event.getOrganizer().getNickname());
 		eventPage.setOrganizerEmail(event.getOrganizer().getEmail());
 
 		return eventPage;
@@ -115,7 +116,7 @@ public class EventServiceImpl implements EventService {
 			throw new ForbiddenException("Forbidden access to the resource");
 		}
 		Event event = eventRepo.findOneById(eventId);
-		event.setDescription(input.getDescription());
+		event.setDescription(HtmlUtils.htmlEscape(input.getDescription()));
 		eventRepo.save(event);
 		return input;
 	}

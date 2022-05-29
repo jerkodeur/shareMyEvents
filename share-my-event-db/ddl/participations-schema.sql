@@ -7,9 +7,11 @@
 DROP TABLE IF EXISTS participations;
 
 CREATE TABLE "participations" (
-  	participant_id INTEGER NOT NULL,
-  	event_id INTEGER NOT NULL,
-  	availability_id INTEGER,
+  	id SERIAL PRIMARY KEY,
+	name varchar(255) NOT NULL UNIQUE,
+	participant_id INTEGER NOT NULL,
+	event_id INTEGER NOT NULL,
+	availability_id INTEGER,
 	CONSTRAINT fk_participations_participant 
 		FOREIGN KEY (participant_id) 
 		REFERENCES actors(id) 

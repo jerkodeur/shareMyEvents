@@ -1,5 +1,7 @@
-<form #addParticipantForm="ngForm">
-  <!-- (ngSubmit)="addParticipantForm.valid && onSubmit(addParticipantForm)" -->
+<form
+  #addParticipantForm="ngForm"
+  (ngSubmit)="addParticipantForm.valid && onSubmit(addParticipantForm)"
+>
   <fieldset class="participant-form-layout">
     <legend>Nouvel invité</legend>
     <div class="form-group">

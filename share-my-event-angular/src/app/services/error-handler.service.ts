@@ -70,7 +70,10 @@ export class ErrorHandlerService {
         return 'Votre session a expiré';
       case 'forbidden':
         return 'Accès non autorisé';
-
+      case 'name_unique':
+        return 'Un nom similaire existe déjà';
+      case 'participant_exist':
+        return "L'adresse email saisie existe déjà sur l'event";
       default:
         return "Erreur serveur, merci de contacter l'administrateur";
     }

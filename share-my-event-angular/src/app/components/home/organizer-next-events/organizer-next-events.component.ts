@@ -6,6 +6,7 @@ import { OrganizerService } from 'src/app/services/organizer.service';
 
 import { DateHandler } from 'src/app/handlers/date-handler';
 import { EventInterface } from 'src/app/core/interfaces/Event.interface';
+import { NextEvent } from 'src/app/core/interfaces/NextEvent.interface';
 
 @Component({
   selector: 'app-organizer-next-events',
@@ -13,8 +14,9 @@ import { EventInterface } from 'src/app/core/interfaces/Event.interface';
   styleUrls: ['./organizer-next-events.component.scss'],
 })
 export class OrganizerNextEventsComponent implements OnInit {
-  @Input() nextEvent$!: Observable<EventInterface>;
-  event!: EventInterface;
+  @Input() nextEvent$!: Observable<NextEvent>;
+  event!: any;
+  participants!: number;
   formattedDate!: string;
 
   constructor(
@@ -26,10 +28,11 @@ export class OrganizerNextEventsComponent implements OnInit {
     if (this.authService.authenticated) {
       this.organizerService
         .getNextOrganizerEvent()
-        .subscribe((event: EventInterface) => {
-          this.event = event;
+        .subscribe((event: NextEvent) => {
+          const { eventDate, ...nextEvent } = event;
+          this.event = nextEvent;
           if (event) {
-            const { date, time } = DateHandler.splitDateObject(event.eventDate);
+            const { date, time } = DateHandler.splitDateObject(eventDate);
             this.formattedDate = `${date} ${time}`;
           }
         });

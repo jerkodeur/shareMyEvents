@@ -9,7 +9,7 @@ echo '----------'
 echo 'Connect to postGres...'
 psql -h localhost -p 5432 -U postgres <<MULTILIGNE
 \i admin/database.sql
-\c sharemyevent
+\c sharemyevents
 \i ddl/actors-schema.sql
 \i ddl/addresses-schema.sql
 \i ddl/events-schema.sql
@@ -19,6 +19,7 @@ psql -h localhost -p 5432 -U postgres <<MULTILIGNE
 \i dml/availabilities-data.dml.sql
 \i dml/addresses-data.dml.sql
 \i dml/events-data.dml.sql
+\i dml/participations-data.dml.sql
 \q
 MULTILIGNE
 

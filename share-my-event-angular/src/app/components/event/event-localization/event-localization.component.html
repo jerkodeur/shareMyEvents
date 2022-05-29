@@ -8,19 +8,20 @@
   <fieldset class="sub-fieldset" *ngIf="!edited">
     <legend>Adresse</legend>
     <div *ngIf="address">
-      <p class="address-info">
-        <span class="address">{{ address && address.street }}</span>
-        <span class="locZip"
-          >{{ address && address.zipCode }}
-          {{ address && address.locality }}</span
-        >
-      </p>
+      <article class="address-info">
+        <p class="address">{{ address && address.street }}</p>
+        <p class="locZip">
+          {{ address && address.zipCode }} {{ address && address.locality }}
+        </p>
+      </article>
       <span class="aside-info" *ngIf="address.additional"
-        >Complément d'addresse:</span
+        >Complément d'adresse:</span
       >
-      <p class="additional-address">{{ address && address.additional }}</p>
+      <aside class="additional-address">
+        {{ address && address.additional }}
+      </aside>
     </div>
-    <div *ngIf="!address" class="pb-2">Aucune adresse renseignée</div>
+    <p *ngIf="!address" class="pb-2">Aucune adresse renseignée</p>
 
     <div class="button-layout" *ngIf="isOrganizer">
       <button

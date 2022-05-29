@@ -38,8 +38,7 @@ export class SignUpComponent implements OnDestroy {
 
   signUpForm = this.formBuilder.group(
     {
-      firstname: ['', [Validators.required, Validators.minLength(2)]],
-      lastname: ['', [Validators.required, Validators.minLength(2)]],
+      nickname: ['', [Validators.required, Validators.minLength(2)]],
       email: [
         '',
         [
@@ -75,8 +74,8 @@ export class SignUpComponent implements OnDestroy {
         'Des erreurs ont été détectées, merci de les corriger.'
       );
     }
-    const { firstname, lastname, email, password } = this.signUpForm.value;
-    const newUser = new User(firstname, lastname, email, password);
+    const { nickname, email, password } = this.signUpForm.value;
+    const newUser = new User(nickname, email, password);
     this.userService
       .signup$(newUser)
       .pipe(takeUntil(this.destroy$))

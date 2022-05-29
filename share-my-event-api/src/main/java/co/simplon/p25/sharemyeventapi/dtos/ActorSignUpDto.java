@@ -16,15 +16,11 @@ public class ActorSignUpDto {
 	@Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", message = "password_format")
 	private String password;
 
-	@Size(min = 2, message = "firstname_length")
-	@NotBlank(message = "firstname_required")
-	private String firstname;
+	@Size(min = 2, message = "nickname_length")
+	@NotBlank(message = "nickname_required")
+	private String nickname;
 
-	@Size(min = 2, message = "lastname_length")
-	@NotBlank(message = "lastname_required")
-	private String lastname;
-
-	private UUID gandalf_id;
+	private UUID auth_id;
 
 	public ActorSignUpDto() {
 	}
@@ -45,35 +41,26 @@ public class ActorSignUpDto {
 		this.password = password;
 	}
 
-	public String getFirstname() {
-		return firstname;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
-	public String getLastname() {
-		return lastname;
+	public UUID getAuthId() {
+		return auth_id;
 	}
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
-
-	public UUID getGandalfId() {
-		return gandalf_id;
-	}
-
-	public void setGandalfId(UUID uuid) {
-		gandalf_id = uuid;
+	public void setAuthId(UUID uuid) {
+		auth_id = uuid;
 	}
 
 	@Override
 	public String toString() {
 		return "ActorSignUpDto [email=" + email + ", password=" + "[PROTECTED]"
-				+ ", firstname=" + firstname + ", lastname=" + lastname
-				+ ", gandalf_id=" + gandalf_id + "]";
+				+ ", nickname=" + nickname + ", auth_id=" + auth_id + "]";
 	}
 
 }

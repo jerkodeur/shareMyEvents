@@ -19,13 +19,9 @@ export class AddParticipantFormComponent {
 
   onSubmit(form: NgForm) {
     this.submitted = true;
-    const { name, email } = form.value;
-    const newParticipant = new Participant(name, email, this.eventId);
-    // this.participantService
-    //   .addParticipantToEvent$(newParticipant)
-    //   .subscribe(() =>
-    //     this.participantService.getEventParticipants$(this.eventId)
-    //   );
-    form.resetForm();
+    const newParticipant = new Participant(form.value);
+    this.participantService.add$(newParticipant, this.eventId).subscribe({
+      next: () => form.resetForm(),
+    });
   }
 }
