@@ -20,6 +20,7 @@ import { ResetPasswordPageComponent } from './pages/reset-password/reset-passwor
 import { AuthenticatedGuard } from './core/guards/authenticated.guard';
 import { EventAccessGuard } from './core/guards/event-access.guard';
 import { UnauthenticatedGuard } from './core/guards/unauthenticated.guard';
+import { CguComponent } from './components/cgu/cgu.component';
 
 const routes: Routes = [
   {
@@ -69,6 +70,10 @@ const routes: Routes = [
     path: 'signup',
     component: SignUpComponent,
     canActivate: [UnauthenticatedGuard],
+  },
+  {
+    path: 'cgu',
+    component: CguComponent,
   },
   {
     path: '**',

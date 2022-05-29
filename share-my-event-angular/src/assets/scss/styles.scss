@@ -34,10 +34,13 @@ html {
   }
 }
 
-aside {
-  &.form-info {
-    margin-top: 0 !important;
-  }
+ul {
+  list-style-type: none;
+}
+
+hr {
+  margin: 0;
+  padding: 0;
 }
 
 .aside-link {
@@ -77,3 +80,5 @@ aside {
 @import "./navbar/navbar.scss";
 @import "./event-layout/event-layout.scss";
 @import "./home/home.scss";
+@import "./cgu.scss";
+@import "./footer.scss";
