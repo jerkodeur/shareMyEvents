@@ -1,0 +1,31 @@
+<section class="organizer-event-list-layout">
+  <div *ngIf="events && events.length > 0">
+    <h1>Liste des prochains events dont vous êtes l'organisateur:</h1>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Titre</th>
+          <th scope="col">Invités</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-primary" *ngFor="let event of events">
+          <td>{{ event.eventDate }}</td>
+          <td class="event-title" title="Aller sur la page de l'event">
+            <a [routerLink]="['/events', event.id]">
+              {{ event.title }}
+            </a>
+          </td>
+          <td>{{ event.nbParticipants }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h1 *ngIf="events && events.length == 0">
+    Vous n'organisez actuellement aucun event.
+  </h1>
+  <div class="aside-text-info">
+    <a routerLink="/new-event">Créer un event</a>
+  </div>
+</section>

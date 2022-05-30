@@ -25,6 +25,7 @@ public class Actor extends AbstractEntity {
 	public Actor(UUID uuid, String email, String nickname) {
 		authId = uuid;
 		this.email = email;
+		this.nickname = nickname;
 	}
 
 	public UUID getAuthId() {

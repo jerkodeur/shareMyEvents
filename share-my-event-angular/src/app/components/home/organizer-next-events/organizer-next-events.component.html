@@ -1,28 +1,32 @@
-<section class="organiser-events-layout" *ngIf="event">
+<section class="organiser-events-layout">
   <fieldset>
     <legend class="w-auto px-2">
       <h1>Prochain event organisateur</h1>
     </legend>
-    <article class="next-event-body" *ngIf="event">
-      <span class="next-event-date">
-        <span class="event-item-label"> Titre: </span>
-        {{ event.title }}
-      </span>
-      <span class="next-event-date">
-        <span class="event-item-label"> Date: </span>
-        {{ formattedDate }}
-      </span>
-      <span class="next-event-guest">
-        <span class="event-item-label"> Nombre d'invités: </span>
-        {{ event.nbParticipants }}
-      </span>
-      <div class="next-event-footer">
-        <a href="#" class="my-events">Voir tous les events que j'organise</a>
-        <a [routerLink]="['/events', event.id]" class="button">
-          <button type="button">Page de l'event</button>
-        </a>
-      </div>
-    </article>
+    <div *ngIf="event">
+      <article class="next-event-body" *ngIf="event">
+        <span class="next-event-date">
+          <span class="event-item-label"> Titre: </span>
+          {{ event.title }}
+        </span>
+        <span class="next-event-date">
+          <span class="event-item-label"> Date: </span>
+          {{ formattedDate }}
+        </span>
+        <span class="next-event-guest">
+          <span class="event-item-label"> Nombre d'invités: </span>
+          {{ event.nbParticipants }}
+        </span>
+        <div class="next-event-footer">
+          <a routerLink="/events" class="my-events"
+            >Voir tous les events que j'organise</a
+          >
+          <a [routerLink]="['/events', event.id]" class="button">
+            <button type="button">Page de l'event</button>
+          </a>
+        </div>
+      </article>
+    </div>
     <p *ngIf="!event" class="no-event">Aucun event organisateur à venir</p>
   </fieldset>
 </section>
