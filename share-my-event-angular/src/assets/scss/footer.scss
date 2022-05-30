@@ -3,7 +3,7 @@ footer {
     display: none;
     @media screen and (min-width: 576px) {
       display: block;
-      background-color: lighten($color: $secondary, $amount: 25%);
+      background-color: lighten($color: $secondary, $amount: 15%);
       box-shadow: 0 -2px 2px $primary;
       padding: 0 !important;
       ul {

@@ -2,11 +2,11 @@ package co.simplon.p25.sharemyeventapi.dtos;
 
 import java.time.LocalDateTime;
 
-public interface NextEventHomeDto {
+public interface EventListItem {
 
 	Long getId();
-	String getTitle();
 	LocalDateTime getEventDate();
+	String getTitle();
+	String getOrganizer();
 	int getNbParticipants();
-
 }

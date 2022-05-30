@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class NotificationService {
   private options = {
-    timeOut: 2500,
+    timeOut: 2000,
     progressBar: true,
     countDuplicates: true,
     toastClass: 'toastr',
@@ -24,7 +24,7 @@ export class NotificationService {
   showError(message: string, title: string = '') {
     this.toastr.error(message, title, {
       ...this.options,
-      timeOut: 4000,
+      timeOut: 3000,
       messageClass: 'error-toaster',
     });
   }

@@ -36,6 +36,10 @@ import { EventTitleComponent } from './components/event/event-title/event-title.
 import { EventTitleFormComponent } from './components/event/event-title/event-title-form/event-title-form.component';
 import { StatusModifierComponent } from './components/event/event-mobile-menu/status-modifier/status-modifier.component';
 
+// Event List
+import { EventListComponent } from './pages/event-list/event-list.component';
+import { EventListOrganizerComponent } from './components/event/event-list/event-list-organizer/event-list-organizer.component';
+
 // Navbar components
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NavbarLogoComponent } from './components/navbar/navbar-logo/navbar-logo.component';
@@ -64,6 +68,7 @@ export function tokenGetter() {
   declarations: [
     AddParticipantFormComponent,
     AppComponent,
+    CguComponent,
     CreateEventFormComponent,
     EventAsideInfoComponent,
     EventAsideInfoFormComponent,
@@ -71,20 +76,25 @@ export function tokenGetter() {
     EventDescriptionFormComponent,
     EventIdComponent,
     EventLayoutComponent,
+    EventListComponent,
+    EventListOrganizerComponent,
     EventLocalizationComponent,
     EventLocalizationFormComponent,
     EventMobileMenuComponent,
     EventParticipantListComponent,
     EventTitleFormComponent,
     EventTitleComponent,
+    FooterComponent,
     HomeComponent,
     HomeEventCreateComponent,
     HomeEventJoinFormComponent,
     LogInComponent,
     LogOutComponent,
+    ModalComponent,
     NavbarComponent,
     NavbarLogoComponent,
     NavbarTitleComponent,
+    OrganizerNextEventsComponent,
     Page404Component,
     ParticipantStatusComponent,
     ResetPasswordInitComponent,
@@ -92,10 +102,6 @@ export function tokenGetter() {
     ResetPasswordPageComponent,
     SignUpComponent,
     StatusModifierComponent,
-    OrganizerNextEventsComponent,
-    ModalComponent,
-    FooterComponent,
-    CguComponent,
   ],
   imports: [
     AppRoutingModule,

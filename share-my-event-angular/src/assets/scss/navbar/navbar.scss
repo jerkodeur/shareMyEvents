@@ -19,17 +19,21 @@ a:visited {
 .top-nav {
   #navbarSupportedContent {
     .menu-hidden {
-      padding: 0 !important;
-      margin: 0 !important;
+      margin-top: 0.5em;
+      padding: 0 0.25em 0.25em 0.25em;
       font-size: 1.1em;
-      li {
-        padding: 0 !important;
-        margin: 0 !important;
+      background-color: lighten($secondary, 15%);
+      border-radius: 0 0 4px 4px;
+      &:hover {
+        background-color: lighten($secondary, 25%);
       }
       .flex-icon {
         text-align: right;
-
-        font-weight: 300;
+        color: $primary;
+        font-weight: 500;
+        &:hover {
+          color: $dark;
+        }
       }
     }
   }
@@ -44,7 +48,7 @@ a:visited {
     > li {
       color: $secondary;
       font-size: 1.5em;
-      padding: 0 1em;
+      padding-left: 0.5em;
       &.nav-item:hover {
         cursor: pointer;
         background-color: $primary;
@@ -100,6 +104,20 @@ a:visited {
       background-image: url("../../img/sign-up-hover.svg");
     }
   }
+
+  .logout-img {
+    background-image: url("../../img/logout-hover.svg");
+    &:hover {
+      background-image: url("../../img/logout-hover.svg");
+    }
+  }
+
+  .events-img {
+    background-image: url("../../img/events-hover.svg");
+    &:hover {
+      background-image: url("../../img/events-hover.svg");
+    }
+  }
 }
 
 .flex-icon {
@@ -107,7 +125,7 @@ a:visited {
   font-size: 0.75em;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0.5em;
+  padding: 0.15em 0.5em;
 
   svg {
     margin-right: 0.5em;
@@ -152,6 +170,7 @@ button {
       padding-bottom: 0 !important;
       box-shadow: none;
       > li {
+        margin-top: 0.35em;
         padding: 0;
         font-size: 1em;
         &.active-nav-item {
@@ -166,6 +185,10 @@ button {
 
               &.signup-img {
                 background-image: url("../../img/sign-up-hover.svg");
+              }
+
+              &.events-img {
+                background-image: url("../../img/events-hover.svg");
               }
 
               &.logout-img {
@@ -198,6 +221,10 @@ button {
           background-image: url("../../img/sign-up.svg");
         }
 
+        &.events-img {
+          background-image: url("../../img/events.svg");
+        }
+
         &.logout-img {
           background-image: url("../../img/logout.svg");
         }
@@ -206,16 +233,19 @@ button {
         background-color: $light;
         color: $secondary !important;
         text-decoration: underline;
-        svg.login-img {
+        svg {
           transition: all 500ms;
+        }
+        svg.login-img {
           background-image: url("../../img/login-hover.svg");
         }
         svg.signup-img {
-          transition: all 500ms;
           background-image: url("../../img/sign-up-hover.svg");
         }
+        svg.events-img {
+          background-image: url("../../img/events-hover.svg");
+        }
         svg.logout-img {
-          transition: all 500ms;
           background-image: url("../../img/logout-hover.svg");
         }
       }

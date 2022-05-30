@@ -8,11 +8,11 @@ import { environment } from 'src/environments/environment';
 import { LocalizationInterface } from '../core/interfaces/Localization.interface';
 import { NotificationService } from './notification.service';
 
-import { Event } from '../core/models/Event.model';
+import { DateHandler } from '../handlers/date-handler';
 import { ErrorHandlerService } from './error-handler.service';
+import { Event } from '../core/models/Event.model';
 import { EventInterface } from '../core/interfaces/Event.interface';
 
-import '../data/db.json';
 @Injectable({
   providedIn: 'root',
 })
@@ -42,6 +42,25 @@ export class EventService {
             this.errorHandler.notifyHttpError(err).subscribe();
           },
         })
+      );
+  }
+
+  getNextEvents$(): Observable<any> {
+    return this.httpService
+      .get<any>(`${environment.apiUrl}/organizer/events`)
+      .pipe(
+        map((event: any) => {
+          event.forEach((event: any) => {
+            const { date, time } = DateHandler.splitDateObject(
+              new Date(event.eventDate)
+            );
+            event.eventDate = `${date} ${time}`;
+          });
+          return event;
+        }),
+        catchError(async (err) =>
+          this.errorHandler.notifyHttpError(err).subscribe()
+        )
       );
   }
 
