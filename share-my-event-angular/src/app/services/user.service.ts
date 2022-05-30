@@ -52,9 +52,7 @@ export class UserService {
             if (res.token) {
               localStorage.setItem('access_token', res.token.token);
               this.authentication.authenticated.next(true);
-              this.notify.showSuccess(
-                `Bon retour parmi nous ${res.actor.nickname}`
-              );
+              this.notify.showSuccess(`Bienvenue ${res.actor.nickname} !`);
               this.router.navigateByUrl('/home');
             } else {
               throw new Error('Erreur lors de la récupération du token');

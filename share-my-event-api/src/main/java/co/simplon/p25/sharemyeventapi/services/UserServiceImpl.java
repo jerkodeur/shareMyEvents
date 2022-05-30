@@ -42,8 +42,8 @@ public final class UserServiceImpl implements UserService {
 		UserSignUpDto userSignUpDto = new UserSignUpDto(actor.getEmail(),
 				actor.getPassword());
 
-		ResponseEntity<UserUuidDto> response = restTemplate
-				.postForEntity("/users/create", userSignUpDto, UserUuidDto.class);
+		ResponseEntity<UserUuidDto> response = restTemplate.postForEntity(
+				"/users/create", userSignUpDto, UserUuidDto.class);
 		actor.setAuthId(response.getBody().getUuid());
 
 		Actor newActor = new Actor(actor.getAuthId(), actor.getEmail(),

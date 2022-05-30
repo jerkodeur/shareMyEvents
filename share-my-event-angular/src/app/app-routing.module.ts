@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { CguComponent } from './components/cgu/cgu.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LogInComponent } from './pages/log-in/log-in.component';
 import { LogOutComponent } from './pages/log-out/log-out.component';
@@ -10,6 +11,7 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 // Events
 import { CreateEventFormComponent } from './pages/create-event-form/create-event-form.component';
 import { EventLayoutComponent } from './pages/event-layout/event-layout.component';
+import { EventListComponent } from './pages/event-list/event-list.component';
 
 // Reset Password
 import { ResetPasswordInitComponent } from './pages/reset-password/reset-password-init/reset-password-init.component';
@@ -20,7 +22,6 @@ import { ResetPasswordPageComponent } from './pages/reset-password/reset-passwor
 import { AuthenticatedGuard } from './core/guards/authenticated.guard';
 import { EventAccessGuard } from './core/guards/event-access.guard';
 import { UnauthenticatedGuard } from './core/guards/unauthenticated.guard';
-import { CguComponent } from './components/cgu/cgu.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,11 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+  },
+  {
+    component: EventListComponent,
+    path: 'events',
+    canActivate: [AuthenticatedGuard],
   },
   {
     component: EventLayoutComponent,

@@ -29,11 +29,13 @@ export class OrganizerNextEventsComponent implements OnInit {
       this.organizerService
         .getNextOrganizerEvent()
         .subscribe((event: NextEvent) => {
-          const { eventDate, ...nextEvent } = event;
-          this.event = nextEvent;
           if (event) {
+            const { eventDate, ...nextEvent } = event;
+            this.event = nextEvent;
             const { date, time } = DateHandler.splitDateObject(eventDate);
             this.formattedDate = `${date} ${time}`;
+          } else {
+            this.event = null;
           }
         });
     }
