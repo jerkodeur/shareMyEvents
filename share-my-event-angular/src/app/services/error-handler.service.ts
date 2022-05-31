@@ -74,6 +74,10 @@ export class ErrorHandlerService {
         return 'Un nom similaire existe déjà';
       case 'participant_exist':
         return "L'adresse email saisie existe déjà sur l'event";
+      case 'unknown_user':
+        return 'Adresse email inconnue';
+      case 'old_password_required':
+        return 'Mot de passe temporaire requis';
       default:
         return "Erreur serveur, merci de contacter l'administrateur";
     }

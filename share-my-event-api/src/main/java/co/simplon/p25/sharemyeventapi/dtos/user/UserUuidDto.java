@@ -1,4 +1,4 @@
-package co.simplon.p25.sharemyeventapi.dtos;
+package co.simplon.p25.sharemyeventapi.dtos.user;
 
 import java.util.UUID;
 
@@ -7,7 +7,7 @@ public class UserUuidDto {
 	private UUID uuid;
 
 	public UserUuidDto() {
-		// TODO Auto-generated constructor stub
+		//
 	}
 
 	public UUID getUuid() {
