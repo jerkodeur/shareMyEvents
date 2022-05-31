@@ -35,7 +35,7 @@ public class RestTemplateConfig {
 	}
 
 	@Bean
-	public RestTemplate sharemyeventRestTemplate(RestTemplateBuilder builder) {
+	public RestTemplate gandalfTemplate(RestTemplateBuilder builder) {
 		RestTemplate template = builder.rootUri(gandalfRootUri)
 				.defaultHeader("client-name", gandalfClientName)
 				.defaultHeader("client-api-key", gandalfClientKey)

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import co.simplon.p25.sharemyeventapi.exceptions.ExistException;
 import co.simplon.p25.sharemyeventapi.exceptions.ForbiddenException;
+import co.simplon.p25.sharemyeventapi.exceptions.ResourceNotFoundException;
 import co.simplon.p25.sharemyeventapi.exceptions.RestTemplateException;
 
 @RestControllerAdvice
@@ -50,6 +51,16 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
 			ForbiddenException ex, WebRequest request) {
 		return super.handleExceptionInternal(ex, ex.getMessage(),
 				new HttpHeaders(), HttpStatus.FORBIDDEN, request);
+	}
+
+	@ExceptionHandler(ResourceNotFoundException.class)
+	protected ResponseEntity<Object> handleResourceNotException(
+			ResourceNotFoundException ex, WebRequest request) {
+		Map<String, Object> body = new LinkedHashMap<>();
+		body.put("code_error", ex.getMessage());
+
+		return super.handleExceptionInternal(ex, body, new HttpHeaders(),
+				HttpStatus.NOT_FOUND, request);
 	}
 
 	@ExceptionHandler(ExistException.class)

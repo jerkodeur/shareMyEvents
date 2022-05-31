@@ -42,7 +42,7 @@ public class ParticipationServiceImpl implements ParticipationService {
 		Actor actor;
 
 		if (actorRepo.existsActorByEmail(inputs.getEmail())) {
-			actor = actorRepo.findByEmail(inputs.getEmail());
+			actor = actorRepo.searchByEmail(inputs.getEmail());
 			if (repo.existsByParticipantId(actor.getId())) {
 				throw new ExistException("participant_exist");
 			}

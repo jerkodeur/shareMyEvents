@@ -1,5 +1,6 @@
 package co.simplon.p25.sharemyeventapi.repositories;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,5 +24,11 @@ public interface ActorRepository extends JpaRepository<Actor, Long> {
 
 	boolean existsActorByEmail(String email);
 
-	Actor findByEmail(String email);
+	Optional<Actor> findByEmail(String email);
+
+	@Query("SELECT a FROM Actor a WHERE a.email = ?1")
+	Actor searchByEmail(String email);
+
+	@Query("SELECT a.authId as userUuid FROM Actor a WHERE email = ?1")
+	Optional<UUID> findUserUuidByEmail(String email);
 }

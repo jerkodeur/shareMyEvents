@@ -17,7 +17,7 @@ html {
 
 .pwd-reset-intructions {
   h1 {
-    @include text-maker($size: 1.2em, $weight: bold);
+    @include text-maker($size: 1.35em, $weight: bold, $color: $blood);
     margin-top: 1em;
   }
 
