@@ -20,7 +20,6 @@ export class ErrorHandlerService {
     if (err.error.errors) {
       errorCode = err.error.errors[0].defaultMessage;
     }
-    console.log(err.status);
     if (err.status == 401) {
       errorCode =
         err?.error?.message == 'Invalid credential'
