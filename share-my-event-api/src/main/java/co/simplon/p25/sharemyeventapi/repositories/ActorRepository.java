@@ -22,13 +22,13 @@ public interface ActorRepository extends JpaRepository<Actor, Long> {
 	@Query("SELECT a.id FROM Actor a WHERE a.email = ?1")
 	Long findActorIdByEmail(String email);
 
-	boolean existsActorByEmail(String email);
-
-	Optional<Actor> findByEmail(String email);
+	@Query("SELECT a.authId as userUuid FROM Actor a WHERE email = ?1")
+	Optional<UUID> findUserUuidByEmail(String email);
 
 	@Query("SELECT a FROM Actor a WHERE a.email = ?1")
 	Actor searchByEmail(String email);
 
-	@Query("SELECT a.authId as userUuid FROM Actor a WHERE email = ?1")
-	Optional<UUID> findUserUuidByEmail(String email);
+	Optional<Actor> findByEmail(String email);
+
+	boolean existsByEmail(String email);
 }

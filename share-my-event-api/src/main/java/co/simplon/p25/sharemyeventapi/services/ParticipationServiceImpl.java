@@ -10,7 +10,6 @@ import co.simplon.p25.sharemyeventapi.dtos.ParticipantCreateDto;
 import co.simplon.p25.sharemyeventapi.dtos.ParticipationDto;
 import co.simplon.p25.sharemyeventapi.entities.Actor;
 import co.simplon.p25.sharemyeventapi.entities.Participation;
-import co.simplon.p25.sharemyeventapi.exceptions.ExistException;
 import co.simplon.p25.sharemyeventapi.repositories.ActorRepository;
 import co.simplon.p25.sharemyeventapi.repositories.EventRepository;
 import co.simplon.p25.sharemyeventapi.repositories.ParticipationRepository;
@@ -41,11 +40,8 @@ public class ParticipationServiceImpl implements ParticipationService {
 	public ParticipationDto add(ParticipantCreateDto inputs) {
 		Actor actor;
 
-		if (actorRepo.existsActorByEmail(inputs.getEmail())) {
+		if (actorRepo.existsByEmail(inputs.getEmail())) {
 			actor = actorRepo.searchByEmail(inputs.getEmail());
-			if (repo.existsByParticipantId(actor.getId())) {
-				throw new ExistException("participant_exist");
-			}
 		} else {
 			actor = new Actor();
 			actor.setEmail(inputs.getEmail());

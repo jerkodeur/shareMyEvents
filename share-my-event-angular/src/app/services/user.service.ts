@@ -53,7 +53,9 @@ export class UserService {
             if (res.token) {
               localStorage.setItem('access_token', res.token.token);
               this.authentication.authenticated.next(true);
-              this.notify.showSuccess(`Bienvenue ${res.actor.nickname} !`);
+              this.notify.showSuccess(`Bienvenue ${res.actor.nickname} !`, '', {
+                timeOut: 1250,
+              });
               this.router.navigateByUrl('/home');
             } else {
               throw new Error('Erreur lors de la récupération du token');
@@ -105,7 +107,9 @@ export class UserService {
   logout() {
     localStorage.clear();
     this.authentication.authenticated.next(false);
-    this.notify.showSuccess('Déconnexion effectuée avec succès');
+    this.notify.showSuccess('Déconnexion effectuée avec succès', '', {
+      timeOut: 1250,
+    });
     this.router.navigate(['/home']);
   }
 }

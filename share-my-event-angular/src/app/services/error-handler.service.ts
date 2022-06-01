@@ -17,6 +17,7 @@ export class ErrorHandlerService {
     console.error(err);
     let errorCode = err?.error?.code_error;
     errorCode = err.error?.fieldErrors?.email[0].code ?? errorCode;
+    errorCode = err.error?.errors[0]?.defaultMessage ?? errorCode;
     if (err.status == 401) {
       errorCode =
         err?.error?.message == 'Invalid credential'
@@ -72,8 +73,10 @@ export class ErrorHandlerService {
         return 'Accès non autorisé';
       case 'name_unique':
         return 'Un nom similaire existe déjà';
-      case 'participant_exist':
+      case 'participant_exist_on_event':
         return "L'adresse email saisie existe déjà sur l'event";
+      case 'name_exist_on_event':
+        return "Le nom renseigné existe déjà sur l'event";
       case 'unknown_user':
         return 'Adresse email inconnue';
       case 'old_password_required':

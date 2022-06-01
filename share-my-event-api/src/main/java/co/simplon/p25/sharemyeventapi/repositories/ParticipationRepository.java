@@ -1,6 +1,7 @@
 package co.simplon.p25.sharemyeventapi.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -35,4 +36,11 @@ public interface ParticipationRepository
 	ParticipationDto findOneParticipationById(Long id);
 
 	int countByEventId(Long getId);
+
+	@Query(value = "SELECT * FROM participations WHERE name = ? AND event_id = ?", nativeQuery = true)
+	Optional<Participation> existsByNameAndEventId(String name, Long eventId);
+
+	@Query(value = "SELECT * FROM participations WHERE participant_id = ? AND event_id = ?", nativeQuery = true)
+	Optional<Participation> existsByParticipantIdAndEventId(Long participantId,
+			Long eventId);
 }
