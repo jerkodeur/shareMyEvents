@@ -80,4 +80,22 @@ export class ParticipantService {
         })
       );
   }
+
+  access$(accessForm: {
+    eventCode: string;
+    email: string | null;
+  }): Observable<any> {
+    return this.httpService
+      .post(`${environment.apiUrl}/events/participant-access`, accessForm)
+      .pipe(
+        tap({
+          next: (res: any) => {
+            console.log(res);
+          },
+          error: (err) => {
+            this.errorHandler.notifyHttpError(err).subscribe();
+          },
+        })
+      );
+  }
 }

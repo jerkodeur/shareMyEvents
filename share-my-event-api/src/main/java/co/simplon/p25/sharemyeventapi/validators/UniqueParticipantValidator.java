@@ -30,7 +30,7 @@ public class UniqueParticipantValidator
 			ConstraintValidatorContext context) {
 		if (actorRepo.existsByEmail(participation.getEmail())) {
 			Long participantId = actorRepo
-					.findActorIdByEmail(participation.getEmail());
+					.findActorIdByEmail(participation.getEmail()).get();
 			return !participationRepo.existsByParticipantIdAndEventId(
 					participantId, participation.getEventId()).isPresent();
 		}

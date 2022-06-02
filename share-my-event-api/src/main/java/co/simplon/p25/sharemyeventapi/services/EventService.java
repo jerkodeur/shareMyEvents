@@ -1,5 +1,7 @@
 package co.simplon.p25.sharemyeventapi.services;
 
+import co.simplon.p25.sharemyeventapi.dtos.ParticipantAccessDto;
+import co.simplon.p25.sharemyeventapi.dtos.AuthorizedEventAccessDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventAddressDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventCreateDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventCreatedId;
@@ -19,4 +21,5 @@ public interface EventService {
 	EventAddressDto updateAddress(Long eventId, EventAddressDto inputs);
 	boolean isOrganizer(Long eventId);
 	void remove(Long eventId);
+	AuthorizedEventAccessDto access(ParticipantAccessDto inputs);
 }

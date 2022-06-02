@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import co.simplon.p25.sharemyeventapi.dtos.ParticipationDto;
+import co.simplon.p25.sharemyeventapi.entities.Actor;
+import co.simplon.p25.sharemyeventapi.entities.Event;
 import co.simplon.p25.sharemyeventapi.entities.Participation;
 
 @Repository
@@ -43,4 +45,7 @@ public interface ParticipationRepository
 	@Query(value = "SELECT * FROM participations WHERE participant_id = ? AND event_id = ?", nativeQuery = true)
 	Optional<Participation> existsByParticipantIdAndEventId(Long participantId,
 			Long eventId);
+
+	Optional<Participation> findByParticipantAndEvent(Actor participant,
+			Event event);
 }

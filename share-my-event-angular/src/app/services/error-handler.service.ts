@@ -96,6 +96,10 @@ export class ErrorHandlerService {
         return 'Adresse email inconnue';
       case 'old_password_required':
         return 'Mot de passe temporaire requis';
+      case 'eventId_required':
+        return 'Code event requis';
+      case 'unknown_participation':
+        return "Vous n'êtes pas autorisé à accéder à l'évènement ou les données renseignées ne sont pas correctes";
       default:
         return "Erreur lors de la requête au serveur, merci de contacter l'administrateur";
     }
