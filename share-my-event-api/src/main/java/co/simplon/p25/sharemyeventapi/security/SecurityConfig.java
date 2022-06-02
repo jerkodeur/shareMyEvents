@@ -16,7 +16,7 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Value("${sharemyevent.security.jwt.secret}")
+	@Value("${sharemyevents.security.jwt.secret}")
 	private String secret;
 
 	@Override

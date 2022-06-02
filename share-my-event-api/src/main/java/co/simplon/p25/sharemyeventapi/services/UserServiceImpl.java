@@ -28,13 +28,13 @@ import co.simplon.p25.sharemyeventapi.security.Jwt;
 public final class UserServiceImpl implements UserService {
 
 	private final ActorRepository actorRepo;
-	private final RestTemplate restTemplate;
+	private final RestTemplate gandalf;
 	private final JwtDecoder decoder;
 
-	public UserServiceImpl(ActorRepository actorRepo, RestTemplate restTemplate,
-			JwtDecoder decoder) {
+	public UserServiceImpl(ActorRepository actorRepo,
+			RestTemplate gandalfRestTemplate, JwtDecoder decoder) {
 		this.actorRepo = actorRepo;
-		this.restTemplate = restTemplate;
+		gandalf = gandalfRestTemplate;
 		this.decoder = decoder;
 	}
 
@@ -44,7 +44,7 @@ public final class UserServiceImpl implements UserService {
 		UserSignUpDto userSignUpDto = new UserSignUpDto(actor.getEmail(),
 				actor.getPassword());
 
-		ResponseEntity<UserUuidDto> response = restTemplate.postForEntity(
+		ResponseEntity<UserUuidDto> response = gandalf.postForEntity(
 				"/users/create", userSignUpDto, UserUuidDto.class);
 		actor.setAuthId(response.getBody().getUuid());
 
@@ -57,7 +57,7 @@ public final class UserServiceImpl implements UserService {
 	@Override
 	public ActorJwt login(UserLogInDto inputs) {
 
-		ResponseEntity<ActorJwt> response = restTemplate
+		ResponseEntity<ActorJwt> response = gandalf
 				.postForEntity("/users/login", inputs, ActorJwt.class);
 
 		Jwt gandalfToken = response.getBody().getToken();
@@ -75,7 +75,7 @@ public final class UserServiceImpl implements UserService {
 	public void lostPassword(@Valid UserMailDto inputs) {
 		Actor actor = actorRepo.findByEmail(inputs.getEmail())
 				.orElseThrow(() -> new ResourceNotFoundException(
-						String.format("unknown_user")));
+						String.format("unknown_user_mail")));
 
 		String mailHeader = String.format(
 				"<p>Bonjour %s,<br> vous avez demandé la réinitialisation de votre mot de passe, </p>",
@@ -93,7 +93,7 @@ public final class UserServiceImpl implements UserService {
 		LostPasswordDto lostPassword = new LostPasswordDto(actor.getAuthId(),
 				mailHeader, mailFooter);
 
-		restTemplate.patchForObject("/users/lost-password", lostPassword,
+		gandalf.patchForObject("/users/lost-password", lostPassword,
 				String.class);
 
 	}
@@ -102,14 +102,14 @@ public final class UserServiceImpl implements UserService {
 	public void resetPassword(@Valid UserResetPasswordDto inputs) {
 		UUID userUuid = actorRepo.findUserUuidByEmail(inputs.getEmail())
 				.orElseThrow(() -> new ResourceNotFoundException(
-						String.format("Unknown user")));
+						String.format("unknown_user_mail")));
 
 		ResetPasswordDto resetPassword = new ResetPasswordDto();
 		resetPassword.setUserUuid(userUuid);
 		resetPassword.setOldPassword(inputs.getOldPassword());
 		resetPassword.setNewPassword(inputs.getNewPassword());
 
-		restTemplate.patchForObject("/users/reset-password", resetPassword,
+		gandalf.patchForObject("/users/reset-password", resetPassword,
 				String.class);
 	}
 

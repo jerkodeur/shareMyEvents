@@ -20,17 +20,36 @@ export class ErrorHandlerService {
     if (err.error.errors) {
       errorCode = err.error.errors[0].defaultMessage;
     }
-    if (err.status == 401) {
-      errorCode =
-        err?.error?.message == 'Invalid credential'
-          ? 'bad_credential'
-          : 'unauthorized';
-    }
-    errorCode = err.status == 403 ? 'forbidden' : errorCode;
 
-    this.notify.showError(this.setErrorMessage(errorCode));
-    if (errorCode == 'unauthorized' || errorCode == 'forbidden') {
+    if (err.status == 401) {
+      if (err.error.message) {
+        switch (err.error.message) {
+          case 'Invalid credential':
+          case 'Unknown user':
+            this.notify.showError('Identifiants incorrects');
+            break;
+          default:
+            this.router.navigateByUrl('/home');
+            this.notify.showError('Votre session a expiré');
+        }
+      }
+    }
+
+    if (err.status == 400 || err.status == 404) {
+      this.notify.showError(this.setErrorMessage(errorCode));
+    }
+
+    if (err.status == 403) {
       this.router.navigateByUrl('/home');
+      this.notify.showError('Accès non autorisé !');
+    }
+
+    if (err.status == 500) {
+      this.notify.showError(
+        this.setErrorMessage(
+          "E500, Erreur serveur, merci de contacter l'administrateur"
+        )
+      );
     }
     return throwError(() => new Error(message));
   }
@@ -67,24 +86,18 @@ export class ErrorHandlerService {
         return 'La date est obligatoire';
       case 'date_earlier':
         return "Impossible d'insérer une date déjà passée";
-      case 'bad_credential':
-        return 'Identifiants incorrects';
-      case 'unauthorized':
-        return 'Votre session a expiré';
-      case 'forbidden':
-        return 'Accès non autorisé';
       case 'name_unique':
         return 'Un nom similaire existe déjà';
       case 'participant_exist_on_event':
         return "L'adresse email saisie existe déjà sur l'event";
       case 'name_exist_on_event':
         return "Le nom renseigné existe déjà sur l'event";
-      case 'unknown_user':
+      case 'unknown_user_mail':
         return 'Adresse email inconnue';
       case 'old_password_required':
         return 'Mot de passe temporaire requis';
       default:
-        return "Erreur serveur, merci de contacter l'administrateur";
+        return "Erreur lors de la requête au serveur, merci de contacter l'administrateur";
     }
   }
 }

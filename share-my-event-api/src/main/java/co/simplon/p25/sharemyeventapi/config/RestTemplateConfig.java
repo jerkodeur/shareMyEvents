@@ -28,6 +28,15 @@ public class RestTemplateConfig {
 	@Value("${gandalf.api-key}")
 	private String gandalfClientKey;
 
+	@Value("${herald.api.root-uri}")
+	private String heraldRootUri;
+
+	@Value("${herald.api.client-name}")
+	private String heraldClientName;
+
+	@Value("${herald.api.client-key}")
+	private String heraldClientKey;
+
 	private final ObjectMapper objectMapper;
 
 	public RestTemplateConfig(ObjectMapper objectMapper) {
@@ -35,10 +44,20 @@ public class RestTemplateConfig {
 	}
 
 	@Bean
-	public RestTemplate gandalfTemplate(RestTemplateBuilder builder) {
+	public RestTemplate gandalfRestTemplate(RestTemplateBuilder builder) {
 		RestTemplate template = builder.rootUri(gandalfRootUri)
 				.defaultHeader("client-name", gandalfClientName)
 				.defaultHeader("client-api-key", gandalfClientKey)
+				.errorHandler(errorHandler()).build();
+		template.setRequestFactory(requestFactory());
+		return template;
+	}
+
+	@Bean
+	public RestTemplate heraldRestTemplate(RestTemplateBuilder builder) {
+		RestTemplate template = builder.rootUri(heraldRootUri)
+				.defaultHeader("API-Client-Name", heraldClientName)
+				.defaultHeader("API-Key", heraldClientKey)
 				.errorHandler(errorHandler()).build();
 		template.setRequestFactory(requestFactory());
 		return template;
