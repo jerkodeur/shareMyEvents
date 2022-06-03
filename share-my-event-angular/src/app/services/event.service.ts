@@ -29,12 +29,12 @@ export class EventService {
     private router: Router
   ) {}
 
-  getEvent$(eventId: number): Observable<EventInterface | any> {
+  getEvent$(eventId: number): Observable<EventInterface> {
     return this.httpService
       .get<EventInterface>(`${environment.apiUrl}/events/${eventId}`)
       .pipe(
         tap({
-          next: (event: any) => {
+          next: (event: EventInterface) => {
             event.eventDate = new Date(event.eventDate);
             return event;
           },
@@ -66,9 +66,7 @@ export class EventService {
 
   createEvent$(event: Event): Observable<any> {
     return this.httpService
-      .post(`${environment.apiUrl}/events/new`, {
-        ...event,
-      })
+      .post(`${environment.apiUrl}/events/new`, event)
       .pipe(
         tap({
           next: (res: any) => {
