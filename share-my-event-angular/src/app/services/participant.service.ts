@@ -10,6 +10,7 @@ import { NotificationService } from './notification.service';
 import { Participant } from '../core/models/Participant.model';
 import { Participation } from '../core/interfaces/Participation.interface';
 import { Participations } from '../core/models/Participations.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -19,9 +20,10 @@ export class ParticipantService {
   participations!: Participations;
 
   constructor(
-    private httpService: HttpClient,
     private errorHandler: ErrorHandlerService,
-    private notify: NotificationService
+    private httpService: HttpClient,
+    private notify: NotificationService,
+    private router: Router
   ) {}
 
   getParticipants$(eventId: number): Observable<any> {
@@ -90,7 +92,8 @@ export class ParticipantService {
       .pipe(
         tap({
           next: (res: any) => {
-            console.log(res);
+            sessionStorage.setItem('participantId', res.participantId);
+            this.router.navigateByUrl(`/events/${res.eventId}`);
           },
           error: (err) => {
             this.errorHandler.notifyHttpError(err).subscribe();

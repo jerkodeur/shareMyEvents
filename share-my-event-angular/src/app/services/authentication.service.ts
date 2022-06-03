@@ -39,16 +39,18 @@ export class AuthenticationService {
       );
   }
 
-  getAuthUserId(): string {
+  getAuthUserId(): any {
     this.setIfAuthenticated();
-    return this.jwtService.decodeToken(this.token).sub;
+    return this.authenticated.subscribe((auth: boolean) =>
+      auth ? this.jwtService.decodeToken(this.token).sub : null
+    );
   }
 
   checkIfOrganizer(eventOrganizerId: string): void {
     this.isOrganizer.next(this.getAuthUserId() == eventOrganizerId);
   }
 
-  checkIfParticipant(eventId: number, participantId: number): void {
-    this.isParticipant.next(eventId == participantId);
+  checkIfParticipant(participantsId: number, participants: number[]): void {
+    this.isParticipant.next(participants.indexOf(participantsId) != -1);
   }
 }

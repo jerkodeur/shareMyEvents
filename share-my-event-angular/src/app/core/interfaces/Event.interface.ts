@@ -1,14 +1,16 @@
 import { LocalizationInterface } from './Localization.interface';
 
 export interface EventInterface {
-  id: number;
-  title: string;
-  description: string;
+  address: LocalizationInterface;
   code: string;
+  description: string;
   eventDate: Date;
+  id: number;
   organizerAuthId: string;
   organizerEmail: string;
   organizerFirstname: string;
+  organizerId: number;
   organizerLastname: string;
-  address: LocalizationInterface;
+  participants: number[];
+  title: string;
 }

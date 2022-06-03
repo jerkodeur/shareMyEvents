@@ -36,6 +36,12 @@ export class ErrorHandlerService {
     }
 
     if (err.status == 400 || err.status == 404) {
+      if (err.error.message) {
+        switch (err.error.message) {
+          case 'unknown_user_uuid':
+            this.notify.showError('Utilisateur inconnu');
+        }
+      }
       this.notify.showError(this.setErrorMessage(errorCode));
     }
 

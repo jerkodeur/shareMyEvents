@@ -8,7 +8,7 @@ INSERT INTO actors
     (auth_id, email, nickname)
     VALUES
         ('11f0f2d8-e36d-4870-adf6-508009d22106', 'jerome.potie@gmail.com', 'Jéjé'),
-        ('4d6f531e-ef47-42b1-85a2-b891b0fe3909', 'jejouelas@hotmail.fr', null)
+        ('c67a349f-5a01-45ba-a564-ac5ec0e05bb9', 'jejouelas@hotmail.fr', 'Jéjé')
 ;
 
 INSERT INTO actors (email)

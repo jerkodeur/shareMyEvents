@@ -1,5 +1,6 @@
 package co.simplon.p25.sharemyeventapi.services;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.transaction.Transactional;
@@ -87,7 +88,6 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public EventPageDto getEvent(Long eventId) {
 		Event event = eventRepo.findOneById(eventId);
-
 		EventPageDto eventPage = new EventPageDto();
 		eventPage.setId(event.getId());
 		eventPage.setCode(event.getCode());
@@ -103,8 +103,13 @@ public class EventServiceImpl implements EventService {
 			eventPage.setAddress(event.getAddress());
 		}
 		eventPage.setOrganizerAuthId(event.getOrganizer().getAuthId());
+		eventPage.setOrganizerId(event.getOrganizer().getId());
 		eventPage.setOrganizerFirstname(event.getOrganizer().getNickname());
 		eventPage.setOrganizerEmail(event.getOrganizer().getEmail());
+
+		List<Long> participants = participationRepo
+				.findParticipationsIdByeventId(eventId);
+		eventPage.setParticipants(participants);
 
 		return eventPage;
 	}

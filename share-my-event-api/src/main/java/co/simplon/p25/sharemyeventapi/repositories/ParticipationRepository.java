@@ -48,4 +48,7 @@ public interface ParticipationRepository
 
 	Optional<Participation> findByParticipantAndEvent(Actor participant,
 			Event event);
+
+	@Query("SELECT p.participant.id FROM Participation p WHERE p.event.id = ?1 ")
+	List<Long> findParticipationsIdByeventId(Long eventId);
 }
