@@ -1,38 +1,30 @@
-package co.simplon.p25.sharemyeventapi.dtos;
+package co.simplon.p25.sharemyeventapi.dtos.user;
 
-import javax.validation.constraints.NotBlank;
-
-public class UserLogInDto {
-
-	@NotBlank(message = "email_required")
+public class UserSignUpDto {
 	private String email;
-
-	@NotBlank(message = "password_required")
 	private String password;
 
-	public UserLogInDto() {
+	public UserSignUpDto(String email, String password) {
+		this.email = email;
+		this.password = password;
 	}
 
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	public String getPassword() {
 		return password;
 	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
 	@Override
 	public String toString() {
-		return "UserLogInDto [email=" + email + ", password=" + "[PROTECTED]"
-				+ "]";
+		return "UserSignUpDto { email=" + email + ", password=[PROTECTED] }";
 	}
 
 }

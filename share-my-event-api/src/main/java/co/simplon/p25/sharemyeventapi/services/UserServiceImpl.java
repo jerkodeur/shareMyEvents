@@ -4,7 +4,6 @@ import java.util.UUID;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.stereotype.Service;
@@ -12,10 +11,15 @@ import org.springframework.web.client.RestTemplate;
 
 import co.simplon.p25.sharemyeventapi.dtos.ActorIdentityDto;
 import co.simplon.p25.sharemyeventapi.dtos.ActorSignUpDto;
-import co.simplon.p25.sharemyeventapi.dtos.UserLogInDto;
-import co.simplon.p25.sharemyeventapi.dtos.UserSignUpDto;
-import co.simplon.p25.sharemyeventapi.dtos.UserUuidDto;
+import co.simplon.p25.sharemyeventapi.dtos.user.LostPasswordDto;
+import co.simplon.p25.sharemyeventapi.dtos.user.ResetPasswordDto;
+import co.simplon.p25.sharemyeventapi.dtos.user.UserLogInDto;
+import co.simplon.p25.sharemyeventapi.dtos.user.UserMailDto;
+import co.simplon.p25.sharemyeventapi.dtos.user.UserResetPasswordDto;
+import co.simplon.p25.sharemyeventapi.dtos.user.UserSignUpDto;
+import co.simplon.p25.sharemyeventapi.dtos.user.UserUuidDto;
 import co.simplon.p25.sharemyeventapi.entities.Actor;
+import co.simplon.p25.sharemyeventapi.exceptions.ResourceNotFoundException;
 import co.simplon.p25.sharemyeventapi.repositories.ActorRepository;
 import co.simplon.p25.sharemyeventapi.security.ActorJwt;
 import co.simplon.p25.sharemyeventapi.security.Jwt;
@@ -23,17 +27,15 @@ import co.simplon.p25.sharemyeventapi.security.Jwt;
 @Service
 public final class UserServiceImpl implements UserService {
 
-	@Autowired
-	ActorRepository actorRepo;
+	private final ActorRepository actorRepo;
+	private final RestTemplate gandalf;
+	private final JwtDecoder decoder;
 
-	@Autowired
-	private RestTemplate restTemplate;
-
-	@Autowired
-	JwtDecoder decoder;
-
-	private UserServiceImpl() {
-		// Ensures non-instantiability
+	public UserServiceImpl(ActorRepository actorRepo,
+			RestTemplate gandalfRestTemplate, JwtDecoder decoder) {
+		this.actorRepo = actorRepo;
+		gandalf = gandalfRestTemplate;
+		this.decoder = decoder;
 	}
 
 	@Override
@@ -42,7 +44,7 @@ public final class UserServiceImpl implements UserService {
 		UserSignUpDto userSignUpDto = new UserSignUpDto(actor.getEmail(),
 				actor.getPassword());
 
-		ResponseEntity<UserUuidDto> response = restTemplate.postForEntity(
+		ResponseEntity<UserUuidDto> response = gandalf.postForEntity(
 				"/users/create", userSignUpDto, UserUuidDto.class);
 		actor.setAuthId(response.getBody().getUuid());
 
@@ -53,10 +55,10 @@ public final class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public ActorJwt login(UserLogInDto userLogInInputs) {
+	public ActorJwt login(UserLogInDto inputs) {
 
-		ResponseEntity<ActorJwt> response = restTemplate
-				.postForEntity("/users/login", userLogInInputs, ActorJwt.class);
+		ResponseEntity<ActorJwt> response = gandalf
+				.postForEntity("/users/login", inputs, ActorJwt.class);
 
 		Jwt gandalfToken = response.getBody().getToken();
 		UUID userUuid = UUID.fromString(
@@ -67,6 +69,48 @@ public final class UserServiceImpl implements UserService {
 		actorJwt.setToken(gandalfToken);
 		actorJwt.setActor(actorIdentityDto);
 		return actorJwt;
+	}
+
+	@Override
+	public void lostPassword(@Valid UserMailDto inputs) {
+		Actor actor = actorRepo.findByEmail(inputs.getEmail())
+				.orElseThrow(() -> new ResourceNotFoundException(
+						String.format("unknown_user_mail")));
+
+		String mailHeader = String.format(
+				"<p>Bonjour %s,<br> vous avez demandé la réinitialisation de votre mot de passe, </p>",
+				actor.getNickname());
+		String mailFooter = String.format(
+				"<p>Si vous n'êtes pas à l'origine de cette demande, "
+						+ "merci de contacter l'administrateur du site.</p>"
+						+ "<p>"
+						+ "<strong>Vous pouvez soit continuer d'utiliser ce mot de passe</strong>, "
+						+ "ou <strong>vous pouvez le modifier à l'adresse suivante</strong>:<br><br> "
+						+ "<a href=\"http://localhost:4200/password-reset\" target=\"blank\"> Page de modification du mot de passe </a>"
+						+ "</p>" + "<p>A très vite sur sharemyevents %s! </p>",
+				actor.getNickname());
+
+		LostPasswordDto lostPassword = new LostPasswordDto(actor.getAuthId(),
+				mailHeader, mailFooter);
+
+		gandalf.patchForObject("/users/lost-password", lostPassword,
+				String.class);
+
+	}
+
+	@Override
+	public void resetPassword(@Valid UserResetPasswordDto inputs) {
+		UUID userUuid = actorRepo.findUserUuidByEmail(inputs.getEmail())
+				.orElseThrow(() -> new ResourceNotFoundException(
+						String.format("unknown_user_mail")));
+
+		ResetPasswordDto resetPassword = new ResetPasswordDto();
+		resetPassword.setUserUuid(userUuid);
+		resetPassword.setOldPassword(inputs.getOldPassword());
+		resetPassword.setNewPassword(inputs.getNewPassword());
+
+		gandalf.patchForObject("/users/reset-password", resetPassword,
+				String.class);
 	}
 
 }

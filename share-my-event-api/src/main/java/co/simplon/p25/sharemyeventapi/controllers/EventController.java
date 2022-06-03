@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.simplon.p25.sharemyeventapi.dtos.ParticipantAccessDto;
+import co.simplon.p25.sharemyeventapi.dtos.AuthorizedEventAccessDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventAddressDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventCreateDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventCreatedId;
@@ -41,6 +43,12 @@ public class EventController {
 	@GetMapping("/{id}")
 	public EventPageDto getEvent(@PathVariable(value = "id") Long eventId) {
 		return eventService.getEvent(eventId);
+	}
+
+	@PostMapping("/participant-access")
+	@ResponseStatus(HttpStatus.OK)
+	public AuthorizedEventAccessDto Create(@Valid @RequestBody ParticipantAccessDto inputs) {
+		return eventService.access(inputs);
 	}
 
 	@PatchMapping("/update/{id}/title")

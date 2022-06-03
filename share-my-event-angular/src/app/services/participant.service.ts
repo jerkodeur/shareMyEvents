@@ -10,6 +10,7 @@ import { NotificationService } from './notification.service';
 import { Participant } from '../core/models/Participant.model';
 import { Participation } from '../core/interfaces/Participation.interface';
 import { Participations } from '../core/models/Participations.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -19,9 +20,10 @@ export class ParticipantService {
   participations!: Participations;
 
   constructor(
-    private httpService: HttpClient,
     private errorHandler: ErrorHandlerService,
-    private notify: NotificationService
+    private httpService: HttpClient,
+    private notify: NotificationService,
+    private router: Router
   ) {}
 
   getParticipants$(eventId: number): Observable<any> {
@@ -73,6 +75,25 @@ export class ParticipantService {
             this.notify.showSuccess(
               `Vous avez bien retiré ${participation.name} de l'event`
             );
+          },
+          error: (err) => {
+            this.errorHandler.notifyHttpError(err).subscribe();
+          },
+        })
+      );
+  }
+
+  access$(accessForm: {
+    eventCode: string;
+    email: string | null;
+  }): Observable<any> {
+    return this.httpService
+      .post(`${environment.apiUrl}/events/participant-access`, accessForm)
+      .pipe(
+        tap({
+          next: (res: any) => {
+            sessionStorage.setItem('participantId', res.participantId);
+            this.router.navigateByUrl(`/events/${res.eventId}`);
           },
           error: (err) => {
             this.errorHandler.notifyHttpError(err).subscribe();

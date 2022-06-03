@@ -8,15 +8,13 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Constraint(validatedBy = UniqueParticipantNameValidator.class)
+@Constraint(validatedBy = UniqueParticipantValidator.class)
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface UniqueParticipantName {
-
-	String message() default "Participant name is already used in this event";
+public @interface UniqueParticipant {
+	String message() default "Participant already exist on this event";
 
 	Class<?>[] groups() default {};
 
 	Class<? extends Payload>[] payload() default {};
-
 }

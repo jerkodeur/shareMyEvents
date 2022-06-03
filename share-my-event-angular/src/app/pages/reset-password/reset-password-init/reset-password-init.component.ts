@@ -1,42 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { NotificationService } from 'src/app/services/notification.service';
+import { UserService } from 'src/app/services/user.service';
 
+import { ModalComponent } from 'src/app/components/modal/modal.component';
 @Component({
   selector: 'app-reset-password-init',
   templateUrl: './reset-password-init.component.html',
   styleUrls: ['./reset-password-init.component.scss'],
 })
-export class ResetPasswordInitComponent implements OnInit {
-  testEmail = 'jerome.potie@gmail.com';
-  noMatch = false;
-
+export class ResetPasswordInitComponent {
   constructor(
-    private route: ActivatedRoute,
-    private notify: NotificationService,
-    private router: Router
+    private userService: UserService,
+    private modalService: NgbModal
   ) {}
 
-  ngOnInit(): void {
-    this.route.params.subscribe(
-      (param) =>
-        param['exception'] == 'codeExpired' &&
-        this.notify.showError(
-          'La validité du code a expiré, merci de renseigner votre e-mail pour relancer la procédure'
-        )
-    );
-    localStorage.clear();
+  submitForm(form: any) {
+    this.userService.lostPassword$(form.value.email).subscribe();
   }
 
-  onSubmit(form: any) {
-    if (form.value.email !== this.testEmail) {
-      this.noMatch = true;
-      return this.notify.showError(
-        "L'adresse e-mail est inconnue de nos services"
-      );
-    }
-    localStorage.setItem('email', form.value.email);
-    this.router.navigate(['password-reset/instructions']);
+  openModal(form: any) {
+    const modalRef = this.modalService.open(ModalComponent, {
+      backdropClass: 'primary-backdrop',
+      size: 'md',
+      centered: true,
+    });
+    modalRef.componentInstance.title = 'Réinitialisation du mot de passe';
+    modalRef.componentInstance.message = `Etes vous bien sur de vouloir réinitialiser votre mot de passe ?`;
+    modalRef.componentInstance.btnName = 'Valider';
+    modalRef.componentInstance.action = () => {
+      this.submitForm(form);
+      modalRef.dismiss('success');
+    };
   }
 }

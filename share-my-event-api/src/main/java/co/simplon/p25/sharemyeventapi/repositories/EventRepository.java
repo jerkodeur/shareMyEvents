@@ -1,6 +1,7 @@
 package co.simplon.p25.sharemyeventapi.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -38,5 +39,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
 	@Query("SELECT e.organizer FROM Event e WHERE e.id = ?1 ")
 	Actor findOrganizerByEventId(Long event_id);
+
+	Optional<Event> findByCode(String eventCode);
 
 }

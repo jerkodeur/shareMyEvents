@@ -1,10 +1,16 @@
 package co.simplon.p25.sharemyeventapi.services;
 
+import java.util.List;
+import java.util.UUID;
+
 import javax.transaction.Transactional;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.HtmlUtils;
 
+import co.simplon.p25.sharemyeventapi.dtos.AuthorizedEventAccessDto;
+import co.simplon.p25.sharemyeventapi.dtos.ParticipantAccessDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventAddressDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventCreateDto;
 import co.simplon.p25.sharemyeventapi.dtos.event.EventCreatedId;
@@ -16,25 +22,34 @@ import co.simplon.p25.sharemyeventapi.entities.Actor;
 import co.simplon.p25.sharemyeventapi.entities.Address;
 import co.simplon.p25.sharemyeventapi.entities.Event;
 import co.simplon.p25.sharemyeventapi.exceptions.ForbiddenException;
+import co.simplon.p25.sharemyeventapi.exceptions.ResourceNotFoundException;
 import co.simplon.p25.sharemyeventapi.helpers.RandomCode;
+import co.simplon.p25.sharemyeventapi.repositories.ActorRepository;
 import co.simplon.p25.sharemyeventapi.repositories.AddressRepository;
 import co.simplon.p25.sharemyeventapi.repositories.EventRepository;
+import co.simplon.p25.sharemyeventapi.repositories.ParticipationRepository;
+import co.simplon.p25.sharemyeventapi.security.SecurityHelper;
 
 @Service
 public class EventServiceImpl implements EventService {
 
-	private final AuthService authService;
+	private final ActorRepository actorRepo;
 	private final ActorService actorService;
-	private final EventRepository eventRepo;
 	private final AddressRepository addressRepo;
+	private final AuthService authService;
+	private final EventRepository eventRepo;
+	private final ParticipationRepository participationRepo;
 
 	public EventServiceImpl(AuthService authService, ActorService actorService,
 			EventRepository eventRepo, AddressRepository addressRepo,
-			OrganizerService organizerService) {
-		this.authService = authService;
+			ActorRepository actorRepo, OrganizerService organizerService,
+			ParticipationRepository participationRepo) {
+		this.actorRepo = actorRepo;
 		this.actorService = actorService;
-		this.eventRepo = eventRepo;
 		this.addressRepo = addressRepo;
+		this.authService = authService;
+		this.eventRepo = eventRepo;
+		this.participationRepo = participationRepo;
 	}
 
 	@Override
@@ -73,7 +88,6 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public EventPageDto getEvent(Long eventId) {
 		Event event = eventRepo.findOneById(eventId);
-
 		EventPageDto eventPage = new EventPageDto();
 		eventPage.setId(event.getId());
 		eventPage.setCode(event.getCode());
@@ -89,8 +103,13 @@ public class EventServiceImpl implements EventService {
 			eventPage.setAddress(event.getAddress());
 		}
 		eventPage.setOrganizerAuthId(event.getOrganizer().getAuthId());
+		eventPage.setOrganizerId(event.getOrganizer().getId());
 		eventPage.setOrganizerFirstname(event.getOrganizer().getNickname());
 		eventPage.setOrganizerEmail(event.getOrganizer().getEmail());
+
+		List<Long> participants = participationRepo
+				.findParticipationsIdByeventId(eventId);
+		eventPage.setParticipants(participants);
 
 		return eventPage;
 	}
@@ -181,6 +200,37 @@ public class EventServiceImpl implements EventService {
 	public boolean isOrganizer(Long eventId) {
 		return authService.findActorIdByAuthId() == eventRepo
 				.findOrganizerByEventId(eventId).getId();
+	}
+
+	@Override
+	public AuthorizedEventAccessDto access(ParticipantAccessDto inputs) {
+		Actor participant;
+
+		if (inputs.getEmail() != null) {
+			participant = actorRepo.findByEmail(inputs.getEmail())
+					.orElseThrow(() -> new ResourceNotFoundException(
+							String.format("unknown_participation")));
+		} else {
+			if (SecurityContextHolder.getContext().getAuthentication()
+					.getPrincipal() != "anonymousUser") {
+				UUID userUuid = SecurityHelper.authenticatedUserId();
+				participant = actorRepo.findByAuthId(userUuid).get();
+			} else {
+				throw new ForbiddenException("forbidden_access");
+			}
+		}
+
+		Event event = eventRepo.findByCode(inputs.getEventCode()).orElseThrow(
+				() -> new ResourceNotFoundException("unknown_participation"));
+
+		if (participationRepo.findByParticipantAndEvent(participant, event)
+				.isPresent()) {
+			return new AuthorizedEventAccessDto(participant.getId(),
+					event.getId());
+		}
+
+		throw new ResourceNotFoundException(
+				String.format("unknown_participation"));
 	}
 
 }

@@ -6,11 +6,13 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 
+import co.simplon.p25.sharemyeventapi.validators.UniqueParticipant;
 import co.simplon.p25.sharemyeventapi.validators.UniqueParticipantName;
 
+@UniqueParticipant(message = "participant_exist_on_event")
+@UniqueParticipantName(message = "name_exist_on_event")
 public class ParticipantCreateDto {
 
-	@UniqueParticipantName(message = "name_unique")
 	@NotBlank(message = "name_required")
 	@Length(min = 2, message = "name_length")
 	private String name;
@@ -23,13 +25,10 @@ public class ParticipantCreateDto {
 	private String email;
 
 	public ParticipantCreateDto() {
-		// TODO Auto-generated constructor stub
+		//
 	}
 
-	public ParticipantCreateDto(
-			@Length(min = 2, message = "name_length") String name,
-			@NotNull(message = "eventId_required") Long eventId,
-			@Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "email_format") String email) {
+	public ParticipantCreateDto(String name, Long eventId, String email) {
 		this.name = name;
 		this.eventId = eventId;
 		this.email = email;

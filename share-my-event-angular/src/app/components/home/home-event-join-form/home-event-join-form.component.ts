@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ParticipantService } from 'src/app/services/participant.service';
 
 @Component({
   selector: 'app-home-event-join-form',
@@ -10,22 +12,37 @@ import { NotificationService } from 'src/app/services/notification.service';
 })
 export class HomeEventJoinFormComponent implements OnInit {
   joinEventForm!: FormGroup;
+  authenticated!: boolean;
 
   submitted = false;
 
-  constructor(private fb: FormBuilder, private notify: NotificationService) {}
+  constructor(
+    private authService: AuthenticationService,
+    private fb: FormBuilder,
+    private notify: NotificationService,
+    private participantService: ParticipantService
+  ) {}
 
   ngOnInit(): void {
-    this.joinEventForm = this.fb.group({
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/),
-        ],
-      ],
-      participantId: ['', Validators.required],
+    this.authService.authenticated.subscribe((bool: boolean) => {
+      this.authenticated = bool;
     });
+    this.authService.setIfAuthenticated();
+
+    this.joinEventForm = !this.authenticated
+      ? this.fb.group({
+          email: [
+            null,
+            [
+              Validators.required,
+              Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/),
+            ],
+          ],
+          eventCode: ['', Validators.required],
+        })
+      : this.fb.group({
+          eventCode: ['', Validators.required],
+        });
   }
 
   onSubmitForm() {
@@ -35,6 +52,6 @@ export class HomeEventJoinFormComponent implements OnInit {
         'Des erreurs ont été détectées, merci de les corriger'
       );
     }
-    // this.router.navigate(['events/1']);
+    this.participantService.access$(this.joinEventForm.value).subscribe();
   }
 }

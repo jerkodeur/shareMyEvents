@@ -14,18 +14,22 @@ export class NotificationService {
 
   constructor(private toastr: ToastrService) {}
 
-  showSuccess(message: string, title: string = '') {
+  showSuccess(message: string, title: string = '', options = {}) {
     this.toastr.success(message, title, {
       ...this.options,
       messageClass: 'success-toaster',
+      progressAnimation: 'increasing',
+      ...options,
     });
   }
 
-  showError(message: string, title: string = '') {
+  showError(message: string, title: string = '', options = {}) {
     this.toastr.error(message, title, {
       ...this.options,
       timeOut: 3000,
       messageClass: 'error-toaster',
+      progressAnimation: 'increasing',
+      ...options,
     });
   }
 

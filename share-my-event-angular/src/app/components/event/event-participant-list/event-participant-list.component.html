@@ -42,12 +42,15 @@
           [status]="participation.availability"
         ></app-participant-status>
         <a
+          *ngIf="isOrganizer"
           href="mailto:{{ participation.email }}"
           title="Envoyé un mail à {{ participation.email }}"
           target="_blank"
           >{{ participation.name }}</a
         >
+        <span *ngIf="!isOrganizer">{{ participation.name }}</span>
         <button
+          *ngIf="isOrganizer"
           type="button"
           (click)="openModal(participation)"
           title="Enlever {{ participation.name }} de l'event"

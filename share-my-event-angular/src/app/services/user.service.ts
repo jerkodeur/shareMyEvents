@@ -9,6 +9,7 @@ import { AuthenticationService } from './authentication.service';
 import { ErrorHandlerService } from './error-handler.service';
 import { NotificationService } from './notification.service';
 
+import { ResetPassword } from '../core/models/ResetPassword.model';
 import { User } from '../core/models/User.model';
 
 @Injectable({
@@ -37,7 +38,7 @@ export class UserService {
             this.router.navigate(['/login']);
           },
           error: async (err) => {
-            this.errorHandler.notifyHttpError(err).pipe(take(1)).subscribe();
+            this.errorHandler.notifyHttpError(err).subscribe();
           },
         })
       );
@@ -52,14 +53,52 @@ export class UserService {
             if (res.token) {
               localStorage.setItem('access_token', res.token.token);
               this.authentication.authenticated.next(true);
-              this.notify.showSuccess(`Bienvenue ${res.actor.nickname} !`);
+              this.notify.showSuccess(`Bienvenue ${res.actor.nickname} !`, '', {
+                timeOut: 1250,
+              });
               this.router.navigateByUrl('/home');
             } else {
               throw new Error('Erreur lors de la récupération du token');
             }
           },
           error: async (err) => {
-            this.errorHandler.notifyHttpError(err).pipe(take(1)).subscribe();
+            this.errorHandler.notifyHttpError(err).subscribe();
+          },
+        })
+      );
+  }
+
+  lostPassword$(email: string) {
+    return this.httpService
+      .patch(`${environment.apiUrl}/users/lost-password`, { email })
+      .pipe(
+        tap({
+          next: () => {
+            this.router.navigate(['/password-reset/instructions', { email }]);
+            this.notify.showSuccess(
+              'Votre demande de réinitialisation de mot de passe a bien été prise compte'
+            );
+          },
+          error: async (err) => {
+            this.errorHandler.notifyHttpError(err).subscribe();
+          },
+        })
+      );
+  }
+
+  resetPassword$(resetPassword: ResetPassword) {
+    return this.httpService
+      .patch(`${environment.apiUrl}/users/reset-password`, resetPassword)
+      .pipe(
+        tap({
+          next: () => {
+            this.notify.showSuccess(
+              'Votre mot de passe a été modifié avec succès'
+            );
+            this.router.navigate(['login']);
+          },
+          error: async (err) => {
+            this.errorHandler.notifyHttpError(err).subscribe();
           },
         })
       );
@@ -68,7 +107,9 @@ export class UserService {
   logout() {
     localStorage.clear();
     this.authentication.authenticated.next(false);
-    this.notify.showSuccess('Déconnexion effectuée avec succès');
+    this.notify.showSuccess('Déconnexion effectuée avec succès', '', {
+      timeOut: 1250,
+    });
     this.router.navigate(['/home']);
   }
 }
