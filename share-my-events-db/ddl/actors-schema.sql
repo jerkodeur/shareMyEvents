@@ -8,7 +8,7 @@ ALTER TABLE IF EXISTS events
 DROP CONSTRAINT fk_event_organizer;
 
 ALTER TABLE IF EXISTS participations 
-DROP CONSTRAINT participant_id;
+DROP CONSTRAINT fk_participations_participant;
 
 DROP TABLE IF EXISTS actors;
 
