@@ -3,6 +3,8 @@ package co.simplon.p25.sharemyeventsapi.controllers.errors;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,8 @@ import co.simplon.p25.sharemyeventsapi.exceptions.RestTemplateException;
 @RestControllerAdvice
 public class ControllerAdvice extends ResponseEntityExceptionHandler {
 
+	private final static Log LOGGER = LogFactory.getLog(ControllerAdvice.class);
+
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(
 			MethodArgumentNotValidException ex, HttpHeaders headers,
@@ -33,8 +37,7 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
 		body.put("status", status);
 		body.put("status_code", status.value());
 
-		return super.handleExceptionInternal(ex, body, headers, status,
-				request);
+		return handleExceptionInternal(ex, body, headers, status, request);
 	}
 
 	// Handle RestTemplateException to forward external APIs status
@@ -42,15 +45,15 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(RestTemplateException.class)
 	protected ResponseEntity<Object> handleRestTemplateException(
 			RestTemplateException ex, WebRequest request) {
-		return super.handleExceptionInternal(ex, ex.getBody(),
-				new HttpHeaders(), ex.getStatus(), request);
+		return handleExceptionInternal(ex, ex.getBody(), new HttpHeaders(),
+				ex.getStatus(), request);
 	}
 
 	@ExceptionHandler(ForbiddenException.class)
 	protected ResponseEntity<Object> handleForbiddenException(
 			ForbiddenException ex, WebRequest request) {
-		return super.handleExceptionInternal(ex, ex.getMessage(),
-				new HttpHeaders(), HttpStatus.FORBIDDEN, request);
+		return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(),
+				HttpStatus.FORBIDDEN, request);
 	}
 
 	@ExceptionHandler(ResourceNotFoundException.class)
@@ -59,7 +62,7 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
 		Map<String, Object> body = new LinkedHashMap<>();
 		body.put("code_error", ex.getMessage());
 
-		return super.handleExceptionInternal(ex, body, new HttpHeaders(),
+		return handleExceptionInternal(ex, body, new HttpHeaders(),
 				HttpStatus.NOT_FOUND, request);
 	}
 
@@ -69,8 +72,17 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
 		Map<String, Object> body = new LinkedHashMap<>();
 		body.put("code_error", ex.getMessage());
 
-		return super.handleExceptionInternal(ex, body, new HttpHeaders(),
+		return handleExceptionInternal(ex, body, new HttpHeaders(),
 				HttpStatus.BAD_REQUEST, request);
+	}
+
+	@Override
+	protected ResponseEntity<Object> handleExceptionInternal(Exception ex,
+			Object body, HttpHeaders headers, HttpStatus status,
+			WebRequest request) {
+		LOGGER.debug(ex);
+		return super.handleExceptionInternal(ex, body, headers, status,
+				request);
 	}
 
 }
