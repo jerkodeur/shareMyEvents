@@ -4,6 +4,12 @@
  * \q
  */
 
+ALTER TABLE IF EXISTS events 
+DROP CONSTRAINT fk_event_organizer;
+
+ALTER TABLE IF EXISTS participations 
+DROP CONSTRAINT participant_id;
+
 DROP TABLE IF EXISTS actors;
 
 CREATE TABLE "actors" (
