@@ -4,7 +4,7 @@
  * \q
  */
 
-DROP TABLE IF EXISTS addresses;
+DROP TABLE IF EXISTS addresses cascade;
 
 CREATE TABLE "addresses" (
   id SERIAL PRIMARY KEY,
