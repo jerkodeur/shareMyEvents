@@ -5,7 +5,7 @@
  */
 
 
-DROP TABLE IF EXISTS actors;
+DROP TABLE IF EXISTS actors cascade;
 
 CREATE TABLE "actors" (
   id SERIAL PRIMARY KEY,

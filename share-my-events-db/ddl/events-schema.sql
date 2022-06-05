@@ -4,7 +4,7 @@
  * \q
  */
 
-DROP TABLE IF EXISTS events;
+DROP TABLE IF EXISTS events cascade;
 
 CREATE TABLE "events" (
   	id SERIAL PRIMARY KEY,

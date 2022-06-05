@@ -4,7 +4,7 @@
  * \q
  */
 
-DROP TABLE IF EXISTS participations;
+DROP TABLE IF EXISTS participations cascade;
 
 CREATE TABLE "participations" (
   	id SERIAL PRIMARY KEY,
