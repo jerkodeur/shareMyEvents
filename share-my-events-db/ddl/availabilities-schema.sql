@@ -4,7 +4,7 @@
  * \q
  */
 
-DROP TABLE IF EXISTS availabilities;
+DROP TABLE IF EXISTS availabilities cascade;
 
 CREATE TABLE "availabilities" (
   id SERIAL PRIMARY KEY,
