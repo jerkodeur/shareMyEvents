@@ -41,7 +41,7 @@ export class AuthenticationService {
 
   getAuthUserId(): any {
     this.setIfAuthenticated();
-    return this.jwtService.decodeToken(this.token).sub ?? null;
+    return this.token && this.jwtService.decodeToken(this.token).sub;
   }
 
   checkIfOrganizer(eventOrganizerId: string): void {
