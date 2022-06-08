@@ -21,7 +21,8 @@ export class DateHandler {
   static splitDateObject(dateObj: Date): {
     date: string;
     time: string;
-    shortDateFormatted: string;
+    shortDateFr: string;
+    shortDateEn: string;
     shortTime: string;
   } {
     const date = dateObj.toLocaleDateString('fr-FR', {
@@ -38,7 +39,8 @@ export class DateHandler {
     });
     const shortTime = dateObj.toLocaleTimeString().slice(0, 5);
     const shortDate = dateObj.toLocaleDateString().split('/');
-    const shortDateFormatted = `${shortDate[0]}-${shortDate[1]}-${shortDate[2]}`;
-    return { date, time, shortDateFormatted, shortTime };
+    const shortDateFr = shortDate.join('-');
+    const shortDateEn = `${shortDate[2]}-${shortDate[1]}-${shortDate[0]}`;
+    return { date, time, shortDateFr, shortDateEn, shortTime };
   }
 }

@@ -1,7 +1,7 @@
 footer {
   &.main-footer {
     display: none;
-    @media screen and (min-width: 576px) {
+    @media screen and (min-width: 768px) {
       display: block;
       background-color: lighten($color: $secondary, $amount: 15%);
       box-shadow: 0 -2px 2px $primary;

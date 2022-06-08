@@ -51,7 +51,7 @@ export class EventService {
       .pipe(
         map((event: any) => {
           event.forEach((event: any) => {
-            const { shortDateFormatted: date, shortTime: time } =
+            const { shortDateFr: date, shortTime: time } =
               DateHandler.splitDateObject(new Date(event.eventDate));
             event.eventDate = `${date} ${time}`;
           });

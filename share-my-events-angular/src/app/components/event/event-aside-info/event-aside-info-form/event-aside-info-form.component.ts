@@ -28,12 +28,12 @@ export class EventAsideInfoFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const { shortDateFormatted, shortTime } = DateHandler.splitDateObject(
+    const { shortDateEn, shortTime } = DateHandler.splitDateObject(
       this.eventDate
     );
     this.asideInfoForm = this.fb.group({
       date: [
-        shortDateFormatted,
+        shortDateEn,
         [Validators.required, Validators.pattern(/^\d{4}-\d{2}-\d{2}$/)],
       ],
       time: [
@@ -52,7 +52,7 @@ export class EventAsideInfoFormComponent implements OnInit {
   }
 
   checkIfchanged(): boolean {
-    const { shortDateFormatted: prevDate, shortTime: prevTime } =
+    const { shortDateEn: prevDate, shortTime: prevTime } =
       DateHandler.splitDateObject(this.eventDate);
     const { date, time } = this.asideInfoForm.value;
     return prevDate == date && prevTime == time;
