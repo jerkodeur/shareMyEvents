@@ -113,8 +113,10 @@ export function tokenGetter() {
     HttpClientModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: tokenGetter,
-        allowedDomains: [`${environment.apiBaseUrl}`],
+        tokenGetter: () => {
+          return localStorage.getItem('access_token');
+        },
+        allowedDomains: [environment.apiBaseUrl],
         disallowedRoutes: [
           `${environment.apiUrl}/users/login`,
           `${environment.apiUrl}/users/signup`,
