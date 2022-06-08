@@ -116,7 +116,7 @@ export function tokenGetter() {
         tokenGetter: () => {
           return localStorage.getItem('access_token');
         },
-        allowedDomains: [`${environment.apiBaseUrl}`],
+        allowedDomains: environment.apiBaseUrl,
         disallowedRoutes: [
           `${environment.apiUrl}/users/login`,
           `${environment.apiUrl}/users/signup`,

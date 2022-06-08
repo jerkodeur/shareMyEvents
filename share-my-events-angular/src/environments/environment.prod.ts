@@ -8,5 +8,7 @@ export const environment = {
     'https://gateway.readresolve.tech:9443',
     'gateway.readresolve.tech:9443/share',
     'gateway.readresolve.tech:9443',
+    'localhost:9443',
+    'localhost:9093',
   ],
 };

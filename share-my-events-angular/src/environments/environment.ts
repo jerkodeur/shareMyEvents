@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'localhost:7070',
+  apiBaseUrl: ['localhost:7070'],
   apiUrl: 'http://localhost:7070/sharemyevents',
 };
 
