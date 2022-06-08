@@ -28,17 +28,6 @@ export class AuthenticationService {
     this.authenticated.next(!this.jwtService.isTokenExpired(this.token));
   }
 
-  getAuthUser(): Observable<any> {
-    this.setIfAuthenticated();
-    return this.httpService
-      .get<User>(`${environment.apiTestBaseUrl}/users/${this.getAuthUserId}`)
-      .pipe(
-        catchError(async (err) =>
-          this.errorHandler.notifyHttpError(err).subscribe()
-        )
-      );
-  }
-
   getAuthUserId(): any {
     this.setIfAuthenticated();
     return this.token && this.jwtService.decodeToken(this.token).sub;
