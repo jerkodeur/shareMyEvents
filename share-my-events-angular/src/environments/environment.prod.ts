@@ -7,5 +7,6 @@ export const environment = {
     'www.readresolve.tech',
     'gateway.readresolve.tech',
     'https://gateway.readresolve.tech:9443/share',
+    'gateway.readresolve.tech:9443',
   ],
 };

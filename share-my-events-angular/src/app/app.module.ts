@@ -114,7 +114,7 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        // allowedDomains: ['share.readresolve.tech'],
+        allowedDomains: [`${environment.apiBaseUrl}`],
         disallowedRoutes: [
           `${environment.apiUrl}/users/login`,
           `${environment.apiUrl}/users/signup`,
