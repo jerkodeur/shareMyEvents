@@ -114,7 +114,7 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: [`${environment.apiBaseUrl}`],
+        allowedDomains: [`${environment.apiUrl}`],
         disallowedRoutes: [
           `${environment.apiUrl}/users/login`,
           `${environment.apiUrl}/users/signup`,
