@@ -148,13 +148,12 @@
   .event-menu {
     width: 100px;
     z-index: 2000;
-    bottom: 25px;
     left: 10px;
     padding: 0 !important;
     box-shadow: none;
     background-color: transparent;
 
-    .nav-link:not(&.user-status),
+    .nav-link:not(.user-status),
     .flex-icon {
       display: none;
     }
@@ -179,6 +178,7 @@
 
     .nav-link:first-child {
       padding: 0 !important;
+      margin-bottom: 0.75em;
       border-radius: 100%;
       &:hover {
         border-radius: 100%;
