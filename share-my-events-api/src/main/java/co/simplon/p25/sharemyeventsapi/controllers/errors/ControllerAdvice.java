@@ -29,19 +29,10 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
 			MethodArgumentNotValidException ex, HttpHeaders headers,
 			HttpStatus status, WebRequest request) {
 
-		String error = "";
-
 		Map<String, Object> body = new LinkedHashMap<>();
-		if (ex.getBindingResult().hasErrors()) {
-			if (ex.getBindingResult().getFieldError() != null) {
-				error = ex.getBindingResult().getFieldErrors().get(0)
-						.getDefaultMessage();
-			} else {
-				error = ex.getBindingResult().getGlobalError()
-						.getDefaultMessage();
-			}
-		}
 
+		String error = ex.getBindingResult().getFieldErrors().get(0)
+				.getDefaultMessage();
 		body.put("code_error", error);
 		body.put("status", status);
 		body.put("status_code", status.value());
