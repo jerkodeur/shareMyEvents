@@ -147,7 +147,7 @@ export class EventService {
         tap({
           next: (address: any) => {
             this.address.next(address);
-            this.notify.showSuccess("L'addresse a été modifiée avec succès");
+            this.notify.showSuccess("L'adresse a été modifiée avec succès");
           },
           error: async (err) => {
             this.errorHandler.notifyHttpError(err).subscribe();
