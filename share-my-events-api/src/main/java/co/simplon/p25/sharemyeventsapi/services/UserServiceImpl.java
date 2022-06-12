@@ -90,10 +90,9 @@ public final class UserServiceImpl implements UserService {
 						+ "<p>"
 						+ "<strong>Vous pouvez soit continuer d'utiliser ce mot de passe</strong>, "
 						+ "ou <strong>vous pouvez le modifier à l'adresse suivante</strong>:<br><br> "
-						+ "<a href=" + frontUrl
-						+ "/password-reset target=\"blank\"> Page de modification du mot de passe </a>"
+						+ "<a href=\"%s/password-reset\" target=\"blank\"> Page de modification du mot de passe </a>"
 						+ "</p>" + "<p>A très vite sur sharemyevents %s! </p>",
-				actor.getNickname());
+				frontUrl, actor.getNickname());
 
 		LostPasswordDto lostPassword = new LostPasswordDto(actor.getAuthId(),
 				mailHeader, mailFooter);
