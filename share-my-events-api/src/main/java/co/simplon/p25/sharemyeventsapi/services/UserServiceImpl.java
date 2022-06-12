@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,9 @@ public final class UserServiceImpl implements UserService {
 	private final ActorRepository actorRepo;
 	private final RestTemplate gandalf;
 	private final JwtDecoder decoder;
+
+	@Value("${sharemyevents.front.url}")
+	private String frontUrl;
 
 	public UserServiceImpl(ActorRepository actorRepo,
 			RestTemplate gandalfRestTemplate, JwtDecoder decoder) {
@@ -86,7 +90,8 @@ public final class UserServiceImpl implements UserService {
 						+ "<p>"
 						+ "<strong>Vous pouvez soit continuer d'utiliser ce mot de passe</strong>, "
 						+ "ou <strong>vous pouvez le modifier à l'adresse suivante</strong>:<br><br> "
-						+ "<a href=\"http://localhost:4200/password-reset\" target=\"blank\"> Page de modification du mot de passe </a>"
+						+ "<a href=" + frontUrl
+						+ "/password-reset target=\"blank\"> Page de modification du mot de passe </a>"
 						+ "</p>" + "<p>A très vite sur sharemyevents %s! </p>",
 				actor.getNickname());
 

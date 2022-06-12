@@ -35,7 +35,7 @@ public class ParticipationController {
 	}
 
 	@PostMapping("/new")
-	@ResponseStatus(code = HttpStatus.ACCEPTED)
+	@ResponseStatus(code = HttpStatus.CREATED)
 	public ParticipationDto add(
 			@Valid @RequestBody ParticipantCreateDto inputs) {
 		return participationService.add(inputs);
