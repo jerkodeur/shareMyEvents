@@ -1,0 +1,153 @@
+*,
+::after,
+::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container-fluid {
+  min-width: 270px;
+  margin-bottom: 1em;
+}
+
+body {
+  background-color: $light;
+}
+
+main {
+  margin-top: 4em;
+  margin-bottom: 2.5em !important;
+
+  .main-form-layout {
+    margin-top: 6em;
+  }
+}
+
+form {
+  margin: auto;
+  .btn {
+    width: 40% !important;
+  }
+  .form-group {
+    margin: auto;
+    margin-bottom: 0.5em;
+  }
+}
+
+.pwd-reset-intructions {
+  width: 90%;
+  margin: auto;
+}
+
+aside {
+  &.form-info {
+    margin-top: 0 !important;
+  }
+}
+
+// Media queries
+@media only screen and (min-width: 500px) {
+  form:not(.event-form) {
+    .form-group,
+    aside.aside-text-info {
+      margin: auto;
+      width: 80% !important;
+      input {
+        width: 100% !important;
+      }
+    }
+    .sub-fieldset {
+      width: 80%;
+      .form-group {
+        width: 100% !important;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 576px) {
+  form,
+  .home-layout {
+    width: 90% !important;
+  }
+  aside.aside-text-info {
+    width: 95%;
+  }
+  .top-nav {
+    ul {
+      padding: 0 !important;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .home-layout {
+    width: 75% !important;
+  }
+  .pwd-reset-intructions,
+  form:not(.event-form) {
+    width: 75% !important;
+  }
+  aside.aside-text-info {
+    margin: auto;
+    width: 75%;
+  }
+
+  .sub-fieldset {
+    width: 100%;
+    .form-group {
+      width: 100% !important;
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  form:not(.event-form),
+  .pwd-reset-intructions,
+  .home-layout {
+    width: 65% !important;
+  }
+  aside.aside-text-info {
+    width: 65%;
+  }
+  .event-form {
+    fieldset {
+      width: 80%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  form:not(.event-form),
+  .pwd-reset-intructions,
+  .home-layout {
+    width: 50% !important;
+  }
+  .event-form {
+    fieldset {
+      width: 70%;
+    }
+  }
+
+  aside.aside-text-info {
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .event-form {
+    .sub-fieldset,
+    .form-group,
+    .home-layout {
+      width: 90% !important;
+    }
+    .row {
+      margin: auto;
+      width: 100%;
+      .form-group {
+        width: 100% !important;
+      }
+    }
+  }
+}

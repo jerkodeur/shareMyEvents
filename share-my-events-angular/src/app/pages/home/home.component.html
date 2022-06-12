@@ -1,0 +1,22 @@
+<article class="home-layout">
+  <div class="presentation">
+    <div class="welcome">Bienvenue sur sharemyevents!</div>
+    <div>
+      L'application qui va vous permettre de partager un event plus vite que les
+      vents !
+    </div>
+    <div class="description">
+      {{
+        authenticated
+          ? "Laissez-vous tenter!"
+          : "Inscrivez-vous ou connectez-vous pour tester!"!
+      }}
+    </div>
+  </div>
+  <app-home-event-create></app-home-event-create>
+  <app-home-event-join-form></app-home-event-join-form>
+  <app-organizer-next-events
+    *ngIf="authenticated"
+    [nextEvent$]="nextEvent"
+  ></app-organizer-next-events>
+</article>

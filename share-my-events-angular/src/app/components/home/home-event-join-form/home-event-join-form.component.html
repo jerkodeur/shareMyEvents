@@ -1,0 +1,78 @@
+<div class="event-join-layout">
+  <form [formGroup]="joinEventForm" (ngSubmit)="onSubmitForm()">
+    <fieldset>
+      <legend class="w-auto px-2">
+        <h1>Participer à un event</h1>
+      </legend>
+      <p class="event-join-instructions">
+        Afin de participer à un event, veuillez renseigner
+        <span *ngIf="!authenticated">
+          l'adresse e-mail sur laquelle vous avez reçu votre invitation ainsi
+          que</span
+        >
+        le code event fournit dans le mail que vous avez reçu.
+      </p>
+      <hr />
+      <div class="form-group" *ngIf="!authenticated">
+        <label for="email" class="form-label"
+          >E-mail <span class="text-blood">*</span></label
+        >
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="mon-email@gmail.com"
+          class="form-control"
+          aria-required
+          formControlName="email"
+          autocomplete="email"
+        />
+        <div
+          class="error-feedback"
+          *ngIf="
+          submitted &&
+          joinEventForm.controls['email'].errors?.['required']
+        "
+        >
+          * Vous devez renseigner une adresse e-email.
+        </div>
+        <div
+          class="error-feedback"
+          *ngIf="
+          submitted && (joinEventForm.controls['email'].errors?.['pattern'])
+        "
+        >
+          * Le format de l'adresse e-mail est invalide.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password" class="form-label" aria-required
+          >Code event <span class="text-blood">*</span></label
+        >
+        <div class="form-icon">
+          <input
+            type="text"
+            name="eventCode"
+            id="eventCode"
+            placeholder="Renseignez le code de l'event"
+            class="form-control"
+            aria-required
+            formControlName="eventCode"
+          />
+        </div>
+        <div
+          class="error-feedback"
+          *ngIf="
+          submitted &&
+          joinEventForm.controls['eventCode']?.errors?.['required']
+        "
+        >
+          * Champs requis.
+        </div>
+      </div>
+      <div class="row form-btn-layout">
+        <button type="submit">Participer à l'event</button>
+      </div>
+    </fieldset>
+  </form>
+</div>
