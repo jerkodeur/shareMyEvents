@@ -1,0 +1,19 @@
+footer {
+  &.main-footer {
+    display: none;
+    @media screen and (min-width: 576px) {
+      display: block;
+      background-color: lighten($color: $secondary, $amount: 15%);
+      box-shadow: 0 -2px 2px $primary;
+      padding: 0 !important;
+      ul {
+        padding: 0.25em 0 0.25em 0.5em !important;
+        margin: 0 !important;
+        li {
+          color: $dark;
+          text-align: center;
+        }
+      }
+    }
+  }
+}

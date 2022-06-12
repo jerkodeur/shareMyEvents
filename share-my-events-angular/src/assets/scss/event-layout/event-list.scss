@@ -1,0 +1,75 @@
+.organizer-event-list-layout {
+  margin-top: 6em !important;
+  width: 98%;
+  margin: auto;
+  font-size: 0.9em;
+  font-weight: 400;
+  .table {
+    border-radius: 4px;
+    box-shadow: 1px 1px 2px $dark, -1px -1px 2px $dark;
+    .table-primary {
+      border-radius: 4px;
+      // box-shadow: 2px 2px 2px $blood;
+      --bs-table-bg: white;
+      color: $primary;
+      text-align: center;
+      padding: 0 !important;
+    }
+    thead {
+      background-color: $secondary;
+      color: $primary;
+      text-align: center;
+      th {
+        padding: 0 0.25em !important;
+      }
+    }
+    :not(caption) > * > * {
+      padding: 0.15em 0;
+      border: none;
+    }
+  }
+  h1 {
+    color: $blood;
+    text-shadow: 1px 1px 1px $primary;
+    font-size: 1.25em;
+  }
+  .event-date {
+    min-width: 90px;
+  }
+  .event-title {
+    width: 80%;
+    a {
+      text-decoration: underline;
+      &:hover {
+        text-decoration: underline;
+        color: $blood !important;
+      }
+    }
+  }
+  .aside-text-info {
+    text-align: right;
+    margin-top: -1em;
+    a {
+      color: $dark;
+      &:hover {
+        text-decoration: underline;
+        color: $blood;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 625px) {
+    width: 90%;
+    .event-date {
+      min-width: 175px;
+    }
+
+    @media only screen and (min-width: 900px) {
+      width: 80%;
+    }
+
+    @media only screen and (min-width: 1200px) {
+      width: 70%;
+    }
+  }
+}
