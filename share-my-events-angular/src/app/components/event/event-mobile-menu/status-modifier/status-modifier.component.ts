@@ -26,7 +26,8 @@ export class StatusModifierComponent implements OnInit {
         (participations: Participation[]) => {
           participations.map((participation) => {
             if (participation.participantId == this.participantId) {
-              this.status = participation.availability.trim();
+              this.status =
+                participation.availability && participation.availability.trim();
             }
           });
         }
