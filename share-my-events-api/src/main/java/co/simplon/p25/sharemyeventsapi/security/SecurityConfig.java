@@ -28,12 +28,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.authorizeRequests().antMatchers(HttpMethod.GET, "/events/**")
 				.permitAll().and().authorizeRequests()
 				.antMatchers("/participations/{id}").permitAll().and()
-				.authorizeRequests().antMatchers("/events/participant-access")
-				.permitAll().and().authorizeRequests().antMatchers("/events/**")
-				.authenticated().and().authorizeRequests()
-				.antMatchers("/organizer/**").authenticated().and()
-				.authorizeRequests().anyRequest().authenticated().and()
-				.oauth2ResourceServer().jwt();
+				.authorizeRequests()
+				.antMatchers(HttpMethod.PATCH,
+						"/participations/availability/{participatantId}")
+				.permitAll().and().authorizeRequests()
+				.antMatchers("/events/participant-access").permitAll().and()
+				.authorizeRequests().antMatchers("/events/**").authenticated()
+				.and().authorizeRequests().antMatchers("/organizer/**")
+				.authenticated().and().authorizeRequests().anyRequest()
+				.authenticated().and().oauth2ResourceServer().jwt();
 	}
 
 	@Bean

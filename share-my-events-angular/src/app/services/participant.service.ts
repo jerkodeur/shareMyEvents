@@ -64,6 +64,33 @@ export class ParticipantService {
       );
   }
 
+  updateAvailability$(
+    availability: string,
+    eventId: number,
+    participatantId: number
+  ) {
+    return this.httpService
+      .patch<any>(
+        `${environment.apiUrl}/participations/availability/${participatantId}`,
+        {
+          eventId,
+          availability,
+        }
+      )
+      .pipe(
+        tap({
+          next: () => {
+            this.notify.showSuccess(
+              'Votre disponibilité a bien été bien prise en compte'
+            );
+          },
+          error: (err) => {
+            this.errorHandler.notifyHttpError(err).subscribe();
+          },
+        })
+      );
+  }
+
   delete$(participation: Participation): Observable<any> {
     return this.httpService
       .delete(`${environment.apiUrl}/participations/delete/${participation.id}`)

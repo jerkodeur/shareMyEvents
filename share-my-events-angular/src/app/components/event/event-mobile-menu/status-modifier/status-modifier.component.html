@@ -13,9 +13,9 @@
           id="user-status"
           [ngClass]="{
             sts_unknown: status == 'unknown',
-            sts_available: status == 'available',
-            sts_uncertain: status == 'uncertain',
-            sts_unavailable: status == 'unavailable'
+            sts_available: status == 'Disponible',
+            sts_uncertain: status == 'Incertain',
+            sts_unavailable: status == 'Indisponible'
           }"
         ></svg>
       </button>
@@ -24,7 +24,7 @@
           <button
             class="dropdown-item"
             type="button"
-            (click)="updateStatus('available')"
+            (click)="updateStatus('Disponible')"
           >
             Participe
           </button>
@@ -33,7 +33,7 @@
           <button
             class="dropdown-item"
             type="button"
-            (click)="updateStatus('uncertain')"
+            (click)="updateStatus('Incertain')"
           >
             Incertain
           </button>
@@ -42,7 +42,7 @@
           <button
             class="dropdown-item"
             type="button"
-            (click)="updateStatus('unavailable')"
+            (click)="updateStatus('Indisponible')"
           >
             Indisponible
           </button>

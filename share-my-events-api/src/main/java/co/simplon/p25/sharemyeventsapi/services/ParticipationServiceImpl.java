@@ -3,6 +3,7 @@ package co.simplon.p25.sharemyeventsapi.services;
 import java.util.List;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -11,10 +12,14 @@ import org.springframework.web.client.RestTemplate;
 import co.simplon.p25.sharemyeventsapi.dtos.MailDto;
 import co.simplon.p25.sharemyeventsapi.dtos.ParticipantCreateDto;
 import co.simplon.p25.sharemyeventsapi.dtos.ParticipationDto;
+import co.simplon.p25.sharemyeventsapi.dtos.updateAvailabilityDto;
 import co.simplon.p25.sharemyeventsapi.entities.Actor;
+import co.simplon.p25.sharemyeventsapi.entities.Availability;
 import co.simplon.p25.sharemyeventsapi.entities.Event;
 import co.simplon.p25.sharemyeventsapi.entities.Participation;
+import co.simplon.p25.sharemyeventsapi.exceptions.ResourceNotFoundException;
 import co.simplon.p25.sharemyeventsapi.repositories.ActorRepository;
+import co.simplon.p25.sharemyeventsapi.repositories.AvailabilityRepository;
 import co.simplon.p25.sharemyeventsapi.repositories.EventRepository;
 import co.simplon.p25.sharemyeventsapi.repositories.ParticipationRepository;
 
@@ -29,14 +34,17 @@ public class ParticipationServiceImpl implements ParticipationService {
 
 	private final ParticipationRepository repo;
 	private final ActorRepository actorRepo;
+	private final AvailabilityRepository availabilityRepo;
 	private final EventRepository eventRepo;
 	private final RestTemplate herald;
 
 	public ParticipationServiceImpl(ParticipationRepository repo,
 			ActorRepository actorRepo, EventRepository eventRepo,
+			AvailabilityRepository availabilityRepo,
 			RestTemplate heraldRestTemplate) {
 		this.repo = repo;
 		this.actorRepo = actorRepo;
+		this.availabilityRepo = availabilityRepo;
 		this.eventRepo = eventRepo;
 		herald = heraldRestTemplate;
 	}
@@ -94,6 +102,25 @@ public class ParticipationServiceImpl implements ParticipationService {
 	@Transactional
 	public void remove(Long id) {
 		repo.deleteById(id);
+	}
+
+	@Override
+	public void updateAvailability(Long participantId,
+			@Valid updateAvailabilityDto input) {
+		Actor participant = actorRepo.findOneById(participantId);
+		Event event = eventRepo.findOneById(input.getEventId());
+		Availability availability = availabilityRepo
+				.findOneByLabel(input.getAvailability())
+				.orElseThrow(() -> new ResourceNotFoundException(
+						String.format("unknown_availability")));
+
+		Participation participation = repo
+				.findByParticipantAndEvent(participant, event)
+				.orElseThrow(() -> new ResourceNotFoundException(
+						String.format("unknown_participation")));
+
+		participation.setAvailability(availability);
+		repo.save(participation);
 	}
 
 }

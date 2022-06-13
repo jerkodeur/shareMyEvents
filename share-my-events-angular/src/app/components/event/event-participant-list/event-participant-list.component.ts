@@ -64,6 +64,10 @@ export class EventParticipantListComponent implements OnInit, OnDestroy {
     this.isDisplayForm = !this.isDisplayForm;
   }
 
+  handleStatus(availability: string) {
+    return availability ? availability.trim() : 'unknown';
+  }
+
   removeParticipant(participation: Participation) {
     this.participantService.delete$(participation).subscribe();
   }

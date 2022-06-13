@@ -39,7 +39,7 @@
     >
       <p *ngFor="let participation of participations">
         <app-participant-status
-          [status]="participation.availability"
+          [status]="handleStatus(participation.availability)"
         ></app-participant-status>
         <a
           *ngIf="isOrganizer"

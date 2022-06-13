@@ -2,10 +2,10 @@
   <div
     class="circle-layout"
     [ngClass]="{
+      available: status == 'Disponible',
       unknown: status == 'unknown',
-      uncertain: status == 'uncertain',
-      available: status == 'available',
-      unavailable: status == 'unavailable'
+      uncertain: status == 'Incertain',
+      unavailable: status == 'Indisponible'
     }"
     [title]="status"
   ></div>

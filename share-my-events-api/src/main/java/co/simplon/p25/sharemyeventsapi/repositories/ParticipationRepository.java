@@ -23,7 +23,8 @@ public interface ParticipationRepository
 
 	boolean existsByParticipantId(Long participantId);
 
-	@Query("SELECT " + "p.id as id, " + "p.name as name, "
+	@Query("SELECT " + "p.id as id, "
+			+ "p.name as name, p.participant.id as participantId, "
 			+ "ac.email as email, " + "av.label as availability "
 			+ "FROM Participation p " + "INNER JOIN p.participant ac "
 			+ "LEFT JOIN p.availability av " + "WHERE p.event.id = ?1")

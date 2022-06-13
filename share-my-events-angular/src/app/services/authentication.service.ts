@@ -1,12 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, Observable, Subject } from 'rxjs';
-
-import { environment } from 'src/environments/environment';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 import { ErrorHandlerService } from './error-handler.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { User } from '../core/models/User.model';
 
 @Injectable({
   providedIn: 'root',
@@ -37,7 +34,8 @@ export class AuthenticationService {
     this.isOrganizer.next(this.getAuthUserId() == eventOrganizerId);
   }
 
-  checkIfParticipant(participantsId: number, participants: number[]): void {
-    this.isParticipant.next(participants.indexOf(participantsId) != -1);
+  checkIfParticipant(participantId: number, participants: number[]): void {
+    const isParticipant = participants.indexOf(participantId) != -1;
+    this.isParticipant.next(isParticipant);
   }
 }
