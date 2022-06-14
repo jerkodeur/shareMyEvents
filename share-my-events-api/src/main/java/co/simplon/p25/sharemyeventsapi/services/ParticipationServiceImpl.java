@@ -82,7 +82,7 @@ public class ParticipationServiceImpl implements ParticipationService {
 		MailDto mail = new MailDto();
 		mail.setReplyTo(smeMail);
 		mail.setFrom(smeMail);
-		mail.setTo(smeMail);
+		mail.setTo(inputs.getEmail());
 		mail.setSubject("Vous avez été convié à participer à un évènement!");
 		mail.setContent(String.format("<p>Bonjour,</p>"
 				+ "<p>%s vous a convié à participer à son évènement:</p>"
