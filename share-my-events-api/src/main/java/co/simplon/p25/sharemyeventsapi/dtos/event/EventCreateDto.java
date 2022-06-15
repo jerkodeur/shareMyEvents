@@ -22,7 +22,7 @@ public class EventCreateDto {
 
 	@NotNull(message = "date_required")
 	@DateTimeFormat
-	@Future(message = "date_earlier")
+	@Future(message = "date_future")
 	private LocalDateTime eventDate;
 
 	@Valid

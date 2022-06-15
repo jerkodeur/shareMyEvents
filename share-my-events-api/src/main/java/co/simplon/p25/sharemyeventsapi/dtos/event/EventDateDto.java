@@ -11,7 +11,7 @@ public final class EventDateDto {
 
 	@NotNull(message = "date_required")
 	@DateTimeFormat
-	@Future
+	@Future(message = "date_future")
 	private LocalDateTime eventDate;
 
 	public EventDateDto() {

@@ -90,7 +90,7 @@ export class ErrorHandlerService {
         return 'La description est obligatoire';
       case 'date_required':
         return 'La date est obligatoire';
-      case 'date_earlier':
+      case 'date_future':
         return "Impossible d'insérer une date déjà passée";
       case 'name_unique':
         return 'Un nom similaire existe déjà';

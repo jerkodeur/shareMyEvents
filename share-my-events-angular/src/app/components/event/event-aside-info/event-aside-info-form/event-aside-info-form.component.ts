@@ -58,17 +58,19 @@ export class EventAsideInfoFormComponent implements OnInit {
     return prevDate == date && prevTime == time;
   }
 
-  convertDate(
+  checkedDate(
     date: string = this.asideInfoForm.value['date'],
     time: string = this.asideInfoForm.value['time']
   ): Date {
-    return DateHandler.createDatebyDateAndTime(date, time);
+    const dateJoin = DateHandler.createDatebyDateAndTime(date, time);
+    dateJoin.setHours(dateJoin.getHours() - 2);
+    return dateJoin;
   }
 
   onSubmitForm(): void {
     this.submitted = true;
     const { date, time } = this.asideInfoForm.value;
-    if (this.convertDate().getTime() < new Date().getTime()) {
+    if (this.checkedDate().getTime() < new Date().getTime()) {
       return this.notify.showError(
         "La date de l'event ne peut être inférieur à la date actuelle."
       );
@@ -80,7 +82,10 @@ export class EventAsideInfoFormComponent implements OnInit {
     }
     if (!this.checkIfchanged()) {
       this.eventService
-        .updateDate$(this.convertDate(date, time), this.eventId)
+        .updateDate$(
+          DateHandler.createDatebyDateAndTime(date, time),
+          this.eventId
+        )
         .subscribe();
     }
     this.cancelForm();
